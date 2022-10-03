@@ -1284,38 +1284,46 @@
         <member name="T:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApi">
             <summary>
             Spot API endpoints
+            现货 API 端点
             </summary>
         </member>
         <member name="P:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApi.Account">
             <summary>
             Endpoints related to account settings, info or actions
+            与帐户设置、信息或操作相关的端点
             </summary>
         </member>
         <member name="P:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market and system data
+            与检索市场和系统数据相关的端点
             </summary>
         </member>
         <member name="P:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApi.Trading">
             <summary>
             Endpoints related to orders and trades
+            与订单和交易相关的端点
             </summary>
         </member>
         <member name="P:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApi.CommonSpotClient">
             <summary>
             Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+            获取此客户端的 ISpotClient。 这是一个通用接口，允许在不知道任何交换细节的情况下进行一些基本操作。
             </summary>
             <returns></returns>
         </member>
         <member name="T:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount">
             <summary>
             Huobi account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+            火币账户端点。 账户端点包括余额信息、取款/存款信息以及请求和账户设置
             </summary>
         </member>
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetUserIdAsync(System.Threading.CancellationToken)">
             <summary>
             Get the user id associated with the apikey/secret
+            母子用户获取用户UID 此接口用于母子用户查询本用户UID
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-uid"/></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#uid"/></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1323,7 +1331,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetSubAccountUsersAsync(System.Threading.CancellationToken)">
             <summary>
             Gets a list of users associated with the apikey/secret
+            获取子用户列表 母用户通过此接口可获取所有子用户的UID列表及各用户状态
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-sub-user-39-s-list"/></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#5f25844df9"/></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1331,7 +1341,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetSubUserAccountsAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub-user accounts associated with the sub-user id
+            获取特定子用户的账户列表 母用户通过此接口可获取特定子用户的Account ID列表及各账户状态
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-sub-user-39-s-account-list"/></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#c5ff20dc6b"/></para>
             </summary>
             <param name="subUserId">The if of the user to get accounts for</param>
             <param name="ct">Cancellation token</param>
@@ -1340,7 +1352,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetAccountsAsync(System.Threading.CancellationToken)">
             <summary>
             Gets a list of accounts associated with the apikey/secret
+            账户信息 查询当前用户的所有账户 ID account-id 及其相关信息
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-all-accounts-of-the-current-user" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#bd9157656f" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1348,7 +1362,11 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetBalancesAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             Gets a list of balances for a specific account
+            账户余额 查询指定账户的余额，支持以下账户：
+            spot：现货账户， margin：逐仓杠杆账户，otc：OTC 账户，point：点卡账户，super-margin：全仓杠杆账户, 
+            investment: C2C杠杆借出账户, borrow: C2C杠杆借入账户，grid-trading：策略帐户，deposit-earning：理财帐户，otc-options：期权帐户
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-account-balance-of-a-specific-account" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#870c0ab88b" /></para>
             </summary>
             <param name="accountId">The id of the account to get the balances for</param>
             <param name="ct">Cancellation token</param>
@@ -1357,7 +1375,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetAssetValuationAsync(Huobi.Net.Enums.AccountType,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the valuation of all assets
+            获取平台资产总估值 按照BTC或法币计价单位，获取平台账户的总资产估值。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-total-valuation-of-platform-assets" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#be75b07cd4" /></para>
             </summary>
             <param name="accountType">Type of account to valuate</param>
             <param name="valuationCurrency">The currency to get the value in</param>
@@ -1369,6 +1389,8 @@
             <summary>
             Transfer assets between accounts
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#asset-transfer" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#0d3c2e7382" /></para>
+            资产划转 该节点为母用户和子用户进行资产划转的通用接口。
             </summary>
             <param name="fromUserId">From user id</param>
             <param name="fromAccountType">From account type</param>
@@ -1385,6 +1407,8 @@
             <summary>
             Gets a list of balance changes of specified user's account
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-account-history" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#84f1b5486d" /></para>
+            账户流水 该节点基于用户账户ID返回账户流水。
             </summary>
             <param name="accountId">The id of the account to get the balances for</param>
             <param name="asset">Asset name</param>
@@ -1399,7 +1423,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetAccountLedgerAsync(System.Int64,System.String,System.Collections.Generic.IEnumerable{Huobi.Net.Enums.TransactionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{Huobi.Net.Enums.SortingType},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             This endpoint returns the balance changes of specified user's account.
+            财务流水 该节点基于用户账户ID返回财务流水。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-account-ledger" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#2f6797c498" /></para>
             </summary>
             <param name="accountId">The id of the account to get the ledger for</param>
             <param name="asset">Asset name</param>
@@ -1415,7 +1441,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetSubAccountBalancesAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             Gets a list of balances for a specific sub account
+            子用户余额 母用户查询子用户各币种账户余额
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-account-balance-of-a-sub-user" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#3b93ccb738" /></para>
             </summary>
             <param name="subAccountId">The id of the sub account to get the balances for</param>
             <param name="ct">Cancellation token</param>
@@ -1424,7 +1452,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.TransferWithSubAccountAsync(System.Int64,System.String,System.Decimal,Huobi.Net.Enums.TransferType,System.Threading.CancellationToken)">
             <summary>
             Transfer asset between parent and sub account
+            资产划转（母子用户之间） 母用户执行母子用户之间的划转
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#transfer-asset-between-parent-and-sub-account" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#4ddc564afc" /></para>
             </summary>
             <param name="subAccountId">The target sub account id to transfer to or from</param>
             <param name="asset">The asset to transfer</param>
@@ -1436,7 +1466,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetDepositAddressesAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Parent user and sub user could query deposit address of corresponding chain, for a specific crypto currency (except IOTA).
+            充币地址查询 此节点用于查询特定币种（IOTA除外）在其所在区块链中的充币地址，母子用户均可用
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#query-deposit-address" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#85e9327073" /></para>
             </summary>
             <param name="asset">Asset</param>
             <param name="ct">Cancellation token</param>
@@ -1445,7 +1477,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.WithdrawAsync(System.String,System.String,System.Decimal,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Parent user creates a withdraw request from spot account to an external address (exists in your withdraw address list), which doesn't require two-factor-authentication.
+            虚拟币提币 此节点用于将现货账户的数字币提取到区块链地址（已存在于提币地址列表）而不需要多重（短信、邮件）验证，限母用户可用
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#create-a-withdraw-request" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#6b7bd94d29" /></para>
             </summary>
             <param name="address">The desination address of this withdraw</param>
             <param name="asset">Asset</param>
@@ -1459,7 +1493,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetWithdrawDepositAsync(Huobi.Net.Enums.WithdrawDepositType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Huobi.Net.Enums.FilterDirection},System.Threading.CancellationToken)">
             <summary>
             Parent user and sub user searche for all existed withdraws and deposits and return their latest status.
+            充提记录 此节点用于查询充提记录，母子用户均可用
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#search-for-existed-withdraws-and-deposits" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#d3612d98d4" /></para>
             </summary>
             <param name="type">Define transfer type to search</param>
             <param name="asset">The asset to withdraw</param>
@@ -1472,7 +1508,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.RepayMarginLoanAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <summary>
             Repay a margin loan
+            归还借币（全仓逐仓通用） 
+            还币顺序为，（如不指定transactId）先借先还，利息先还；如指定transactId时，currency参数不做校验。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#repay-margin-loan-cross-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#03b85eee9a" /></para>
             </summary>
             <param name="accountId">Account id</param>
             <param name="asset">Asset to repay</param>
@@ -1484,7 +1523,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.TransferSpotToIsolatedMarginAsync(System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Transfer asset from spot account to isolated margin account
+            资产划转（逐仓）此接口用于现货账户与逐仓杠杆账户的资产互转。
+            从现货账户划转至逐仓杠杆账户 transfer-in，从逐仓杠杆账户划转至现货账户 transfer-out
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#transfer-asset-from-spot-trading-account-to-isolated-margin-account-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#9d6ea9e91a" /></para>
             </summary>
             <param name="symbol">Trading symbol</param>
             <param name="asset">Asset to transfer</param>
@@ -1495,7 +1537,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.TransferIsolatedMarginToSpotAsync(System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Transfer asset from isolated margin to spot account
+            资产划转（逐仓）此接口用于现货账户与逐仓杠杆账户的资产互转。
+            从现货账户划转至逐仓杠杆账户 transfer-in，从逐仓杠杆账户划转至现货账户 transfer-out
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#transfer-asset-from-isolated-margin-account-to-spot-trading-account-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#9d6ea9e91a" /></para>
             </summary>
             <param name="symbol">Trading symbol</param>
             <param name="asset">Asset to transfer</param>
@@ -1506,7 +1551,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetIsolatedLoanInterestRateAndQuotaAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get isolated loan interest rate and quotas
+            查询借币币息率及额度（逐仓） 此接口返回用户级别的借币币息率及借币额度。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-loan-interest-rate-and-quota-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#373e9b14fc" /></para>
             </summary>
             <param name="symbols">Filter on symbols</param>
             <param name="ct">Cancellation token</param>
@@ -1515,7 +1562,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.RequestIsolatedMarginLoanAsync(System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Request a loan on isolated margin
+            申请借币（逐仓） 此接口用于申请借币
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#request-a-margin-loan-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#dd54433e31" /></para>
             </summary>
             <param name="symbol">The symbol</param>
             <param name="asset">The asset</param>
@@ -1526,7 +1575,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.RepayIsolatedMarginLoanAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Repay a isolated margin loan
+            归还借币（逐仓） 此接口用于归还借币.
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#repay-margin-loan-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#550a6dbed8" /></para>
             </summary>
             <param name="orderId">Id to repay</param>
             <param name="quantity">Quantity</param>
@@ -1536,7 +1587,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetIsolatedMarginClosedOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Huobi.Net.Enums.MarginOrderStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Huobi.Net.Enums.FilterDirection},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get isolated margin orders history
+            查询借币订单（逐仓）
+            此接口基于指定搜索条件返回借币订单。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#search-past-margin-orders-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#e74b6668ac" /></para>
             </summary>
             <param name="symbol">The symbol to get history for</param>
             <param name="states">Filter by states</param>
@@ -1552,7 +1606,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetIsolatedMarginBalanceAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get isolated margin account balance
+            借币账户详情（逐仓） 此接口返回借币账户详情。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-balance-of-the-margin-loan-account-isolated" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#44c844bef5" /></para>
             </summary>
             <param name="symbol">The symbol</param>
             <param name="subUserId">Sub user id</param>
@@ -1562,7 +1618,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.TransferSpotToCrossMarginAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Transfer from spot account to cross margin account
+            资产划转（全仓） 此接口用于现货账户与全仓杠杆账户的资产互转。
+            从现货账户划转至全仓杠杆账户 transfer-in，从全仓杠杆账户划转至现货账户 transfer-out
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#transfer-asset-from-spot-trading-account-to-cross-margin-account-cross" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#b0e5f1dbd9" /></para>
             </summary>
             <param name="asset">The asset to transfer</param>
             <param name="quantity">Quantity to transfer</param>
@@ -1572,7 +1631,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.TransferCrossMarginToSpotAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Transfer from cross margin account to spot account
+            资产划转（全仓） 此接口用于现货账户与全仓杠杆账户的资产互转。
+            从现货账户划转至全仓杠杆账户 transfer-in，从全仓杠杆账户划转至现货账户 transfer-out
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#transfer-asset-from-cross-margin-account-to-spot-trading-account-cross" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#b0e5f1dbd9" /></para>
             </summary>
             <param name="asset">The asset to transfer</param>
             <param name="quantity">Quantity to transfer</param>
@@ -1582,7 +1644,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetCrossLoanInterestRateAndQuotaAsync(System.Threading.CancellationToken)">
             <summary>
             Get cross margin interest rates and quotas
+            查询借币币息率及额度（全仓） 此接口返回用户级别的借币币息率及借币额度。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-loan-interest-rate-and-quota-cross" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#dcd6f1d683" /></para>
             </summary>
             <param name="ct"></param>
             <returns></returns>
@@ -1590,7 +1654,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.RequestCrossMarginLoanAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Request a loan on cross margin
+            申请借币（全仓） 此接口用于申请借币.
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#request-a-margin-loan-cross" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#fec79965db" /></para>
             </summary>
             <param name="asset">The asset</param>
             <param name="quantity">The quantity</param>
@@ -1600,7 +1666,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.RepayCrossMarginLoanAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Repay a isolated margin loan
+            归还借币（全仓） 此接口用于归还借币.
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#repay-margin-loan-cross" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#92b0676e98" /></para>
             </summary>
             <param name="orderId">Id to repay</param>
             <param name="quantity">Quantity</param>
@@ -1610,7 +1678,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetCrossMarginClosedOrdersAsync(System.String,System.Nullable{Huobi.Net.Enums.MarginOrderStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Huobi.Net.Enums.FilterDirection},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get cross margin order history
+            查询借币订单（全仓） 此接口基于指定搜索条件返回借币订单。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#search-past-margin-orders-cross" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#2dd73d6654" /></para>
             </summary>
             <param name="asset">Filter by asset</param>
             <param name="state">Filter by state</param>
@@ -1626,7 +1696,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetCrossMarginBalanceAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get cross margin account balance
+            借币账户详情（全仓） 此接口返回借币账户详情。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-balance-of-the-margin-loan-account-cross" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#0545827a0a" /></para>
             </summary>
             <param name="subUserId">Sub user id</param>
             <param name="ct">Cancellation token</param>
@@ -1635,7 +1707,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.GetRepaymentHistoryAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get repayment history
+            还币交易记录查询 子用户可以调用
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#repayment-record-reference" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#98bcc71ddd" /></para>
             </summary>
             <param name="repayId">Filter by repay id</param>
             <param name="accountId">Filter by account id</param>
@@ -1651,12 +1725,15 @@
         <member name="T:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData">
             <summary>
             Huobi exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            火币交换数据端点。 交易所数据包括市场数据（代码、订单簿等）和系统状态。
             </summary>
         </member>
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
             <summary>
             Gets the latest ticker for all symbols
+            所有交易对的最新 Tickers
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-latest-tickers-for-all-pairs" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#tickers" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1664,7 +1741,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the ticker, including the best bid / best ask for a symbol
+            聚合行情（Ticker） 此接口获取ticker信息同时提供最近24小时的交易聚合信息。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-latest-aggregated-ticker" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#ticker" /></para>
             </summary>
             <param name="symbol">The symbol to get the ticker for</param>
             <param name="ct">Cancellation token</param>
@@ -1673,7 +1752,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for a symbol
+            K 线数据（蜡烛图） 此接口返回历史K线数据。K线周期以新加坡时间为基准开始计算，例如日K线的起始周期为新加坡时间0时至新加坡时间次日0时。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-klines-candles" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#k" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for</param>
             <param name="period">The period of a single candlestick</param>
@@ -1684,7 +1765,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the order book for a symbol
+            市场深度数据 此接口返回指定交易对的当前市场深度数据。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-market-depth" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#0f7bd4961a" /></para>
             </summary>
             <param name="symbol">The symbol to request for</param>
             <param name="mergeStep">The way the results will be merged together</param>
@@ -1695,7 +1778,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetLastTradeAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the last trade for a symbol
+            最近市场成交记录 此接口返回指定交易对最新的一个交易记录。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-last-trade" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#a7fb7754d7" /></para>
             </summary>
             <param name="symbol">The symbol to request for</param>
             <param name="ct">Cancellation token</param>
@@ -1704,7 +1789,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get the last x trades for a symbol
+            获得近期交易记录 此接口返回指定交易对近期的所有交易记录。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-most-recent-trades" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#5583b4ac64" /></para>
             </summary>
             <param name="symbol">The symbol to get trades for</param>
             <param name="limit">The max number of results</param>
@@ -1714,7 +1801,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetSymbolDetails24HAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets 24h stats for a symbol
+            最近24小时行情数据 此接口返回最近24小时的行情数据汇总。
+            此接口返回的成交量、成交金额为24小时滚动数据（平移窗口大小24小时），有可能会出现后一个窗口内的累计成交量、累计成交额小于前一窗口的情况。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-last-24h-market-summary" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#24" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for</param>
             <param name="ct">Cancellation token</param>
@@ -1723,7 +1813,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetNavAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets real time NAV for ETP
+            获取杠杆ETP实时净值 此接口返回杠杆ETP的最新净值。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-real-time-nav" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#etp" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for</param>
             <param name="ct">Cancellation token</param>
@@ -1732,7 +1824,11 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetSymbolStatusAsync(System.Threading.CancellationToken)">
             <summary>
             Gets the current market status
+            获取当前市场状态 此节点返回当前最新市场状态。
+            状态枚举值包括: 1 - 正常（可下单可撤单），2 - 挂起（不可下单不可撤单），3 - 仅撤单（不可下单可撤单）。
+            挂起原因枚举值包括: 2 - 紧急维护，3 - 计划维护。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-market-status" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#f80d403388" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1740,7 +1836,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetSymbolsAsync(System.Threading.CancellationToken)">
             <summary>
             Gets a list of supported symbols
+            获取所有交易对(V1)(deprecated) 此接口返回所有火币全球站支持的交易对。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-all-supported-trading-symbol" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#v1-deprecated" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1748,7 +1846,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetAssetsAsync(System.Threading.CancellationToken)">
             <summary>
             Gets a list of supported currencies
+            获取所有币种(V1)(deprecated) 此接口返回所有火币全球站支持的币种。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-all-supported-currencies" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#v1-deprecated-2" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1756,7 +1856,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetAssetDetailsAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets a list of supported currencies and chains
+            APIv2 币链参考信息 此节点用于查询各币种及其所在区块链的静态参考信息（公共数据）
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#apiv2-currency-amp-chains" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#apiv2" /></para>
             </summary>
             <param name="asset">Filter by asset</param>
             <param name="ct">Cancellation token</param>
@@ -1765,7 +1867,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
             <summary>
             Gets the server time
+            获取当前系统时间戳 此接口返回当前的系统时间戳，即从 UTC 1970年1月1日0时0分0秒0毫秒到现在的总毫秒数。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-current-timestamp" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#67361e2961" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1773,12 +1877,15 @@
         <member name="T:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading">
             <summary>
             Huobi trading endpoints, placing and mananging orders.
+            火币交易端点，下单和管理订单。
             </summary>
         </member>
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.PlaceOrderAsync(System.Int64,System.String,Huobi.Net.Enums.OrderSide,Huobi.Net.Enums.OrderType,System.Decimal,System.Nullable{System.Decimal},System.String,System.Nullable{Huobi.Net.Enums.SourceType},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.Operator},System.Threading.CancellationToken)">
             <summary>
             Places an order
+            下单 发送一个新订单到火币以进行撮合。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#place-a-new-order" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#fd6ce2a756" /></para>
             </summary>
             <param name="accountId">The account to place the order for</param>
             <param name="symbol">The symbol to place the order for</param>
@@ -1796,7 +1903,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetOpenOrdersAsync(System.Nullable{System.Int64},System.String,System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open orders
+            查询当前未成交订单 查询已提交但是仍未完全成交或未被撤销的订单。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-all-open-orders" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#95f2078356" /></para>
             </summary>
             <param name="accountId">The account id for which to get the orders for</param>
             <param name="symbol">The symbol for which to get the orders for</param>
@@ -1808,7 +1917,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.CancelOrderAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             Cancels an open order
+            撤销订单 此接口发送一个撤销订单的请求。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#submit-cancel-for-an-order" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#4e53c0fccd" /></para>
             </summary>
             <param name="orderId">The id of the order to cancel</param>
             <param name="ct">Cancellation token</param>
@@ -1817,7 +1928,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.CancelOrderByClientOrderIdAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Cancels an open order
+            撤销订单（基于client order ID） 此接口基于client-order-id（8小时内有效）发送一个撤销订单的请求。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#submit-cancel-for-an-order-based-on-client-order-id" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#client-order-id" /></para>
             </summary>
             <param name="clientOrderId">The client id of the order to cancel</param>
             <param name="ct">Cancellation token</param>
@@ -1826,7 +1939,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.CancelOrdersAsync(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Cancel multiple open orders
+            批量撤销指定订单 此接口同时为多个订单（基于id）发送取消请求，建议通过order-ids来撤单，比client-order-ids更快更稳定。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#submit-cancel-for-multiple-orders-by-ids" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#5f8b337a4c" /></para>
             </summary>
             <param name="orderIds">The ids of the orders to cancel</param>
             <param name="clientOrderIds">The client ids of the orders to cancel</param>
@@ -1836,7 +1951,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.CancelOrdersByCriteriaAsync(System.Nullable{System.Int64},System.Collections.Generic.IEnumerable{System.String},System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Cancel multiple open orders
+            批量撤销所有订单 此接口发送批量撤销所有（单次最大100个）订单的请求。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#submit-cancel-for-multiple-orders-by-criteria" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#b9af010185" /></para>
             </summary>
             <param name="accountId">The account id used for this cancel</param>
             <param name="symbols">The trading symbol list (maximum 10 symbols, default value all symbols)</param>
@@ -1848,7 +1965,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetOrderAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             Get details of an order
+            查询订单详情 此接口返回指定订单的最新状态和详情。通过API创建的订单，撤销超过2小时后无法查询。通过API创建的订单返回order-id，按此order-id查询订单还是返回base-record-invalid是因为系统内部处理有延迟，但是不影响成交。建议您后续重试查询或者通过订阅订单推送WebSocket消息查询。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-order-detail-of-an-order" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#92d59b6aad" /></para>
             </summary>
             <param name="orderId">The id of the order to retrieve</param>
             <param name="ct">Cancellation token</param>
@@ -1857,7 +1976,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetOrderByClientOrderIdAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get details of an order by client order id
+            查询订单详情（基于client order ID）
+            此接口返回指定用户自编订单号（8小时内）的订单最新状态和详情。通过API创建的订单，撤销超过2小时后无法查询。建议通过GET /v1/order/orders/{order-id}来撤单，比使用clientOrderId更快更稳定
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-order-detail-of-an-order-based-on-client-order-id" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#client-order-id-2" /></para>
             </summary>
             <param name="clientOrderId">The client id of the order to retrieve</param>
             <param name="ct">Cancellation token</param>
@@ -1866,7 +1988,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetOrderTradesAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             Gets a list of trades made for a specific order
+            成交明细 此接口返回指定订单的成交明细。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-the-match-result-of-an-order" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#56c6c47284" /></para>
             </summary>
             <param name="orderId">The id of the order to get trades for</param>
             <param name="ct">Cancellation token</param>
@@ -1875,7 +1999,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetClosedOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Huobi.Net.Enums.OrderState},System.Collections.Generic.IEnumerable{Huobi.Net.Enums.OrderType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{Huobi.Net.Enums.FilterDirection},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of orders
+            搜索历史订单 此接口基于搜索条件查询历史订单。通过API创建的订单，撤销超过2小时后无法查询。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#search-past-orders" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#d72a5b49e7" /></para>
             </summary>
             <param name="symbol">The symbol to get orders for</param>
             <param name="states">The states of orders to return</param>
@@ -1891,7 +2017,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetUserTradesAsync(System.Collections.Generic.IEnumerable{Huobi.Net.Enums.OrderState},System.String,System.Collections.Generic.IEnumerable{Huobi.Net.Enums.OrderType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{Huobi.Net.Enums.FilterDirection},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of trades for a specific symbol
+            当前和历史成交 此接口基于搜索条件查询当前和历史成交记录。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#search-match-results" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#0fa6055598" /></para>
             </summary>
             <param name="states">Only return trades with specific states</param>
             <param name="symbol">The symbol to retrieve trades for</param>
@@ -1907,7 +2035,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetHistoricalOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{Huobi.Net.Enums.FilterDirection},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of history orders
+            搜索最近48小时内历史订单 此接口基于搜索条件查询最近48小时内历史订单。通过API创建的订单，撤销超过2小时后无法查询。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#search-historical-orders-within-48-hours" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#48" /></para>
             </summary>
             <param name="symbol">The symbol to get orders for</param>
             <param name="startTime">Only get orders after this date</param>
@@ -1920,7 +2050,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.PlaceConditionalOrderAsync(System.Int64,System.String,Huobi.Net.Enums.OrderSide,Huobi.Net.Enums.ConditionalOrderType,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.TimeInForce},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a new conditional order
+            策略委托下单 仅可通过此节点下单策略委托，不可通过现货/杠杆交易相关接口下单策略委托，支持未触发OPEN订单最大数量为100。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#place-a-conditional-order" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#59cfd288e6" /></para>
             </summary>
             <param name="accountId">The account the order should be placed from</param>
             <param name="symbol">The symbol the order is for</param>
@@ -1939,7 +2071,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.CancelConditionalOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Cancel conditional orders
+            策略委托（触发前）撤单 限频值（NEW）：20次/2秒  单次请求最多批量撤销50张订单
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#cancel-conditional-orders-before-triggering" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#2a86a40df8" /></para>
             </summary>
             <param name="clientOrderIds">Client order ids of the conditional orders to cancels</param>
             <param name="ct">Cancelation token</param>
@@ -1948,7 +2082,11 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetOpenConditionalOrdersAsync(System.Nullable{System.Int64},System.String,System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{Huobi.Net.Enums.ConditionalOrderType},System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get open conditional orders based on the parameters
+            查询未触发OPEN策略委托 以orderOrigTime检索
+            未触发OPEN订单，指的是已成功下单，但尚未触发，订单状态orderStatus为created的订单
+            未触发OPEN订单，可通过此节点查询，但不可通过现货/杠杆交易相关接口查询
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#query-open-conditional-orders-before-triggering" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#open" /></para>
             </summary>
             <param name="accountId">Filter by account id</param>
             <param name="symbol">Filter by symbol</param>
@@ -1963,7 +2101,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetClosedConditionalOrdersAsync(System.String,Huobi.Net.Enums.ConditionalOrderStatus,System.Nullable{System.Int64},System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{Huobi.Net.Enums.ConditionalOrderType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get closed conditional orders
+            查询策略委托历史
+            历史终态订单包括，触发前被主动撤销的策略委托（orderStatus=canceled），触发失败的策略委托（orderStatus=rejected），触发成功的策略委托（orderStatus=triggered）。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#query-conditional-order-history" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#a03b914c4d" /></para>
             </summary>
             <param name="accountId">Filter by account id</param>
             <param name="symbol">Filter by symbol</param>
@@ -1981,7 +2122,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiTrading.GetConditionalOrderAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a conditional order by id
+            查询特定策略委托 如需查询已成功触发订单的后续状态，须通过现货/杠杆交易相关接口完成
+            未触发的策略委托及触发失败的策略委托，可通过此节点查询，但不可通过现货/杠杆交易相关接口查询
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#query-a-specific-conditional-order" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#776d38c130" /></para>
             </summary>
             <param name="clientOrderId">Client order id</param>
             <param name="ct">Cancelation token</param>
@@ -1990,12 +2134,15 @@
         <member name="T:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams">
             <summary>
             Spot streams
+            现货数据流
             </summary>
         </member>
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.GetKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval)">
             <summary>
             Gets candlestick data for a symbol
+            所有交易对的最新 Tickers 获得所有交易对的 tickers。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-latest-tickers-for-all-pairs" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#tickers" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for</param>
             <param name="period">The period of a single candlestick</param>
@@ -2014,7 +2161,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.GetOrderBookWithMergeStepAsync(System.String,System.Int32)">
             <summary>
             Gets the current order book for a symbol
+            市场深度行情数据 此主题发送最新市场深度快照。快照频率为每秒1次
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-depth" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#8742b7d9f7" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for</param>
             <param name="mergeStep">The way the results will be merged together</param>
@@ -2023,7 +2172,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.GetOrderBookAsync(System.String,System.Int32)">
             <summary>
             Gets the current order book for a symbol
+            获取市场深度MBP行情数据
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-by-price-incremental-update" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#mbp" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for</param>
             <param name="levels">The amount of rows. 5, 20, 150 or 400</param>
@@ -2032,7 +2183,10 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToPartialOrderBookUpdates100MilisecondAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiOrderBook}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to order book updates for a symbol
+            订阅增量推送 市场深度MBP行情数据（增量推送）
+            用户可订阅此频道以接收最新深度行情Market By Price (MBP) 的增量数据推送；同时，该频道支持用户以req方式请求获取全量数据。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-by-price-incremental-update" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#mbp" /></para>
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="levels">The number of price levels. 5, 10 or 20</param>
@@ -2043,7 +2197,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToPartialOrderBookUpdates1SecondAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiOrderBook}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to order book updates for a symbol
+            主题订阅 市场深度行情数据 此主题发送最新市场深度快照。快照频率为每秒1次。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-depth" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#8742b7d9f7" /></para>
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="mergeStep">The way the results will be merged together</param>
@@ -2054,7 +2210,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToOrderBookChangeUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiIncementalOrderBook}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to order book updates for a symbol, 
+            市场深度MBP行情数据（全量推送） 用户可订阅此频道以接收最新深度行情Market By Price (MBP) 的全量数据推送。推送频率为大约100毫秒一次。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-by-price-incremental-update" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#mbp" /></para>
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="levels">The number of price levels. 5, 20, 150 or 400</param>
@@ -2065,7 +2223,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.GetTradeHistoryAsync(System.String)">
             <summary>
             Gets a list of trades for a symbol
+            市场最新成交逐笔明细
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#trade-detail" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#56c6c47284-2" /></para>
             </summary>
             <param name="symbol">The symbol to get trades for</param>
             <returns></returns>
@@ -2073,7 +2233,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiSymbolTrade}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to trade updates for a symbol
+            成交明细 此主题提供市场最新成交逐笔明细。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#trade-detail" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#56c6c47284-2" /></para>
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="onData">The handler for updates</param>
@@ -2083,7 +2245,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.GetSymbolDetailsAsync(System.String)">
             <summary>
             Gets details for a symbol
+            获取指定交易代码的详情
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-details" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#7c47ef3411" /></para>
             </summary>
             <param name="symbol">The symbol to get data for</param>
             <returns></returns>
@@ -2091,7 +2255,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToSymbolDetailUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiSymbolDetails}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to symbol detail updates for a symbol
+            主题订阅 此主题提供24小时内最新市场概要快照。快照频率不超过每秒10次。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-details" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#7c47ef3411" /></para>
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="onData">The handler for updates</param>
@@ -2101,7 +2267,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiSymbolTick}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to updates for a symbol
+            主题订阅 获取指定交易代码市场聚合行情数据，每100ms推送一次。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-ticker" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#ticker-2" /></para>
             </summary>
             <param name="symbol">The symbol to subscribe</param>
             <param name="onData">The handler for updates</param>
@@ -2111,7 +2279,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToTickerUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiSymbolDatas}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to updates for all tickers
+            主题订阅 获取全部交易代码市场聚合行情数据，每100ms推送一次。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-ticker" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#ticker-2" /></para>
             </summary>
             <param name="onData">The handler for updates</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -2120,7 +2290,9 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToBestOfferUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiBestOffer}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to changes of a symbol's best ask/bid
+            主题订阅 买一卖一逐笔行情 当买一价、买一量、卖一价、卖一量，其中任一数据发生变化时，此主题推送逐笔更新。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#best-bid-offer" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#mbp-2" /></para>
             </summary>
             <param name="symbol">Symbol to subscribe to</param>
             <param name="onData">Data handler</param>
@@ -2130,31 +2302,39 @@
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToOrderUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiSubmittedOrderUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiMatchedOrderUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiCanceledOrderUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiTriggerFailureOrderUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiOrderUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to updates of orders
+            订阅订单更新
+            订单的更新推送由任一以下事件触发：
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#subscribe-order-updates" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#f810bc2ca6" /></para>
             </summary>
             <param name="symbol">Subscribe on a specific symbol</param>
-            <param name="onOrderSubmitted">Event handler for the order submitted event</param>
-            <param name="onOrderMatched">Event handler for the order matched event</param>
-            <param name="onOrderCancelation">Event handler for the order cancelled event</param>
-            <param name="onConditionalOrderTriggerFailure">Event handler for the conditional order trigger failed event</param>
-            <param name="onConditionalOrderCanceled">Event handler for the condition order canceled event</param>
+            <param name="onOrderSubmitted">Event handler for the order submitted event 订单创建</param>
+            <param name="onOrderMatched">Event handler for the order matched event 订单成交</param>
+            <param name="onOrderCancelation">Event handler for the order cancelled event 订单撤销</param>
+            <param name="onConditionalOrderTriggerFailure">Event handler for the conditional order trigger failed event 计划委托或追踪委托触发失败事件</param>
+            <param name="onConditionalOrderCanceled">Event handler for the condition order canceled event 计划委托或追踪委托触发前撤单事件</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToAccountUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiAccountUpdate}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Subscribe to updates of account balances
+            订阅账户变更
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#subscribe-account-change" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#f2e38456dd" /></para>
             </summary>
-            <param name="onAccountUpdate">Event handler</param>
-            <param name="updateMode">The update mode. Defaults to 1, see API docs for more info</param>
+            <param name="onAccountUpdate">Event handler 订阅账户的余额更新</param>
+            <param name="updateMode">The update mode. Defaults to 1, see API docs for more info 用户可选择以下任一账户变更推送的触发方式 1、仅在账户余额发生变动时推送； 2、在账户余额发生变动或可用余额发生变动时均推送，且分别推送。 3、在账户余额发生变动或可用余额发生变动时均推送，且一起推送。</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiSocketClientSpotStreams.SubscribeToOrderDetailsUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiTradeUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.Socket.HuobiOrderCancelationUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to detailed order matched/canceled updates
+            订阅清算后成交及撤单更新
+            仅当用户订单成交或撤销时推送。其中，订单成交为逐笔推送，如一张 taker 订单同时与多张 maker 订单成交，该接口将推送逐笔更新。但用户收到的这几笔成交消息的次序，有可能与实际的成交次序不完全一致。另外，如果一张订单的成交及撤销几乎同时发生，例如 IOC 订单成交后剩余部分被自动撤销，用户可能会先收到撤单推送，再收到成交推送。
             <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#subscribe-trade-details-amp-order-cancellation-post-clearing" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#7ae76c1c98" /></para>
             </summary>
             <param name="symbol">Subscribe to a specific symbol</param>
             <param name="onOrderMatch">Event handler for the order matched event</param>
@@ -2717,6 +2897,11 @@
         <member name="P:Huobi.Net.Objects.Models.HuobiConditionalOrder.AccountId">
             <summary>
             Acount id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiConditionalOrder.OrderId">
+            <summary>
+            Order id（https://github.com/JKorf/Huobi.Net/issues/89）
             </summary>
         </member>
         <member name="P:Huobi.Net.Objects.Models.HuobiConditionalOrder.Source">
