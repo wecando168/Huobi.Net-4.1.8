@@ -448,5 +448,14 @@ namespace Huobi.Net.Clients.SpotApi
                 parameters = JsonConvert.DeserializeObject<Dictionary<string, object>>(huobiCreateSubUserAccountRequest.ToJson());
             return await _baseClient.SendHuobiRequest<IEnumerable<HuobiSubUserCreation>>(_baseClient.GetUrl($"sub-user/creation", "2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long? subUid = null, string? action = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("subUid", subUid);
+            parameters.AddOptionalParameter("action", action);
+            return await _baseClient.SendHuobiRequest<HuobiLockOrUnlockSubUser>(_baseClient.GetUrl($"sub-user/management", "2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
     }
 }

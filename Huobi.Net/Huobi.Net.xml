@@ -226,6 +226,9 @@
         <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.SubUserCreationAsync(Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.LockOrUnlockSubUserAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -1735,6 +1738,18 @@
             <param name="huobiCreateSubUserAccountRequest">Huobi create sub user account request</param>
             <returns>Huobi sub user account list</returns>
         </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.LockOrUnlockSubUserAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Lock/Unlock Sub User
+            冻结/解冻子用户
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#lock-unlock-sub-user" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#41965cbe31" /></para>
+            </summary>
+            <param name="subUid">Sub user UID</param>
+            <param name="action"></param>
+            <param name="ct">Action type(lock or unlock)</param>
+            <returns></returns>
+        </member>
         <member name="T:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData">
             <summary>
             Huobi exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -3181,6 +3196,21 @@
         <member name="P:Huobi.Net.Objects.Models.HuobiLoanInfoAsset.ActualRate">
             <summary>
             Actual interest rate
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiLockOrUnlockSubUser">
+            <summary>
+            Lock/Unlock Sub User
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiLockOrUnlockSubUser.SubUid">
+            <summary>
+            Sub user UID
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiLockOrUnlockSubUser.UserState">
+            <summary>
+            The state of sub user(lock,normal)
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.HuobiMarginBalances">

@@ -446,5 +446,17 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="huobiCreateSubUserAccountRequest">Huobi create sub user account request</param>
         /// <returns>Huobi sub user account list</returns>
         Task<WebCallResult<IEnumerable<HuobiSubUserCreation>>> SubUserCreationAsync(HuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest, CancellationToken ct = default);
+
+        /// <summary>
+        /// Lock/Unlock Sub User
+        /// 冻结/解冻子用户
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#lock-unlock-sub-user" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#41965cbe31" /></para>
+        /// </summary>
+        /// <param name="subUid">Sub user UID</param>
+        /// <param name="action"></param>
+        /// <param name="ct">Action type(lock or unlock)</param>
+        /// <returns></returns>
+        Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long? subUid = null, string? action = null, CancellationToken ct = default);
     }
 }
