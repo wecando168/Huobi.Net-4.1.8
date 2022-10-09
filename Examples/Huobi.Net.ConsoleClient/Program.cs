@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using CryptoExchange.Net.Authentication;
 using Huobi.Net.Clients;
 using Huobi.Net.Objects;
 
@@ -35,6 +36,13 @@ namespace Huobi.Net.ConsoleClient
 
             // Socket client
             var socketClient = new HuobiSocketClient();
+            if (socketClient.ClientOptions != null && socketClient.ClientOptions.ApiCredentials != null)
+            {
+                ApiCredentials apiCredentials = socketClient.ClientOptions.ApiCredentials;
+                Console.WriteLine($"Key:{(object.Equals(apiCredentials.Key, null) ? "null" : apiCredentials.Key.ToString().Trim())}");
+                Console.WriteLine($"PrivateKey:{(object.Equals(apiCredentials.PrivateKey, null) ? "null" : apiCredentials.PrivateKey.ToString().Trim())}");
+                Console.WriteLine($"Secret:{(object.Equals(apiCredentials.Secret, null) ? "null" : apiCredentials.Secret.ToString().Trim())}");
+            }
             await socketClient.SpotStreams.SubscribeToKlineUpdatesAsync("ethusdt", Enums.KlineInterval.FiveMinutes, data =>
             {
                 Console.WriteLine("Received kline update. Last price: " + data.Data.ClosePrice);
