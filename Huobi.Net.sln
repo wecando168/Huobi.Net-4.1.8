@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Huobi.Net.UnitTests", "Huob
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoExchange.Net", "..\CryptoExchange.Net-5.2.4\CryptoExchange.Net\CryptoExchange.Net.csproj", "{4316A387-81DA-4E4B-887E-989AC3901260}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Huobi.Net.ConsoleClient", "Examples\Huobi.Net.ConsoleClient\Huobi.Net.ConsoleClient.csproj", "{D77C6799-DD0E-4EDF-AE1E-8C1300B98F5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4316A387-81DA-4E4B-887E-989AC3901260}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4316A387-81DA-4E4B-887E-989AC3901260}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4316A387-81DA-4E4B-887E-989AC3901260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D77C6799-DD0E-4EDF-AE1E-8C1300B98F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77C6799-DD0E-4EDF-AE1E-8C1300B98F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77C6799-DD0E-4EDF-AE1E-8C1300B98F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77C6799-DD0E-4EDF-AE1E-8C1300B98F5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

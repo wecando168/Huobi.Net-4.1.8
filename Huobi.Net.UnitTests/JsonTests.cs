@@ -32,7 +32,7 @@ namespace Huobi.Net.UnitTests
                 },
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
-                    { "GetBalancesAsync", "list" }
+                    { "GetBalancesAsync", "list" }                    
                 },
                 useNestedJsonPropertyForAllCompare: new List<string> { "data" }
                 );
@@ -82,6 +82,5 @@ namespace Huobi.Net.UnitTests
                 useNestedJsonPropertyForAllCompare: new List<string> { "tick" }
                 );
         }
-
     }
 }

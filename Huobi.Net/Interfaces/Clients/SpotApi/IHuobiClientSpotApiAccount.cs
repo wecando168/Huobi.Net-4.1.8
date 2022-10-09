@@ -436,5 +436,15 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<HuobiRepayment>>> GetRepaymentHistoryAsync(long? repayId = null, long? accountId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, string? sort = null, int? limit = null, long? fromId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Sub user creation
+        /// 子用户创建
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-creation" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#95d89cba52" /></para>
+        /// </summary>
+        /// <param name="huobiCreateSubUserAccountRequest">Huobi create sub user account request</param>
+        /// <returns>Huobi sub user account list</returns>
+        Task<WebCallResult<IEnumerable<HuobiSubUserCreation>>> SubUserCreationAsync(HuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest, CancellationToken ct = default);
     }
 }

@@ -1,0 +1,16 @@
+{
+    "code":200,
+    "data":[
+        {
+            "userName":"test123",
+            "note":"huobi",
+            "uid":123
+        },
+        {
+            "userName":"test456",
+            "note":"huobi two",
+            "errCode":"2002",
+            "errMessage":"value in user name duplicated with existing record"
+        }
+    ]
+}

@@ -223,6 +223,9 @@
         <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.GetRepaymentHistoryAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.SubUserCreationAsync(Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -1722,6 +1725,16 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.SubUserCreationAsync(Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest,System.Threading.CancellationToken)">
+            <summary>
+            Sub user creation
+            子用户创建
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-creation" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#95d89cba52" /></para>
+            </summary>
+            <param name="huobiCreateSubUserAccountRequest">Huobi create sub user account request</param>
+            <returns>Huobi sub user account list</returns>
+        </member>
         <member name="T:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiExchangeData">
             <summary>
             Huobi exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -2999,6 +3012,47 @@
             Orders rejected for cancelation
             </summary>
         </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest">
+            <summary>
+            Huobi create sub-user account request
+            </summary>
+        </member>
+        <member name="F:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest.UserList">
+            <summary>
+            Request huobi create sub user account info list
+            </summary>
+        </member>
+        <member name="M:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest.#ctor(System.Collections.Generic.IEnumerable{Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequestInfo})">
+            <summary>
+            set user list
+            </summary>
+            <param name="userList"></param>
+        </member>
+        <member name="M:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest.ToJson">
+            <summary>
+            转换为Json字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequestInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequestInfo.UserName">
+            <summary>
+            Sub user name, an important identifier of the sub user's identity, requires unique within the huobi platform
+            子用户名，子用户身份的重要标识，要求火币平台内唯一
+            6至20位字母和数字的组合，可为纯字母；若字母和数字的组合，需以字母开头；字母不区分大小写；
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequestInfo.Note">
+            <summary>
+            Sub user note, no unique requirements
+            子用户备注，无唯一性要求
+            最多20位字符，字符类型不限
+            </summary>
+        </member>
         <member name="T:Huobi.Net.Objects.Models.HuobiDepositAddress">
             <summary>
             Deposit address info
@@ -3862,6 +3916,36 @@
         <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAccounts.Accounts">
             <summary>
             List of accounts for the sub-user
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiSubUserCreation">
+            <summary>
+            Huobi sub-user account info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserCreation.UserName">
+            <summary>
+            Sub user name
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserCreation.Note">
+            <summary>
+            Sub user note
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserCreation.SubUserID">
+            <summary>
+            Sub user id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserCreation.ErrCode">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserCreation.ErrMessage">
+            <summary>
+            Error message
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.HuobiSymbol">
