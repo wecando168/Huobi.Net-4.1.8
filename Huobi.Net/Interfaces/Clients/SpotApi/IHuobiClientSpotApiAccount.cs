@@ -454,9 +454,63 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#41965cbe31" /></para>
         /// </summary>
         /// <param name="subUid">Sub user UID</param>
-        /// <param name="action"></param>
-        /// <param name="ct">Action type(lock or unlock)</param>
+        /// <param name="action">Action type(lock or unlock)</param>
+        /// <param name="ct"></param>
         /// <returns></returns>
         Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long? subUid = null, string? action = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Sub user API key creation
+        /// 子用户API key创建
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-creation" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-2" /></para>
+        /// </summary>
+        /// <param name="otpToken">Google verification code of the parent user, the parent user must be bound to Google Authenticator for verification on the web</param>
+        /// <param name="subUid">Sub user UID</param>
+        /// <param name="note">API key note</param>
+        /// <param name="permission">API key permissions:Valid value: readOnly, trade; multiple inputs are allowed, separated by comma, i.e. readOnly, trade; readOnly is required permission for any API key, while trade permission is optional.</param>
+        /// <param name="ipAddresses">The IPv4/IPv6 host address or IPv4 network address bound to the API key: At most 20 IPv4/IPv6 host address(es) and/or IPv4 network address(es) can bind with one API key, separated by comma. For example: 202.106.196.115, 202.106.96.0/24. An API key not linked with an IP address but has trading or withdrawal permissions will be automatically deactivated after 90 days of inactivity.</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<HuobiSubUserAPIKeyCreation>> SubUserAPIKeyCreationAsync(string otpToken, long? subUid = null, string? note = null, string permission = "readOnly", string? ipAddresses = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Sub user API key modification
+        /// 修改子用户API key
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-modification" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-3" /></para>
+        /// </summary>
+        /// <param name="subUid">Sub user UID</param>
+        /// <param name="accessKey">Access key for sub user API key</param>
+        /// <param name="note">API key note</param>
+        /// <param name="permission">API key permissions:Valid value: readOnly, trade; multiple inputs are allowed, separated by comma, i.e. readOnly, trade; readOnly is required permission for any API key, while trade permission is optional.</param>
+        /// <param name="ipAddresses">The IPv4/IPv6 host address or IPv4 network address bound to the API key: At most 20 IPv4/IPv6 host address(es) and/or IPv4 network address(es) can bind with one API key, separated by comma. For example: 202.106.196.115, 202.106.96.0/24. An API key not linked with an IP address but has trading or withdrawal permissions will be automatically deactivated after 90 days of inactivity.</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<HuobiSubUserAPIKeyModification>> SubUserAPIKeyModificationAsync(long? subUid, string accessKey, string? note = null, string permission = "readOnly", string? ipAddresses = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Sub user API key deletion
+        /// 删除子用户API key
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-deletion" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-4" /></para>
+        /// </summary>
+        /// <param name="subUid">Sub user UID</param>
+        /// <param name="accessKey">access key</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<HuobiSubUserAPIKeyDeletion>> SubUserAPIKeyDeletionAsync(long? subUid = null, string? accessKey = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// API key query
+        /// 母子用户API key信息查询
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#api-key-query" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key" /></para>
+        /// </summary>
+        /// <param name="uid">parent user uid , sub user uid</param>
+        /// <param name="accessKey">The access key of the API key, if not specified, it will return all API keys belong to the UID.</param>
+        /// <param name="ct">Action type(lock or unlock)</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<HuobiAPIKeyQuery>>> APIKeyQueryAsync(long? uid = null, string? accessKey = null, CancellationToken ct = default);
     }
 }

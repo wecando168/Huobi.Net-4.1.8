@@ -457,5 +457,49 @@ namespace Huobi.Net.Clients.SpotApi
             parameters.AddOptionalParameter("action", action);
             return await _baseClient.SendHuobiRequest<HuobiLockOrUnlockSubUser>(_baseClient.GetUrl($"sub-user/management", "2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<HuobiSubUserAPIKeyCreation>> SubUserAPIKeyCreationAsync(string otpToken, long? subUid = null, string? note = null, string permission = "readOnly", string? ipAddresses = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("otpToken", otpToken);
+            parameters.AddOptionalParameter("subUid", subUid);
+            parameters.AddOptionalParameter("note", string.IsNullOrWhiteSpace(note) ? DateTime.Now.ToString(format: "yyyy-MM-dd") : note);
+            parameters.AddOptionalParameter("permission", permission);
+            parameters.AddOptionalParameter("ipAddresses", string.IsNullOrWhiteSpace(ipAddresses) ? null : ipAddresses);
+            return await _baseClient.SendHuobiRequest<HuobiSubUserAPIKeyCreation>(_baseClient.GetUrl($"sub-user/api-key-generation", "2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<HuobiSubUserAPIKeyModification>> SubUserAPIKeyModificationAsync(long? subUid, string accessKey, string? note = null, string? permission = null, string? ipAddresses = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("subUid", subUid);
+            parameters.AddOptionalParameter("accessKey", accessKey);
+            parameters.AddOptionalParameter("note", string.IsNullOrWhiteSpace(note) ? null : note);
+            parameters.AddOptionalParameter("permission", string.IsNullOrWhiteSpace(permission) ? null : permission);
+            parameters.AddOptionalParameter("ipAddresses", string.IsNullOrWhiteSpace(ipAddresses) ? null : ipAddresses);
+            return await _baseClient.SendHuobiRequest<HuobiSubUserAPIKeyModification>(_baseClient.GetUrl($"sub-user/api-key-modification", "2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<HuobiSubUserAPIKeyDeletion>> SubUserAPIKeyDeletionAsync(long? subUid = null, string? accessKey = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("subUid", subUid);
+            parameters.AddOptionalParameter("accessKey", accessKey);
+            WebCallResult<HuobiSubUserAPIKeyDeletion>? result = await _baseClient.SendHuobiRequest<HuobiSubUserAPIKeyDeletion>(_baseClient.GetUrl($"sub-user/api-key-deletion", "2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return result;
+            //return result.As(result.Success);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<HuobiAPIKeyQuery>>> APIKeyQueryAsync(long? uid = null, string? accessKey = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("uid", uid);
+            parameters.AddOptionalParameter("accessKey", accessKey);
+            return await _baseClient.SendHuobiRequest<IEnumerable<HuobiAPIKeyQuery>>(_baseClient.GetUrl($"user/api-key", "2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
     }
 }

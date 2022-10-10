@@ -229,6 +229,18 @@
         <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.LockOrUnlockSubUserAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.SubUserAPIKeyCreationAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.SubUserAPIKeyModificationAsync(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.SubUserAPIKeyDeletionAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiAccount.APIKeyQueryAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Huobi.Net.Clients.SpotApi.HuobiClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -1746,7 +1758,61 @@
             <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#41965cbe31" /></para>
             </summary>
             <param name="subUid">Sub user UID</param>
-            <param name="action"></param>
+            <param name="action">Action type(lock or unlock)</param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.SubUserAPIKeyCreationAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sub user API key creation
+            子用户API key创建
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-creation" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-2" /></para>
+            </summary>
+            <param name="otpToken">Google verification code of the parent user, the parent user must be bound to Google Authenticator for verification on the web</param>
+            <param name="subUid">Sub user UID</param>
+            <param name="note">API key note</param>
+            <param name="permission">API key permissions:Valid value: readOnly, trade; multiple inputs are allowed, separated by comma, i.e. readOnly, trade; readOnly is required permission for any API key, while trade permission is optional.</param>
+            <param name="ipAddresses">The IPv4/IPv6 host address or IPv4 network address bound to the API key: At most 20 IPv4/IPv6 host address(es) and/or IPv4 network address(es) can bind with one API key, separated by comma. For example: 202.106.196.115, 202.106.96.0/24. An API key not linked with an IP address but has trading or withdrawal permissions will be automatically deactivated after 90 days of inactivity.</param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.SubUserAPIKeyModificationAsync(System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sub user API key modification
+            修改子用户API key
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-modification" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-3" /></para>
+            </summary>
+            <param name="subUid">Sub user UID</param>
+            <param name="accessKey">Access key for sub user API key</param>
+            <param name="note">API key note</param>
+            <param name="permission">API key permissions:Valid value: readOnly, trade; multiple inputs are allowed, separated by comma, i.e. readOnly, trade; readOnly is required permission for any API key, while trade permission is optional.</param>
+            <param name="ipAddresses">The IPv4/IPv6 host address or IPv4 network address bound to the API key: At most 20 IPv4/IPv6 host address(es) and/or IPv4 network address(es) can bind with one API key, separated by comma. For example: 202.106.196.115, 202.106.96.0/24. An API key not linked with an IP address but has trading or withdrawal permissions will be automatically deactivated after 90 days of inactivity.</param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.SubUserAPIKeyDeletionAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sub user API key deletion
+            删除子用户API key
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-deletion" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-4" /></para>
+            </summary>
+            <param name="subUid">Sub user UID</param>
+            <param name="accessKey">access key</param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.SpotApi.IHuobiClientSpotApiAccount.APIKeyQueryAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <summary>
+            API key query
+            母子用户API key信息查询
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#api-key-query" /></para>
+            <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key" /></para>
+            </summary>
+            <param name="uid">parent user uid , sub user uid</param>
+            <param name="accessKey">The access key of the API key, if not specified, it will return all API keys belong to the UID.</param>
             <param name="ct">Action type(lock or unlock)</param>
             <returns></returns>
         </member>
@@ -2635,6 +2701,59 @@
         <member name="P:Huobi.Net.Objects.Models.HuobiAccountValuation.Timestamp">
             <summary>
             Timestamp of the data
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiAPIKeyQuery">
+            <summary>
+            Huobi sub user API key query info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.AccessKey">
+            <summary>
+            The access key of the account
+            访问密钥
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.Status">
+            <summary>
+            The secret key status of the account
+            API key当前状态	normal(正常)，expired(已过期)
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.AccessKeyNote">
+            <summary>
+            The access key note of the account
+            API key备注	最多255位字符，字符类型不限
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.Permission">
+            <summary>
+            The access key permission of the account
+            API key权限:取值范围：readOnly、trade，其中readOnly必传，trade选传，两个间用半角逗号分隔。
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.IpAddresses">
+            <summary>
+            The access key ip addresses of the account
+            API key绑定的IP地址	
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.ValidDays">
+            <summary>
+            The access key expire in (days) of the account
+            API key剩余有效天数	若为-1，则表示永久有效	
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.createTime">
+            <summary>
+            The access key creation time of the account
+            API key创建时间	
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiAPIKeyQuery.UpdateTime">
+            <summary>
+            The access key  last modified time of the account
+            API key最近一次修改时间
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.HuobiAssetInfo">
@@ -3946,6 +4065,79 @@
         <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAccounts.Accounts">
             <summary>
             List of accounts for the sub-user
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyCreation">
+            <summary>
+            Huobi sub user API key creation info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyCreation.AccessKey">
+            <summary>
+            The access key of the account
+            访问密钥
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyCreation.SecretKey">
+            <summary>
+            The secret key of the account
+            执行密钥
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyCreation.AccessKeyNote">
+            <summary>
+            The access key note of the account
+            API key备注	最多255位字符，字符类型不限
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyCreation.Permission">
+            <summary>
+            The access key permission of the account
+            API key权限:取值范围：readOnly、trade，其中readOnly必传，trade选传，两个间用半角逗号分隔。
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyCreation.IpAddresses">
+            <summary>
+            The access key ip addresses of the account
+            API key绑定的IP地址	
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyDeletion">
+            <summary>
+            Huobi sub user API key deletion info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyDeletion.Code">
+            <summary>
+            Status code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyDeletion.Data">
+            <summary>
+            Deletion data(null)
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyModification">
+            <summary>
+            Huobi sub user API key modification info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyModification.AccessKeyNote">
+            <summary>
+            The access key note of the account
+            API key备注	最多255位字符，字符类型不限
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyModification.Permission">
+            <summary>
+            The access key permission of the account
+            API key权限:取值范围：readOnly、trade，其中readOnly必传，trade选传，两个间用半角逗号分隔。
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSubUserAPIKeyModification.IpAddresses">
+            <summary>
+            The access key ip addresses of the account
+            API key绑定的IP地址	
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.HuobiSubUserCreation">
