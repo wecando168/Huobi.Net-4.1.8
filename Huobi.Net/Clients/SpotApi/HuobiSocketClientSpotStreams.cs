@@ -317,6 +317,15 @@ namespace Huobi.Net.Clients.SpotApi
             return await _baseClient.SubscribeInternalAsync(this, baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        public async Task<CallResult<IEnumerable<HuobiSpecifiedTimeKLine>>> GetSpecifiedTimeKLinesAsync(string symbol, KlineInterval period, long startTimeStamp, long endTimeStamp)
+        {
+            symbol = symbol.ValidateHuobiSymbol();
+            var request = new HuobiSocketRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{symbol}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}", startTimeStamp, endTimeStamp);
+            CallResult<HuobiSocketResponse<IEnumerable<HuobiSpecifiedTimeKLine>>>? result = await _baseClient.QueryInternalAsync<HuobiSocketResponse<IEnumerable<HuobiSpecifiedTimeKLine>>>(this, request, false).ConfigureAwait(false);
+            return result ? result.As(result.Data.Data) : result.AsError<IEnumerable<HuobiSpecifiedTimeKLine>>(result.Error!);
+        }        
+
         #region private
 
         private void DeserializeAndInvoke<T>(DataEvent<JToken> data, Action<DataEvent<T>>? action, string? symbol = null)

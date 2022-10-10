@@ -17,10 +17,10 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
     public interface IHuobiSocketClientSpotStreams : IDisposable
     {
         /// <summary>
-        /// Gets candlestick data for a symbol
-        /// 所有交易对的最新 Tickers 获得所有交易对的 tickers。
-        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#get-latest-tickers-for-all-pairs" /></para>
-        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#tickers" /></para>
+        /// This topic sends a new candlestick whenever it is available.
+        /// K线数据 主题订阅 一旦K线数据产生，Websocket服务器将通过此订阅主题接口推送至客户端：
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-candlestick" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#k-2" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="period">The period of a single candlestick</param>
@@ -230,5 +230,18 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         Task<CallResult<UpdateSubscription>> SubscribeToOrderDetailsUpdatesAsync(string? symbol = null,
             Action<DataEvent<HuobiTradeUpdate>>? onOrderMatch = null, Action<DataEvent<HuobiOrderCancelationUpdate>>? onOrderCancel = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Req Specified time candlestick
+        /// WebSocket获取指定时间段的K线
+        /// 单次获取：WebSocket行情数据 
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-candlestick" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#k-2" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period of a single candlestick</param>
+        /// <param name="startTimeStamp">The candlestick start time stamp</param>
+        /// <param name="endTimeStamp">The candlestick end time stamp</param>
+        /// <returns></returns>
+        Task<CallResult<IEnumerable<HuobiSpecifiedTimeKLine>>> GetSpecifiedTimeKLinesAsync(string symbol, KlineInterval period, long startTimeStamp, long endTimeStamp);
     }
 }
