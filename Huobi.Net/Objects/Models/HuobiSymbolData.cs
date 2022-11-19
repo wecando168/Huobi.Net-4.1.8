@@ -77,7 +77,7 @@ namespace Huobi.Net.Objects.Models
     /// <summary>
     /// Symbol details
     /// </summary>
-    public class HuobiSymbolDetails : HuobiSymbolData
+    public class HuobiSymbolDetails : HuobiSymbolData 
     {
         /// <summary>
         /// The id of the details

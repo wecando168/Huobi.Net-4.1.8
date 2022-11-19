@@ -450,11 +450,11 @@ namespace Huobi.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long? subUid = null, string? action = null, CancellationToken ct = default)
+        public async Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long subUid, SubAccountManageAction action, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("subUid", subUid);
-            parameters.AddOptionalParameter("action", action);
+            parameters.AddOptionalParameter("action", JsonConvert.SerializeObject(action, new SubAccountManageActionConverter(false)));
             return await _baseClient.SendHuobiRequest<HuobiLockOrUnlockSubUser>(_baseClient.GetUrl($"sub-user/management", "2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 

@@ -7,39 +7,39 @@ using System.Threading.Tasks;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using Huobi.Net.Clients.SpotApi;
+using Huobi.Net.Clients.UsdtMargined;
 using Huobi.Net.Interfaces.Clients;
-using Huobi.Net.Interfaces.Clients.SpotApi;
+using Huobi.Net.Interfaces.Clients.UsdtMargined;
 using Huobi.Net.Objects;
 using Huobi.Net.Objects.Internal;
 using Newtonsoft.Json.Linq;
 
 namespace Huobi.Net.Clients
 {
-    /// <inheritdoc cref="IHuobiClient" />
-    public class HuobiClient : BaseRestClient, IHuobiClient
+    /// <inheritdoc cref="IHuobiUsdtMarginedClient" />
+    public class HuobiUsdtMarginedClient : BaseRestClient, IHuobiUsdtMarginedClient
     {
         #region Api clients
 
         /// <inheritdoc />
-        public IHuobiClientSpotApi SpotApi { get; }
+        public IHuobiClientUsdtMarginedApi UsdtMarginedApi { get; }
 
         #endregion
 
         #region constructor/destructor
         /// <summary>
-        /// Create a new instance of HuobiClient using the default options
+        /// Create a new instance of HuobiSpotClient using the default options
         /// </summary>
-        public HuobiClient() : this(HuobiClientOptions.Default)
+        public HuobiUsdtMarginedClient() : this(HuobiUsdtMarginedClientOptions.Default)
         {
         }
 
         /// <summary>
-        /// Create a new instance of the HuobiClient with the provided options
+        /// Create a new instance of the HuobiSpotClient with the provided options
         /// </summary>
-        public HuobiClient(HuobiClientOptions options) : base("Huobi", options)
+        public HuobiUsdtMarginedClient(HuobiUsdtMarginedClientOptions options) : base("Huobi", options)
         {
-            SpotApi = AddApiClient(new HuobiClientSpotApi(log, this, options));
+            UsdtMarginedApi = AddApiClient(new HuobiClientUsdtMarginedApi(log, this, options));
         }
         #endregion
 
@@ -48,21 +48,9 @@ namespace Huobi.Net.Clients
         /// Set the default options to be used when creating new clients
         /// </summary>
         /// <param name="options">Options to use as default</param>
-        public static void SetDefaultOptions(HuobiClientOptions options)
+        public static void SetDefaultOptions(HuobiUsdtMarginedClientOptions options)
         {
-            HuobiClientOptions.Default = options;
-        }
-
-        internal async Task<WebCallResult<T>> SendHuobiV2Request<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
-        {
-            var result = await SendRequestAsync<HuobiApiResponseV2<T>>(apiClient, uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
-            if (!result || result.Data == null)
-                return result.AsError<T>(result.Error!);
-
-            if (result.Data.Code != 200)
-                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message));
-
-            return result.As(result.Data.Data);
+            HuobiUsdtMarginedClientOptions.Default = options;
         }
 
         internal async Task<WebCallResult<(T, DateTime)>> SendHuobiTimestampRequest<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
@@ -85,6 +73,30 @@ namespace Huobi.Net.Clients
 
             if (result.Data.ErrorCode != null)
                 return result.AsError<T>(new ServerError(result.Data.ErrorCode, result.Data.ErrorMessage));
+
+            return result.As(result.Data.Data);
+        }
+
+        internal async Task<WebCallResult<T>> SendHuobiV2Request<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
+        {
+            var result = await SendRequestAsync<HuobiApiResponseV2<T>>(apiClient, uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.AsError<T>(result.Error!);
+
+            if (result.Data.Code != 200)
+                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message));
+
+            return result.As(result.Data.Data);
+        }
+
+        internal async Task<WebCallResult<T>> SendHuobiV3Request<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
+        {
+            var result = await SendRequestAsync<HuobiApiResponseV3<T>>(apiClient, uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.AsError<T>(result.Error!);
+
+            if (result.Data.Code != 200)
+                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message));
 
             return result.As(result.Data.Data);
         }

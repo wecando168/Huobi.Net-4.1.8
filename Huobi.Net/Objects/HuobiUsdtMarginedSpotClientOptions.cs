@@ -9,19 +9,19 @@ namespace Huobi.Net.Objects
     /// <summary>
     /// Client options
     /// </summary>
-    public class HuobiClientOptions: BaseRestClientOptions
+    public class HuobiUsdtMarginedClientOptions: BaseRestClientOptions
     {
         /// <summary>
-        /// Default options for the spot client
+        /// Default options for the usdt margined client
         /// </summary>
-        public static HuobiClientOptions Default { get; set; } = new HuobiClientOptions();
+        public static HuobiUsdtMarginedClientOptions Default { get; set; } = new HuobiUsdtMarginedClientOptions();
 
         /// <summary>
         /// Whether public requests should be signed if ApiCredentials are provided. Needed for accurate rate limiting.
         /// </summary>
         public bool SignPublicRequests { get; set; } = false;
 
-        private RestApiClientOptions _spotApiOptions = new RestApiClientOptions(HuobiApiAddresses.Default.RestClientAddress)
+        private RestApiClientOptions _usdtMarginedApiOptions = new RestApiClientOptions(HuobiApiAddresses.Default.UsdtMarginedRestClientAddress)
         {
             RateLimiters = new List<IRateLimiter>
             {
@@ -32,18 +32,18 @@ namespace Huobi.Net.Objects
             }
         };
         /// <summary>
-        /// Spot API options
+        /// Usdt margined API options
         /// </summary>
-        public RestApiClientOptions SpotApiOptions
+        public RestApiClientOptions UsdtMarginedApiOptions
         {
-            get => _spotApiOptions;
-            set => _spotApiOptions = new RestApiClientOptions(_spotApiOptions, value);
+            get => _usdtMarginedApiOptions;
+            set => _usdtMarginedApiOptions = new RestApiClientOptions(_usdtMarginedApiOptions, value);
         }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public HuobiClientOptions() : this(Default)
+        public HuobiUsdtMarginedClientOptions() : this(Default)
         {
         }
 
@@ -51,44 +51,44 @@ namespace Huobi.Net.Objects
         /// ctor
         /// </summary>
         /// <param name="baseOn">Base the new options on other options</param>
-        internal HuobiClientOptions(HuobiClientOptions baseOn) : base(baseOn)
+        internal HuobiUsdtMarginedClientOptions(HuobiUsdtMarginedClientOptions baseOn) : base(baseOn)
         {
             if (baseOn == null)
                 return;
 
 
             SignPublicRequests = baseOn.SignPublicRequests;
-            _spotApiOptions = new RestApiClientOptions(baseOn.SpotApiOptions, null);
+            _usdtMarginedApiOptions = new RestApiClientOptions(baseOn.UsdtMarginedApiOptions, null);
         }
     }
 
     /// <summary>
     /// Socket client options
     /// </summary>
-    public class HuobiSocketClientOptions : BaseSocketClientOptions
+    public class HuobiUsdtMarginedSocketClientOptions : BaseSocketClientOptions
     {
         /// <summary>
-        /// Default options for the spot client
+        /// Default options for the usdt margined client
         /// </summary>
-        public static HuobiSocketClientOptions Default { get; set; } = new HuobiSocketClientOptions()
+        public static HuobiUsdtMarginedSocketClientOptions Default { get; set; } = new HuobiUsdtMarginedSocketClientOptions()
         {
             SocketSubscriptionsCombineTarget = 10
         };
 
-        private HuobiSocketApiClientOptions _spotStreamsOptions = new HuobiSocketApiClientOptions(HuobiApiAddresses.Default.SocketClientPublicAddress, HuobiApiAddresses.Default.SocketClientPrivateAddress, HuobiApiAddresses.Default.SocketClientIncrementalOrderBookAddress);
+        private HuobiUsdtMarginedSocketApiClientOptions _usdtMarginedStreamsOptions = new HuobiUsdtMarginedSocketApiClientOptions(HuobiApiAddresses.Default.SocketClientLinearSwapWsAddress, HuobiApiAddresses.Default.SocketClientLinearSwapNotificationAddress, HuobiApiAddresses.Default.SocketClientWsIndexAddress);
         /// <summary>
-        /// Spot stream options
+        /// Usdt margined stream options
         /// </summary>
-        public HuobiSocketApiClientOptions SpotStreamsOptions
+        public HuobiUsdtMarginedSocketApiClientOptions UsdtMarginedStreamsOptions
         {
-            get => _spotStreamsOptions;
-            set => _spotStreamsOptions = new HuobiSocketApiClientOptions(_spotStreamsOptions, value);
+            get => _usdtMarginedStreamsOptions;
+            set => _usdtMarginedStreamsOptions = new HuobiUsdtMarginedSocketApiClientOptions(_usdtMarginedStreamsOptions, value);
         }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public HuobiSocketClientOptions() : this(Default)
+        public HuobiUsdtMarginedSocketClientOptions() : this(Default)
         {
         }
 
@@ -96,19 +96,19 @@ namespace Huobi.Net.Objects
         /// ctor
         /// </summary>
         /// <param name="baseOn">Base the new options on other options</param>
-        internal HuobiSocketClientOptions(HuobiSocketClientOptions baseOn) : base(baseOn)
+        internal HuobiUsdtMarginedSocketClientOptions(HuobiUsdtMarginedSocketClientOptions baseOn) : base(baseOn)
         {
             if (baseOn == null)
                 return;
 
-            _spotStreamsOptions = new HuobiSocketApiClientOptions(baseOn.SpotStreamsOptions, null);
+            _usdtMarginedStreamsOptions = new HuobiUsdtMarginedSocketApiClientOptions(baseOn.UsdtMarginedStreamsOptions, null);
         }
     }
 
     /// <summary>
     /// Socket API client options
     /// </summary>
-    public class HuobiSocketApiClientOptions : ApiClientOptions
+    public class HuobiUsdtMarginedSocketApiClientOptions : ApiClientOptions
     {
         /// <summary>
         /// The base address for the authenticated websocket
@@ -124,7 +124,7 @@ namespace Huobi.Net.Objects
         /// ctor
         /// </summary>
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public HuobiSocketApiClientOptions()
+        public HuobiUsdtMarginedSocketApiClientOptions()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
         }
@@ -135,7 +135,7 @@ namespace Huobi.Net.Objects
         /// <param name="baseAddress"></param>
         /// <param name="baseAddressAuthenticated"></param>
         /// <param name="baseAddressIncrementalOrderBook"></param>
-        internal HuobiSocketApiClientOptions(string baseAddress, string baseAddressAuthenticated, string baseAddressIncrementalOrderBook): base(baseAddress)
+        internal HuobiUsdtMarginedSocketApiClientOptions(string baseAddress, string baseAddressAuthenticated, string baseAddressIncrementalOrderBook): base(baseAddress)
         {
             BaseAddressAuthenticated = baseAddressAuthenticated;
             BaseAddressInrementalOrderBook = baseAddressIncrementalOrderBook;
@@ -146,7 +146,7 @@ namespace Huobi.Net.Objects
         /// </summary>
         /// <param name="baseOn"></param>
         /// <param name="newValues"></param>
-        internal HuobiSocketApiClientOptions(HuobiSocketApiClientOptions baseOn, HuobiSocketApiClientOptions? newValues) : base(baseOn, newValues)
+        internal HuobiUsdtMarginedSocketApiClientOptions(HuobiUsdtMarginedSocketApiClientOptions baseOn, HuobiUsdtMarginedSocketApiClientOptions? newValues) : base(baseOn, newValues)
         {
             BaseAddressAuthenticated = newValues?.BaseAddressAuthenticated ?? baseOn.BaseAddressAuthenticated;
             BaseAddressInrementalOrderBook = newValues?.BaseAddressInrementalOrderBook ?? baseOn.BaseAddressInrementalOrderBook;
@@ -156,7 +156,7 @@ namespace Huobi.Net.Objects
     /// <summary>
     /// Order book options
     /// </summary>
-    public class HuobiOrderBookOptions : OrderBookOptions
+    public class HuobiUsdtMarginedOrderBookOptions : OrderBookOptions
     {
         /// <summary>
         /// The way the entries are merged. 0 is no merge, 2 means to combine the entries on 2 decimal places

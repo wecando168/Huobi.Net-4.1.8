@@ -13,6 +13,7 @@ namespace Huobi.Net.Converters
         {
             new KeyValuePair<AccountType, string>(AccountType.Margin, "margin"),
             new KeyValuePair<AccountType, string>(AccountType.SuperMargin, "super-margin"),
+            new KeyValuePair<AccountType, string>(AccountType.CrossMargin, "cross-margin"),
             new KeyValuePair<AccountType, string>(AccountType.Investment, "investment"),
             new KeyValuePair<AccountType, string>(AccountType.Borrow, "borrow"),
             new KeyValuePair<AccountType, string>(AccountType.Spot, "spot"),

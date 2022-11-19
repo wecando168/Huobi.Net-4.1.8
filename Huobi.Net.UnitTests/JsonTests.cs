@@ -13,7 +13,9 @@ namespace Huobi.Net.UnitTests
     [TestFixture]
     public class JsonTests
     {
-        private JsonToObjectComparer<IHuobiClient> _comparer = new JsonToObjectComparer<IHuobiClient>((json) => TestHelpers.CreateResponseClient(json, new HuobiClientOptions()
+        #region 现货相关测试
+        //现货返回数据结构测试
+        private JsonToObjectComparer<IHuobiSpotClient> _spotComparer = new JsonToObjectComparer<IHuobiSpotClient>((json) => TestHelpers.CreateSpotResponseClient(json, new HuobiSpotClientOptions()
         { 
             ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
             OutputOriginalData = true,
@@ -24,9 +26,9 @@ namespace Huobi.Net.UnitTests
         }));
 
         [Test]
-        public async Task ValidateAccountCalls()
+        public async Task ValidateSpotAccountCalls()
         {   
-            await _comparer.ProcessSubject("DataResponses/Account", c => c.SpotApi.Account,
+            await _spotComparer.ProcessSubject("DataResponses/Spot/Account", c => c.SpotApi.Account,
                 useNestedObjectPropertyForCompare: new Dictionary<string, string> 
                 {
                 },
@@ -39,9 +41,9 @@ namespace Huobi.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateTradingCalls()
+        public async Task ValidateSpotTradingCalls()
         {
-            await _comparer.ProcessSubject("DataResponses/Trading", c => c.SpotApi.Trading,
+            await _spotComparer.ProcessSubject("DataResponses/Spot/Trading", c => c.SpotApi.Trading,
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {
                 },
@@ -57,9 +59,9 @@ namespace Huobi.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateExchangeDataDataCalls()
+        public async Task ValidateSpotExchangeDataDataCalls()
         {
-            await _comparer.ProcessSubject("DataResponses/ExchangeData", c => c.SpotApi.ExchangeData,
+            await _spotComparer.ProcessSubject("DataResponses/Spot/ExchangeData", c => c.SpotApi.ExchangeData,
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {
                     { "GetTickersAsync", "Ticks" },
@@ -72,9 +74,9 @@ namespace Huobi.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateExchangeDataTickCalls()
+        public async Task ValidateSpotExchangeDataTickCalls()
         {
-            await _comparer.ProcessSubject("TickResponses", c => c.SpotApi.ExchangeData,
+            await _spotComparer.ProcessSubject("TickResponses", c => c.SpotApi.ExchangeData,
                 parametersToSetNull: new [] { "limit" },
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {
@@ -82,5 +84,35 @@ namespace Huobi.Net.UnitTests
                 useNestedJsonPropertyForAllCompare: new List<string> { "tick" }
                 );
         }
+        #endregion
+
+        #region U本位合约相关测试
+        //U本位合约返回数据结构测试
+        private JsonToObjectComparer<IHuobiUsdtMarginedClient> _usdtMarginedComparer = new JsonToObjectComparer<IHuobiUsdtMarginedClient>((json) => TestHelpers.CreateUsdtMarginedResponseClient(json, new HuobiUsdtMarginedClientOptions()
+        {
+            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"),
+            OutputOriginalData = true,
+            UsdtMarginedApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            }
+        }));
+
+        [Test]
+        public async Task ValidateFuturesUsdtMarginedLinearSwapMarketDataCalls()
+        {
+            await _usdtMarginedComparer.ProcessSubject("DataResponses/Futures/UsdtMargined/LinearSwapmarketData", c => c.UsdtMarginedApi.MarketData,
+                //text文件名与类名对应
+                useNestedObjectPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetLinearSwapExMarketHistoryKlineAsync", "HuobiUsdtMarginedMarketHistoryKline" },
+                },
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "data" }
+                );
+        }
+        #endregion
     }
 }

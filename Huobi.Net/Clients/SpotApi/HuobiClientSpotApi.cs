@@ -22,8 +22,8 @@ namespace Huobi.Net.Clients.SpotApi
     /// <inheritdoc />
     public class HuobiClientSpotApi : RestApiClient, IHuobiClientSpotApi, ISpotClient
     {
-        private readonly HuobiClient _baseClient;
-        private readonly HuobiClientOptions _options;
+        private readonly HuobiSpotClient _baseClient;
+        private readonly HuobiSpotClientOptions _options;
         private readonly Log _log;
 
         internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
@@ -52,7 +52,7 @@ namespace Huobi.Net.Clients.SpotApi
         #endregion
 
         #region constructor/destructor
-        internal HuobiClientSpotApi(Log log, HuobiClient baseClient, HuobiClientOptions options)
+        internal HuobiClientSpotApi(Log log, HuobiSpotClient baseClient, HuobiSpotClientOptions options)
             : base(options, options.SpotApiOptions)
         {
             _baseClient = baseClient;

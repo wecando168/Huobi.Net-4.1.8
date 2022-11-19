@@ -164,9 +164,9 @@ namespace Huobi.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiSymbolStatus>> GetSymbolStatusAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<HuobiMarketStatus>> GetMarketStatusAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendHuobiV2Request<HuobiSymbolStatus>(_baseClient.GetUrl(MarketStatusEndpoint, "2"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.SendHuobiV2Request<HuobiMarketStatus>(_baseClient.GetUrl(MarketStatusEndpoint, "2"), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

@@ -34,7 +34,7 @@ namespace Huobi.Net.Clients.SpotApi
         #endregion
 
         #region ctor
-        internal HuobiSocketClientSpotStreams(Log log, HuobiSocketClient baseClient, HuobiSocketClientOptions options)
+        internal HuobiSocketClientSpotStreams(Log log, HuobiSocketClient baseClient, HuobiSpotSocketClientOptions options)
             : base(options, options.SpotStreamsOptions)
         {
             _log = log;

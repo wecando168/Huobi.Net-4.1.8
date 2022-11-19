@@ -457,7 +457,7 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="action">Action type(lock or unlock)</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long? subUid = null, string? action = null, CancellationToken ct = default);
+        Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long subUid, SubAccountManageAction action, CancellationToken ct = default);
 
         /// <summary>
         /// Sub user API key creation
@@ -507,8 +507,8 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#api-key-query" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key" /></para>
         /// </summary>
-        /// <param name="uid">parent user uid , sub user uid</param>
-        /// <param name="accessKey">The access key of the API key, if not specified, it will return all API keys belong to the UID.</param>
+        /// <param name="uid">母用户UID，子用户UID parent user uid , sub user uid</param>
+        /// <param name="accessKey">API key的access key，若缺省，则返回UID对应用户的所有API key. The access key of the API key, if not specified, it will return all API keys belong to the UID.</param>
         /// <param name="ct">Action type(lock or unlock)</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<HuobiAPIKeyQuery>>> APIKeyQueryAsync(long? uid = null, string? accessKey = null, CancellationToken ct = default);

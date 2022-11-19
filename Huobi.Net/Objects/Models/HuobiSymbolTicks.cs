@@ -6,7 +6,7 @@ namespace Huobi.Net.Objects.Models
     /// <summary>
     /// Symbol ticks
     /// </summary>
-    public class HuobiSymbolDatas
+    public class HuobiSymbolDatas 
     {
         /// <summary>
         /// Timestamp of the data

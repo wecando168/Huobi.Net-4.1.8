@@ -14,7 +14,7 @@ namespace Huobi.Net
     public static class HuobiHelpers
     {
         /// <summary>
-        /// Add the IHuobiClient and IHuobiSocketClient to the sevice collection so they can be injected
+        /// Add the IHuobiClient IHuobiUsdtMarginedClient IHuobiSocketClient And IHuobiUsdtMarginedSocketClient to the sevice collection so they can be injected
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="defaultOptionsCallback">Set default options for the client</param>
@@ -22,24 +22,35 @@ namespace Huobi.Net
         /// <returns></returns>
         public static IServiceCollection AddHuobi(
             this IServiceCollection services, 
-            Action<HuobiClientOptions, HuobiSocketClientOptions>? defaultOptionsCallback = null,
+            Action<HuobiSpotClientOptions, HuobiSpotSocketClientOptions>? defaultOptionsCallback = null,
             ServiceLifetime? socketClientLifeTime = null)
         {
             if (defaultOptionsCallback != null)
             {
-                var options = new HuobiClientOptions();
-                var socketOptions = new HuobiSocketClientOptions();
-                defaultOptionsCallback?.Invoke(options, socketOptions);
+                var spotOptions = new HuobiSpotClientOptions();
+                var usdtMarginedOptions = new HuobiUsdtMarginedClientOptions();
+                var spotSocketOptions = new HuobiSpotSocketClientOptions();
+                var usdtMarginedSocketOptions = new HuobiUsdtMarginedSocketClientOptions();
+                defaultOptionsCallback?.Invoke(spotOptions, spotSocketOptions);
 
-                HuobiClient.SetDefaultOptions(options);
-                HuobiSocketClient.SetDefaultOptions(socketOptions);
+                HuobiSpotClient.SetDefaultOptions(spotOptions);
+                HuobiUsdtMarginedClient.SetDefaultOptions(usdtMarginedOptions);
+                HuobiSocketClient.SetDefaultOptions(spotSocketOptions);
+                HuobiUsdtMarginedSocketClient.SetDefaultOptions(usdtMarginedSocketOptions);
             }
 
-            services.AddTransient<IHuobiClient, HuobiClient>();
+            services.AddTransient<IHuobiSpotClient, HuobiSpotClient>();
+            services.AddTransient<IHuobiUsdtMarginedClient, HuobiUsdtMarginedClient>();
             if (socketClientLifeTime == null)
+            {
                 services.AddScoped<IHuobiSocketClient, HuobiSocketClient>();
+                services.AddScoped<IHuobiUsdtMarginedSocketClient, HuobiUsdtMarginedSocketClient>();
+            }
             else
+            {
                 services.Add(new ServiceDescriptor(typeof(IHuobiSocketClient), typeof(HuobiSocketClient), socketClientLifeTime.Value));
+                services.Add(new ServiceDescriptor(typeof(IHuobiUsdtMarginedSocketClient), typeof(HuobiUsdtMarginedSocketClient), socketClientLifeTime.Value));
+            }
             return services;
         }
 

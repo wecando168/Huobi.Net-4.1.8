@@ -14,9 +14,13 @@
         /// </summary>
         Margin,
         /// <summary>
-        /// Super margin account
+        /// Super margin account(Super margin == Cross margin)
         /// </summary>
         SuperMargin,
+        /// <summary>
+        /// Cross margin account(Cross margin == Super margin)
+        /// </summary>
+        CrossMargin,
         /// <summary>
         /// Otc account
         /// </summary>

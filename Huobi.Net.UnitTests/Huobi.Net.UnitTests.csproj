@@ -16,4 +16,14 @@
     <ProjectReference Include="..\Huobi.Net\Huobi.Net.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JsonResponses\DataResponses\Futures\CoinMarginedFutures\" />
+    <Folder Include="JsonResponses\DataResponses\Futures\CoinMarginedSwaps\" />
+    <Folder Include="JsonResponses\DataResponses\Futures\UsdtMargined\LinearSwapAccount\" />
+    <Folder Include="JsonResponses\DataResponses\Futures\UsdtMargined\LinearSwapTrade\" />
+    <Folder Include="JsonResponses\DataResponses\Futures\UsdtMargined\LinearSwapStrategyOrder\" />
+    <Folder Include="JsonResponses\DataResponses\Futures\UsdtMargined\LinearSwapReferenceData\" />
+    <Folder Include="JsonResponses\DataResponses\Futures\UsdtMargined\LinearSwapTransferring\" />
+  </ItemGroup>
+
 </Project>

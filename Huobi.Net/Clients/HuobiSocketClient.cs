@@ -32,7 +32,7 @@ namespace Huobi.Net.Clients
         /// <summary>
         /// Create a new instance of HuobiSocketClient with default options
         /// </summary>
-        public HuobiSocketClient() : this(HuobiSocketClientOptions.Default)
+        public HuobiSocketClient() : this(HuobiSpotSocketClientOptions.Default)
         {
         }
 
@@ -40,7 +40,7 @@ namespace Huobi.Net.Clients
         /// Create a new instance of HuobiSocketClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public HuobiSocketClient(HuobiSocketClientOptions options) : base("Huobi", options)
+        public HuobiSocketClient(HuobiSpotSocketClientOptions options) : base("Huobi", options)
         {
             SpotStreams = AddApiClient(new HuobiSocketClientSpotStreams(log, this, options));
 
@@ -55,9 +55,9 @@ namespace Huobi.Net.Clients
         /// Set the default options to be used when creating new clients
         /// </summary>
         /// <param name="options">Options to use as default</param>
-        public static void SetDefaultOptions(HuobiSocketClientOptions options)
+        public static void SetDefaultOptions(HuobiSpotSocketClientOptions options)
         {
-            HuobiSocketClientOptions.Default = options;
+            HuobiSpotSocketClientOptions.Default = options;
         }
         #region private
 

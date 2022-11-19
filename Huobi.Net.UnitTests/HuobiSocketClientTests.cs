@@ -41,7 +41,7 @@ namespace Huobi.Net.UnitTests
             // arrange
             var socket = new TestSocket();
             socket.CanConnect = true;
-            var client = TestHelpers.CreateSocketClient(socket, new HuobiSocketClientOptions()
+            var client = TestHelpers.CreateSocketClient(socket, new HuobiSpotSocketClientOptions()
             {
                 SocketResponseTimeout = TimeSpan.FromMilliseconds(10)
             });
@@ -346,7 +346,7 @@ namespace Huobi.Net.UnitTests
             // arrange
             var socket = new TestSocket();
             socket.CanConnect = true;
-            var client = TestHelpers.CreateSocketClient(socket, new HuobiSocketClientOptions()
+            var client = TestHelpers.CreateSocketClient(socket, new HuobiSpotSocketClientOptions()
             {
                 SocketResponseTimeout = TimeSpan.FromMilliseconds(10)
             });
