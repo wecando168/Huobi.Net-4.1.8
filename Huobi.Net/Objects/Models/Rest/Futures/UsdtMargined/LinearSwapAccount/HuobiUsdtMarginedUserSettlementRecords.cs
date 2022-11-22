@@ -103,7 +103,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         public decimal FundingFee { get; set; } = default(decimal);
 
         /// <summary>
-        /// 	本期平仓盈亏
+        /// 本期平仓盈亏
         /// </summary>
         [JsonProperty("offset_profitloss", NullValueHandling = NullValueHandling.Ignore)]
         public decimal OffsetProfitloss { get; set; } = default(decimal);

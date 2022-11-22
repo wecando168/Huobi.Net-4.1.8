@@ -12,6 +12,9 @@ using Huobi.Net.Interfaces;
 using CryptoExchange.Net.Logging;
 using Huobi.Net.Clients.SpotApi;
 using Huobi.Net.Objects.Models;
+using CryptoExchange.Net.CommonObjects;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request;
+using System.Linq;
 
 #region Provide you API key/secret in these fields to retrieve data related to your account
 const string mainAccessKey = "Use Your Exchange Main Account Access Key";
@@ -87,6 +90,7 @@ while (read != "R" && read != "r" && read != "P" && read != "p" && read != "U" &
 
 if (read == "R" || read == "r")
 {
+    /*
     //一、交易所现货数据接口测试-已完成
     Console.WriteLine($"Press enter to test spot api exchange data endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
@@ -134,6 +138,7 @@ if (read == "R" || read == "r")
     {
         await TestUsdtMarginedApiAccountEndpoints();
     }
+    */
 
     //七、交易所U本位合约交易接口测试-开发中...
     Console.WriteLine($"Press enter to test usdt margined api Trade endpoints, Press [S] to skip current test!");
@@ -146,7 +151,7 @@ if (read == "R" || read == "r")
     //八、交易所U本位合约策略订单接口测试-开发中...
     Console.WriteLine($"Press enter to test usdt margined api strategy order endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
-    if (read != "S" && read != "s")
+    if (read != "S" && read != "s")                        
     {
         await TestUsdtMarginedApiStrategyOrderEndpoints();
     }
@@ -3687,7 +3692,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
 
-            await HandleRequest("Linear Swap Api Main Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapBalanceValuation(valuationAsset),
+            await HandleRequest("Linear Swap Api Main Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapBalanceValuationAsync(valuationAsset),
             result => $"" + string.Join($" ", result.Select(s => $"\r\n合约总资产估值：{s.Balance} {s.ValuationAsset}").Take(100)) + "\r\n......");
 
             #region 子用户客户端
@@ -3695,7 +3700,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
 
-            await HandleRequest("Linear Swap Api Sub Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapBalanceValuation(valuationAsset),
+            await HandleRequest("Linear Swap Api Sub Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapBalanceValuationAsync(valuationAsset),
             result => $"" + string.Join($" ", result.Select(s => $"\r\n合约总资产估值：{s.Balance} {s.ValuationAsset}").Take(100)) + "\r\n......");
 
             #region 方法二 不需要等待输入回车后才执行，测试通过保留勿删！！！
@@ -3734,7 +3739,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】获取用户的合约账户信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAccountInfo(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAccountInfoAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"【逐仓】获取用户的合约账户信息");
@@ -3764,7 +3769,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】获取用户的合约账户信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAccountInfo(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAccountInfoAsync(marginAccount);
             if (result.Success)
             {
                 Console.WriteLine($"【全仓】获取用户的合约账户信息");
@@ -3800,7 +3805,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】获取用户的合约持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapPositionInfo(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapPositionInfoAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3828,7 +3833,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】获取用户的合约持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossPositionInfo(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossPositionInfoAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3856,7 +3861,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】查询用户账户和持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAccountPositionInfo(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAccountPositionInfoAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3884,7 +3889,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】查询用户账户和持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAccountPositionInfo(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAccountPositionInfoAsync(marginAccount);
             if (result.Success)
             {
                 foreach (var contractDetail in result.Data.ContractDetails)
@@ -3926,7 +3931,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             subUidList.Add(subUid1);
             subUidList.Add(subUid2);
             IEnumerable<string> subUids = subUidList;
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.SetLinearSwapSubAuth(subUids, subAuth);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.SetLinearSwapSubAuthAsync(subUids, subAuth);
             if (result.Success)
             { 
                 Console.WriteLine($"设置子账户交易权限返回结果：");
@@ -3962,7 +3967,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】查询母账户下所有子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountList(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountListAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3994,7 +3999,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】查询母账户下所有子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountList(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountListAsync(marginAccount);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4028,7 +4033,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】批量获取子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountInfoList(contractCode, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountInfoListAsync(contractCode, pageIndex, pageSize);
             if (result.Success)
             {
                 foreach (var item in result.Data.SubAccountIsolatedInfoLists)
@@ -4062,7 +4067,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】批量获取子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountInfoList(marginAccount, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountInfoListAsync(marginAccount, pageIndex, pageSize);
             if (result.Success)
             {
                 foreach (var item in result.Data.SubAccountCrossInfoLists)
@@ -4095,7 +4100,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】查询单个子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountInfo(long.Parse(subUid), contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountInfoAsync(long.Parse(subUid), contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子账户用户编号：{subUid}");
@@ -4125,7 +4130,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】查询单个子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountInfo(long.Parse(subUid), marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountInfoAsync(long.Parse(subUid), marginAccount);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4161,7 +4166,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】查询单个子账户持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubPositionInfo(long.Parse(subUid), contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubPositionInfoAsync(long.Parse(subUid), contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子账户用户编号：{subUid}");
@@ -4194,7 +4199,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】查询单个子账户持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubPositionInfo(long.Parse(subUid), contractCode, pair, contractType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubPositionInfoAsync(long.Parse(subUid), contractCode, pair, contractType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4223,7 +4228,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【通用】查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecord(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户财务记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4243,7 +4248,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【通用】查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecord(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户财务记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4270,7 +4275,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【通用】组合查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordExact(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordExactAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户组合查询财务记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4290,7 +4295,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【通用】组合查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordExact(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordExactAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户组合查询财务记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4317,7 +4322,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【逐仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapUserSettlementRecords(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapUserSettlementRecordsAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4337,7 +4342,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【逐仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapUserSettlementRecords(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapUserSettlementRecordsAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4364,7 +4369,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【全仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossUserSettlementRecords(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossUserSettlementRecordsAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4384,7 +4389,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【全仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossUserSettlementRecords(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossUserSettlementRecordsAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
@@ -4411,7 +4416,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【逐仓】查询用户可用杠杆倍数");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAvailableLevelRate(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAvailableLevelRateAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户查询可用杠杆倍数：");
@@ -4435,7 +4440,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 #endregion
 
                 Console.WriteLine("【逐仓】查询用户可用杠杆倍数");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAvailableLevelRate(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAvailableLevelRateAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户查询可用杠杆倍数：");
@@ -4465,7 +4470,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】查询用户可用杠杆倍数");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAvailableLevelRate(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAvailableLevelRateAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户查询可用杠杆倍数：");
@@ -4498,7 +4503,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【通用】查询用户当前的下单量限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapOrderLimit(orderPriceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapOrderLimitAsync(orderPriceType);
             if (result.Success)
             {
                 Console.WriteLine($"下单类型：{result.Data.OrderPriceType}");
@@ -4530,7 +4535,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【通用】查询用户当前的手续费费率");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFee(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFeeAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4558,7 +4563,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】查询用户当前的划转限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapTransferLimit(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapTransferLimitAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户划转限制：");
@@ -4587,7 +4592,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】查询用户当前的划转限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossTransferLimit(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossTransferLimitAsync(marginAccount);
             if (result.Success)
             {
                 Console.WriteLine($"子用户划转限制：");
@@ -4616,7 +4621,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】用户持仓量限制的查询");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapPositionLimit(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapPositionLimitAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户持仓量限制：");
@@ -4645,7 +4650,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】用户持仓量限制的查询");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossPositionLimit(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossPositionLimitAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户持仓量限制：");
@@ -4672,7 +4677,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【逐仓】查询用户所有杠杆持仓量限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapLeverPositionLimit();
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapLeverPositionLimitAsync();
             if (result.Success)
             {
                 Console.WriteLine($"子用户所有杠杆持仓量限制：");
@@ -4703,7 +4708,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【全仓】查询用户所有杠杆持仓量限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossLeverPositionLimit();
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossLeverPositionLimitAsync();
             if (result.Success)
             {
                 Console.WriteLine($"子用户所有杠杆持仓量限制：");
@@ -4742,7 +4747,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【通用】母子账户划转");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.LinearSwapMasterSubTransfer(
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.LinearSwapMasterSubTransferAsync(
                 subUid: long.Parse(subUid),
                 asset: asset,
                 fromMarginAccount: fromMarginAccount,
@@ -4786,7 +4791,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【通用】获取母账户下的所有母子账户划转记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapMasterSubTransferRecord(
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapMasterSubTransferRecordAsync(
                 marginAccount: marginAccount,
                 transferType: transferType,
                 createDate: createDate,
@@ -4821,7 +4826,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【通用】同账号不同保证金账户的划转");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.LinearSwapTransferInner(
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.LinearSwapTransferInnerAsync(
                 asset: asset,
                 fromMarginAccount: fromMarginAccount,
                 toMarginAccount: toMarginAccount,
@@ -4857,7 +4862,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【通用】获取用户的API指标禁用信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapApiTradingStatus();
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapApiTradingStatusAsync();
             if (result.Success)
             {
                 Console.WriteLine($"{JsonConvert.SerializeObject(result.Data)}");                
@@ -4874,44 +4879,1197 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
     }
 }
 
-//交易所U本位合约交易接口测试-开发中...
+
+//交易所U本位合约交易接口测试-已完成
 static async Task TestUsdtMarginedApiTradeEndpoints()
 {
     using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
     {
+        List<long> cancelIsolatedOrderIdList = new List<long>();
+        List<long> cancelIsolatedClientOrderIdList = new List<long>();
+
+        List<long> cancelCrossOrderIdList = new List<long>();
+        List<long> cancelCrossClientOrderIdList = new List<long>();
+
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
         ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
-        
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapSwitchLeverRate();
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapSwitchPositionMode();
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossHisordersExact();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossMatchresults();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossMatchresultsExact();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOpenorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOrderDetail();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOrderInfo();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossTradeState();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapHisordersExact();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapMatchresults();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapMatchresultsExact();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOpenorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOrderDetail();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOrderInfo();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapBatchorder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCancel();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCancelAll();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossLightningClosePosition();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossSwitchLeverRate();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossSwitchPositionMode();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapLightningClosePosition();
+
+        #region 【全仓】查询系统交易权限(PrivateData)
+        {
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】查询系统交易权限");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossTradeStateAsync();
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode} 业务类型：{item.BusinessType} 保证金模式：{item.MarginMode} 保证金账户：{item.MarginAccount}");
+                    Console.WriteLine($"开仓下单权限：{(item.Open == 1 ? "可用" : "不可用")} 平仓下单权限：{(item.Close == 1 ? "可用" : "不可用")} 撤单权限：{(item.Cancel == 1 ? "可用" : "不可用")} ");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询系统交易权限" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【逐仓】切换持仓模式(PrivateData)
+        {
+            string marginAccount = "DOGE-USDT";
+            string positionMode = "dual_side";
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】切换持仓模式");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapSwitchPositionModeAsync(marginAccount, positionMode);
+            if (result.Success)
+            {
+                Console.WriteLine($"保证金账户：{result.Data.MarginAccount} 持仓模式：{result.Data.PositionMode}");
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】切换持仓模式" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】切换持仓模式(PrivateData)
+        {
+            string marginAccount = "USDT";
+            string positionMode = "dual_side";
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】切换持仓模式");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossSwitchPositionModeAsync(marginAccount, positionMode);
+            if (result.Success)
+            {
+                Console.WriteLine($"保证金账户：{result.Data.MarginAccount} 持仓模式：{result.Data.PositionMode}");
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】切换持仓模式" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        string? read = "";
+        Console.WriteLine($"Note: The following operations(PlanOrder/BatchPlanOrder/CancelOrder/CancelAllOrder) will generate real order submission, cancellation and other operations, Press [Y] to run test!");
+        read = Console.ReadLine();
+        if (read == "Y" || read == "y")
+        {
+            #region 【逐仓】合约下单(PrivateData)
+            {
+                string contractCode = "DOGE-USDT";
+                UmDirection direction = UmDirection.buy;
+                UmOffset offset = UmOffset.open;
+                decimal? price = 0.04M;
+                UmLeverRate leverRate = UmLeverRate.LeverRate_20;
+                long volume = 1;
+                UmOrderPriceType orderPriceType = UmOrderPriceType.limit;
+                decimal? tpTriggerPrice = null;
+                decimal? tpOrderPrice = null;
+                UmTpOrderPriceType? tpOrderPriceType = null;
+                decimal? slTriggerPrice = null;
+                decimal? slOrderPrice = null;
+                UmSlOrderPriceType? slOrderPriceType = null;
+                int? reduceOnly = null;
+                long? clientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now);
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【逐仓】合约下单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapOrderAsync(
+                    contractCode: contractCode,
+                    direction: direction,
+                    offset: offset,
+                    price: price,
+                    leverRate: leverRate,
+                    volume: volume,
+                    orderPriceType: orderPriceType,
+                    tpTriggerPrice: tpTriggerPrice,
+                    tpOrderPrice: tpOrderPrice,
+                    tpOrderPriceType: tpOrderPriceType,
+                    slTriggerPrice: slTriggerPrice,
+                    slOrderPrice: slOrderPrice,
+                    slOrderPriceType: slOrderPriceType,
+                    reduceOnly: reduceOnly,
+                    clientOrderId: clientOrderId
+                );
+                if (result.Success)
+                {
+                    if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
+                    {
+                        Console.WriteLine($"订单编号：{result.Data.OrderId} 用户自定义单号：{result.Data.ClientOrderId}");
+                        cancelIsolatedOrderIdList.Add((long)result.Data.OrderId);
+                        cancelIsolatedClientOrderIdList.Add((long)result.Data.ClientOrderId);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约下单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+
+            #region 【全仓】合约下单(PrivateData)
+            {
+                string contractCode = "DOGE-USDT";
+                UmDirection direction = UmDirection.buy;
+                UmOffset offset = UmOffset.open;
+                decimal price = 0.04M;
+                UmLeverRate leverRate = UmLeverRate.LeverRate_20;
+                long volume = 1;
+                UmOrderPriceType orderPriceType = UmOrderPriceType.limit;
+                decimal? tpTriggerPrice = null;
+                decimal? tpOrderPrice = null;
+                UmTpOrderPriceType? tpOrderPriceType = null;
+                decimal? slTriggerPrice = null;
+                decimal? slOrderPrice = null;
+                UmSlOrderPriceType? slOrderPriceType = null;
+                string? pair = "DOGE-USDT";
+                string? contractType = "swap";
+                int? reduceOnly = null;
+                long? clientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now);
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【全仓】合约下单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossOrderAsync(
+                    contractCode: contractCode,
+                    direction: direction,
+                    offset: offset,
+                    price: price,
+                    leverRate: leverRate,
+                    volume: volume,
+                    orderPriceType: orderPriceType,
+                    tpTriggerPrice: tpTriggerPrice,
+                    tpOrderPrice: tpOrderPrice,
+                    tpOrderPriceType: tpOrderPriceType,
+                    slTriggerPrice: slTriggerPrice,
+                    slOrderPrice: slOrderPrice,
+                    slOrderPriceType: slOrderPriceType,
+                    pair: pair,
+                    contractType: contractType,
+                    reduceOnly: reduceOnly,
+                    clientOrderId: clientOrderId
+                );
+                if (result.Success)
+                {
+                    if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
+                    {
+                        Console.WriteLine($"订单编号：{result.Data.OrderId} 用户自定义单号：{result.Data.ClientOrderId}");
+                        cancelCrossOrderIdList.Add((long)result.Data.OrderId);
+                        cancelCrossClientOrderIdList.Add((long)result.Data.ClientOrderId);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约下单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+
+            #region 【逐仓】合约批量下单(PrivateData)
+            {
+                HuobiUsdtMarginedIsolatedOrder isolatedOrder = new HuobiUsdtMarginedIsolatedOrder()
+                {
+                    ContractCode = "DOGE-USDT",
+                    Direction = UmDirection.buy.ToString(),
+                    Offset = UmOffset.open.ToString(),
+                    Price = 0.04M,
+                    LeverRate = UmLeverRate.LeverRate_20.GetHashCode(),
+                    Volume = 1,
+                    OrderPriceType = UmOrderPriceType.limit.ToString(),
+                    TpTriggerPrice = null,
+                    TpOrderPrice = null,
+                    TpOrderPriceType = null,
+                    SlTriggerPrice = null,
+                    SlOrderPrice = null,
+                    SlOrderPriceType = null,
+                    ReduceOnly = null,
+                    ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
+                };
+                List<HuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new List<HuobiUsdtMarginedIsolatedOrder>();
+                isolatedOrderList.Add(isolatedOrder);
+                IEnumerable<HuobiUsdtMarginedIsolatedOrder> isolatedOrders = isolatedOrderList;
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【逐仓】合约批量下单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapBatchorderAsync(isolatedOrders);
+                if (result.Success)
+                {
+                    foreach (var item in result.Data.ErrorsList)
+                    {
+                        Console.WriteLine($"错误码：{item.ErrCode} 错误信息：{item.ErrMsg}");
+                    }
+                    foreach (var item in result.Data.SuccessList)
+                    {
+                        Console.WriteLine($"订单编号：{item.OrderId} 用户自定义单号：{item.ClientOrderId}");
+                        if (item.OrderId != null)
+                        {
+                            cancelIsolatedOrderIdList.Add((long)item.OrderId);
+
+                        }
+                        if (item.ClientOrderId != null)
+                        {
+                            cancelIsolatedClientOrderIdList.Add((long)item.ClientOrderId);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约批量下单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+
+            #region 【全仓】合约批量下单(PrivateData)
+            {
+                HuobiUsdtMarginedCrossOrder crossOrder = new HuobiUsdtMarginedCrossOrder()
+                {
+                    ContractCode = "DOGE-USDT",
+                    Direction = UmDirection.buy.ToString(),
+                    Offset = UmOffset.open.ToString(),
+                    Price = 0.04M,
+                    LeverRate = UmLeverRate.LeverRate_20.GetHashCode(),
+                    Volume = 1,
+                    OrderPriceType = UmOrderPriceType.limit.ToString(),
+                    TpTriggerPrice = null,
+                    TpOrderPrice = null,
+                    TpOrderPriceType = null,
+                    SlTriggerPrice = null,
+                    SlOrderPrice = null,
+                    SlOrderPriceType = null,
+                    Pair = "DOGE-USDT",
+                    ContractType = "swap",
+                    ReduceOnly = null,
+                    ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
+                };
+                List<HuobiUsdtMarginedCrossOrder> crossOrderList = new List<HuobiUsdtMarginedCrossOrder>();
+                crossOrderList.Add(crossOrder);
+                IEnumerable<HuobiUsdtMarginedCrossOrder> crossOrders = crossOrderList;
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【全仓】合约批量下单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossBatchorderAsync(crossOrders);
+                if (result.Success)
+                {
+                    foreach (var item in result.Data.ErrorsList)
+                    {
+                        Console.WriteLine($"错误码：{item.ErrCode} 错误信息：{item.ErrMsg}");
+                    }
+                    foreach (var item in result.Data.SuccessList)
+                    {
+                        Console.WriteLine($"订单编号：{item.OrderId} 用户自定义单号：{item.ClientOrderId}");
+                        if (item.OrderId != null)
+                        {
+                            cancelCrossOrderIdList.Add((long)item.OrderId);
+
+                        }
+                        if (item.ClientOrderId != null)
+                        {
+                            cancelCrossClientOrderIdList.Add((long)item.ClientOrderId);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约批量下单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+
+            #region 【逐仓】撤销合约订单(PrivateData)
+            {
+                string contractCode = "DOGE-USDT";
+
+                IEnumerable<long> cancelIsolatedOrderIds = cancelIsolatedOrderIdList;
+
+                IEnumerable<long> cancelIsolatedClientOrderIds = cancelIsolatedClientOrderIdList;
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【逐仓】撤销合约订单");
+                if ((cancelIsolatedOrderIds == null || cancelIsolatedOrderIds.Count() <= 0) && (cancelIsolatedClientOrderIds == null || cancelIsolatedClientOrderIds.Count() <= 0))
+                {
+                    Console.WriteLine("【逐仓】撤销合约订单：未提供需要撤销的订单编号或者用户自定义单号");
+                }
+                else
+                {
+                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCancelAsync(contractCode, cancelIsolatedOrderIds, cancelIsolatedClientOrderIds);
+                    if (result.Success)
+                    {
+                        foreach (var item in result.Data.ErrorsList)
+                        {
+                            Console.WriteLine($"撤销失败订单编号：{item.OrderId}  错误码：{item.ErrCode} 错误信息：{item.ErrMsg}");
+                            if (item.OrderId != null)
+                            {
+                                cancelIsolatedOrderIdList.Remove((long)item.OrderId);
+                            }
+                        }
+                        if (result.Data.Successes != null)
+                        {
+                            Console.WriteLine($"撤销成功订单编号：{result.Data.Successes} ");
+                            foreach (var item in result.Data.Successes.Split(",").ToList<string>())
+                            {
+                                cancelIsolatedOrderIdList.Remove(long.Parse(item));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"火币合约API服务器：" + "【逐仓】撤销合约订单" + "异常\r\n" +
+                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    }
+                }
+            }
+            #endregion
+
+            #region 【全仓】撤销合约订单(PrivateData)
+            {
+                string contractCode = "DOGE-USDT";
+                string pair = "DOGE-USDT";
+                string contractType = "swap";
+
+                IEnumerable<long> cancelCrossOrderIds = cancelCrossOrderIdList;
+
+                IEnumerable<long> cancelCrossClientOrderIds = cancelCrossClientOrderIdList;
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【全仓】撤销合约订单");
+                if ((cancelCrossOrderIds == null || cancelCrossOrderIds.Count() <= 0) && (cancelCrossClientOrderIds == null || cancelCrossClientOrderIds.Count() <= 0))
+                {
+                    Console.WriteLine("【全仓】撤销合约订单：未提供需要撤销的订单编号或者用户自定义单号");
+                }
+                else
+                {
+                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossCancelAsync(contractCode, cancelCrossOrderIds, cancelCrossClientOrderIds, pair, contractType);
+                    if (result.Success)
+                    {
+                        foreach (var item in result.Data.ErrorsList)
+                        {
+                            Console.WriteLine($"撤销失败订单编号：{item.OrderId}  错误码：{item.ErrCode} 错误信息：{item.ErrMsg}");
+                            if (item.OrderId != null)
+                            {
+                                cancelCrossOrderIdList.Remove((long)item.OrderId);
+                            }
+                        }
+                        if (result.Data.Successes != null)
+                        {
+                            Console.WriteLine($"撤销成功订单编号：{result.Data.Successes} ");
+                            foreach (var item in result.Data.Successes.Split(",").ToList<string>())
+                            {
+                                cancelCrossOrderIdList.Remove(long.Parse(item));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"火币合约API服务器：" + "【全仓】撤销合约订单" + "异常\r\n" +
+                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    }
+                }
+            }
+            #endregion
+
+            #region 【逐仓】撤销全部合约单(PrivateData)
+            {
+                string contractCode = "DOGE-USDT";
+                string direction = "buy";
+                string offset = "open";
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【逐仓】撤销全部合约单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCancelAllAsync(contractCode, direction, offset);
+                if (result.Success)
+                {
+                    foreach (var item in result.Data.ErrorsList)
+                    {
+                        Console.WriteLine($"撤销失败订单编号：{item.OrderId}  错误码：{item.ErrCode} 错误信息：{item.ErrMsg}");
+                        if (item.OrderId != null)
+                        {
+                            cancelIsolatedOrderIdList.Remove((long)item.OrderId);
+                        }
+                    }
+                    if (result.Data.Successes != null)
+                    {
+                        Console.WriteLine($"撤销全部合约单：{result.Data.Successes} ");
+                        foreach (var item in result.Data.Successes.Split(",").ToList<string>())
+                        {
+                            cancelIsolatedOrderIdList.Remove(long.Parse(item));
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】撤销全部合约单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+
+            #region 【全仓】撤销全部合约单(PrivateData)
+            {
+                string contractCode = "DOGE-USDT";
+                string direction = "buy";
+                string offset = "open";
+                string pair = "DOGE-USDT";
+                string contractType = "swap";
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【全仓】撤销全部合约单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossCancelAllAsync(contractCode, pair, contractType, direction, offset);
+                if (result.Success)
+                {
+                    foreach (var item in result.Data.ErrorsList)
+                    {
+                        Console.WriteLine($"撤销失败订单编号：{item.OrderId}  错误码：{item.ErrCode} 错误信息：{item.ErrMsg}");
+                        if (item.OrderId != null)
+                        {
+                            cancelCrossOrderIdList.Remove((long)item.OrderId);
+                        }
+                    }
+                    if (result.Data.Successes != null)
+                    {
+                        Console.WriteLine($"撤销成功订单编号：{result.Data.Successes} ");
+                        foreach (var item in result.Data.Successes.Split(",").ToList<string>())
+                        {
+                            cancelCrossOrderIdList.Remove(long.Parse(item));
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【全仓】撤销全部合约单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+        }
+
+        #region 【逐仓】切换杠杆(PrivateData)
+        {
+            string contractCode = "DOGE-USDT";
+            int leverRate = 10;
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】切换杠杆");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapSwitchLeverRateAsync(contractCode, leverRate);
+            if (result.Success)
+            {
+                Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】切换杠杆" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】切换杠杆(PrivateData)
+        {
+            string contractCode = "DOGE-USDT";
+            int leverRate = 10;
+            string pair = "DOGE-USDT";
+            string contractType = "swap";
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】切换杠杆");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossSwitchLeverRateAsync(contractCode, leverRate, pair, contractType);
+            if (result.Success)
+            {
+                Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}\r\n" +
+                    $"合约类型：{result.Data.ContractType} 交易对：{result.Data.Pair} 业务类型：{result.Data.BusinessType}");               
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】切换杠杆" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+
+        #region 【逐仓】获取用户的合约订单信息(PrivateData)
+        {
+            string contractCode = "DOGE-USDT";
+
+            IEnumerable<long> isolatedOrderIds = new List<long>() { 1044606768686141440, 987654321 };
+
+            IEnumerable<long> isolatedClientOrderIds = new List<long>() { 123456789000, 987654321000 };
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】获取用户的合约订单信息");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"订单编号：{item.OrderId} 用户自定义单号：{item.ClientOrderId} 订单来源：{item.OrderSource} \r\n" +
+                        $"合约代码：{item.ContractCode} 保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate} \r\n" +
+                        $"报价类型：{item.OrderPriceType} 委托价格：{item.Price} 委托数量：{item.Volume} 订单状态：{item.Status} ");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约订单信息" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】获取用户的合约订单信息(PrivateData)
+        {
+            string contractCode = "DOGE-USDT";
+            string pair = "DOGE-USDT";
+
+            IEnumerable<long> isolatedOrderIds = new List<long>() { 1043342971513040896, 987654321 };
+            IEnumerable<long> isolatedClientOrderIds = new List<long>() { 123456789000, 987654321000 };
+
+            #region 子用户客户端
+            apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】获取用户的合约订单信息");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds, pair);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"业务类型：{item.BusinessType} 合约类型：{item.ContractType}\r\n" +
+                        $"订单编号：{item.OrderId} 用户自定义单号：{item.ClientOrderId} 订单来源：{item.OrderSource} \r\n" +
+                        $"合约代码：{item.ContractCode} 保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate} \r\n"+
+                        $"报价类型：{item.OrderPriceType} 委托价格：{item.Price} 委托数量：{item.Volume} 订单状态：{item.Status} ");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约订单信息" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【逐仓】获取用户的合约订单明细信息(PrivateData)
+        {
+            long orderId = 1044606768686141440;
+            string contractCode = "DOGE-USDT";
+            long? createdTimestamp = null;
+            int? orderType = null;
+            int? pageIndex = null;
+            int? pageSize = null;
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】获取用户的合约订单明细信息");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOrderDetailAsync(orderId, contractCode, createdTimestamp, orderType, pageIndex, pageSize);
+            if (result.Success)
+            {
+                Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
+                foreach (var item in result.Data.HuobiUsdtMarginedIsolatedTrades)
+                {
+                    Console.WriteLine($"唯一的交易标识：{item.Id} 非唯一撮合结果Id：{item.TradeId}\r\n" +
+                        $"成交价格：{item.TradePrice} 成交量（张）：{item.TradeVolume} 成交金额（成交数量 * 合约面值 * 成交价格）：{item.TradeTurnover} \r\n" +
+                        $"成交手续费：{item.TradeFee} 成交角色：{item.Role} 真实收益：{item.RealProfit}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约订单明细信息" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】获取用户的合约订单明细信息(PrivateData)
+        {
+            long orderId = 1043342971513040896;
+            string contractCode = "DOGE-USDT";
+            string? pair = "DOGE-USDT";
+            long? createdTimestamp = null;
+            int? orderType = null;
+            int? pageIndex = null;
+            int? pageSize = null;
+
+            #region 子用户客户端
+            apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】获取用户的合约订单明细信息");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOrderDetailAsync(orderId, contractCode, pair, createdTimestamp, orderType, pageIndex, pageSize);
+            if (result.Success)
+            {
+                Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
+                foreach (var item in result.Data.HuobiUsdtMarginedCrossTrades)
+                {
+                    Console.WriteLine($"唯一的交易标识：{item.Id} 非唯一撮合结果Id：{item.TradeId}\r\n" +
+                        $"成交价格：{item.TradePrice} 成交量（张）：{item.TradeVolume} 成交金额（成交数量 * 合约面值 * 成交价格）：{item.TradeTurnover} \r\n" +
+                        $"成交手续费：{item.TradeFee} 成交角色：{item.Role} 真实收益：{item.RealProfit}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约订单明细信息" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【逐仓】获取用户的合约当前未成交委托(PrivateData)
+        {
+            string contractCode = "DOGE-USDT";
+            int? pageIndex = null;
+            int? pageSize = null;
+            string? sortBy = "created_at";
+            int? tradeType = 0;
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】获取用户的合约当前未成交委托");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOpenordersAsync(contractCode, pageIndex, pageSize, sortBy, tradeType);
+            if (result.Success)
+            {
+                Console.WriteLine($"总页数：{result.Data.TotalPage}  当前页：{result.Data.CurrentPage} 总条数：{result.Data.TotalSize}");
+                foreach (var item in result.Data.HuobiUsdtMarginedIsolatedOpenOrders)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode}  保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate}");
+                    Console.WriteLine($"委托数量：{item.Volume} 委托价格：{item.Price} 订单报价类型：{item.OrderPriceType}\r\n" +
+                        $"订单类型：{item.OrderType} 买卖方向：{item.Direction} 开平方向：{item.Offset} 成交数量：{item.TradeVolume} 成交总金额：{item.TradeTurnover} 手续费：{item.Fee} 手续费币种：{item.FeeAsset}\r\n" +
+                        $"订单编号：{item.OrderId} 用户自定义编号：{item.ClientOrderId} 创建时间戳：{item.CreatedTimestamp} 更新时间戳：{item.UpdateTimestamp} 订单来源：{item.OrderSource}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约当前未成交委托" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】获取用户的合约当前未成交委托(PrivateData)
+        {
+            string contractCode = "DOGE-USDT";
+            string pair = "DOGE-USDT";
+            int? pageIndex = null;
+            int? pageSize = null;
+            string? sortBy = "created_at";
+            int? tradeType = 0;
+
+            #region 子用户客户端
+            apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】获取用户的合约当前未成交委托");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOpenordersAsync(contractCode, pair, pageIndex, pageSize, sortBy, tradeType);
+            if (result.Success)
+            {
+                Console.WriteLine($"总页数：{result.Data.TotalPage}  当前页：{result.Data.CurrentPage} 总条数：{result.Data.TotalSize}");
+                foreach (var item in result.Data.HuobiUsdtMarginedCrossOpenOrders)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode}  保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate}");
+                    Console.WriteLine($"委托数量：{item.Volume} 委托价格：{item.Price} 订单报价类型：{item.OrderPriceType}\r\n" +
+                        $"订单类型：{item.OrderType} 买卖方向：{item.Direction} 开平方向：{item.Offset} 成交数量：{item.TradeVolume} 成交总金额：{item.TradeTurnover} 手续费：{item.Fee} 手续费币种：{item.FeeAsset}\r\n" +
+                        $"订单编号：{item.OrderId} 用户自定义编号：{item.ClientOrderId} 创建时间戳：{item.CreatedTimestamp} 更新时间戳：{item.UpdateTimestamp} 订单来源：{item.OrderSource}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约当前未成交委托" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【逐仓】获取用户的合约历史委托(PrivateData)
+        {
+            int tradeType = 0;
+            int type = 1;
+            string status = "0";
+            string? contractCode = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】获取用户的合约历史委托");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapHisordersAsync(tradeType, type, status, contractCode, startTime, endTime, direct, fromId);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode}  保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate}");
+                    Console.WriteLine($"委托数量：{item.Volume} 委托价格：{item.Price} 订单报价类型：{item.OrderPriceType}\r\n" +
+                        $"订单类型：{item.OrderType} 买卖方向：{item.Direction} 开平方向：{item.Offset} 成交数量：{item.TradeVolume} 成交总金额：{item.TradeTurnover} 手续费：{item.Fee} 手续费币种：{item.FeeAsset}\r\n" +
+                        $"订单编号：{item.OrderId} 成交时间戳：{item.CreatedTimestamp} 更新时间戳：{item.UpdateTimestamp} 订单来源：{item.OrderSource}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约历史委托" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】获取用户的合约历史委托(PrivateData)
+        {
+            int tradeType = 0;
+            int type = 1;
+            string status = "0";
+            string? contractCode = "DOGE-USDT";
+            string? pair = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+
+            #region 子用户客户端
+            apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】获取用户的合约历史委托");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossHisordersAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode}  保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate}");
+                    Console.WriteLine($"委托数量：{item.Volume} 委托价格：{item.Price} 订单报价类型：{item.OrderPriceType}\r\n" +
+                        $"订单类型：{item.OrderType} 买卖方向：{item.Direction} 开平方向：{item.Offset} 成交数量：{item.TradeVolume} 成交总金额：{item.TradeTurnover} 手续费：{item.Fee} 手续费币种：{item.FeeAsset}\r\n" +
+                        $"订单编号：{item.OrderId} 成交时间戳：{item.CreatedTimestamp} 更新时间戳：{item.UpdateTimestamp} 订单来源：{item.OrderSource}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约历史委托" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【逐仓】组合查询合约历史委托(PrivateData)
+        {
+            int tradeType = 0;
+            int type = 1;
+            string status = "0";
+            string? contractCode = "DOGE-USDT";
+            string? pair = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+            string? priceType = null;
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】组合查询合约历史委托");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode}  保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate}");
+                    Console.WriteLine($"委托数量：{item.Volume} 委托价格：{item.Price} 订单报价类型：{item.OrderPriceType}\r\n" +
+                        $"订单类型：{item.OrderType} 买卖方向：{item.Direction} 开平方向：{item.Offset} 成交数量：{item.TradeVolume} 成交总金额：{item.TradeTurnover} 手续费：{item.Fee} 手续费币种：{item.FeeAsset}\r\n" +
+                        $"订单编号：{item.OrderId} 成交时间戳：{item.CreatedTimestamp} 更新时间戳：{item.UpdateTimestamp} 订单来源：{item.OrderSource}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】组合查询合约历史委托" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】组合查询合约历史委托(PrivateData)
+        {
+            int tradeType = 0;
+            int type = 1;
+            string status = "0";
+            string? contractCode = "DOGE-USDT";
+            string? pair = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+            string? priceType = null;
+
+            #region 子用户客户端
+            apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】组合查询合约历史委托");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode}  保证金模式：{item.MarginMode} 当前杠杆倍数：{item.LeverRate}");
+                    Console.WriteLine($"委托数量：{item.Volume} 委托价格：{item.Price} 订单报价类型：{item.OrderPriceType}\r\n" +
+                        $"订单类型：{item.OrderType} 买卖方向：{item.Direction} 开平方向：{item.Offset} 成交数量：{item.TradeVolume} 成交总金额：{item.TradeTurnover} 手续费：{item.Fee} 手续费币种：{item.FeeAsset}\r\n" +
+                        $"订单编号：{item.OrderId} 成交时间戳：{item.CreatedTimestamp} 更新时间戳：{item.UpdateTimestamp} 订单来源：{item.OrderSource}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】组合查询合约历史委托" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【逐仓】获取用户的合约历史成交记录(PrivateData)
+        {
+            int tradeType = 0;
+            string? contractCode = "DOGE-USDT";           
+            string? pair = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】获取用户的合约历史成交记录");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode} 保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode}");
+                    Console.WriteLine($"唯一成交编号：{item.Id}  订单编号：{item.OrderId} 撮合结果编号：{item.MatchId}");
+                    Console.WriteLine($"买卖方向：{item.Direction} 开平方向：{item.Offset} 订单来源：{item.OrderSource}\r\n" +
+                        $"成交数量：{item.TradeVolume} 成交价格：{item.TradePrice} 成交总金额：{item.TradeTurnover} 成交时间：{item.CreateTimestamp}\r\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约历史成交记录" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】获取用户的合约历史成交记录(PrivateData)
+        {
+            int tradeType = 0;
+            string? contractCode = "DOGE-USDT";
+            string? pair = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+
+            #region 子用户客户端
+            apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】获取用户的合约历史成交记录");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode} 保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode}");
+                    Console.WriteLine($"唯一成交编号：{item.Id}  订单编号：{item.OrderId} 撮合结果编号：{item.MatchId}");
+                    Console.WriteLine($"买卖方向：{item.Direction} 开平方向：{item.Offset} 订单来源：{item.OrderSource}\r\n" +
+                        $"成交数量：{item.TradeVolume} 成交价格：{item.TradePrice} 成交总金额：{item.TradeTurnover} 成交时间：{item.CreateTimestamp}\r\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约历史成交记录" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【逐仓】组合查询用户历史成交记录(PrivateData)
+        {
+            int tradeType = 0;
+            string? contractCode = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+
+            #region 母用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【逐仓】组合查询用户历史成交记录");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapMatchresultsExactAsync(contractCode, tradeType, startTime, endTime, direct, fromId);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode} 保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode}");
+                    Console.WriteLine($"唯一成交编号：{item.Id}  订单编号：{item.OrderId} 撮合结果编号：{item.MatchId}");
+                    Console.WriteLine($"买卖方向：{item.Direction} 开平方向：{item.Offset} 订单来源：{item.OrderSource}\r\n" +
+                        $"成交数量：{item.TradeVolume} 成交价格：{item.TradePrice} 成交总金额：{item.TradeTurnover} 成交时间：{item.CreateTimestamp}\r\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【逐仓】组合查询用户历史成交记录" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【全仓】组合查询用户历史成交记录(PrivateData)
+        {
+            int tradeType = 0;
+            string? contractCode = "DOGE-USDT";
+            string? pair = "DOGE-USDT";
+            long? startTime = null;
+            long? endTime = null;
+            string? direct = null;
+            long? fromId = null;
+
+            #region 子用户客户端
+            apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】组合查询用户历史成交记录");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossMatchresultsExactAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"合约代码：{item.ContractCode} 保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode}");
+                    Console.WriteLine($"唯一成交编号：{item.Id}  订单编号：{item.OrderId} 撮合结果编号：{item.MatchId}");
+                    Console.WriteLine($"买卖方向：{item.Direction} 开平方向：{item.Offset} 订单来源：{item.OrderSource}\r\n" +
+                        $"成交数量：{item.TradeVolume} 成交价格：{item.TradePrice} 成交总金额：{item.TradeTurnover} 成交时间：{item.CreateTimestamp}\r\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】组合查询用户历史成交记录" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        Console.WriteLine($"Note: The following operations(LightningClosePosition) will generate real order submission, cancellation and other operations, Press [Y] to run test!");
+        read = Console.ReadLine();
+        if (read == "Y" || read == "y")
+        {
+            #region 【逐仓】合约闪电平仓下单(PrivateData)
+            {
+                string contractCode = "DOGE-USDT";
+                long volume = 1;
+                string direction = UmDirection.buy.ToString();
+                long clientOrderId = 123456789000;
+                string OrderPriceType = "lightning";
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【逐仓】合约闪电平仓下单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapLightningClosePositionAsync(contractCode, volume, direction, clientOrderId, OrderPriceType);
+                if (result.Success)
+                {
+                    if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
+                    {
+                        Console.WriteLine($"订单编号：{result.Data.OrderId} 用户自定义单号：{result.Data.ClientOrderId}");
+                        cancelIsolatedOrderIdList.Add((long)result.Data.OrderId);
+                        cancelIsolatedClientOrderIdList.Add((long)result.Data.ClientOrderId);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约闪电平仓下单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+
+            #region 【全仓】合约闪电平仓下单(PrivateData)
+            {
+                long volume = 1;
+                string direction = UmDirection.buy.ToString();
+                string? contractCode = "DOGE-USDT";
+                string? pair = "DOGE-USDT";
+                string? contract_type = "swap";
+                long clientOrderId = 123456789000;
+                string OrderPriceType = "lightning";
+
+                #region 母用户客户端
+                apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+                huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+                #endregion
+
+                Console.WriteLine("【全仓】合约闪电平仓下单");
+                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossLightningClosePositionAsync(volume, direction, contractCode, pair, contract_type, clientOrderId, OrderPriceType);
+                if (result.Success)
+                {
+                    if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
+                    {
+                        Console.WriteLine($"订单编号：{result.Data.OrderId} 用户自定义单号：{result.Data.ClientOrderId}");
+                        cancelIsolatedOrderIdList.Add((long)result.Data.OrderId);
+                        cancelIsolatedClientOrderIdList.Add((long)result.Data.ClientOrderId);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约闪电平仓下单" + "异常\r\n" +
+                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                }
+            }
+            #endregion
+        }
     }
 }
 

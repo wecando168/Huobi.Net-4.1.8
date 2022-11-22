@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Converters;
 using Huobi.Net.Interfaces.Clients.SpotApi;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request;
 
 namespace Huobi.Net.Interfaces.Clients.UsdtMargined
 {

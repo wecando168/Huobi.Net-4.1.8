@@ -135,16 +135,33 @@ namespace Huobi.Net.Clients.UsdtMargined
         #region common interface
 
         /// 【逐仓】U本位合约下单
-        async Task<WebCallResult<OrderId>> IUsdtMarginedClient.LinearSwapOrder(string contractCode, UmDirection direction, UmOffset offset, decimal price, UmLeverRate leverRate, long volume, UmOrderPriceType orderPriceType, decimal tpTriggerPrice, decimal tpOrderPrice, UmTpOrderPriceType tpOrderPriceType, decimal slTriggerPrice, decimal slOrderPrice, UmSlOrderPriceType slOrderPriceType, string? accountId = null, string? clientOrderId = null, CancellationToken ct = default)
+        async Task<WebCallResult<OrderId>> IUsdtMarginedClient.LinearSwapOrder(
+            string contractCode,
+            UmDirection direction,
+            UmOffset offset,
+            decimal price,
+            UmLeverRate leverRate,
+            long volume,
+            UmOrderPriceType orderPriceType,
+            decimal tpTriggerPrice,
+            decimal tpOrderPrice,
+            UmTpOrderPriceType tpOrderPriceType,
+            decimal slTriggerPrice,
+            decimal slOrderPrice,
+            UmSlOrderPriceType slOrderPriceType,
+            int? reduceOnly,
+            string? clientOrderId,
+            CancellationToken ct
+            )
         {
             if (string.IsNullOrEmpty(contractCode))
                 throw new ArgumentException(nameof(contractCode) + " required for Huobi " + nameof(IUsdtMarginedClient.LinearSwapOrder), nameof(contractCode));
 
-            if (string.IsNullOrEmpty(accountId) || !long.TryParse(accountId, out var id))
-                throw new ArgumentException(nameof(accountId) + " required for Huobi " + nameof(IUsdtMarginedClient.LinearSwapOrder), nameof(accountId));
+            //if (string.IsNullOrEmpty(accountId) || !long.TryParse(accountId, out var id))
+            //    throw new ArgumentException(nameof(accountId) + " required for Huobi " + nameof(IUsdtMarginedClient.LinearSwapOrder), nameof(accountId));
 
             var huobiUmOrderPriceType = GetUmOrderPriceType(orderPriceType);
-            var result = await Trade.LinearSwapCrossOrder(
+            var result = await Trade.LinearSwapCrossOrderAsync(
                 contractCode: contractCode,
                 direction: direction,
                 offset: offset,
@@ -158,8 +175,8 @@ namespace Huobi.Net.Clients.UsdtMargined
                 slTriggerPrice: slTriggerPrice,
                 slOrderPrice: slOrderPrice,
                 slOrderPriceType: slOrderPriceType,
-                accountId: accountId,
-                clientOrderId: clientOrderId,
+                reduceOnly: reduceOnly,
+                clientOrderId: long.Parse(clientOrderId),
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -172,16 +189,35 @@ namespace Huobi.Net.Clients.UsdtMargined
         }
 
         /// 【全仓】U本位合约下单      
-        async Task<WebCallResult<OrderId>> IUsdtMarginedClient.LinearSwapCrossOrder(string contractCode, UmDirection direction, UmOffset offset, decimal price, UmLeverRate leverRate, long volume, UmOrderPriceType orderPriceType, decimal tpTriggerPrice, decimal tpOrderPrice, UmTpOrderPriceType tpOrderPriceType, decimal slTriggerPrice, decimal slOrderPrice, UmSlOrderPriceType slOrderPriceType, string? accountId = null, string? clientOrderId = null, CancellationToken ct = default)
-        {
+        async Task<WebCallResult<OrderId>> IUsdtMarginedClient.LinearSwapCrossOrder(
+            string contractCode,
+            UmDirection direction,
+            UmOffset offset,
+            decimal price,
+            UmLeverRate leverRate,
+            long volume,
+            UmOrderPriceType orderPriceType,
+            decimal tpTriggerPrice,
+            decimal tpOrderPrice,
+            UmTpOrderPriceType tpOrderPriceType,
+            decimal slTriggerPrice,
+            decimal slOrderPrice,
+            UmSlOrderPriceType slOrderPriceType,
+            string? pair,
+            string? contractType,
+            int? reduceOnly,
+            string? clientOrderId,
+            CancellationToken ct
+            )
+        { 
             if (string.IsNullOrEmpty(contractCode))
                 throw new ArgumentException(nameof(contractCode) + " required for Huobi " + nameof(IUsdtMarginedClient.LinearSwapOrder), nameof(contractCode));
 
-            if (string.IsNullOrEmpty(accountId) || !long.TryParse(accountId, out var id))
-                throw new ArgumentException(nameof(accountId) + " required for Huobi " + nameof(IUsdtMarginedClient.LinearSwapOrder), nameof(accountId));
+            //if (string.IsNullOrEmpty(accountId) || !long.TryParse(accountId, out var id))
+            //    throw new ArgumentException(nameof(accountId) + " required for Huobi " + nameof(IUsdtMarginedClient.LinearSwapOrder), nameof(accountId));
 
             var huobiUmOrderPriceType = GetUmOrderPriceType(orderPriceType);
-            var result = await Trade.LinearSwapCrossOrder(
+            var result = await Trade.LinearSwapCrossOrderAsync(
                 contractCode :contractCode,
                 direction :direction,
                 offset:offset,
@@ -195,8 +231,10 @@ namespace Huobi.Net.Clients.UsdtMargined
                 slTriggerPrice : slTriggerPrice,
                 slOrderPrice : slOrderPrice,
                 slOrderPriceType : slOrderPriceType,
-                accountId : accountId,
-                clientOrderId : clientOrderId,
+                pair : pair,
+                contractType : contractType,
+                reduceOnly : reduceOnly,
+                clientOrderId : long.Parse(clientOrderId),
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)

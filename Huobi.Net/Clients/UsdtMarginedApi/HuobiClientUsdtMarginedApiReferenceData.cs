@@ -14,6 +14,7 @@ using CryptoExchange.Net.Converters;
 using Huobi.Net.Interfaces.Clients.UsdtMargined;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapMarketData;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request;
 
 namespace Huobi.Net.Clients.UsdtMargined
 {

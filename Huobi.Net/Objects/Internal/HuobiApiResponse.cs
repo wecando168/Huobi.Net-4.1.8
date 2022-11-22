@@ -19,10 +19,22 @@ namespace Huobi.Net.Objects.Internal
         internal string? ErrorMessage { get; set; }
 
         /// <summary>
+        /// 错误信息2
+        /// </summary>
+        [JsonProperty("err_msg", NullValueHandling = NullValueHandling.Ignore)]
+        internal string? ErrorMessage2 { set => ErrorMessage = value; get => ErrorMessage; }
+
+        /// <summary>
         /// 错误编码
         /// </summary>
         [JsonProperty("err-code", NullValueHandling = NullValueHandling.Ignore)]
         internal string? ErrorCode { get; set; }
+
+        /// <summary>
+        /// 错误编码2
+        /// </summary>
+        [JsonProperty("err_code", NullValueHandling = NullValueHandling.Ignore)]
+        internal string? ErrorCode2 { set => ErrorCode = value; get => ErrorCode; }
     }
 
     internal class HuobiBasicResponse<T> : HuobiApiResponse
