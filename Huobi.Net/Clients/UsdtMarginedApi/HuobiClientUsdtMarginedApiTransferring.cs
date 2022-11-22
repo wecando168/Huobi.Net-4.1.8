@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Huobi.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
 using Huobi.Net.Interfaces.Clients.UsdtMargined;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring;
 
 namespace Huobi.Net.Clients.UsdtMargined
 {
@@ -31,23 +32,48 @@ namespace Huobi.Net.Clients.UsdtMargined
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTransferState(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedSwapCrossTransferState>>> GetLinearSwapCrossTransferStateAsync(
+            string marginAccount, 
+            CancellationToken ct = default
+            )
         {
-            return await _baseClient.SendHuobiRequest<IEnumerable<object>>(
+            var parameters = new Dictionary<string, object> { };
+            parameters.AddOptionalParameter("margin_account", marginAccount);
+
+            return await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedSwapCrossTransferState>>(
                 uri: _baseClient.GetUrl(GetLinearSwapCrossTransferStateEndpoint, ApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
+                parameters: parameters,
                 signed: true
                 ).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<object>>> LinearSwapAccountTransfer(CancellationToken ct = default)
+        public async Task<WebCallResult<long>> LinearSwapAccountTransferAsync(
+            string from, 
+            string to, 
+            string currency, 
+            decimal amount, 
+            string marginAccount, 
+            CancellationToken ct = default
+            )
         {
-            return await _baseClient.SendHuobiRequest<IEnumerable<object>>(
+            var parameters = new Dictionary<string, object>() 
+            { 
+                { "from", from },
+                { "to", to },
+                { "currency", currency },
+                { "amount", amount },
+                { "margin-account", marginAccount },
+
+            };
+
+            return await _baseClient.SendHuobiV2Request<long>(
                 uri: new Uri(LinearSwapAccountTransferEndpoint),
                 method: HttpMethod.Post,
                 cancellationToken: ct,
+                parameters: parameters,
                 signed: true
                 ).ConfigureAwait(false);
         }

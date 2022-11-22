@@ -61,133 +61,7 @@ namespace Huobi.Net.Clients.UsdtMargined
         }
 
         /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossRelationTpslOrder(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTpslHisorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTpslOpenorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTrackHisorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTrackOpenorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTriggerHisorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTriggerOpenorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapRelationTpslOrder(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTpslHisorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTpslOpenorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTrackHisorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTrackOpenOrders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTriggerHisorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTriggerOpenorders(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTpslCancel(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTpslCancelAll(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTpslOrder(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTrackCancel(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTrackCancelAll(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTrackOrder(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTriggerCancel(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTriggerCancelAll(CancellationToken ct = default)
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTriggerOrder(CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
@@ -199,43 +73,13 @@ namespace Huobi.Net.Clients.UsdtMargined
         }
 
         /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTpslCancel(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTpslCancelAll(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTpslOrder(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTrackCancel(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTrackCancelAll(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTrackOrder(CancellationToken ct = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public Task<WebCallResult<IEnumerable<object>>> LinearSwapTriggerCancel(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTriggerCancel(CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
@@ -247,7 +91,163 @@ namespace Huobi.Net.Clients.UsdtMargined
         }
 
         /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTriggerOrder(CancellationToken ct = default)
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTriggerCancelAll(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTriggerOpenorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTriggerOpenorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTriggerHisorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTriggerHisorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTpslOrder(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTpslCancel(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTpslCancel(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTpslOrder(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTpslCancelAll(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTpslCancelAll(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTpslOpenorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTpslOpenorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTpslHisorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTpslHisorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapRelationTpslOrder(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossRelationTpslOrder(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTrackOrder(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTrackOrder(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTrackCancel(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTrackCancel(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapTrackCancelAll(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> LinearSwapCrossTrackCancelAll(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTrackOpenOrders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTrackOpenorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapTrackHisorders(CancellationToken ct = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<WebCallResult<IEnumerable<object>>> GetLinearSwapCrossTrackHisorders(CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }

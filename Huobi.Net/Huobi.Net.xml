@@ -770,100 +770,100 @@
         <member name="T:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossRelationTpslOrder(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTpslHisorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTpslOpenorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTrackHisorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTrackOpenorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTriggerHisorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTriggerOpenorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapRelationTpslOrder(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTpslHisorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTpslOpenorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTrackHisorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTrackOpenOrders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTriggerHisorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTriggerOpenorders(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTpslCancel(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTpslCancelAll(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTpslOrder(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTrackCancel(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTrackCancelAll(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTrackOrder(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTriggerCancel(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTriggerCancelAll(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTriggerOrder(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTriggerOrder(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTpslCancel(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTpslCancelAll(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTpslOrder(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTrackCancel(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTrackCancelAll(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTrackOrder(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTriggerCancel(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTriggerCancel(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTriggerCancelAll(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTriggerOrder(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTriggerCancelAll(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTriggerOpenorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTriggerOpenorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTriggerHisorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTriggerHisorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTpslOrder(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTpslCancel(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTpslCancel(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTpslOrder(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTpslCancelAll(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTpslCancelAll(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTpslOpenorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTpslOpenorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTpslHisorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTpslHisorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapRelationTpslOrder(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossRelationTpslOrder(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTrackOrder(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTrackOrder(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTrackCancel(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTrackCancel(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapTrackCancelAll(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.LinearSwapCrossTrackCancelAll(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTrackOpenOrders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTrackOpenorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapTrackHisorders(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiStrategyOrder.GetLinearSwapCrossTrackHisorders(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiTrade">
@@ -959,10 +959,10 @@
         <member name="T:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiTransferring">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiTransferring.GetLinearSwapCrossTransferState(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiTransferring.GetLinearSwapCrossTransferStateAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiTransferring.LinearSwapAccountTransfer(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiClientUsdtMarginedApiTransferring.LinearSwapAccountTransferAsync(System.String,System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams">
@@ -4894,23 +4894,29 @@
             U本位合约划转接口
             </summary>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiClientUsdtMarginedApiTransferring.GetLinearSwapCrossTransferState(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiClientUsdtMarginedApiTransferring.GetLinearSwapCrossTransferStateAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】查询系统划转权限(PrivateData)
             <para><a href="/linear-swap-api/v1/swap_cross_transfer_state"/></para>
             <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#7063bffbff"/></para>
             </summary>
+            <param name="marginAccount">保证金账户，不填则返回所有全仓数据	"USDT"，目前只有一个全仓账户（USDT）</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiClientUsdtMarginedApiTransferring.LinearSwapAccountTransfer(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiClientUsdtMarginedApiTransferring.LinearSwapAccountTransferAsync(System.String,System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】现货-U本位合约账户间进行资金的划转(PrivateData)
             <para><a href="https://api.huobi.pro/v2/account/transfer"/></para>
             <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#u-3"/></para>
             </summary>
+            <param name="from">来源业务线账户，取值：spot(币币)、linear-swap(U本位合约)</param>
+            <param name="to">目标业务线账户，取值：spot(币币)、linear-swap(U本位合约)</param>
+            <param name="currency">币种,支持大小写</param>
+            <param name="amount">划转金额</param>
+            <param name="marginAccount">保证金账户</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -11712,6 +11718,16 @@
             合约代码	"BTC-USDT"...
             </summary>
         </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData.HuobiUsdtMarginedMarketSwapApiState.MarginMode">
+            <summary>
+            保证金模式
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData.HuobiUsdtMarginedMarketSwapApiState.MarginAccount">
+            <summary>
+            保证金账户
+            </summary>
+        </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData.HuobiUsdtMarginedMarketSwapApiState.Open">
             <summary>
             开仓下单权限："1"表示可用，“0”表示不可用
@@ -11775,16 +11791,6 @@
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData.HuobiUsdtMarginedMarketSwapApiState.TransferInnerOut">
             <summary>
             同账号不同保证金账户划转的转出权限："1"表示可用，“0”表示不可用
-            </summary>
-        </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData.HuobiUsdtMarginedMarketSwapApiState.MarginMode">
-            <summary>
-            保证金模式
-            </summary>
-        </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData.HuobiUsdtMarginedMarketSwapApiState.MarginAccount">
-            <summary>
-            保证金账户
             </summary>
         </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReferenceData.HuobiUsdtMarginedMarketSwapApiState.TradePartition">
@@ -14745,6 +14751,91 @@
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request.HuobiUsdtMarginedTrade.RealProfit">
             <summary>
             该笔成交的真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。）	
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedAccountTransfer">
+            <summary>
+            【通用】现货-U本位合约账户间进行资金划转
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedAccountTransfer.success">
+            <summary>
+            状态	true/false
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedAccountTransfer.Data">
+            <summary>
+            生成的划转订单id	
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedAccountTransfer.Code">
+            <summary>
+            响应码
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedAccountTransfer.Message">
+            <summary>
+            响应信息
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState">
+            <summary>
+            【全仓】查询系统划转权限
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.MarginMode">
+            <summary>
+            保证金模式	cross：全仓模式；
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.MarginAccount">
+            <summary>
+            保证金账户	比如“BTC-USDT”
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.TransferIn">
+            <summary>
+            从币币转入的权限："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.TransferOut">
+            <summary>
+            转出至币币的权限："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.MasterTransferSub">
+            <summary>
+            从母账号划转到子账号的权限："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.SubTransferMaster">
+            <summary>
+            从子账号划转到母账号的权限："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.MasterTransferSubInnerIn">
+            <summary>
+            母账号划转到子账号的转入权限-跨账户："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.MasterTransferSubInnerOut">
+            <summary>
+            母账号划转到子账号的转出权限-跨账户："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.SubTransferMasterInnerOut">
+            <summary>
+            子账号划转到母账号的转出权限-跨账户："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.TransferInnerIn">
+            <summary>
+            同账号不同保证金账户划转的转入权限："1"表示可用，“0”表示不可用
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTransferring.HuobiUsdtMarginedSwapCrossTransferState.TransferInnerOut">
+            <summary>
+            同账号不同保证金账户划转的转出权限："1"表示可用，“0”表示不可用
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.Socket.HuobiAccountUpdate">

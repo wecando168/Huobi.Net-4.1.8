@@ -60,7 +60,6 @@
     <Folder Include="Objects\Models\Rest\Futures\CoinMarginedFutures\" />
     <Folder Include="Objects\Models\Rest\Futures\CoinMarginedSwaps\" />
     <Folder Include="Objects\Models\Rest\Futures\UsdtMargined\LinearSwapStrategyOrder\" />
-    <Folder Include="Objects\Models\Rest\Futures\UsdtMargined\LinearSwapTransferring\" />
     <Folder Include="Objects\Models\Rest\Spot\" />
   </ItemGroup>
 </Project>

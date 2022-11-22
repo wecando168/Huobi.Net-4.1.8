@@ -24,6 +24,18 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         public string ContractCode { get; set; } = string.Empty;
 
         /// <summary>
+        /// 保证金模式
+        /// </summary>
+        [JsonProperty("margin_mode", NullValueHandling = NullValueHandling.Ignore)]
+        public string MarginMode { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 保证金账户
+        /// </summary>
+        [JsonProperty("margin_account", NullValueHandling = NullValueHandling.Ignore)]
+        public string MarginAccount { get; set; } = string.Empty;
+
+        /// <summary>
         /// 开仓下单权限："1"表示可用，“0”表示不可用
         /// </summary>
         [JsonProperty("open", NullValueHandling = NullValueHandling.Ignore)]
@@ -100,18 +112,6 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// </summary>
         [JsonProperty("transfer_inner_out", NullValueHandling = NullValueHandling.Ignore)]
         public int TransferInnerOut { get; set; } = default;
-
-        /// <summary>
-        /// 保证金模式
-        /// </summary>
-        [JsonProperty("margin_mode", NullValueHandling = NullValueHandling.Ignore)]
-        public string MarginMode { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 保证金账户
-        /// </summary>
-        [JsonProperty("margin_account", NullValueHandling = NullValueHandling.Ignore)]
-        public string MarginAccount { get; set; } = string.Empty;
 
         /// <summary>
         /// 成交分区 如 USDT

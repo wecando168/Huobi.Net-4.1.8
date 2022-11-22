@@ -6085,40 +6085,38 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
 
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerOrder();
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerCancel();
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerCancelAll();
-
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackCancel();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackCancelAll();
-        
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossRelationTpslOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTpslHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTpslOpenorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTrackHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTrackOpenorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTriggerHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTriggerOpenorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapRelationTpslOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTpslHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTpslOpenorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTrackHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTrackOpenOrders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTriggerHisorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTriggerOpenorders();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancel();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancelAll();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackCancel();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackCancelAll();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerCancel();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerOrder();
         //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerOrder();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancel();
-        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerCancel();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerCancel();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTriggerOpenorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTriggerOpenorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTriggerHisorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTriggerHisorders();
         //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslOrder();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancel();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancel();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslOrder();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTpslOpenorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTpslOpenorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTpslHisorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTpslHisorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapRelationTpslOrder();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossRelationTpslOrder();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackOrder();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackOrder();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackCancel();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackCancel();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackCancelAll();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTrackOpenOrders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTrackOpenorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTrackHisorders();
+        //await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTrackHisorders();
     }
 }
 
@@ -6134,8 +6132,68 @@ static async Task TestUsdtMarginedApiTransferringEndpoints()
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
 
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Transferring.GetLinearSwapCrossTransferState();
-        await huobiUsdtMarginedClient.UsdtMarginedApi.Transferring.LinearSwapAccountTransfer();
+        #region 【全仓】查询系统划转权限(PrivateData)
+        {
+            string? marginAccount = "USDT";
+
+            #region 主用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【全仓】查询系统划转权限");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Transferring.GetLinearSwapCrossTransferStateAsync(marginAccount);
+            if (result.Success)
+            {
+                foreach (var item in result.Data)
+                {
+                    Console.WriteLine($"保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode}");
+                    Console.WriteLine($"从币币转入的权限：{(item.TransferIn == 1 ? "可用": (item.TransferIn == 0 ? "不可用" : "未知"))}");
+                    Console.WriteLine($"转出至币币的权限：{(item.TransferOut == 1 ? "可用" : (item.TransferOut == 0 ? "不可用" : "未知"))}");
+                    Console.WriteLine($"从母账号划转到子账号的权限：{(item.MasterTransferSub == 1 ? "可用" : (item.MasterTransferSub == 0 ? "不可用" : "未知"))}");
+                    Console.WriteLine($"从子账号划转到母账号的权限：{(item.SubTransferMaster == 1 ? "可用" : (item.SubTransferMaster == 0 ? "不可用" : "未知"))}");
+                    Console.WriteLine($"同账号不同保证金账户划转的转入权限：{(item.TransferInnerIn == 1 ? "可用" : (item.TransferIn == 0 ? "不可用" : "未知"))}");
+                    Console.WriteLine($"同账号不同保证金账户划转的转出权限：{(item.TransferInnerOut == 1 ? "可用" : (item.TransferIn == 0 ? "不可用" : "未知"))}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询系统划转权限" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
+
+        #region 【通用】现货-U本位合约账户间进行资金的划转(PrivateData)
+        {
+            string from = "spot";
+            string to = "linear-swap";
+            string currency = "usdt";
+            decimal amount = 20;
+            string marginAccount = "USDT";
+
+            #region 主用户客户端
+            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
+            #endregion
+
+            Console.WriteLine("【通用】现货-U本位合约账户间进行资金的划转");
+            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Transferring.LinearSwapAccountTransferAsync(from, to, currency, amount, marginAccount);
+            if (result.Success)
+            {
+                Console.WriteLine($"从{from}账户划转{amount} {currency}到{to} {marginAccount}账户成功，划转单号：{result.Data}");
+            }
+            else
+            {
+                Console.WriteLine($"火币合约API服务器：" + "【通用】现货-U本位合约账户间进行资金的划转" + "异常\r\n" +
+                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
+                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
+                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            }
+        }
+        #endregion
     }
 }
 
