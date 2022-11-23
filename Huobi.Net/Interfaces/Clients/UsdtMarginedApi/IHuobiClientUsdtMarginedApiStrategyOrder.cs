@@ -227,7 +227,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
             string contractCode,
             int tradeType,
             string status,
-            int create_date,
+            int createDate,
             int? pageIndex = null,
             int? pageSize = null,
             string? sortBy = null,
@@ -253,7 +253,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         Task<WebCallResult<IEnumerable<Object>>> GetLinearSwapCrossTriggerHisordersAsync(
             int tradeType,
             string status,
-            int create_date,
+            int createDate,
             string? contractCode,
             string? pair,            
             int? pageIndex = null,
@@ -372,7 +372,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<Object>>> LinearSwapTpslCancelAllAsync(
             string contractCode,
-            string orderId,
+            string? direction,
             CancellationToken ct = default
             );
 
@@ -388,11 +388,11 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<Object>>> LinearSwapCrossTpslCancelAllAsync(
-            string orderId,
+        Task<WebCallResult<IEnumerable<Object>>> LinearSwapCrossTpslCancelAllAsync(            
             string? contractCode,
             string? pair,
             string? contractType,
+            string? direction,
             CancellationToken ct = default
             );
 
@@ -409,7 +409,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<Object>>> GetLinearSwapTpslOpenordersAsync(
-            string? contractCode,
+            string contractCode,
             int? pageIndex = null,
             int? pageSize = null,
             int? tradeType = null,
@@ -454,7 +454,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         Task<WebCallResult<IEnumerable<Object>>> GetLinearSwapTpslHisordersAsync(
             string contractCode,
             string status,
-            long create_date,
+            long createDate,
             int? pageIndex = null,
             int? pageSize = null,
             string? sortBy = null,
@@ -478,7 +478,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<Object>>> GetLinearSwapCrossTpslHisordersAsync(
             string status,
-            long create_date,
+            long createDate,
             string? contractCode,
             string? pair,
             int? pageIndex = null,
@@ -516,8 +516,8 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<Object>>> GetLinearSwapCrossRelationTpslOrderAsync(
             long orderId,
-            string contractCode,
-            string pair,
+            string? contractCode,
+            string? pair,
             CancellationToken ct = default
             );
 
@@ -545,9 +545,9 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
             decimal callbackRate,
             decimal activePrice,
             string orderPriceType,
-            int reduceOnly,
-            int leverRate,
-            string offset,
+            int? reduceOnly,
+            int? leverRate,
+            string? offset,
             CancellationToken ct = default
             );
 
