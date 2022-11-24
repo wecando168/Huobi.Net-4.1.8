@@ -444,6 +444,7 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#95d89cba52" /></para>
         /// </summary>
         /// <param name="huobiCreateSubUserAccountRequest">Huobi create sub user account request</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>Huobi sub user account list</returns>
         Task<WebCallResult<IEnumerable<HuobiSubUserCreation>>> SubUserCreationAsync(HuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest, CancellationToken ct = default);
 

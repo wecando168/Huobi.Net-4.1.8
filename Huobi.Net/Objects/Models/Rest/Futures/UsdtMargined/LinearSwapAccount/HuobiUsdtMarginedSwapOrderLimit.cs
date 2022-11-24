@@ -21,6 +21,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
 
         /// <summary>
         /// 下单量限制列表
+        /// </summary>
         [JsonProperty("list", NullValueHandling = NullValueHandling.Ignore)]
         public IEnumerable<SwapOrderLimit> SwapOrderLimitList { get; set; } = Array.Empty<SwapOrderLimit>();        
     }

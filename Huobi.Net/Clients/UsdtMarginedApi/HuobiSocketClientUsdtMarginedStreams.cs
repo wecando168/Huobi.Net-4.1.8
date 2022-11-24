@@ -326,221 +326,265 @@ namespace Huobi.Net.Clients.UsdtMargined
         //    return result ? result.As(result.Data.Data) : result.AsError<IEnumerable<HuobiSpecifiedTimeKLine>>(result.Error!);
         //}        
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeKlineAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeKline(string contractCode, KlineInterval period, string clientId, long from, long to)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeDepthAsync(string contractCode, string type, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeIncrementalDepthAsync(string contractCode, string type, string size, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeDetailAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeBboAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeTradeDetail(string contractCode, string clientId, int size = 50)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeTradeDetailAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeIndexAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeIndex(string contractCode, KlineInterval period, string clientId, long from, long to)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodePremiumIndexAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodePremiumIndex(string contractCode, KlineInterval period, string clientId, long from, long to)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeEstimatedRateAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeEstimatedRate(string contractCode, KlineInterval period, string clientId, long from, long to)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeEstimatedRateAsync(string contractCode, KlineInterval period, string basisPriceType, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeEstimatedRate(string contractCode, KlineInterval period, string basisPriceType, string clientId, long from, long to)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeMarkPriceAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeMarkPrice(string contractCode, KlineInterval period, string clientId, long from, long to)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeOrderContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeOrderContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeOrderCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeOrderCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeAccountsContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeAccountsContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeAccountsCrossContractCodeAsync(string marginAccount, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeAccountsCrossContractCodeAsync(string marginAccount, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribePositionsContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribePositionsContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribePositionsCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribePositionsCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMatchOrdersContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeMatchOrdersContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMatchOrdersCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeMatchOrdersCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribePublicContractCodeLiquidationOrdersAsync(string contractCode, string businessType, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribePublicContractCodeLiquidationOrdersAsync(string contractCode, string businessType, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribePublicContractCodeFundingRateAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribePublicContractCodeFundingRateAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribePublicContractCodeContractInfoAsync(string contractCode, string businessType, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribePublicContractCodeContractInfoAsync(string contractCode, string businessType, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribetRiggerOrderContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeRiggerOrderContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribetRiggerOrderCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> UnsubscribeRiggerOrderCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
         {
             throw new NotImplementedException();

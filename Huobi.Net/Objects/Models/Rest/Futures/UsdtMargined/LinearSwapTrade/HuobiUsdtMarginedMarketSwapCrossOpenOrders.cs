@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 using Huobi.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request
+namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
 {
     /// <summary>
     /// 【全仓】获取用户合约当前未成交委托
@@ -30,7 +30,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Req
         public int TotalSize { get; set; } = default(int);
 
         /// <summary>
-        /// 【逐仓】未成交委托信息集合
+        /// 【全仓】未成交委托信息集合
         /// </summary>
         [JsonProperty("orders", NullValueHandling = NullValueHandling.Ignore)]
         public IEnumerable<HuobiUsdtMarginedCrossOpenOrder> HuobiUsdtMarginedCrossOpenOrders { get; set; } = Array.Empty<HuobiUsdtMarginedCrossOpenOrder>();

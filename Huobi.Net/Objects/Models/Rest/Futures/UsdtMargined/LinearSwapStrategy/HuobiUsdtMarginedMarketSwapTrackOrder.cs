@@ -4,12 +4,12 @@ using CryptoExchange.Net.Converters;
 using Huobi.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
+namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
 {
     /// <summary>
-    /// 【全仓】合约下单
+    /// 【逐仓】跟踪委托订单下单
     /// </summary>
-    public class HuobiUsdtMarginedMarketSwapCrossOrder
+    public class HuobiUsdtMarginedMarketSwapTrackOrder
     {
         /// <summary>
         /// 订单ID
@@ -18,13 +18,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         public long? OrderId { get; set; } = default(long);
 
         /// <summary>
-        /// 用户下单时填写的客户端订单ID，没填则不返回	
-        /// </summary>
-        [JsonProperty("client_order_id", NullValueHandling = NullValueHandling.Ignore)]
-        public long? ClientOrderId { get; set; } = default(long);
-
-        /// <summary>
-        /// String类型订单ID
+        /// 字符串类型的跟踪委托订单ID
         /// </summary>
         [JsonProperty("order_id_str", NullValueHandling = NullValueHandling.Ignore)]
         public string? OrderIdStr { get; set; } = string.Empty;

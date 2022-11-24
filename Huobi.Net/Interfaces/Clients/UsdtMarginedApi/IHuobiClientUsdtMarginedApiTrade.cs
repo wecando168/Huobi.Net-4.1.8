@@ -1,19 +1,9 @@
-﻿using CryptoExchange.Net;
-using CryptoExchange.Net.Objects;
-using Huobi.Net.Converters;
-using Huobi.Net.Enums;
-using Newtonsoft.Json;
-using System;
+﻿using CryptoExchange.Net.Objects;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Huobi.Net.Objects.Models;
-using CryptoExchange.Net.Converters;
-using Huobi.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.CommonObjects;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request;
 
 namespace Huobi.Net.Interfaces.Clients.UsdtMargined

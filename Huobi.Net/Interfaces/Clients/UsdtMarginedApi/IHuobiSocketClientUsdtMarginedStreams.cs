@@ -384,7 +384,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <para><a href="" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#unsub-5" /></para>
         /// </summary>
-        /// <param name="marginAccount">margin account目前只有一个全仓账户（USDT）</param></param>
+        /// <param name="marginAccount">margin account目前只有一个全仓账户（USDT）</param>
         /// <param name="clientId">选填;Client 请求唯一 ID</param>
         /// <param name="onData">更新处理程序 The handler for updates</param>
         /// <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>

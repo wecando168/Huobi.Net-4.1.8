@@ -126,7 +126,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <summary>
         /// 
         /// 【通用】平台历史持仓量查询(PublicData)
-        /// <para><a href="GET /linear-swap-api/v1/swap_his_open_interest></para>
+        /// <para><a href="GET /linear-swap-api/v1/swap_his_open_interest"/></para>
         /// <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#903bf620df"/></para>
         /// </summary>
         /// <param name="pair">交易对	BTC-USDT</param>
@@ -174,7 +174,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="contractCode">合约代码	"BTC-USDT","ETH-USDT"...</param>
         /// <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
         /// <param name="size">K线获取数量	[1,2000]</param>
-        /// param name="basisPriceType">基差价格类型，表示在周期内计算基差使用的价格类型， 不填，默认使用开盘价	开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average</param>
+        /// <param name="basisPriceType">基差价格类型，表示在周期内计算基差使用的价格类型， 不填，默认使用开盘价	开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average </param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketHistoryBasis>>> GetLinearSwapBasisAsync(string contractCode, string period, int size, string? basisPriceType = null, CancellationToken ct = default);

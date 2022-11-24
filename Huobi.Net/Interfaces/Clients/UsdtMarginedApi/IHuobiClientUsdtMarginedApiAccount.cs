@@ -40,6 +40,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <para><a href="POST /linear-swap-api/v1/swap_account_info"/></para>
         /// <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#0b91d90b81"/></para>
         /// </summary>
+        /// <param name="contractCode">合约代码	永续："BTC-USDT"... ，交割："BTC-USDT-210625"...</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<HuobiUsdtMarginedAccountInfo>>> GetLinearSwapAccountInfoAsync(string? contractCode = null, CancellationToken ct = default);

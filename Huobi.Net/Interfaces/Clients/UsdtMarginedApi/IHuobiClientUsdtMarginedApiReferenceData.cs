@@ -258,7 +258,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="pair">交易对	BTC-USDT</param>
         /// <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>
         /// <param name="businessType">业务类型，不填默认永续	futures：交割、swap：永续、all：全部</param>
-        /// <param name="ct">Cancellation token</param></param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapOpenInterest>>> GetLinearSwapOpenInterestAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
 

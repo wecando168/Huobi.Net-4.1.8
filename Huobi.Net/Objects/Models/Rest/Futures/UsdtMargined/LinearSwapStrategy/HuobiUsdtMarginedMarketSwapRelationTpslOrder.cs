@@ -4,42 +4,12 @@ using CryptoExchange.Net.Converters;
 using Huobi.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
+namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
 {
     /// <summary>
-    /// 【逐仓】获取用户合约当前未成交委托
+    /// 【逐仓】查询开仓单关联的止盈止损订单详情
     /// </summary>
-    public class HuobiUsdtMarginedMarketSwapOpenOrders
-    {
-        /// <summary>
-        /// 总页数
-        /// </summary>
-        [JsonProperty("total_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalPage { get; set; } = default(int);
-
-        /// <summary>
-        /// 当前页
-        /// </summary>
-        [JsonProperty("current_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int CurrentPage { get; set; } = default(int);
-
-        /// <summary>
-        /// 总条数
-        /// </summary>
-        [JsonProperty("total_size", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalSize { get; set; } = default(int);
-
-        /// <summary>
-        /// 【逐仓】未成交委托信息集合
-        /// </summary>
-        [JsonProperty("orders", NullValueHandling = NullValueHandling.Ignore)]
-        public IEnumerable<HuobiUsdtMarginedIsolatedOpenOrder> HuobiUsdtMarginedIsolatedOpenOrders { get; set; } = Array.Empty<HuobiUsdtMarginedIsolatedOpenOrder>();
-    }
-
-    /// <summary>
-    /// 【逐仓】未成交委托信息
-    /// </summary>
-    public class HuobiUsdtMarginedIsolatedOpenOrder
+    public class HuobiUsdtMarginedMarketSwapRelationTpslOrder
     {
         /// <summary>
         /// 品种代码
@@ -54,16 +24,28 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         public string? ContractCode { get; set; } = string.Empty;
 
         /// <summary>
+        /// 保证金模式   isolated：逐仓模式
+        /// </summary>
+        [JsonProperty("margin_mode", NullValueHandling = NullValueHandling.Ignore)]
+        public string? MarginMode { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 保证金账户   比如“BTC-USDT”
+        /// </summary>
+        [JsonProperty("margin_account", NullValueHandling = NullValueHandling.Ignore)]
+        public string? MarginAccount { get; set; } = string.Empty;
+
+        /// <summary>
         /// 委托数量
         /// </summary>
         [JsonProperty("volume", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? Volume { get; set; } = default(decimal);
 
         /// <summary>
-        /// 委托价格
+        /// 委托价
         /// </summary>
         [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Price { get; set; } = default(decimal);
+        public decimal? Price { get; set; }
 
         /// <summary>
         /// 订单报价类型	"limit":限价，"opponent":对手价，"post_only":只做maker单,post only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5":最优5档，"optimal_10":最优10档，"optimal_20":最优20档，"fok":FOK订单，"ioc":IOC订单, "opponent_ioc": 对手价-IOC下单，"lightning_ioc": 闪电平仓-IOC下单，"optimal_5_ioc": 最优5档-IOC下单，"optimal_10_ioc": 最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单，"opponent_fok"： 对手价-FOK下单，"lightning_fok"：闪电平仓-FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单
@@ -72,13 +54,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         public string? OrderPriceType { get; set; } = string.Empty;
 
         /// <summary>
-        /// 订单类型	1:报单 、 2:撤单 、 3:强平、4:交割
-        /// </summary>
-        [JsonProperty("order_type", NullValueHandling = NullValueHandling.Ignore)]
-        public int? OrderType { get; set; } = default(int);
-
-        /// <summary>
-        /// 买卖方向	"buy":买 "sell":卖
+        /// 买卖方向 "buy":买 "sell":卖
         /// </summary>
         [JsonProperty("direction", NullValueHandling = NullValueHandling.Ignore)]
         public string? Direction { get; set; } = string.Empty;
@@ -102,6 +78,12 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         public long? OrderId { get; set; } = default(long);
 
         /// <summary>
+        /// 字符串类型的订单ID
+        /// </summary>
+        [JsonProperty("order_id_str", NullValueHandling = NullValueHandling.Ignore)]
+        public long? OrderIdStr { get; set; } = default(long);
+
+        /// <summary>
         /// 客户订单ID
         /// </summary>
         [JsonProperty("client_order_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -112,12 +94,6 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public long? CreatedTimestamp { get; set; } = default(long);
-
-        /// <summary>
-        /// 订单更新时间，单位：毫秒
-        /// </summary>
-        [JsonProperty("update_time", NullValueHandling = NullValueHandling.Ignore)]
-        public long? UpdateTimestamp { get; set; } = default(long);
 
         /// <summary>
         /// 成交数量
@@ -162,70 +138,142 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         public int? Status { get; set; } = default(int);
 
         /// <summary>
+        /// 订单类型	1:报单 、 2:撤单 、 3:强平、4:交割
+        /// </summary>
+        [JsonProperty("order_type", NullValueHandling = NullValueHandling.Ignore)]
+        public int? OrderType { get; set; } = default(int);
+
+        /// <summary>
         /// 订单来源（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发 ）
         /// </summary>
         [JsonProperty("order_source", NullValueHandling = NullValueHandling.Ignore)]
         public string? OrderSource { get; set; } = string.Empty;
 
         /// <summary>
-        /// String类型订单ID
-        /// </summary>
-        [JsonProperty("order_id_str", NullValueHandling = NullValueHandling.Ignore)]
-        public string? OrderIdStr { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 手续费币种	（"USDT"...）
+        /// 手续费币种
         /// </summary>
         [JsonProperty("fee_asset", NullValueHandling = NullValueHandling.Ignore)]
-        public string? FeeAsset { get; set; } = string.Empty;
+        public string FeeAsset { get; set; } = string.Empty;
 
         /// <summary>
-        /// 结算类型 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管
-        /// </summary>
-        [JsonProperty("liquidation_type", NullValueHandling = NullValueHandling.Ignore)]
-        public string? LiquidationType { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 撤单时间
+        /// 下order单时间	
         /// </summary>
         [JsonProperty("canceled_at", NullValueHandling = NullValueHandling.Ignore)]
-        public long? CanceledTimestamp { get; set; } = null;
+        public long? CanceledTimestamp { get; set; }
 
         /// <summary>
-        /// 保证金币种（计价币种）	
+        /// 【逐仓】关联的止盈止损单信息集合
         /// </summary>
-        [JsonProperty("margin_asset", NullValueHandling = NullValueHandling.Ignore)]
-        public string? MarginAsset { get; set; } = string.Empty;
+        [JsonProperty("tpsl_order_type", NullValueHandling = NullValueHandling.Ignore)]
+        public IEnumerable<HuobiUsdtMarginedIsolatedTpslOrderInfo> HuobiUsdtMarginedIsolatedTpslOrderInfos { get; set; } = Array.Empty<HuobiUsdtMarginedIsolatedTpslOrderInfo>();
+    }
+
+    /// <summary>
+    /// 【逐仓】关联的止盈止损单信息
+    /// </summary>
+    public class HuobiUsdtMarginedIsolatedTpslOrderInfo
+    {        
+        /// <summary>
+        /// 委托数量
+        /// </summary>
+        [JsonProperty("volume", NullValueHandling = NullValueHandling.Ignore)]
+        public decimal? Volume { get; set; } = default(decimal);
 
         /// <summary>
-        /// 保证金账户   比如“BTC-USDT”
+        /// 买卖方向 "buy":买 "sell":卖
         /// </summary>
-        [JsonProperty("margin_account", NullValueHandling = NullValueHandling.Ignore)]
-        public string? MarginAccount { get; set; } = string.Empty;
+        [JsonProperty("direction", NullValueHandling = NullValueHandling.Ignore)]
+        public string? Direction { get; set; } = string.Empty;
 
         /// <summary>
-        /// 保证金模式   isolated：逐仓模式
+        /// 止盈止损类型 “tp”:止盈单；"sl"：止损单
         /// </summary>
-        [JsonProperty("margin_mode", NullValueHandling = NullValueHandling.Ignore)]
-        public string? MarginMode { get; set; } = string.Empty;
+        [JsonProperty("tpsl_order_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string? TpslOrderType { get; set; } = string.Empty;
 
         /// <summary>
-        /// 是否设置止盈止损	1：是；0：否
+        /// 订单ID
         /// </summary>
-        [JsonProperty("is_tpsl", NullValueHandling = NullValueHandling.Ignore)]
-        public int? IsTpsl { get; set; } = default(int);
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public long? OrderId { get; set; } = default(long);
 
         /// <summary>
-        /// 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。）	
+        /// 字符串类型的订单ID
         /// </summary>
-        [JsonProperty("real_profit", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RealProfit { get; set; } = default(decimal);
+        [JsonProperty("order_id_str", NullValueHandling = NullValueHandling.Ignore)]
+        public long? OrderIdStr { get; set; } = default(long);
 
         /// <summary>
-        /// 是否为只减仓订单	0:表示为非只减仓订单，1:表示为只减仓订单
+        /// 触发类型	ge大于等于；le小于等于
         /// </summary>
-        [JsonProperty("reduce_only", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ReduceOnly { get; set; } = default(int);
+        [JsonProperty("trigger_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string? TriggerType { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 触发价
+        /// </summary>
+        [JsonProperty("trigger_price", NullValueHandling = NullValueHandling.Ignore)]
+        public decimal TriggerPrice { get; set; }
+
+        /// <summary>
+        /// 委托价
+        /// </summary>
+        [JsonProperty("order_price", NullValueHandling = NullValueHandling.Ignore)]
+        public decimal? OrderPrice { get; set; }
+
+        /// <summary>
+        /// 订单创建时间	
+        /// </summary>
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
+        public long CreatedTimestamp { get; set; }
+
+        /// <summary>
+        /// 订单报价类型 限价：limit ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20
+        /// </summary>
+        [JsonProperty("order_price_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string? OrderPriceType { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 关联的止盈止损单id（用户同时设置止盈止损单时，该字段才有值，否则数值为-1）
+        /// </summary>
+        [JsonProperty("relation_tpsl_order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string? RelationTpslOrderId { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 1:准备提交、2:已提交、3:报单中、8：撤单未找到、9：撤单中、10：失败
+        /// </summary>
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Status { get; set; } = default(int);
+
+        /// <summary>
+        /// 下order单时间	
+        /// </summary>
+        [JsonProperty("canceled_at", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CanceledTimestamp { get; set; }
+
+        /// <summary>
+        /// 被触发时下order单失败错误码
+        /// </summary>
+        [JsonProperty("fail_code", NullValueHandling = NullValueHandling.Ignore)]
+        public int? FailCode { get; set; }
+
+        /// <summary>
+        /// 被触发时下order单失败原因	
+        /// </summary>
+        [JsonProperty("fail_reason", NullValueHandling = NullValueHandling.Ignore)]
+        public string? FailReason { get; set; }
+
+        /// <summary>
+        /// 被触发时的价格
+        /// </summary>
+        [JsonProperty("triggered_price", NullValueHandling = NullValueHandling.Ignore)]
+        public decimal? TriggeredPrice { get; set; } = default(decimal);
+
+        /// <summary>
+        /// 该字段为关联限价单的关联字段，未触发前数值为-1
+        /// </summary>
+        [JsonProperty("relation_order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string? RelationOrderId { get; set; } = string.Empty;
 
         /// <summary>
         /// 成交分区 如 USDT

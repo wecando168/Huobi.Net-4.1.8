@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 using Huobi.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request
+namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
 {
     /// <summary>
     /// 【逐仓】合约下单

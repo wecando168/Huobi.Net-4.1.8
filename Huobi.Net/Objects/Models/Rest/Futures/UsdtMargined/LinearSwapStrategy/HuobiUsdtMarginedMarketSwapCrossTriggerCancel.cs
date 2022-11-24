@@ -4,30 +4,30 @@ using CryptoExchange.Net.Converters;
 using Huobi.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
+namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
 {
     /// <summary>
-    /// 【逐仓】撤销合约订单
+    /// 【全仓】撤销合约计划委托订单
     /// </summary>
-    public class HuobiUsdtMarginedMarketSwapCancel
+    public class HuobiUsdtMarginedMarketSwapCrossTriggerCancel
     {
         /// <summary>
-        /// 撤销失败订单信息列表
+        /// 撤销失败合约计划委托订单信息列表
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
-        public IEnumerable<IsolatedCancelOrderErrors> ErrorsList { get; set; } = Array.Empty<IsolatedCancelOrderErrors>();
+        public IEnumerable<CrossCancelTriggerOrderErrors> ErrorsList { get; set; } = Array.Empty<CrossCancelTriggerOrderErrors>();
 
         /// <summary>
-        /// 撤销成功订单信息列表
+        /// 撤销成功合约计划委托订单信息列表
         /// </summary>
         [JsonProperty("successes", NullValueHandling = NullValueHandling.Ignore)]
         public string Successes { get; set; } = string.Empty;
     }
 
     /// <summary>
-    /// 逐仓撤销失败订单信息
+    /// 全仓撤销失败合约计划委托订单信息
     /// </summary>
-    public class IsolatedCancelOrderErrors
+    public class CrossCancelTriggerOrderErrors
     {
         /// <summary>
         /// 订单ID

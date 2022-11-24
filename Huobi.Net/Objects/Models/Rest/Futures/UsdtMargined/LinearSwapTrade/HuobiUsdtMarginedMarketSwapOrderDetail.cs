@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Huobi.Net.Enums;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request;
 using Newtonsoft.Json;
 
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request
+namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
 {
     /// <summary>
     /// 【逐仓】获取用户的合约订单明细信息
