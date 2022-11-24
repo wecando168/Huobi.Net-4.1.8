@@ -164,374 +164,170 @@ if (read == "R" || read == "r")
 }
 else if (read == "P" || read == "p")
 {
-    //HuobiSocketClient? huobiSocketClient = new HuobiSocketClient();
-    //CallResult<UpdateSubscription>? publicSubscription = null;
+    HuobiSocketClient? huobiPublicSocketClient = new HuobiSocketClient();
+    CallResult<UpdateSubscription>? publicSubscription = null;
 
-    //#region 订阅逐笔交易
-    ////订阅一个交易代码逐笔交易
-    //Console.WriteLine($"Press enter to subscribe one symbol trade stream, Press [S] to skip current subscription");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    publicSubscription = await huobiSocketClient.SpotPublicStreams.SubscribeToTradeUpdatesAsync("BTCUSDT", data =>
-    //    {
-    //        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-    //        foreach (var item in data.Data.Data.Deals)
-    //        {
-    //            Console.WriteLine($"DealTradeType:{item.TradeType} DealPrice:{item.Price} DealTime:{item.DealTime} DealQuantity:{item.Quantity}");
-    //        }
-    //        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    });
+    #region 订阅全部交易代码市场聚合行情数据
+    //订阅全部交易代码市场聚合行情数据
+    Console.WriteLine($"Press enter to subscribe symbols ticker stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        Console.WriteLine($"现货Websocket主题订阅：获取全部交易代码市场聚合行情数据");
+        publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToTickerUpdatesAsync(data =>
+        {
+            if (!object.Equals(data, null))
+            {
+                //Console.WriteLine($"{JsonConvert.SerializeObject(data)}");
+                foreach (var item in data.Data.Ticks)
+                {
+                    Console.WriteLine($"现货交易代码：{item.Symbol} 开盘价格：{item.OpenPrice} 收盘价格：{item.ClosePrice} 最高价格：{item.HighPrice} 最低价格：{item.LowPrice}");
+                }                
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
+            }
+        });
 
-    //    if (!publicSubscription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
-    //        Console.ReadLine();
-    //        return;
-    //    }
+        if (!publicSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubscription.Error);
+            Console.ReadLine();
+            return;
+        }
 
-    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
+        publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
 
-    ////订阅多交易代码逐笔交易
-    //Console.WriteLine($"Press enter to subscribe symbols trade stream, Press [S] to skip current subscription");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    publicSubscription = await huobiSocketClient.SpotPublicStreams.SubscribeToTradeUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, data =>
-    //    {
-    //        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-    //        foreach (var item in data.Data.Data.Deals)
-    //        {
-    //            Console.WriteLine($"DealTradeType:{item.TradeType} DealPrice:{item.Price} DealTime:{item.DealTime} DealQuantity:{item.Quantity}");
-    //        }
-    //        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    });
+    #region 订阅K线
+    //订阅一个交易代码，单时间区间
+    Console.WriteLine($"Press enter to subscribe one symbol candlestick stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        string symbol = "BTCUSDT";
+        KlineInterval klineInterval = KlineInterval.FiveMinutes;
+        publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToKlineUpdatesAsync(symbol, klineInterval, data =>
+        {
+            if (!object.Equals(data, null))
+            {
 
-    //    if (!publicSubscription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
-    //        Console.ReadLine();
-    //        return;
-    //    }
+                Console.WriteLine($"现货交易代码：{symbol} 开盘价格：{data.Data.OpenPrice} 收盘价格：{data.Data.ClosePrice} 最高价格：{data.Data.HighPrice} 最低价格：{data.Data.LowPrice}");
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
+            }
+        });
 
-    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-    //#endregion
+        if (!publicSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + publicSubscription.Error);
+            Console.ReadLine();
+            return;
+        }
 
-    //#region 订阅K线
-    ////订阅一个交易代码，单时间区间
-    //Console.WriteLine($"Press enter to subscribe one symbol candlestick stream, Press [S] to skip current subscription");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    publicSubscription = await huobiSocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", KlineInterval.FiveMinutes, data =>
-    //    {
-    //        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-    //        Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
-    //        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    });
-
-    //    if (!publicSubscription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
-    //        Console.ReadLine();
-    //        return;
-    //    }
-
-    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-
-    ////订阅多交易代码，多时间区间（如果需要订阅的比较多，建议分多组申请，每组20个即可）
-    //Console.WriteLine($"Press enter to subscribe symbols candlestick stream by string array, Press [S] to skip current subscription" +
-    //    $"\r\nThe maximum number of combinations of symbol and Interval is 24, if it exceeds, no data will be received");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    publicSubscription = await huobiSocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, new KlineInterval[] { KlineInterval.OneMinute, KlineInterval.FiveMinutes }, data =>
-    //    {
-    //        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-    //        Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
-    //        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    });
-
-    //    if (!publicSubscription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
-    //        Console.ReadLine();
-    //        return;
-    //    }
-
-    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-
-    ////订阅多交易代码，多时间区间（如果需要订阅的比较多，建议分多组申请，每组20个即可）
-    //Console.WriteLine($"Press enter to subscribe symbols candlestick stream by IEnumerable<T>, Press [S] to skip current subscription" +
-    //    $"\r\nThe maximum number of combinations of symbol and Interval is 24, if it exceeds, no data will be received!");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    List<string> symbolList = new List<string>();
-    //    //symbolList.Add("AKITAUSDT");
-    //    //symbolList.Add("API3USDT");
-    //    symbolList.Add("ASSUSDT");
-    //    symbolList.Add("BABYDOGEUSDT");
-    //    symbolList.Add("BNBUSDT");
-    //    symbolList.Add("BTCUSDT");
-    //    symbolList.Add("BUNNYUSDT");
-    //    symbolList.Add("CFXUSDT");
-    //    symbolList.Add("COOKUSDT");
-    //    symbolList.Add("DAIUSDT");
-    //    symbolList.Add("DOGEUSDT");
-    //    symbolList.Add("ETHUSDT");
-    //    symbolList.Add("ETHWUSDT");
-    //    symbolList.Add("FIL36USDT");
-    //    symbolList.Add("FILUSDT");
-    //    symbolList.Add("GLOUSDT");
-    //    symbolList.Add("GNXUSDT");
-    //    symbolList.Add("HOTUSDT");
-    //    symbolList.Add("KISHUUSDT");
-    //    symbolList.Add("LUNAUSDT");
-    //    symbolList.Add("MXUSDT");
-    //    symbolList.Add("PAINTUSDT");
-    //    symbolList.Add("PETUSDT");
-    //    symbolList.Add("PIGUSDT");
-    //    symbolList.Add("RACAUSDT");
-    //    symbolList.Add("SAFEMOONUSDT");
-    //    IEnumerable<string> symbols = symbolList;
-
-    //    List<KlineInterval> KlineIntervalList = new List<KlineInterval>();
-    //    KlineIntervalList.Add(KlineInterval.OneMinute);
-    //    //KlineIntervalList.Add(KlineInterval.FiveMinutes);
-    //    IEnumerable<KlineInterval> KlineIntervals = KlineIntervalList;
-
-    //    publicSubscription = await huobiSocketClient.SpotPublicStreams.SubscribeToKlineUpdatesAsync(symbols, KlineIntervals, data =>
-    //    {
-    //        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-    //        Console.WriteLine($"DetailSymbol:{data.Data.Data.Details.Symbol} DetailOpenPrice:{data.Data.Data.Details.OpenPrice} DetailClosePrice:{data.Data.Data.Details.ClosePrice} DetailQuoteVolume:{data.Data.Data.Details.QuoteVolume}");
-    //        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    });
-
-    //    if (!publicSubscription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
-    //        Console.ReadLine();
-    //        return;
-    //    }
-
-    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-    //#endregion
-
-    //#region 订阅增量深度信息
-    ////订阅一个交易代码增量深度信息
-    //Console.WriteLine($"Press enter to subscribe \"BTCUSDT\" diff depth stream, Press [S] to skip current subscription");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    publicSubscription = await huobiSocketClient.SpotPublicStreams.SubscribeToDiffDepthUpdatesAsync("BTCUSDT", data =>
-    //    {
-    //        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-    //        if (!Object.Equals(data.Data.Data.Asks, null))
-    //        {
-    //            foreach (var item in data.Data.Data.Asks)
-    //            {
-    //                Console.WriteLine($"SellPrice:{item.Price} SellQuantity:{item.Quantity}");
-    //            }
-    //        }
-    //        if (!Object.Equals(data.Data.Data.Bids, null))
-    //        {
-    //            foreach (var item in data.Data.Data.Bids)
-    //            {
-    //                Console.WriteLine($"BuyPrice:{item.Price} BuyQuantity:{item.Quantity}");
-    //            }
-    //        }
-    //        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    });
-
-    //    if (!publicSubscription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
-    //        Console.ReadLine();
-    //        return;
-    //    }
-
-    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-
-    ////订阅多个交易代码增量深度信息
-    //Console.WriteLine($"Press enter to subscribe \"ETHUSDT\" and \"MXUSDT\" diff depth stream, Press [S] to skip current subscription");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    publicSubscription = await huobiSocketClient.SpotPublicStreams.SubscribeToDiffDepthUpdatesAsync(new string[] { "ETHUSDT", "MXUSDT" }, data =>
-    //    {
-    //        Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //        Console.WriteLine($"DataEventTime:{data.Data.Data.EventTime} DataEventType:{data.Data.Data.EventType} DataSymbol:{data.Data.Data.Symbol}");
-    //        if (!Object.Equals(data.Data.Data.Asks, null))
-    //        {
-    //            foreach (var item in data.Data.Data.Asks)
-    //            {
-    //                Console.WriteLine($"SellPrice:{item.Price} SellQuantity:{item.Quantity}");
-    //            }
-    //        }
-    //        if (!Object.Equals(data.Data.Data.Bids, null))
-    //        {
-    //            foreach (var item in data.Data.Data.Bids)
-    //            {
-    //                Console.WriteLine($"BuyPrice:{item.Price} BuyQuantity:{item.Quantity}");
-    //            }
-    //        }
-    //        Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    });
-
-    //    if (!publicSubscription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
-    //        Console.ReadLine();
-    //        return;
-    //    }
-
-    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-    //#endregion
+        publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
 }
 else if (read == "U" || read == "u")
 {
-    //#region 生成订阅私有数据的监听密钥（Listen Key)
-    //using (var client = new HuobiClient())
-    //{
-    //    #region 创建现货WebSocket 连接 Listen Key
-    //    Console.WriteLine("创建现货WebSocket 连接 Listen Key");
-    //    WebCallResult<string>? result = await client.SpotApi.WebsocketAccount.StartUserStreamAsync();
-    //    listenKey = result.Data;
-    //    Console.WriteLine($"New Listen Key :{(listenKey != null ? listenKey : "Create failed!")}");
-    //    #endregion
-    //}
-    //if (string.IsNullOrWhiteSpace(listenKey))
-    //{
-    //    Console.WriteLine($"Please check \"AccessKey\" and \"SecretKey\" are valid");
-    //    return;
-    //}
-    //#endregion
+    HuobiSocketClient? huobiPrivateSocketClient = new HuobiSocketClient();
+    CallResult<UpdateSubscription>? priavteSubscription = null;
 
-    //#region 构造可以获取私有账户数据的连接客户端
-    //HuobiSocketClientOptions privateOptions = new HuobiSocketClientOptions();
-    //privateOptions.SpotStreamsOptions.BaseAddress = HuobiApiAddresses.Default.SocketClientPrivateAddress;
-    //privateOptions.SpotStreamsOptions.ApiCredentials = new ApiCredentials(accessKey, secretKey);
-    //HuobiSocketClient? huobiSocketClient = new HuobiSocketClient(privateOptions);
-    //CallResult<UpdateSubscription>? privateSubV3scription = null;
-    //#endregion
+    #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
+    //使用accessKey, secretKey生成一个新的API凭证
+    ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+    //当前客户端使用新生成的API凭证
+    huobiPrivateSocketClient.SetApiCredentials(apiCredentials);
+    #endregion
 
-    //#region 订阅账户成交（实时）
-    //Console.WriteLine($"Press enter to subscribe account deals stream");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    #region 方法一(功能已实现，保留请勿删除）：
-    //    //privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateDealsUpdatesAsync(listenKey, data =>
-    //    //{
-    //    //    Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //    //    Console.WriteLine($"AccountDealsClientOrderId:{data.Data.Data.ClientOrderId} AccountDealsOrderId:{data.Data.Data.OrderId} AccountDealsPrice:{data.Data.Data.Price} AccountDealsQuantity:{data.Data.Data.Quantity} AccountDealsMakerOrTaker:{data.Data.Data.MakerOrTaker}");
-    //    //    Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    //});
-    //    #endregion
+    #region 订阅账户资产变更（实时）
+    Console.WriteLine($"Press enter to subscribe account deals stream");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        //订阅账户变更
+        priavteSubscription = await huobiPrivateSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(OnHuobiAccountUpdate, 1);
 
-    //    #region 方法二：
-    //    privateSubV3scription = await huobiSocketClient.SpotPrivateStreams.SubscribeToPrivateDealsUpdatesAsync(listenKey, data =>
-    //    {
-    //        MexcV3StreamPrivateDeals? result = data.Data;
-    //        if (result != null)
-    //        {
-    //            result.ListenKey = listenKey;
-    //            Console.WriteLine(
-    //                $"Stream:{result.Stream}\t" +
-    //                $"ListenKey:{result.ListenKey}\r\n" +
-    //                $"Symbol:{result.Symbol} " +
-    //                $"TradeType {result.Data.TradeType} " +
-    //                $"Price {result.Data.Price} " +
-    //                $"Quantity {result.Data.Quantity} " +
-    //                $"ClientOrderId {result.Data.ClientOrderId} " +
-    //                $"OrderId {result.Data.OrderId} " +
-    //                $"TradeId {result.Data.TradeId} " +
-    //                $"@ {result.Data.DealTime}");
-    //        }
-    //    });
-    //    #endregion
+        /// <summary>
+        /// 火币订阅账户变更：当账户更新时–HuobiAccountUpdate
+        /// </summary>
+        /// <param name="data"></param>
+        void OnHuobiAccountUpdate(DataEvent<HuobiAccountUpdate> data)
+        {
+            if (!object.Equals(data, null))
+            {
 
-    //    if (!privateSubV3scription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + privateSubV3scription.Error);
-    //        Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
-    //        Console.ReadLine();
-    //        return;
-    //    }
+                Console.WriteLine($"账户编号：{data.Data.AccountId} 账户类型：{data.Data.AccountType} 币种名称：{data.Data.Asset} 数量：{data.Data.Balance} 更新时间：{data.Data.ChangeTime}");
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
+            }
+        }
 
-    //    privateSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    privateSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-    //#endregion
+        if (!priavteSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + priavteSubscription.Error);
+            Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
+            Console.ReadLine();
+            return;
+        }
 
-    //#region 订阅账户订单（实时）
-    //Console.WriteLine($"Press enter to subscribe account orders stream, Press [S] to skip current subscription");
-    //read = Console.ReadLine();
-    //if (read != "S" && read != "s")
-    //{
-    //    #region 方法一(功能已实现，保留请勿删除）：
-    //    //privateSubV3scription = await mexcV3SocketClient.SpotPrivateStreams.SubscribeToPrivateOrdersUpdatesAsync(listenKey, data =>
-    //    //{
-    //    //    Console.WriteLine($"Stream:{data.Data.Stream} StreamSymbol:{data.Data.Symbol}");
-    //    //    Console.WriteLine($"AccountOrdersClientOrderId:{data.Data.Data.ClientOrderId} AccountOrdersOrderId:{data.Data.Data.OrderId} AccountOrdersPrice:{data.Data.Data.Price} AccountDealsQuantity:{data.Data.Data.Quantity} AccountDealsMakerOrTaker:{data.Data.Data.MakerOrTaker}");
-    //    //    Console.Write($"@ StreamEventTimeStamp:{data.Data.EventTimeStamp}\r\n");
-    //    //});
-    //    #endregion
+        priavteSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        priavteSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
 
-    //    #region 方法二：
-    //    privateSubV3scription = await huobiSocketClient.SpotPrivateStreams.SubscribeToPrivateOrdersUpdatesAsync(listenKey, data =>
-    //    {
-    //        MexcV3StreamPrivateOrders? result = data.Data;
-    //        if (result != null)
-    //        {
-    //            result.ListenKey = listenKey;
-    //            Console.WriteLine(
-    //                $"Stream:{result.Stream}\t" +
-    //                $"ListenKey:{result.ListenKey}\r\n" +
-    //                $"Symbol:{result.Symbol} " +
-    //                $"ClientOrderId {result.Data.ClientOrderId} " +
-    //                $"OrderId {result.Data.OrderId} " +
-    //                $"Price {result.Data.Price} " +
-    //                $"Quantity {result.Data.Quantity} " +
-    //                $"@ {result.Data.CreateTime}"
-    //                );
-    //        }
-    //    });
-    //    #endregion
+    #region 订阅火币订阅清算后成交及撤单更新（实时）
+    Console.WriteLine($"Press enter to subscribe account deals stream");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        //订阅火币订阅清算后成交及撤单更新
+        priavteSubscription = await huobiPrivateSocketClient.SpotStreams.SubscribeToOrderDetailsUpdatesAsync(null, OnHuobiTradeUpdate, null);
 
-    //    if (!privateSubV3scription.Success)
-    //    {
-    //        Console.WriteLine("Failed to sub" + privateSubV3scription.Error);
-    //        Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
-    //        Console.ReadLine();
-    //        return;
-    //    }
+        /// <summary>
+        /// 火币订阅清算后成交及撤单更新：当订单成交后–OnHuobiTradeUpdate
+        /// （策略补单功能在这里实现）
+        /// </summary>
+        /// <param name="data"></param>
+        void OnHuobiTradeUpdate(DataEvent<Huobi.Net.Objects.Models.Socket.HuobiTradeUpdate> data)
+        {
+            DataEvent<HuobiTradeUpdate> response = data;
+            HuobiTradeUpdate huobiTradeUpdate = data.Data;
 
-    //    privateSubV3scription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-    //    privateSubV3scription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
-    //}
-    //#endregion
+            if (!object.Equals(data, null))
+            {
+
+                Console.WriteLine($"账户编号：{huobiTradeUpdate.AccountId} 订单编号：{huobiTradeUpdate.OrderId} 用户自定义单号：{huobiTradeUpdate.ClientOrderId}\r\n" +
+                    $"订单价格：{huobiTradeUpdate.OrderPrice} 订单数量：{huobiTradeUpdate.OrderQuantity} 订单状态：{huobiTradeUpdate.OrderStatus}\r\n" +
+                    $"成交价格：{huobiTradeUpdate.Price} 成交数量：{huobiTradeUpdate.Quantity} 成交金额：{huobiTradeUpdate.Price * huobiTradeUpdate.Quantity}");
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
+            }
+        }
+
+        if (!priavteSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + priavteSubscription.Error);
+            Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
+            Console.ReadLine();
+            return;
+        }
+
+        priavteSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        priavteSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
 }
 
 //交易所现货数据接口测试-已完成
@@ -4876,7 +4672,6 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
         #endregion
     }
 }
-
 
 //交易所U本位合约交易接口测试-已完成
 static async Task TestUsdtMarginedApiTradeEndpoints()
