@@ -40,7 +40,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="onData">更新处理程序 The handler for updates</param>
         /// <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeKlineAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<HuobiContractCodeTick>> onData, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeKlineAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<HuobiContractCodeKlineTick>> onData, CancellationToken ct = default);
 
         /// <summary>
         /// 【通用】请求KLine数据
@@ -55,7 +55,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="from">开始时间</param>
         /// <param name="to">结束时间</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiContractCodeTick>>> GetMarketContractCodeKline(string contractCode, KlineInterval period , string clientId, long from, long to);
+        Task<CallResult<IEnumerable<HuobiContractCodeKlineTick>>> GetMarketContractCodeKlineAsync(string contractCode, KlineInterval period , string clientId, long from, long to);
 
         /// <summary>
         /// 【通用】订阅Market Depth数据
@@ -69,7 +69,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="onData">更新处理程序 The handler for updates</param>
         /// <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeDepthAsync(string contractCode, string type, string clientId, Action<DataEvent<Object>> onData, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeDepthAsync(string contractCode, string type, string clientId, Action<DataEvent<HuobiContractCodeDepthTick>> onData, CancellationToken ct = default);
 
         /// <summary>
         /// 【通用】订阅Market Depth 增量数据
@@ -78,13 +78,12 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#market-depth-2" /></para>
         /// </summary>
         /// <param name="contractCode">合约代码 或 合约标识</param>
-        /// <param name="type">Depth 类型</param>
         /// <param name="size">档位数</param>
         /// <param name="clientId">选填;Client 请求唯一 ID</param>
         /// <param name="onData">更新处理程序 The handler for updates</param>
         /// <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeIncrementalDepthAsync(string contractCode, string type, string size, string clientId, Action<DataEvent<Object>> onData, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeIncrementalDepthAsync(string contractCode, string size, string clientId, Action<DataEvent<Object>> onData, CancellationToken ct = default);
 
         /// <summary>
         /// 【通用】订阅Market Detail 数据
@@ -124,7 +123,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="clientId">选填;Client 请求唯一 ID</param>
         /// <param name="size">数据条数，最多50，不填默认50</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeTradeDetail(string contractCode, string clientId, int size = 50);
+        Task<CallResult<IEnumerable<object>>> GetMarketContractCodeTradeDetailAsync(string contractCode, string clientId, int size = 50);
 
         /// <summary>
         /// 【通用】订阅Trade Detail数据
@@ -168,7 +167,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="from">开始时间</param>
         /// <param name="to">结束时间</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeIndex(string contractCode, KlineInterval period, string clientId, long from, long to);
+        Task<CallResult<IEnumerable<object>>> GetMarketContractCodeIndexAsync(string contractCode, KlineInterval period, string clientId, long from, long to);
 
         /// <summary>
         /// 【通用】订阅溢价指数KLine数据
@@ -197,7 +196,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="from">开始时间</param>
         /// <param name="to">结束时间</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodePremiumIndex(string contractCode, KlineInterval period, string clientId, long from, long to);
+        Task<CallResult<IEnumerable<object>>> GetMarketContractCodePremiumIndexAsync(string contractCode, KlineInterval period, string clientId, long from, long to);
 
         /// <summary>
         /// 【通用】订阅预测资金费率K线数据
@@ -226,7 +225,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="from">开始时间</param>
         /// <param name="to">结束时间</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeEstimatedRate(string contractCode, KlineInterval period, string clientId, long from, long to);
+        Task<CallResult<IEnumerable<object>>> GetMarketContractCodeEstimatedRateAsync(string contractCode, KlineInterval period, string clientId, long from, long to);
 
         /// <summary>
         /// 【通用】订阅基差数据
@@ -241,7 +240,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="onData">更新处理程序 The handler for updates</param>
         /// <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeEstimatedRateAsync(string contractCode, KlineInterval period, string basisPriceType, string clientId, Action<DataEvent<Object>> onData, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeMarketContractBasisAsync(string contractCode, KlineInterval period, string basisPriceType, string clientId, Action<DataEvent<Object>> onData, CancellationToken ct = default);
 
         /// <summary>
         /// 【通用】请求基差数据
@@ -257,7 +256,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="from">开始时间</param>
         /// <param name="to">结束时间</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeEstimatedRate(string contractCode, KlineInterval period, string basisPriceType, string clientId, long from, long to);
+        Task<CallResult<IEnumerable<object>>> GetMarketContractBasisAsync(string contractCode, KlineInterval period, string basisPriceType, string clientId, long from, long to);
 
         /// <summary>
         /// 【通用】订阅标记价格K线数据
@@ -286,7 +285,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="from">开始时间</param>
         /// <param name="to">结束时间</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeMarkPrice(string contractCode, KlineInterval period, string clientId, long from, long to);
+        Task<CallResult<IEnumerable<object>>> GetMarketContractCodeMarkPriceAsync(string contractCode, KlineInterval period, string clientId, long from, long to);
         #endregion
 
         #region WeSocket订单和用户数据接口

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -59,9 +60,45 @@ namespace Huobi.Net.Objects.Models
     }
 
     /// <summary>
-    /// Huobi contract code tick
+    /// Contract code depth data
     /// </summary>
-    public class HuobiContractCodeTick : HuobiContractCodeData
+    public class HuobiContractCodedDepthData
+    {
+        /// <summary>
+        /// The current best bid for the symbol
+        /// </summary>
+        [JsonProperty("bids")]
+        public IEnumerable<HuobiOrderBookEntry>? Bids { get; set; }
+
+        /// <summary>
+        /// The current best ask for the symbol
+        /// </summary>
+        [JsonProperty("asks")]
+        public IEnumerable<HuobiOrderBookEntry>? Asks { get; set; }
+    }
+
+    /// <summary>
+    /// Huobi contract code kline tick
+    /// </summary>
+    public class HuobiContractCodeKlineTick : HuobiContractCodeData
+    {
+        /// <summary>
+        /// K线ID,也就是K线时间戳，K线起始时间戳
+        /// </summary>
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Id { get; set; }
+
+        /// <summary>
+        /// 合约订单编号
+        /// </summary>
+        [JsonProperty("mrid", NullValueHandling = NullValueHandling.Ignore)]
+        public long? MarginedId { get; set; }
+    }
+
+    /// <summary>
+    /// Huobi contract code depth tick
+    /// </summary>
+    public class HuobiContractCodeDepthTick : HuobiContractCodedDepthData
     {
         /// <summary>
         /// K线ID,也就是K线时间戳，K线起始时间戳
@@ -97,6 +134,6 @@ namespace Huobi.Net.Objects.Models
         /// K线ID,也就是K线时间戳，K线起始时间戳
         /// </summary>
         [JsonProperty("tick", NullValueHandling = NullValueHandling.Ignore)]
-        public HuobiContractCodeTick? Tick { get; set; } = default;
+        public HuobiContractCodeKlineTick? Tick { get; set; } = default;
     }
 }

@@ -971,19 +971,16 @@
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeTick}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeKlineTick}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetOrderBookWithMergeStepAsync(System.String,System.Int32)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeKline(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeDepthAsync(System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeDepthTick}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeDepthAsync(System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeIncrementalDepthAsync(System.String,System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeIncrementalDepthAsync(System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeDetailAsync(System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
@@ -992,7 +989,7 @@
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeBboAsync(System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeTradeDetail(System.String,System.String,System.Int32)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeTradeDetailAsync(System.String,System.String,System.Int32)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeTradeDetailAsync(System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
@@ -1001,31 +998,31 @@
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeIndexAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeIndex(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeIndexAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodePremiumIndexAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodePremiumIndex(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodePremiumIndexAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeEstimatedRateAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeEstimatedRate(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeEstimatedRateAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeEstimatedRateAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractBasisAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeEstimatedRate(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractBasisAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Int64,System.Int64)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeMarkPriceAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeMarkPrice(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeMarkPriceAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeOrderContractCodeAsync(System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
@@ -5291,7 +5288,7 @@
             火币U本位合约websocket数据流接口
             </summary>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeTick}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeKlineTick}},System.Threading.CancellationToken)">
             <summary>
             【通用】订阅KLine数据
             成功建立和 WebSocket API 的连接之后，向 Server订阅数据
@@ -5305,7 +5302,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeKline(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <summary>
             【通用】请求KLine数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -5320,7 +5317,7 @@
             <param name="to">结束时间</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeDepthAsync(System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeDepthAsync(System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeDepthTick}},System.Threading.CancellationToken)">
             <summary>
             【通用】订阅Market Depth数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -5334,7 +5331,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeIncrementalDepthAsync(System.String,System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeIncrementalDepthAsync(System.String,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <summary>
             【通用】订阅Market Depth 增量数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -5342,7 +5339,6 @@
             <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#market-depth-2" /></para>
             </summary>
             <param name="contractCode">合约代码 或 合约标识</param>
-            <param name="type">Depth 类型</param>
             <param name="size">档位数</param>
             <param name="clientId">选填;Client 请求唯一 ID</param>
             <param name="onData">更新处理程序 The handler for updates</param>
@@ -5375,7 +5371,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeTradeDetail(System.String,System.String,System.Int32)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeTradeDetailAsync(System.String,System.String,System.Int32)">
             <summary>
             【通用】请求Trade Detail 数据
             成功建立和 WebSocket API 的连接之后，向 Server 发送数据来请求数据
@@ -5415,7 +5411,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeIndex(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeIndexAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <summary>
             【通用】请求指数KLine数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -5444,7 +5440,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodePremiumIndex(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodePremiumIndexAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <summary>
             【通用】请求溢价指数KLine数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -5473,7 +5469,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeEstimatedRate(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeEstimatedRateAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <summary>
             【通用】请求预测资金费率K线数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -5488,7 +5484,7 @@
             <param name="to">结束时间</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeEstimatedRateAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractBasisAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
             <summary>
             【通用】订阅基差数据
             成功建立和 WebSocket API 的连接之后，向 Server订阅数据
@@ -5503,7 +5499,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeEstimatedRate(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractBasisAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.String,System.Int64,System.Int64)">
             <summary>
             【通用】请求基差数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -5533,7 +5529,7 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeMarkPrice(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeMarkPriceAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
             <summary>
             【通用】请求标记价格K线数据
             成功建立和 WebSocket API 的连接之后，向Server请求数据
@@ -6906,17 +6902,47 @@
             成交笔数。 值是买卖双边之和
             </summary>
         </member>
-        <member name="T:Huobi.Net.Objects.Models.HuobiContractCodeTick">
+        <member name="T:Huobi.Net.Objects.Models.HuobiContractCodedDepthData">
             <summary>
-            Huobi contract code tick
+            Contract code depth data
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeTick.Id">
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodedDepthData.Bids">
+            <summary>
+            The current best bid for the symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodedDepthData.Asks">
+            <summary>
+            The current best ask for the symbol
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiContractCodeKlineTick">
+            <summary>
+            Huobi contract code kline tick
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeKlineTick.Id">
             <summary>
             K线ID,也就是K线时间戳，K线起始时间戳
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeTick.MarginedId">
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeKlineTick.MarginedId">
+            <summary>
+            合约订单编号
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiContractCodeDepthTick">
+            <summary>
+            Huobi contract code depth tick
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeDepthTick.Id">
+            <summary>
+            K线ID,也就是K线时间戳，K线起始时间戳
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeDepthTick.MarginedId">
             <summary>
             合约订单编号
             </summary>
