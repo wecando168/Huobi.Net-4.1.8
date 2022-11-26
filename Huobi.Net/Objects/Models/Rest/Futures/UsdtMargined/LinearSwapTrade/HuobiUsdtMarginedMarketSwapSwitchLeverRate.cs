@@ -27,7 +27,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// 切换成功后的杠杆倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public int? LeverRate { get; set; } = default(int);
+        public int? LeverRate { get; set; } = default;
 
         /// <summary>
         /// 成交分区 如 USDT

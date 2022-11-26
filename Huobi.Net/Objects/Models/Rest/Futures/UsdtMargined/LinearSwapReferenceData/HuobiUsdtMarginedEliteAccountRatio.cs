@@ -58,19 +58,19 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 净多仓的账户比例
         /// </summary>
         [JsonProperty("buy_ratio", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal BuyRatio { get; set; } = default(decimal);
+        public decimal BuyRatio { get; set; } = default;
 
         /// <summary>
         /// 净空仓的账户比例
         /// </summary>
         [JsonProperty("sell_ratio", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal SellRatio { get; set; } = default(decimal);
+        public decimal SellRatio { get; set; } = default;
 
         /// <summary>
         /// 锁仓的账户比例
         /// </summary>
         [JsonProperty("locked_ratio", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal LockedRatio { get; set; } = default(decimal);
+        public decimal LockedRatio { get; set; } = default;
 
         /// <summary>
         /// 响应生成时间点，单位：毫秒	

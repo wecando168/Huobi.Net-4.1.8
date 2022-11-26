@@ -971,7 +971,10 @@
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeTick}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetOrderBookWithMergeStepAsync(System.String,System.Int32)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMargined.HuobiSocketClientUsdtMarginedStreams.GetMarketContractCodeKline(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Int64,System.Int64)">
@@ -2109,6 +2112,18 @@
             Validate the string is a valid Huobi symbol.
             </summary>
             <param name="symbolString">string to validate</param>
+        </member>
+        <member name="M:Huobi.Net.HuobiHelpers.ValidateHuobiContractCode(System.String)">
+            <summary>
+            Validate the string is a valid Huobi contract code.
+            </summary>
+            <param name="contractCodeString">string to validate</param>
+        </member>
+        <member name="M:Huobi.Net.HuobiHelpers.ValidateHuobiPair(System.String)">
+            <summary>
+            Validate the string is a valid Huobi pair.
+            </summary>
+            <param name="pairString">string to validate</param>
         </member>
         <member name="T:Huobi.Net.Interfaces.Clients.IHuobiSocketClient">
             <summary>
@@ -4662,7 +4677,7 @@
             <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#1d86317775"/></para>
             </summary>
             <param name="contractCode">合约代码</param>
-            <param name="orderId">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
+            <param name="orderIdList">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -4673,7 +4688,7 @@
             <para><a href="/linear-swap-api/v1/swap_cross_track_cancel"/></para>
             <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#eaf06c20d1"/></para>
             </summary>
-            <param name="orderId">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
+            <param name="orderIdList">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
             <param name="contractCode">合约代码	永续：“BTC-USDT”... , 交割：“BTC-USDT-210625”...</param>
             <param name="pair">交易对	BTC-USDT</param>
             <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>
@@ -5271,7 +5286,12 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Object}},System.Threading.CancellationToken)">
+        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams">
+            <summary>
+            火币U本位合约websocket数据流接口
+            </summary>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMargined.IHuobiSocketClientUsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(System.String,Huobi.Net.Enums.KlineInterval,System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Huobi.Net.Objects.Models.HuobiContractCodeTick}},System.Threading.CancellationToken)">
             <summary>
             【通用】订阅KLine数据
             成功建立和 WebSocket API 的连接之后，向 Server订阅数据
@@ -6839,6 +6859,86 @@
         <member name="P:Huobi.Net.Objects.Models.HuobiConditionalOrderCancelResult.Rejected">
             <summary>
             Orders rejected for cancelation
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiContractCodeData">
+            <summary>
+            Contract code data
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.OpenPrice">
+            <summary>
+            开盘价
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.ClosePrice">
+            <summary>
+            收盘价,当K线为最晚的一根时，是最新成交价
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.HighPrice">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.LowPrice">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.Amount">
+            <summary>
+            成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.Vol">
+            <summary>
+            成交量张数。 值是买卖双边之和
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.TradeTurnover">
+            <summary>
+            成交额, 即sum（每一笔成交张数 * 合约面值 * 成交价格）。 值是买卖双边之和
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeData.Count">
+            <summary>
+            成交笔数。 值是买卖双边之和
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiContractCodeTick">
+            <summary>
+            Huobi contract code tick
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeTick.Id">
+            <summary>
+            K线ID,也就是K线时间戳，K线起始时间戳
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeTick.MarginedId">
+            <summary>
+            合约订单编号
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiContractCodeKline">
+            <summary>
+            火币合约WebSocket K线
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeKline.Channel">
+            <summary>
+            请求参数
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeKline.Timestamp">
+            <summary>
+            响应生成时间点，单位：毫秒
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiContractCodeKline.Tick">
+            <summary>
+            K线ID,也就是K线时间戳，K线起始时间戳
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.HuobiCreateSubUserAccountRequest">
@@ -13375,12 +13475,12 @@
             【全仓】对仓位设置止盈止损订单
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapCrossTpslOrder.tpOrder">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapCrossTpslOrder.TpOrder">
             <summary>
             止盈单下单结果
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapCrossTpslOrder.slOrder">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapCrossTpslOrder.SlOrder">
             <summary>
             止损单下单结果
             </summary>
@@ -14740,12 +14840,12 @@
             【逐仓】对仓位设置止盈止损订单
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapTpslOrder.tpOrder">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapTpslOrder.TpOrder">
             <summary>
             止盈单下单结果
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapTpslOrder.slOrder">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy.HuobiUsdtMarginedMarketSwapTpslOrder.SlOrder">
             <summary>
             止损单下单结果
             </summary>

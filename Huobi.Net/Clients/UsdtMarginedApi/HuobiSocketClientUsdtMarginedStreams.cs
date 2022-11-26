@@ -52,24 +52,6 @@ namespace Huobi.Net.Clients.UsdtMargined
         #region methods
 
         ///// <inheritdoc />
-        //public async Task<CallResult<IEnumerable<HuobiKline>>> GetKlinesAsync(string symbol, KlineInterval period)
-        //{
-        //    symbol = symbol.ValidateHuobiSymbol();
-        //    var request = new HuobiSocketRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{symbol}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}");
-        //    var result = await _baseClient.QueryInternalAsync<HuobiSocketResponse<IEnumerable<HuobiKline>>>(this, request, false).ConfigureAwait(false);
-        //    return result ? result.As(result.Data.Data) : result.AsError<IEnumerable<HuobiKline>>(result.Error!);
-        //}
-
-        ///// <inheritdoc />
-        //public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval period, Action<DataEvent<HuobiKline>> onData, CancellationToken ct = default)
-        //{
-        //    symbol = symbol.ValidateHuobiSymbol();
-        //    var request = new HuobiSubscribeRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{symbol}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}");
-        //    var internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiKline>>>(data => onData(data.As(data.Data.Data, symbol)));
-        //    return await _baseClient.SubscribeInternalAsync(this, request, null, false, internalHandler, ct).ConfigureAwait(false);
-        //}
-
-        ///// <inheritdoc />
         //public async Task<CallResult<HuobiOrderBook>> GetOrderBookWithMergeStepAsync(string symbol, int mergeStep)
         //{
         //    symbol = symbol.ValidateHuobiSymbol();
@@ -324,19 +306,58 @@ namespace Huobi.Net.Clients.UsdtMargined
         //    var request = new HuobiSocketRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{symbol}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}", startTimeStamp, endTimeStamp);
         //    CallResult<HuobiSocketResponse<IEnumerable<HuobiSpecifiedTimeKLine>>>? result = await _baseClient.QueryInternalAsync<HuobiSocketResponse<IEnumerable<HuobiSpecifiedTimeKLine>>>(this, request, false).ConfigureAwait(false);
         //    return result ? result.As(result.Data.Data) : result.AsError<IEnumerable<HuobiSpecifiedTimeKLine>>(result.Error!);
-        //}        
+        //}
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeKlineAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeKlineAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<HuobiContractCodeTick>> onData, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            contractCode = contractCode.ValidateHuobiContractCode();
+            HuobiSubscribeRequest? request = new HuobiSubscribeRequest
+                (
+                _baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture),
+                $"market.{contractCode}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}"
+                );
+            Action<DataEvent<HuobiDataEvent<HuobiContractCodeTick>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiContractCodeTick>>>
+                (
+                data =>
+                onData(data.As(data.Data.Data, contractCode))
+                );
+            return await _baseClient.SubscribeInternalAsync(this, request, null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeKline(string contractCode, KlineInterval period, string clientId, long from, long to)
+        public async Task<CallResult<IEnumerable<HuobiContractCodeTick>>> GetMarketContractCodeKline(string contractCode, KlineInterval period, string clientId, long from, long to)
         {
-            throw new NotImplementedException();
+            contractCode = contractCode.ValidateHuobiContractCode();
+            var request = new HuobiSocketRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{contractCode}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}", from, to);
+            var result = await _baseClient.QueryInternalAsync<HuobiSocketResponse<IEnumerable<HuobiContractCodeTick>>>(this, request, false).ConfigureAwait(false);
+            return result ? result.As(result.Data.Data) : result.AsError<IEnumerable<HuobiContractCodeTick>>(result.Error!);
         }
+
+        /// <inheritdoc />
+        public async Task<CallResult<HuobiOrderBook>> GetOrderBookWithMergeStepAsync(string symbol, int mergeStep)
+        {
+            symbol = symbol.ValidateHuobiSymbol();
+            mergeStep.ValidateIntBetween(nameof(mergeStep), 0, 5);
+
+            var request = new HuobiSocketRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{symbol}.depth.step{mergeStep}");
+            var result = await _baseClient.QueryInternalAsync<HuobiSocketResponse<HuobiOrderBook>>(this, request, false).ConfigureAwait(false);
+            if (!result)
+                return new CallResult<HuobiOrderBook>(result.Error!);
+
+            result.Data.Data.Timestamp = result.Data.Timestamp;
+            return new CallResult<HuobiOrderBook>(result.Data.Data);
+        }
+
+        ///// <inheritdoc />
+        //public async Task<CallResult<IEnumerable<HuobiKline>>> GetKlinesAsync(string symbol, KlineInterval period)
+        //{
+        //    symbol = symbol.ValidateHuobiSymbol();
+        //    var request = new HuobiSocketRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{symbol}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}");
+        //    var result = await _baseClient.QueryInternalAsync<HuobiSocketResponse<IEnumerable<HuobiKline>>>(this, request, false).ConfigureAwait(false);
+        //    return result ? result.As(result.Data.Data) : result.AsError<IEnumerable<HuobiKline>>(result.Error!);
+        //}
+
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeDepthAsync(string contractCode, string type, string clientId, Action<DataEvent<object>> onData, CancellationToken ct = default)

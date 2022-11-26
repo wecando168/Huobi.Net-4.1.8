@@ -15,19 +15,19 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 总页数
         /// </summary>
         [JsonProperty("total_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalPage { get; set; } = default(int);
+        public int TotalPage { get; set; } = default;
 
         /// <summary>
         /// 当前页
         /// </summary>
         [JsonProperty("current_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int CurrentPage { get; set; } = default(int);
+        public int CurrentPage { get; set; } = default;
 
         /// <summary>
         /// 总条数
         /// </summary>
         [JsonProperty("total_size", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalSize { get; set; } = default(int);
+        public int TotalSize { get; set; } = default;
 
         /// <summary>
         /// 【全仓】计划委托当前委托信息集合
@@ -81,13 +81,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 委托数量
         /// </summary>
         [JsonProperty("volume", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Volume { get; set; } = default(decimal);
+        public decimal? Volume { get; set; } = default;
 
         /// <summary>
         /// 订单类型	1:报单 、 2:撤单 、 3:强平、4:交割
         /// </summary>
         [JsonProperty("order_type", NullValueHandling = NullValueHandling.Ignore)]
-        public int? OrderType { get; set; } = default(int);
+        public int? OrderType { get; set; } = default;
 
         /// <summary>
         /// 买卖方向	"buy":买 "sell":卖
@@ -105,7 +105,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 杠杆倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public int? LeverRate { get; set; } = default(int);
+        public int? LeverRate { get; set; } = default;
 
         /// <summary>
         /// 订单ID
@@ -153,7 +153,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 1:准备提交、2:已提交、3:报单中、8：撤单未找到、9：撤单中、10：失败
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Status { get; set; } = default(int);
+        public int? Status { get; set; } = default;
 
         /// <summary>
         /// 保证金模式   cross：全仓模式
@@ -171,7 +171,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 是否为只减仓订单	0:表示为非只减仓订单，1:表示为只减仓订单
         /// </summary>
         [JsonProperty("reduce_only", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ReduceOnly { get; set; } = default(int);
+        public int? ReduceOnly { get; set; } = default;
 
         /// <summary>
         /// 成交分区 如 USDT

@@ -17,19 +17,19 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 总页数
         /// </summary>
         [JsonProperty("total_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalPage { get; set; } = default(int);
+        public int TotalPage { get; set; } = default;
 
         /// <summary>
         /// 当前页
         /// </summary>
         [JsonProperty("current_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int CurrentPage { get; set; } = default(int);
+        public int CurrentPage { get; set; } = default;
 
         /// <summary>
         /// 总条数
         /// </summary>
         [JsonProperty("total_size", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalSize { get; set; } = default(int);
+        public int TotalSize { get; set; } = default;
 
         /// <summary>
         /// 子账户列表

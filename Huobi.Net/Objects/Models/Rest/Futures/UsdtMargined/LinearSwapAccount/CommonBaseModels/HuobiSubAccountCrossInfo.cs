@@ -16,7 +16,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount.C
         /// 账户权益
         /// </summary>
         [JsonProperty("margin_balance", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginBalance { get; set; } = default(decimal);
+        public decimal MarginBalance { get; set; } = default;
 
         /// <summary>
         /// 保证金率

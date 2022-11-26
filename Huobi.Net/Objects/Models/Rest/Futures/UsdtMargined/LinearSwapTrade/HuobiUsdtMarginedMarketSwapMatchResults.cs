@@ -75,31 +75,31 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// 成交数量
         /// </summary>
         [JsonProperty("trade_volume", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeVolume { get; set; } = default(decimal);
+        public decimal? TradeVolume { get; set; } = default;
 
         /// <summary>
         /// 成交价格
         /// </summary>
         [JsonProperty("trade_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradePrice { get; set; } = default(decimal);
+        public decimal? TradePrice { get; set; } = default;
 
         /// <summary>
         /// 成交总金额 ，即sum（每一笔成交张数* 合约面值 * 成交价格）	
         /// </summary>
         [JsonProperty("trade_turnover", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeTurnover { get; set; } = default(decimal);
+        public decimal? TradeTurnover { get; set; } = default;
 
         /// <summary>
         /// 成交手续费
         /// </summary>
         [JsonProperty("trade_fee", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeFee { get; set; } = default(decimal);
+        public decimal? TradeFee { get; set; } = default;
 
         /// <summary>
         /// 本期平仓盈亏
         /// </summary>
         [JsonProperty("offset_profitloss", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal OffsetProfitloss { get; set; } = default(decimal);
+        public decimal OffsetProfitloss { get; set; } = default;
 
         /// <summary>
         /// 成交时间戳
@@ -111,7 +111,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// taker或maker
         /// </summary>
         [JsonProperty("role", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Role { get; set; } = default(decimal);
+        public decimal? Role { get; set; } = default;
 
         /// <summary>
         /// 订单来源（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发 ）
@@ -153,13 +153,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。）	
         /// </summary>
         [JsonProperty("real_profit", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RealProfit { get; set; } = default(decimal);
+        public decimal? RealProfit { get; set; } = default;
 
         /// <summary>
         /// 是否为只减仓订单	0:表示为非只减仓订单，1:表示为只减仓订单
         /// </summary>
         [JsonProperty("reduce_only", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ReduceOnly { get; set; } = default(int);
+        public int? ReduceOnly { get; set; } = default;
 
         /// <summary>
         /// 成交分区 如 USDT

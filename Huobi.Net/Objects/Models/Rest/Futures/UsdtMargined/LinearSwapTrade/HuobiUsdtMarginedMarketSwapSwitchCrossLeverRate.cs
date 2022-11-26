@@ -27,7 +27,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// 切换成功后的杠杆倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public int? LeverRate { get; set; } = default(int);
+        public int? LeverRate { get; set; } = default;
 
         /// <summary>
         /// swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）

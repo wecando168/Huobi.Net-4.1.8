@@ -22,6 +22,9 @@ using HuobiOrderUpdate = Huobi.Net.Objects.Models.Socket.HuobiOrderUpdate;
 
 namespace Huobi.Net.Interfaces.Clients.UsdtMargined
 {
+    /// <summary>
+    /// 火币U本位合约websocket数据流接口
+    /// </summary>
     public interface IHuobiSocketClientUsdtMarginedStreams
     {
         #region WeSocket市场行情接口
@@ -37,7 +40,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="onData">更新处理程序 The handler for updates</param>
         /// <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeKlineAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<Object>> onData, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeMarketContractCodeKlineAsync(string contractCode, KlineInterval period, string clientId, Action<DataEvent<HuobiContractCodeTick>> onData, CancellationToken ct = default);
 
         /// <summary>
         /// 【通用】请求KLine数据
@@ -52,7 +55,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <param name="from">开始时间</param>
         /// <param name="to">结束时间</param>
         /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiKline>>> GetMarketContractCodeKline(string contractCode, KlineInterval period , string clientId, long from, long to);
+        Task<CallResult<IEnumerable<HuobiContractCodeTick>>> GetMarketContractCodeKline(string contractCode, KlineInterval period , string clientId, long from, long to);
 
         /// <summary>
         /// 【通用】订阅Market Depth数据

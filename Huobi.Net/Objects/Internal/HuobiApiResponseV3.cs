@@ -8,7 +8,7 @@ namespace Huobi.Net.Objects.Internal
         /// API接口返回码
         /// </summary>
         [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
-        public int Code { get; set; } = default(int);
+        public int Code { get; set; } = default;
 
         /// <summary>
         /// 结果描述

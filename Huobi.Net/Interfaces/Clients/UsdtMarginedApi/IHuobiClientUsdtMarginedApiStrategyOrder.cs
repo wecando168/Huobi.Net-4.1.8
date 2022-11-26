@@ -593,7 +593,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#1d86317775"/></para>
         /// </summary>
         /// <param name="contractCode">合约代码</param>
-        /// <param name="orderId">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
+        /// <param name="orderIdList">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<HuobiUsdtMarginedMarketSwapTrackCancel>> LinearSwapTrackCancelAsync(
@@ -608,7 +608,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMargined
         /// <para><a href="/linear-swap-api/v1/swap_cross_track_cancel"/></para>
         /// <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#eaf06c20d1"/></para>
         /// </summary>
-        /// <param name="orderId">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
+        /// <param name="orderIdList">用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
         /// <param name="contractCode">合约代码	永续：“BTC-USDT”... , 交割：“BTC-USDT-210625”...</param>
         /// <param name="pair">交易对	BTC-USDT</param>
         /// <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>

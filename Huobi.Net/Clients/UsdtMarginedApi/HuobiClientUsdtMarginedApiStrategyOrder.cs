@@ -164,7 +164,7 @@ namespace Huobi.Net.Clients.UsdtMargined
             {
                 {"contract_code", contractCode }
             };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 20)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 20)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
@@ -191,7 +191,7 @@ namespace Huobi.Net.Clients.UsdtMargined
             )
         {
             var parameters = new Dictionary<string, object> { };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 10)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
@@ -523,7 +523,7 @@ namespace Huobi.Net.Clients.UsdtMargined
             {
                 {"contract_code", contractCode }
             };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 10)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
@@ -550,7 +550,7 @@ namespace Huobi.Net.Clients.UsdtMargined
             )
         {
             var parameters = new Dictionary<string, object> { };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 10)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
@@ -931,7 +931,7 @@ namespace Huobi.Net.Clients.UsdtMargined
             {
                 {"contract_code", contractCode },
             };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 10)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
@@ -958,7 +958,7 @@ namespace Huobi.Net.Clients.UsdtMargined
             )
         {
             var parameters = new Dictionary<string, object> { };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 10)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }

@@ -23,73 +23,73 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 账户权益
         /// </summary>
         [JsonProperty("margin_balance", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginBalance { get; set; } = default(decimal);
+        public decimal MarginBalance { get; set; } = default;
 
         /// <summary>
         /// 持仓保证金（当前持有仓位所占用的保证金）
         /// </summary>
         [JsonProperty("margin_position", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginPosition { get; set; } = default(decimal);
+        public decimal MarginPosition { get; set; } = default;
 
         /// <summary>
         /// 冻结保证金
         /// </summary>
         [JsonProperty("margin_frozen", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginFrozen { get; set; } = default(decimal);
+        public decimal MarginFrozen { get; set; } = default;
 
         /// <summary>
         /// 可用保证金
         /// </summary>
         [JsonProperty("margin_available", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginAvailable { get; set; } = default(decimal);
+        public decimal MarginAvailable { get; set; } = default;
 
         /// <summary>
         /// 已实现盈亏
         /// </summary>
         [JsonProperty("profit_real", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal ProfitReal { get; set; } = default(decimal);
+        public decimal ProfitReal { get; set; } = default;
 
         /// <summary>
         /// 未实现盈亏
         /// </summary>
         [JsonProperty("profit_unreal", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal ProfitUnreal { get; set; } = default(decimal);
+        public decimal ProfitUnreal { get; set; } = default;
 
         /// <summary>
         /// 保证金率
         /// </summary>
         [JsonProperty("risk_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal RiskRate { get; set; } = default(decimal);
+        public decimal RiskRate { get; set; } = default;
 
         /// <summary>
         /// 可划转数量
         /// </summary>
         [JsonProperty("withdraw_available", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal WithdrawAvailable { get; set; } = default(decimal);
+        public decimal WithdrawAvailable { get; set; } = default;
 
         /// <summary>
         /// 预估强平价
         /// </summary>
         [JsonProperty("liquidation_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal LiquidationPrice { get; set; } = default(decimal);
+        public decimal LiquidationPrice { get; set; } = default;
 
         /// <summary>
         /// 杠杠倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal LeverRate { get; set; } = default(decimal);
+        public decimal LeverRate { get; set; } = default;
 
         /// <summary>
         /// 调整系数
         /// </summary>
         [JsonProperty("adjust_factor", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal AdjustFactor { get; set; } = default(decimal);
+        public decimal AdjustFactor { get; set; } = default;
 
         /// <summary>
         /// 静态权益
         /// </summary>
         [JsonProperty("margin_static", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginStatic { get; set; } = default(decimal);
+        public decimal MarginStatic { get; set; } = default;
 
         /// <summary>
         /// 合约代码	"BTC-USDT" ...

@@ -51,7 +51,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 杠杆倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal LeverRate { get; set; } = default(decimal);
+        public decimal LeverRate { get; set; } = default;
 
         /// <summary>
         /// 逐仓平台阶梯调整系数列表
@@ -69,24 +69,24 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 档位 从0档开始
         /// </summary>
         [JsonProperty("ladder", NullValueHandling = NullValueHandling.Ignore)]
-        public int Ladder { get; set; } = default(int);
+        public int Ladder { get; set; } = default;
 
         /// <summary>
         /// 净持仓量的最小值
         /// </summary>
         [JsonProperty("min_size", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MinSize { get; set; } = default(decimal);
+        public decimal MinSize { get; set; } = default;
 
         /// <summary>
         /// 净持仓量的最大值
         /// </summary>
         [JsonProperty("max_size", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MaxSize { get; set; } = default(decimal);
+        public decimal MaxSize { get; set; } = default;
 
         /// <summary>
         /// 调整系数
         /// </summary>
         [JsonProperty("adjust_factor", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal AdjustFactor { get; set; } = default(decimal);
+        public decimal AdjustFactor { get; set; } = default;
     }
 }

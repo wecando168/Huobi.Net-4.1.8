@@ -28,31 +28,31 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Req
         /// 成交价格
         /// </summary>
         [JsonProperty("trade_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradePrice { get; set; } = default(decimal);
+        public decimal? TradePrice { get; set; } = default;
 
         /// <summary>
         /// 成交量（张）
         /// </summary>
         [JsonProperty("trade_vlume", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeVolume { get; set; } = default(decimal);
+        public decimal? TradeVolume { get; set; } = default;
 
         /// <summary>
         /// 成交金额（成交数量* 合约面值 * 成交价格）	
         /// </summary>
         [JsonProperty("trade_turnover", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeTurnover { get; set; } = default(decimal);
+        public decimal? TradeTurnover { get; set; } = default;
 
         /// <summary>
         /// 成交手续费
         /// </summary>
         [JsonProperty("trade_fee", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeFee { get; set; } = default(decimal);
+        public decimal? TradeFee { get; set; } = default;
 
         /// <summary>
         /// taker或maker
         /// </summary>
         [JsonProperty("role", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Role { get; set; } = default(decimal);
+        public decimal? Role { get; set; } = default;
 
         /// <summary>
         /// 创建时间
@@ -64,12 +64,12 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Req
         /// 该笔成交的平仓盈亏（使用持仓均价计算，不包含仓位跨结算的已实现盈亏。）	
         /// </summary>
         [JsonProperty("profit", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Profit { get; set; } = default(decimal);
+        public decimal? Profit { get; set; } = default;
 
         /// <summary>
         /// 该笔成交的真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。）	
         /// </summary>
         [JsonProperty("real_profit", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RealProfit { get; set; } = default(decimal);
+        public decimal? RealProfit { get; set; } = default;
     }
 }

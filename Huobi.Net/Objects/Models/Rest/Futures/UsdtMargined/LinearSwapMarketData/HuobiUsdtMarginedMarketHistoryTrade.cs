@@ -40,19 +40,19 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapMarketDat
         /// 成交量(张)。 值是买卖双边之和
         /// </summary>
         [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal Amount { get; set; } = default(decimal);
+        public decimal Amount { get; set; } = default;
 
         /// <summary>
         /// 成交量（币）
         /// </summary>
         [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal Quantity { get; set; } = default(decimal);
+        public decimal Quantity { get; set; } = default;
 
         /// <summary>
         /// 成交额（计价币种）
         /// </summary>
         [JsonProperty("trade_turnover", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal TradeTurnover { get; set; } = default(decimal);
+        public decimal TradeTurnover { get; set; } = default;
 
         /// <summary>
         /// 成交时间戳
@@ -70,7 +70,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapMarketDat
         /// 成交价
         /// </summary>
         [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal Price { get; set; } = default(decimal);
+        public decimal Price { get; set; } = default;
 
         /// <summary>
         /// 买卖方向，即taker(主动成交)的方向

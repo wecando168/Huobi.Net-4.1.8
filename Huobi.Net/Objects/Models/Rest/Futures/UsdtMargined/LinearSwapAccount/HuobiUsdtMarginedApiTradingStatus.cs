@@ -16,7 +16,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 是否被禁用	1：被禁用中，0：没有被禁用
         /// </summary>
         [JsonProperty("is_disable", NullValueHandling = NullValueHandling.Ignore)]
-        public int IsDisable { get; set; } = default(int);
+        public int IsDisable { get; set; } = default;
 
         /// <summary>
         /// 触发禁用的订单价格类型，多个订单价格类型以英文逗号分割，例如：“limit,post_only,FOK,IOC”	
@@ -82,7 +82,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 撤单率的阈值
         /// </summary>
         [JsonProperty("cancel_ratio_threshold", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal CancelRatioThreshold { get; set; } = default(decimal);
+        public decimal CancelRatioThreshold { get; set; } = default;
 
         /// <summary>
         /// 用户撤单率的实际值
@@ -94,13 +94,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 	用户是否触发该指标	1：已经触发，0：没有触发
         /// </summary>
         [JsonProperty("is_trigger", NullValueHandling = NullValueHandling.Ignore)]
-        public int IsTrigger { get; set; } = default(int);
+        public int IsTrigger { get; set; } = default;
 
         /// <summary>
         /// 该指标是否开启
         /// </summary>
         [JsonProperty("is_active", NullValueHandling = NullValueHandling.Ignore)]
-        public int IsActive { get; set; } = default(int);
+        public int IsActive { get; set; } = default;
     }
 
     /// <summary>
@@ -124,13 +124,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 用户是否触发该指标	1：已经触发，0：没有触发
         /// </summary>
         [JsonProperty("is_trigger", NullValueHandling = NullValueHandling.Ignore)]
-        public int IsTrigger { get; set; } = default(int);
+        public int IsTrigger { get; set; } = default;
 
         /// <summary>
         /// 该指标是否开启
         /// </summary>
         [JsonProperty("is_active", NullValueHandling = NullValueHandling.Ignore)]
-        public int IsActive { get; set; } = default(int);
+        public int IsActive { get; set; } = default;
     }
 
 }

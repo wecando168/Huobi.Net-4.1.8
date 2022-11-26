@@ -15,13 +15,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 止盈单下单结果
         /// </summary>
         [JsonProperty("tp_order", NullValueHandling = NullValueHandling.Ignore)]
-        public IsolatedTpOrder? tpOrder { get; set; }
+        public IsolatedTpOrder? TpOrder { get; set; }
 
         /// <summary>
         /// 止损单下单结果
         /// </summary>
         [JsonProperty("sl_order", NullValueHandling = NullValueHandling.Ignore)]
-        public IsolatedSlOrder? slOrder { get; set; }
+        public IsolatedSlOrder? SlOrder { get; set; }
     }
 
     /// <summary>

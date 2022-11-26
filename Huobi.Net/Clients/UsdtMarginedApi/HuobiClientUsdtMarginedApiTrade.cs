@@ -263,11 +263,11 @@ namespace Huobi.Net.Clients.UsdtMargined
             {
                 {"contract_code", contractCode },
             };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 10)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
-            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Count() > 0 && clientOrderIdList.Count() <= 10)
+            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Any() && clientOrderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("client_order_id", string.Join(",", clientOrderIdList));
             }
@@ -292,11 +292,11 @@ namespace Huobi.Net.Clients.UsdtMargined
             {
                 {"contract_code", contractCode },
             };
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 10)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
-            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Count() > 0 && clientOrderIdList.Count() <= 10)
+            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Any() && clientOrderIdList.Count() <= 10)
             {
                 parameters.AddOptionalParameter("client_order_id", string.Join(",", clientOrderIdList));
             }
@@ -402,11 +402,11 @@ namespace Huobi.Net.Clients.UsdtMargined
                 {"contract_code", contractCode }
             };
 
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 50)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 50)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
-            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Count() > 0 && clientOrderIdList.Count() <= 50)
+            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Any() && clientOrderIdList.Count() <= 50)
             {
                 parameters.AddOptionalParameter("client_order_id", string.Join(",", clientOrderIdList));
             }
@@ -441,11 +441,11 @@ namespace Huobi.Net.Clients.UsdtMargined
                 throw new InvalidOperationException("Parameters contract_code and pair must have at least one");
             }            
             
-            if (orderIdList != null && orderIdList.Count() > 0 && orderIdList.Count() <= 50)
+            if (orderIdList != null && orderIdList.Any() && orderIdList.Count() <= 50)
             {
                 parameters.AddOptionalParameter("order_id", string.Join(",", orderIdList));
             }
-            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Count() > 0 && clientOrderIdList.Count() <= 50)
+            else if ((orderIdList == null || orderIdList.Count() == 0) && clientOrderIdList != null && clientOrderIdList.Any() && clientOrderIdList.Count() <= 50)
             {
                 parameters.AddOptionalParameter("client_order_id", string.Join(",", clientOrderIdList));
             }

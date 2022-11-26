@@ -33,13 +33,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// 订单索引
         /// </summary>
         [JsonProperty("index", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Index { get; set; } = default(int);
+        public int? Index { get; set; } = default;
 
         /// <summary>
         /// 错误码
         /// </summary>
         [JsonProperty("err_code", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ErrCode { get; set; } = default(int);
+        public int? ErrCode { get; set; } = default;
 
         /// <summary>
         /// 错误信息
@@ -57,7 +57,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// 订单索引
         /// </summary>
         [JsonProperty("index", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Index { get; set; } = default(int);
+        public int? Index { get; set; } = default;
 
         /// <summary>
         /// 订单ID

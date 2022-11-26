@@ -64,8 +64,15 @@ namespace Huobi.Net.Clients.SpotApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval period, Action<DataEvent<HuobiKline>> onData, CancellationToken ct = default)
         {
             symbol = symbol.ValidateHuobiSymbol();
-            var request = new HuobiSubscribeRequest(_baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), $"market.{symbol}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}");
-            var internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiKline>>>(data => onData(data.As(data.Data.Data, symbol)));
+            HuobiSubscribeRequest? request = new HuobiSubscribeRequest
+                (
+                _baseClient.NextIdInternal().ToString(CultureInfo.InvariantCulture), 
+                $"market.{symbol}.kline.{JsonConvert.SerializeObject(period, new PeriodConverter(false))}"
+                );
+            Action<DataEvent<HuobiDataEvent<HuobiKline>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiKline>>>
+                (
+                data => onData(data.As(data.Data.Data, symbol))
+                );
             return await _baseClient.SubscribeInternalAsync(this, request, null, false, internalHandler, ct).ConfigureAwait(false);
         }
 

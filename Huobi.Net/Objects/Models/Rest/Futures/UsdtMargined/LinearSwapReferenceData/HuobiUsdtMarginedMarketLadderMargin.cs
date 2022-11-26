@@ -51,7 +51,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 杠杆倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public int LeverRate { get; set; } = default(int);
+        public int LeverRate { get; set; } = default;
 
         /// <summary>
         /// 该合约对应杠杆倍数下的阶梯保证金数据
@@ -69,24 +69,24 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 最小账户权益（该阶梯权益范围起点，包含该值）
         /// </summary>
         [JsonProperty("min_margin_balance", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MinMarginBalance { get; set; } = default(decimal);
+        public decimal MinMarginBalance { get; set; } = default;
 
         /// <summary>
         /// 最大账户权益（该阶梯权益范围终点，不包含该值，该值属于下一阶梯的权益范围起点）	
         /// </summary>
         [JsonProperty("max_margin_balance", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MaxMarginBalance { get; set; } = default(decimal);
+        public decimal MaxMarginBalance { get; set; } = default;
 
         /// <summary>
         /// 最小可用保证金（范围内包含该值）	
         /// </summary>
         [JsonProperty("min_margin_available", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MinMarginAvailable { get; set; } = default(decimal);
+        public decimal MinMarginAvailable { get; set; } = default;
 
         /// <summary>
         /// 最大可用保证金（范围内不包含该值，该值属于下一阶梯的最小可用保证金）
         /// </summary>
         [JsonProperty("max_margin_available", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MaxMarginAvailable { get; set; } = default(decimal);
+        public decimal MaxMarginAvailable { get; set; } = default;
     }
 }

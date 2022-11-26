@@ -24,7 +24,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount.C
         /// </summary>
         [JsonProperty("err_code", NullValueHandling = NullValueHandling.Ignore)]
 
-        public int ErrCode { get; set; } = default(int);
+        public int ErrCode { get; set; } = default;
 
         /// <summary>
         /// 错误信息

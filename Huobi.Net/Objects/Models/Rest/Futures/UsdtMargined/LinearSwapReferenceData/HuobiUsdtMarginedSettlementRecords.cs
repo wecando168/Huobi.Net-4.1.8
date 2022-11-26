@@ -16,19 +16,19 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 总页数
         /// </summary>
         [JsonProperty("total_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalPage { get; set; } = default(int);
+        public int TotalPage { get; set; } = default;
 
         /// <summary>
         /// 当前页
         /// </summary>
         [JsonProperty("current_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int CurrentPage { get; set; } = default(int);
+        public int CurrentPage { get; set; } = default;
 
         /// <summary>
         /// 总条数
         /// </summary>
         [JsonProperty("total_size", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalSize { get; set; } = default(int);
+        public int TotalSize { get; set; } = default;
 
         /// <summary>
         /// 结算记录列表
@@ -64,13 +64,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 分摊比例
         /// </summary>
         [JsonProperty("clawback_ratio", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal ClawbackRatio { get; set; } = default(decimal);
+        public decimal ClawbackRatio { get; set; } = default;
 
         /// <summary>
         /// 本期结算价格，交割时为交割价格	
         /// </summary>
         [JsonProperty("settlement_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal SettlementPrice { get; set; } = default(decimal);
+        public decimal SettlementPrice { get; set; } = default;
 
         /// <summary>
         /// 结算类型	settlement：结算；delivery：交割；

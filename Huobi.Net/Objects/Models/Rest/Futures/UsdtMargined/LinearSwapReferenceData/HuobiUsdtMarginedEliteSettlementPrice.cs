@@ -22,7 +22,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 本期预估结算价/预估交割价（结算类型为交割时为预估交割价；结算时为预估结算价；）
         /// </summary>
         [JsonProperty("estimated_settlement_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal EstimatedSettlementPrice { get; set; } = default(decimal);
+        public decimal EstimatedSettlementPrice { get; set; } = default;
 
         /// <summary>
         /// 本期结算类型	“delivery”：交割，“settlement”：结算

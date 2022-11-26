@@ -22,13 +22,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapReference
         /// 风险准备金余额
         /// </summary>
         [JsonProperty("insurance_fund", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal InsuranceFund { get; set; } = default(decimal);
+        public decimal InsuranceFund { get; set; } = default;
 
         /// <summary>
         /// 预估分摊比例
         /// </summary>
         [JsonProperty("estimated_clawback", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal EstimatedClawback { get; set; } = default(decimal);
+        public decimal EstimatedClawback { get; set; } = default;
 
         /// <summary>
         /// 成交分区 如 USDT

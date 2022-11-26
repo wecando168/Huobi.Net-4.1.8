@@ -164,90 +164,187 @@ if (read == "R" || read == "r")
 }
 else if (read == "P" || read == "p")
 {
-    HuobiSocketClient? huobiPublicSocketClient = new HuobiSocketClient();
+    //现货公有数据WebSocket客户端（无需签名的现货数据订阅）
+    HuobiSocketClient? huobiPublicSocketClient = new();
     CallResult<UpdateSubscription>? publicSubscription = null;
 
-    #region 订阅全部交易代码市场聚合行情数据
-    //订阅全部交易代码市场聚合行情数据
-    Console.WriteLine($"Press enter to subscribe symbols ticker stream, Press [S] to skip current subscription");
+    //U本位合约公有数据WebSocket客户端（无需签名的U本位合约数据订阅）
+    HuobiUsdtMarginedSocketClient? huobiPublicUsdtMarginedSocketClient = new();
+    CallResult<UpdateSubscription>? publicUsdtMarginedSubscription = null;
+
+    //#region 现货订阅 全部交易代码市场聚合行情数据
+    ////订阅全部交易代码市场聚合行情数据
+    //Console.WriteLine($"Press enter to subscribe spot symbols ticker stream, Press [S] to skip current subscription");
+    //read = Console.ReadLine();
+    //if (read != "S" && read != "s")
+    //{
+    //    Console.WriteLine($"现货Websocket主题订阅：获取全部交易代码市场聚合行情数据");
+    //    publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToTickerUpdatesAsync(data =>
+    //    {
+    //        if (!object.Equals(data, null))
+    //        {
+    //            //Console.WriteLine($"{JsonConvert.SerializeObject(data)}");
+    //            foreach (var item in data.Data.Ticks)
+    //            {
+    //                Console.WriteLine($"现货交易代码：{item.Symbol} 开盘价格：{item.OpenPrice} 收盘价格：{item.ClosePrice} 最高价格：{item.HighPrice} 最低价格：{item.LowPrice}");
+    //            }                
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
+    //        }
+    //    });
+
+    //    if (!publicSubscription.Success)
+    //    {
+    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
+    //        Console.ReadLine();
+    //        return;
+    //    }
+
+    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    //}
+    //#endregion
+
+    //#region 现货订阅 订阅K线
+    ////订阅一个交易代码，单时间区间
+    //Console.WriteLine($"Press enter to subscribe spot one symbol Kline stream, Press [S] to skip current subscription");
+    //read = Console.ReadLine();
+    //if (read != "S" && read != "s")
+    //{
+    //    string symbol = "BTCUSDT";
+    //    KlineInterval klineInterval = KlineInterval.FiveMinutes;
+    //    publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToKlineUpdatesAsync(
+    //        symbol,
+    //        klineInterval, data =>
+    //    {
+    //        if (!object.Equals(data, null))
+    //        {
+
+    //            Console.WriteLine($"现货交易代码：{symbol} 开盘价格：{data.Data.OpenPrice} 收盘价格：{data.Data.ClosePrice} 最高价格：{data.Data.HighPrice} 最低价格：{data.Data.LowPrice}");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
+    //        }
+    //    });
+
+    //    if (!publicSubscription.Success)
+    //    {
+    //        Console.WriteLine("Failed to sub" + publicSubscription.Error);
+    //        Console.ReadLine();
+    //        return;
+    //    }
+
+    //    publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+    //    publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    //}
+    //#endregion
+
+    #region U本位合约订阅 WebSocket 获取K线
+    //获取一个交易代码，指定时间区间
+    Console.WriteLine($"Press enter to get usdt margined contract code klines, Press [S] to skip current subscription");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
-        Console.WriteLine($"现货Websocket主题订阅：获取全部交易代码市场聚合行情数据");
-        publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToTickerUpdatesAsync(data =>
+        string contractCode = "BTC-USDT";
+        KlineInterval klineInterval = KlineInterval.FiveMinutes;
+        string clientId = $"火币U本位合约{contractCode} 获取K线数据";
+        long from = 1667232000; //2022-11-01 00:00:00
+        long to = 1667260800;   //2022-11-01 08:00:00
+
+        Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {klineInterval.ToString()} K线");
+        CallResult<IEnumerable<HuobiContractCodeTick>>? huobiContractCodeTickList = await huobiPublicUsdtMarginedSocketClient.UsdtMarginedStreams.GetMarketContractCodeKline(
+            contractCode: contractCode,
+            period: klineInterval,
+            clientId: clientId,
+            from: from,
+            to:to
+            );
+
+        if (!object.Equals(huobiContractCodeTickList, null))
         {
-            if (!object.Equals(data, null))
+            foreach (var item in huobiContractCodeTickList.Data)
             {
-                //Console.WriteLine($"{JsonConvert.SerializeObject(data)}");
-                foreach (var item in data.Data.Ticks)
+                if (item != null)
                 {
-                    Console.WriteLine($"现货交易代码：{item.Symbol} 开盘价格：{item.OpenPrice} 收盘价格：{item.ClosePrice} 最高价格：{item.HighPrice} 最低价格：{item.LowPrice}");
-                }                
+                    Console.WriteLine($"K线编号：{item.Id} 开盘时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(item.Id.ToString()))} 订单编号：{item.MarginedId}");
+                    Console.WriteLine($"开盘价：{item.OpenPrice} 收盘价：{item.ClosePrice} 最低价：{item.LowPrice}  最高价：{item.HighPrice}");
+                    Console.WriteLine($"成交量(币)：{item.Amount} 成交额：{item.TradeTurnover} 成交笔数：{item.Count} 成交张数：{item.Vol}");
+                }
             }
-            else
-            {
-                Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
-            }
-        });
-
-        if (!publicSubscription.Success)
-        {
-            Console.WriteLine("Failed to sub" + publicSubscription.Error);
-            Console.ReadLine();
-            return;
         }
-
-        publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        else
+        {
+            Console.WriteLine($"订阅火币U本位合约公有数据异常：未正常接收到数据");
+        }
     }
     #endregion
 
-    #region 订阅K线
+    #region U本位合约订阅 WebSocket 订阅K线
     //订阅一个交易代码，单时间区间
-    Console.WriteLine($"Press enter to subscribe one symbol candlestick stream, Press [S] to skip current subscription");
+    Console.WriteLine($"Press enter to subscribe usdt margined contract code kline stream, Press [S] to skip current subscription");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
-        string symbol = "BTCUSDT";
+        string contractCode = "BTC-USDT";
         KlineInterval klineInterval = KlineInterval.FiveMinutes;
-        publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToKlineUpdatesAsync(symbol, klineInterval, data =>
+        string clientId = $"火币U本位合约{contractCode}订阅 K线数据";
+
+        Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {klineInterval.ToString()} K线");
+        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(
+            contractCode,
+            klineInterval,
+            clientId, data =>
         {
             if (!object.Equals(data, null))
             {
-
-                Console.WriteLine($"现货交易代码：{symbol} 开盘价格：{data.Data.OpenPrice} 收盘价格：{data.Data.ClosePrice} 最高价格：{data.Data.HighPrice} 最低价格：{data.Data.LowPrice}");
+                HuobiContractCodeTick huobiContractCodeTick = data.Data;
+                if (huobiContractCodeTick != null)
+                {
+                    Console.WriteLine($"合约代码：{data.Topic} K线编号：{huobiContractCodeTick.Id} 开盘时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(huobiContractCodeTick.Id.ToString()))} 订单编号：{huobiContractCodeTick.MarginedId}");
+                    Console.WriteLine($"开盘价：{huobiContractCodeTick.OpenPrice} 收盘价：{huobiContractCodeTick.ClosePrice} 最低价：{huobiContractCodeTick.LowPrice}  最高价：{huobiContractCodeTick.HighPrice}");
+                    Console.WriteLine($"成交量(币)：{huobiContractCodeTick.Amount} 成交额：{huobiContractCodeTick.TradeTurnover} 成交笔数：{huobiContractCodeTick.Count} 成交张数：{huobiContractCodeTick.Vol}");
+                }
             }
             else
             {
-                Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
+                Console.WriteLine($"订阅火币U本位合约公有数据异常：未正常接收到数据");
             }
         });
 
-        if (!publicSubscription.Success)
+        if (!publicUsdtMarginedSubscription.Success)
         {
-            Console.WriteLine("Failed to sub" + publicSubscription.Error);
+            Console.WriteLine("Failed to sub" + publicUsdtMarginedSubscription.Error);
             Console.ReadLine();
             return;
         }
 
-        publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        publicUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        publicUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 }
 else if (read == "U" || read == "u")
 {
-    HuobiSocketClient? huobiPrivateSocketClient = new HuobiSocketClient();
+    //现货私有数据WebSocket客户端（需要签名的现货数据订阅）
+    HuobiSocketClient? huobiPrivateSocketClient = new();
     CallResult<UpdateSubscription>? priavteSubscription = null;
 
-    #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
+    //U本位合约私有数据WebSocket客户端（无需签名的现货数据订阅）
+    HuobiUsdtMarginedSocketClient? huobiPrivateUsdtMarginedSocketClient = new();
+    CallResult<UpdateSubscription>? privateUsdtMarginedSubscription = null;
+
+    #region 对现货WebSocket客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
     //使用accessKey, secretKey生成一个新的API凭证
-    ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+    ApiCredentials apiCredentials = new (mainAccessKey, mainSecretKey);
     //当前客户端使用新生成的API凭证
     huobiPrivateSocketClient.SetApiCredentials(apiCredentials);
+    huobiPrivateUsdtMarginedSocketClient.SetApiCredentials(apiCredentials);
     #endregion
 
-    #region 订阅账户资产变更（实时）
+    #region 现货订阅 账户资产变更（实时）
     Console.WriteLine($"Press enter to subscribe account deals stream");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
@@ -285,7 +382,7 @@ else if (read == "U" || read == "u")
     }
     #endregion
 
-    #region 订阅火币订阅清算后成交及撤单更新（实时）
+    #region 现货订阅 火币订阅清算后成交及撤单更新（实时）
     Console.WriteLine($"Press enter to subscribe account deals stream");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
@@ -628,7 +725,7 @@ static async Task TestSpotApiAccountEndpoints()
     {
         #region 对HuobiClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
-        ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+        ApiCredentials apiCredentials = new (mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiSpotRestClient.SetApiCredentials(apiCredentials);
         #endregion
@@ -1672,13 +1769,13 @@ static async Task TestSpotApiAccountEndpoints()
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
 
-            HuobiCreateSubUserAccountRequestInfo huobiCreateSubUserAccountRequestInfo = new HuobiCreateSubUserAccountRequestInfo()
+            HuobiCreateSubUserAccountRequestInfo huobiCreateSubUserAccountRequestInfo = new()
             {
                 UserName = "DaiPaxUsdt",
                 Note = "NoteText"
             };
             IEnumerable<HuobiCreateSubUserAccountRequestInfo> UserList = new HuobiCreateSubUserAccountRequestInfo[] { huobiCreateSubUserAccountRequestInfo };
-            HuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest = new HuobiCreateSubUserAccountRequest(UserList);
+            HuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest = new(UserList);
             var result = await huobiSpotRestClient.SpotApi.Account.SubUserCreationAsync(huobiCreateSubUserAccountRequest);
             if (result.Success)
             {
@@ -1897,7 +1994,7 @@ static async Task TestSpotApiTradingEndpoints()
     {
         #region 对HuobiClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
-        ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+        ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiSpotRestClient.SetApiCredentials(apiCredentials);
         #endregion
@@ -2016,12 +2113,12 @@ static async Task TestSpotApiTradingEndpoints()
             Console.WriteLine("通过订单编号列表撤销订单");
 
             {
-                List<long> orderIdList = new List<long>();
+                List<long> orderIdList = new();
                 if(!string.IsNullOrWhiteSpace(testCancelOrderId))
                     orderIdList.Add(long.Parse(testCancelOrderId));
                 IEnumerable<long> orderIds = orderIdList;
 
-                if (orderIds.Count() > 0)
+                if (orderIds.Any())
                 {
                     var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrdersAsync(
                     orderIds: orderIds);
@@ -2045,12 +2142,12 @@ static async Task TestSpotApiTradingEndpoints()
             {
                 Console.WriteLine("通过用户自定义单号列表撤销多条订单");
 
-                List<string> clientOrderIdList = new List<string>();
+                List<string> clientOrderIdList = new();
                 if (!string.IsNullOrWhiteSpace(testCancelClientOrderId))
                     clientOrderIdList.Add(testCancelClientOrderId);
                 IEnumerable<string> clientOrderIds = clientOrderIdList;
 
-                if (clientOrderIds.Count() > 0)
+                if (clientOrderIds.Any())
                 {
                     var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrdersAsync(
                         orderIds: null,
@@ -2084,11 +2181,11 @@ static async Task TestSpotApiTradingEndpoints()
             Console.WriteLine("批量撤销所有订单（可限制账户Id/交易代码/交易方向/撤销数量）");
 
             {
-                List<long> orderIdList = new List<long>();
+                List<long> orderIdList = new();
                 orderIdList.Add(long.Parse(testOrderId));
                 IEnumerable<long> orderIds = orderIdList;
 
-                List<string> symbolList = new List<string>();
+                List<string> symbolList = new();
                 symbolList.Add("TestSymbol");
                 IEnumerable<string> symbols = symbolList;
 
@@ -2156,12 +2253,12 @@ static async Task TestSpotApiTradingEndpoints()
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
 
-            List<string> clientOrderIdList = new List<string>();
+            List<string> clientOrderIdList = new();
             if (!string.IsNullOrWhiteSpace(testCancelConditionalClientOrderId))
                 clientOrderIdList.Add(testCancelConditionalClientOrderId);
             IEnumerable<string> clientOrderIds = clientOrderIdList;
 
-            if (clientOrderIds.Count() > 0)
+            if (clientOrderIds.Any())
             {
                 var result = await huobiSpotRestClient.SpotApi.Trading.CancelConditionalOrdersAsync(
                 clientOrderIds: clientOrderIds);
@@ -2458,7 +2555,7 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
     {
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
-        ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+        ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
@@ -3471,7 +3568,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
     {
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
-        ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+        ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
@@ -3721,7 +3818,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             #endregion
 
             Console.WriteLine("【通用】批量设置子账户交易权限");
-            List<string> subUidList = new List<string>();
+            List<string> subUidList = new();
             subUidList.Add(subUid1);
             subUidList.Add(subUid2);
             IEnumerable<string> subUids = subUidList;
@@ -4678,15 +4775,15 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
 {
     using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
     {
-        List<long> cancelIsolatedOrderIdList = new List<long>();
-        List<long> cancelIsolatedClientOrderIdList = new List<long>();
+        List<long> cancelIsolatedOrderIdList = new();
+        List<long> cancelIsolatedClientOrderIdList = new();
 
-        List<long> cancelCrossOrderIdList = new List<long>();
-        List<long> cancelCrossClientOrderIdList = new List<long>();
+        List<long> cancelCrossOrderIdList = new();
+        List<long> cancelCrossClientOrderIdList = new();
 
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
-        ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+        ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
@@ -4901,7 +4998,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
 
             #region 【逐仓】合约批量下单(PrivateData)
             {
-                HuobiUsdtMarginedIsolatedOrder isolatedOrder = new HuobiUsdtMarginedIsolatedOrder()
+                HuobiUsdtMarginedIsolatedOrder isolatedOrder = new()
                 {
                     ContractCode = "DOGE-USDT",
                     Direction = UmDirection.buy.ToString(),
@@ -4919,7 +5016,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                     ReduceOnly = null,
                     ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
                 };
-                List<HuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new List<HuobiUsdtMarginedIsolatedOrder>();
+                List<HuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new();
                 isolatedOrderList.Add(isolatedOrder);
                 IEnumerable<HuobiUsdtMarginedIsolatedOrder> isolatedOrders = isolatedOrderList;
 
@@ -4962,7 +5059,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
 
             #region 【全仓】合约批量下单(PrivateData)
             {
-                HuobiUsdtMarginedCrossOrder crossOrder = new HuobiUsdtMarginedCrossOrder()
+                HuobiUsdtMarginedCrossOrder crossOrder = new()
                 {
                     ContractCode = "DOGE-USDT",
                     Direction = UmDirection.buy.ToString(),
@@ -4982,7 +5079,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                     ReduceOnly = null,
                     ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
                 };
-                List<HuobiUsdtMarginedCrossOrder> crossOrderList = new List<HuobiUsdtMarginedCrossOrder>();
+                List<HuobiUsdtMarginedCrossOrder> crossOrderList = new();
                 crossOrderList.Add(crossOrder);
                 IEnumerable<HuobiUsdtMarginedCrossOrder> crossOrders = crossOrderList;
 
@@ -5037,7 +5134,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 #endregion
 
                 Console.WriteLine("【逐仓】撤销合约订单");
-                if ((cancelIsolatedOrderIds == null || cancelIsolatedOrderIds.Count() <= 0) && (cancelIsolatedClientOrderIds == null || cancelIsolatedClientOrderIds.Count() <= 0))
+                if ((cancelIsolatedOrderIds == null || !cancelIsolatedOrderIds.Any()) && (cancelIsolatedClientOrderIds == null || !cancelIsolatedClientOrderIds.Any()))
                 {
                     Console.WriteLine("【逐仓】撤销合约订单：未提供需要撤销的订单编号或者用户自定义单号");
                 }
@@ -5090,7 +5187,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 #endregion
 
                 Console.WriteLine("【全仓】撤销合约订单");
-                if ((cancelCrossOrderIds == null || cancelCrossOrderIds.Count() <= 0) && (cancelCrossClientOrderIds == null || cancelCrossClientOrderIds.Count() <= 0))
+                if ((cancelCrossOrderIds == null || !cancelCrossOrderIds.Any()) && (cancelCrossClientOrderIds == null || !cancelCrossClientOrderIds.Any()))
                 {
                     Console.WriteLine("【全仓】撤销合约订单：未提供需要撤销的订单编号或者用户自定义单号");
                 }
@@ -5871,17 +5968,17 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
 {
     using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
     {
-        List<long> cancelIsolatedTriggerOrderIdList = new List<long>();
-        List<long> cancelIsolatedTpslOrderIdList = new List<long>();
-        List<long> cancelIsolatedTrackOrderIdList = new List<long>();
+        List<long> cancelIsolatedTriggerOrderIdList = new();
+        List<long> cancelIsolatedTpslOrderIdList = new();
+        List<long> cancelIsolatedTrackOrderIdList = new();
 
-        List<long> cancelCrossTriggerOrderIdList = new List<long>();
-        List<long> cancelCrossTpslOrderIdList = new List<long>();
-        List<long> cancelCrossTrackOrderIdList = new List<long>();
+        List<long> cancelCrossTriggerOrderIdList = new();
+        List<long> cancelCrossTpslOrderIdList = new();
+        List<long> cancelCrossTrackOrderIdList = new();
 
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
-        ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+        ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
@@ -6396,15 +6493,15 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 if (result.Success)
                 {
                     Console.WriteLine($"【逐仓】止盈止损订单下单结果");
-                    if (result.Data.tpOrder != null && result.Data.tpOrder.OrderId != null)
+                    if (result.Data.TpOrder != null && result.Data.TpOrder.OrderId != null)
                     {
-                        Console.WriteLine($"止盈订单编号：{result.Data.tpOrder.OrderId}");
-                        cancelIsolatedTpslOrderIdList.Add((long)result.Data.tpOrder.OrderId);
+                        Console.WriteLine($"止盈订单编号：{result.Data.TpOrder.OrderId}");
+                        cancelIsolatedTpslOrderIdList.Add((long)result.Data.TpOrder.OrderId);
                     }
-                    if (result.Data.slOrder != null && result.Data.slOrder.OrderId != null)
+                    if (result.Data.SlOrder != null && result.Data.SlOrder.OrderId != null)
                     {
-                        Console.WriteLine($"止损订单编号：{result.Data.slOrder.OrderId}");
-                        cancelIsolatedTpslOrderIdList.Add((long)result.Data.slOrder.OrderId);
+                        Console.WriteLine($"止损订单编号：{result.Data.SlOrder.OrderId}");
+                        cancelIsolatedTpslOrderIdList.Add((long)result.Data.SlOrder.OrderId);
                     }
                 }
                 else
@@ -6453,15 +6550,15 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 if (result.Success)
                 {
                     Console.WriteLine($"【全仓】止盈止损订单下单结果");
-                    if (result.Data.tpOrder != null)
+                    if (result.Data.TpOrder != null)
                     {
-                        Console.WriteLine($"止盈订单编号：{result.Data.tpOrder.OrderId}");
-                        cancelCrossTpslOrderIdList.Add((long)result.Data.tpOrder.OrderId);
+                        Console.WriteLine($"止盈订单编号：{result.Data.TpOrder.OrderId}");
+                        cancelCrossTpslOrderIdList.Add((long)result.Data.TpOrder.OrderId);
                     }
-                    if (result.Data.slOrder != null)
+                    if (result.Data.SlOrder != null)
                     {
-                        Console.WriteLine($"止损订单编号：{result.Data.slOrder.OrderId}");
-                        cancelCrossTpslOrderIdList.Add((long)result.Data.slOrder.OrderId);
+                        Console.WriteLine($"止损订单编号：{result.Data.SlOrder.OrderId}");
+                        cancelCrossTpslOrderIdList.Add((long)result.Data.SlOrder.OrderId);
                     }
                 }
                 else
@@ -6484,7 +6581,7 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
 
-                if (cancelIsolatedTpslOrderIdList != null && cancelIsolatedTpslOrderIdList.Count() > 0)
+                if (cancelIsolatedTpslOrderIdList != null && cancelIsolatedTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【逐仓】止盈止损订单撤单");
                     var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancelAsync(
@@ -6533,7 +6630,7 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
 
-                if (cancelCrossTpslOrderIdList != null && cancelCrossTpslOrderIdList.Count() > 0)
+                if (cancelCrossTpslOrderIdList != null && cancelCrossTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【全仓】止盈止损订单撤单");
                     var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancelAsync(
@@ -6582,7 +6679,7 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
 
-                if (cancelIsolatedTpslOrderIdList != null && cancelIsolatedTpslOrderIdList.Count() > 0)
+                if (cancelIsolatedTpslOrderIdList != null && cancelIsolatedTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【逐仓】止盈止损订单全部撤单");
                     var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancelAllAsync(
@@ -6631,7 +6728,7 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
 
-                if (cancelCrossTpslOrderIdList != null && cancelCrossTpslOrderIdList.Count() > 0)
+                if (cancelCrossTpslOrderIdList != null && cancelCrossTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【全仓】止盈止损订单全部撤单");
                     var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancelAllAsync(
@@ -7397,7 +7494,7 @@ static async Task TestUsdtMarginedApiTransferringEndpoints()
     {
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
-        ApiCredentials apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+        ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
@@ -7407,7 +7504,7 @@ static async Task TestUsdtMarginedApiTransferringEndpoints()
             string? marginAccount = "USDT";
 
             #region 主用户客户端
-            apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
+            apiCredentials = new(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
 

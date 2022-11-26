@@ -16,19 +16,19 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 总页数
         /// </summary>
         [JsonProperty("total_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalPage { get; set; } = default(int);
+        public int TotalPage { get; set; } = default;
 
         /// <summary>
         /// 当前页
         /// </summary>
         [JsonProperty("current_page", NullValueHandling = NullValueHandling.Ignore)]
-        public int CurrentPage { get; set; } = default(int);
+        public int CurrentPage { get; set; } = default;
 
         /// <summary>
         /// 总条数
         /// </summary>
         [JsonProperty("total_size", NullValueHandling = NullValueHandling.Ignore)]
-        public int TotalSize { get; set; } = default(int);
+        public int TotalSize { get; set; } = default;
 
         /// <summary>
         /// 结算记录列表
@@ -58,19 +58,19 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 本期初始账户权益
         /// </summary>
         [JsonProperty("margin_balance_init", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginBalanceInit { get; set; } = default(decimal);
+        public decimal MarginBalanceInit { get; set; } = default;
 
         /// <summary>
         /// 本期结算后账户权益
         /// </summary>
         [JsonProperty("margin_balance", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal MarginBalance { get; set; } = default(decimal);
+        public decimal MarginBalance { get; set; } = default;
 
         /// <summary>
         /// 本期结算已实现盈亏
         /// </summary>
         [JsonProperty("settlement_profit_real", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal SettlementProfitReal { get; set; } = default(decimal);
+        public decimal SettlementProfitReal { get; set; } = default;
 
         /// <summary>
         /// 本期结算时间，交割时为交割时间	
@@ -82,25 +82,25 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 本期分摊费用
         /// </summary>
         [JsonProperty("clawback", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal Clawback { get; set; } = default(decimal);
+        public decimal Clawback { get; set; } = default;
 
         /// <summary>
         /// 本期资金费（或本期交割费）	
         /// </summary>
         [JsonProperty("funding_fee", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal FundingFee { get; set; } = default(decimal);
+        public decimal FundingFee { get; set; } = default;
 
         /// <summary>
         /// 本期平仓盈亏
         /// </summary>
         [JsonProperty("offset_profitloss", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal OffsetProfitloss { get; set; } = default(decimal);
+        public decimal OffsetProfitloss { get; set; } = default;
 
         /// <summary>
         /// 本期交易手续费	
         /// </summary>
         [JsonProperty("fee", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal Fee { get; set; } = default(decimal);
+        public decimal Fee { get; set; } = default;
 
         /// <summary>
         /// 手续费币种
@@ -136,13 +136,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 本期平仓盈亏
         /// </summary>
         [JsonProperty("offset_profitloss", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal OffsetProfitloss { get; set; } = default(decimal);
+        public decimal OffsetProfitloss { get; set; } = default;
 
         /// <summary>
         /// 本期交易手续费	
         /// </summary>
         [JsonProperty("fee", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal Fee { get; set; } = default(decimal);
+        public decimal Fee { get; set; } = default;
 
         /// <summary>
         /// 手续费币种
@@ -184,37 +184,37 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 本期结算前持仓量（张）	
         /// </summary>
         [JsonProperty("volume", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal Volume { get; set; } = default(decimal);
+        public decimal Volume { get; set; } = default;
 
         /// <summary>
         /// 开仓均价
         /// </summary>
         [JsonProperty("cost_open", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal CostOpen { get; set; } = default(decimal);
+        public decimal CostOpen { get; set; } = default;
 
         /// <summary>
         /// 本期结算前持仓均价
         /// </summary>
         [JsonProperty("cost_hold_pre", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal CostHoldPre { get; set; } = default(decimal);
+        public decimal CostHoldPre { get; set; } = default;
 
         /// <summary>
         /// 本期结算后持仓均价
         /// </summary>
         [JsonProperty("cost_hold", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal CostHold { get; set; } = default(decimal);
+        public decimal CostHold { get; set; } = default;
 
         /// <summary>
         /// 本期结算未实现盈亏
         /// </summary>
         [JsonProperty("settlement_profit_unreal", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal SettlementProfitUnreal { get; set; } = default(decimal);
+        public decimal SettlementProfitUnreal { get; set; } = default;
 
         /// <summary>
         /// 本期结算价格，交割时为交割价格	
         /// </summary>
         [JsonProperty("settlement_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal SettlementPrice { get; set; } = default(decimal);
+        public decimal SettlementPrice { get; set; } = default;
 
         /// <summary>
         /// 结算类型	settlement：结算；delivery：交割；

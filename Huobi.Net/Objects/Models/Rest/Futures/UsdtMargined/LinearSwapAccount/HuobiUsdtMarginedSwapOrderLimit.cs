@@ -47,13 +47,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 合约开仓单笔下单量最大值
         /// </summary>
         [JsonProperty("open_limit", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal OpenLimit { get; set; } = default(decimal);
+        public decimal OpenLimit { get; set; } = default;
 
         /// <summary>
         /// 合约平仓单笔下单量最大值
         /// </summary>
         [JsonProperty("close_limit", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal CloseLimit { get; set; } = default(decimal);
+        public decimal CloseLimit { get; set; } = default;
 
         /// <summary>
         /// 业务类型	futures：交割、swap：永续

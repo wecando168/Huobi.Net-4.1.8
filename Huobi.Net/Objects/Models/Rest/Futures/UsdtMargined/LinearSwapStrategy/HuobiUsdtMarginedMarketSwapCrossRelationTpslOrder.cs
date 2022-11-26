@@ -57,7 +57,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 委托数量
         /// </summary>
         [JsonProperty("volume", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Volume { get; set; } = default(decimal);
+        public decimal? Volume { get; set; } = default;
 
         /// <summary>
         /// 委托价
@@ -87,7 +87,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 杠杆倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public int? LeverRate { get; set; } = default(int);
+        public int? LeverRate { get; set; } = default;
 
         /// <summary>
         /// 订单ID
@@ -117,49 +117,49 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 成交数量
         /// </summary>
         [JsonProperty("trade_volume", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeVolume { get; set; } = default(decimal);
+        public decimal? TradeVolume { get; set; } = default;
 
         /// <summary>
         /// 成交总金额 ，即sum（每一笔成交张数* 合约面值 * 成交价格）	
         /// </summary>
         [JsonProperty("trade_turnover", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeTurnover { get; set; } = default(decimal);
+        public decimal? TradeTurnover { get; set; } = default;
 
         /// <summary>
         /// 手续费
         /// </summary>
         [JsonProperty("fee", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Fee { get; set; } = default(decimal);
+        public decimal? Fee { get; set; } = default;
 
         /// <summary>
         /// 成交均价
         /// </summary>
         [JsonProperty("trade_avg_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TradeAvgPrice { get; set; } = default(decimal);
+        public decimal? TradeAvgPrice { get; set; } = default;
 
         /// <summary>
         /// 冻结保证金
         /// </summary>
         [JsonProperty("margin_frozen", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? MarginFrozen { get; set; } = default(decimal);
+        public decimal? MarginFrozen { get; set; } = default;
 
         /// <summary>
         /// 平仓盈亏（使用持仓均价计算，不包含仓位跨结算的已实现盈亏。）	
         /// </summary>
         [JsonProperty("profit", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Profit { get; set; } = default(decimal);
+        public decimal? Profit { get; set; } = default;
 
         /// <summary>
         /// 订单状态(1准备提交 2准备提交 3已提交 4部分成交 5部分成交已撤单 6全部成交 7已撤单 11撤单中)
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Status { get; set; } = default(int);
+        public int? Status { get; set; } = default;
 
         /// <summary>
         /// 订单类型	1:报单 、 2:撤单 、 3:强平、4:交割
         /// </summary>
         [JsonProperty("order_type", NullValueHandling = NullValueHandling.Ignore)]
-        public int? OrderType { get; set; } = default(int);
+        public int? OrderType { get; set; } = default;
 
         /// <summary>
         /// 订单来源（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发 ）
@@ -195,7 +195,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 委托数量
         /// </summary>
         [JsonProperty("volume", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Volume { get; set; } = default(decimal);
+        public decimal? Volume { get; set; } = default;
 
         /// <summary>
         /// 买卖方向 "buy":买 "sell":卖
@@ -261,7 +261,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 1:准备提交、2:已提交、3:报单中、8：撤单未找到、9：撤单中、10：失败
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Status { get; set; } = default(int);
+        public int? Status { get; set; } = default;
 
         /// <summary>
         /// 下order单时间	
@@ -285,7 +285,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapStrategy
         /// 被触发时的价格
         /// </summary>
         [JsonProperty("triggered_price", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TriggeredPrice { get; set; } = default(decimal);
+        public decimal? TriggeredPrice { get; set; } = default;
 
         /// <summary>
         /// 该字段为关联限价单的关联字段，未触发前数值为-1

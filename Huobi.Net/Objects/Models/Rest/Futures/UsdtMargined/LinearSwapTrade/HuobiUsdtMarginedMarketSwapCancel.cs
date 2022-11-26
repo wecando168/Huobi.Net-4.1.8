@@ -39,7 +39,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade
         /// 错误码
         /// </summary>
         [JsonProperty("err_code", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ErrCode { get; set; } = default(int);
+        public int? ErrCode { get; set; } = default;
 
         /// <summary>
         /// 错误信息

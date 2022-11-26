@@ -64,18 +64,18 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapAccount
         /// 品种杠杆倍数
         /// </summary>
         [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-        public int LeverRate { get; set; } = default(int);
+        public int LeverRate { get; set; } = default;
 
         /// <summary>
         /// 合约多仓持仓价值上限，单位USDT
         /// </summary>
         [JsonProperty("buy_limit_value", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal BuyLimitValue { get; set; } = default(decimal);
+        public decimal BuyLimitValue { get; set; } = default;
 
         /// <summary>
         /// 合约空仓持仓价值上限，单位USDT
         /// </summary>
         [JsonProperty("sell_limit_value", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal SellLimitValue { get; set; } = default(decimal);
+        public decimal SellLimitValue { get; set; } = default;
     }
 }
