@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Huobi.Net.Enums;
@@ -16,6 +17,12 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
     /// </summary>
     public interface IHuobiSocketClientSpotStreams : IDisposable
     {
+        /// <summary>
+        /// The factory for creating sockets. Used for unit testing
+        /// </summary>
+        IWebsocketFactory SocketFactory { get; set; }
+
+        #region WebSocket行情数据
         /// <summary>
         /// This topic sends a new candlestick whenever it is available.
         /// K线数据 主题订阅 一旦K线数据产生，Websocket服务器将通过此订阅主题接口推送至客户端：
@@ -36,6 +43,20 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval period, Action<DataEvent<HuobiKline>> onData, CancellationToken ct = default);
+
+        /// <summary>
+        /// Req Specified time candlestick
+        /// WebSocket获取指定时间段的K线
+        /// 单次获取：WebSocket行情数据 
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-candlestick" /></para>
+        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#k-2" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period of a single candlestick</param>
+        /// <param name="startTimeStamp">The candlestick start time stamp</param>
+        /// <param name="endTimeStamp">The candlestick end time stamp</param>
+        /// <returns></returns>
+        Task<CallResult<IEnumerable<HuobiSpecifiedTimeKLine>>> GetSpecifiedTimeKLinesAsync(string symbol, KlineInterval period, long startTimeStamp, long endTimeStamp);
 
         /// <summary>
         /// Gets the current order book for a symbol
@@ -178,7 +199,9 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToBestOfferUpdatesAsync(string symbol,
             Action<DataEvent<HuobiBestOffer>> onData, CancellationToken ct = default);
+        #endregion
 
+        #region WebSocket资产及订单
         /// <summary>
         /// Subscribe to updates of orders
         /// 订阅订单更新
@@ -229,19 +252,6 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToOrderDetailsUpdatesAsync(string? symbol = null,
             Action<DataEvent<HuobiTradeUpdate>>? onOrderMatch = null, Action<DataEvent<HuobiOrderCancelationUpdate>>? onOrderCancel = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Req Specified time candlestick
-        /// WebSocket获取指定时间段的K线
-        /// 单次获取：WebSocket行情数据 
-        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#market-candlestick" /></para>
-        /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#k-2" /></para>
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="period">The period of a single candlestick</param>
-        /// <param name="startTimeStamp">The candlestick start time stamp</param>
-        /// <param name="endTimeStamp">The candlestick end time stamp</param>
-        /// <returns></returns>
-        Task<CallResult<IEnumerable<HuobiSpecifiedTimeKLine>>> GetSpecifiedTimeKLinesAsync(string symbol, KlineInterval period, long startTimeStamp, long endTimeStamp);
+        #endregion
     }
 }

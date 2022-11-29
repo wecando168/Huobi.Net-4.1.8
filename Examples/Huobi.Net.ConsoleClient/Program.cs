@@ -12,7 +12,7 @@ namespace Huobi.Net.ConsoleClient
         static async Task Main(string[] args)
         {
             // REST client
-            using (var client = new HuobiSpotClient())
+            using (var client = new HuobiClient())
             {
                 // Public method
                 var marketDetails = await client.SpotApi.ExchangeData.GetSymbolDetails24HAsync("ethusdt");

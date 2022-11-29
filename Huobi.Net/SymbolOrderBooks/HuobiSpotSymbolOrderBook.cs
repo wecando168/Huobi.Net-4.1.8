@@ -27,7 +27,7 @@ namespace Huobi.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">The symbol the order book is for</param>
         /// <param name="options">The options for the order book</param>
-        public HuobiSpotSymbolOrderBook(string symbol, HuobiSpotOrderBookOptions? options = null) : base("Huobi", symbol, options ?? new HuobiSpotOrderBookOptions())
+        public HuobiSpotSymbolOrderBook(string symbol, HuobiOrderBookOptions? options = null) : base("Huobi", symbol, options ?? new HuobiOrderBookOptions())
         {
             _mergeStep = options?.MergeStep;
             _levels = options?.Levels;

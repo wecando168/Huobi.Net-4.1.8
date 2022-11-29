@@ -11,6 +11,11 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
     public interface IHuobiClientSpotApi : IDisposable
     {
         /// <summary>
+        /// The factory for creating requests. Used for unit testing
+        /// </summary>
+        IRequestFactory RequestFactory { get; set; }
+
+        /// <summary>
         /// Endpoints related to account settings, info or actions
         /// 与帐户设置、信息或操作相关的端点
         /// </summary>

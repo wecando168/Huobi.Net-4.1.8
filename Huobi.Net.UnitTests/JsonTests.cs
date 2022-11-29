@@ -15,12 +15,12 @@ namespace Huobi.Net.UnitTests
     {
         #region 现货相关测试
         //现货返回数据结构测试
-        private JsonToObjectComparer<IHuobiSpotClient> _spotComparer = new JsonToObjectComparer<IHuobiSpotClient>((json) => TestHelpers.CreateSpotResponseClient(json, new HuobiSpotClientOptions()
-        { 
-            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
-            OutputOriginalData = true,
+        private JsonToObjectComparer<IHuobiClient> _comparer = new JsonToObjectComparer<IHuobiClient>((json) => TestHelpers.CreateResponseClient(json, new HuobiClientOptions()
+        {
+            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"),
             SpotApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
             {
+                OutputOriginalData = true,
                 RateLimiters = new List<IRateLimiter>()
             }
         }));
@@ -28,7 +28,7 @@ namespace Huobi.Net.UnitTests
         [Test]
         public async Task ValidateSpotAccountCalls()
         {   
-            await _spotComparer.ProcessSubject("DataResponses/Spot/Account", c => c.SpotApi.Account,
+            await _comparer.ProcessSubject("DataResponses/Spot/Account", c => c.SpotApi.Account,
                 useNestedObjectPropertyForCompare: new Dictionary<string, string> 
                 {
                 },
@@ -43,7 +43,7 @@ namespace Huobi.Net.UnitTests
         [Test]
         public async Task ValidateSpotTradingCalls()
         {
-            await _spotComparer.ProcessSubject("DataResponses/Spot/Trading", c => c.SpotApi.Trading,
+            await _comparer.ProcessSubject("DataResponses/Spot/Trading", c => c.SpotApi.Trading,
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {
                 },
@@ -61,7 +61,7 @@ namespace Huobi.Net.UnitTests
         [Test]
         public async Task ValidateSpotExchangeDataDataCalls()
         {
-            await _spotComparer.ProcessSubject("DataResponses/Spot/ExchangeData", c => c.SpotApi.ExchangeData,
+            await _comparer.ProcessSubject("DataResponses/Spot/ExchangeData", c => c.SpotApi.ExchangeData,
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {
                     { "GetTickersAsync", "Ticks" },
@@ -76,7 +76,7 @@ namespace Huobi.Net.UnitTests
         [Test]
         public async Task ValidateSpotExchangeDataTickCalls()
         {
-            await _spotComparer.ProcessSubject("TickResponses", c => c.SpotApi.ExchangeData,
+            await _comparer.ProcessSubject("TickResponses", c => c.SpotApi.ExchangeData,
                 parametersToSetNull: new [] { "limit" },
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {
@@ -88,12 +88,12 @@ namespace Huobi.Net.UnitTests
 
         #region U本位合约相关测试
         //U本位合约返回数据结构测试
-        private JsonToObjectComparer<IHuobiUsdtMarginedClient> _usdtMarginedComparer = new JsonToObjectComparer<IHuobiUsdtMarginedClient>((json) => TestHelpers.CreateUsdtMarginedResponseClient(json, new HuobiUsdtMarginedClientOptions()
+        private JsonToObjectComparer<IHuobiClient> _usdtMarginedComparer = new JsonToObjectComparer<IHuobiClient>((json) => TestHelpers.CreateResponseClient(json, new HuobiClientOptions()
         {
             ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"),
-            OutputOriginalData = true,
-            UsdtMarginedApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
+            UsdtMarginSwapApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
             {
+                OutputOriginalData = true,
                 RateLimiters = new List<IRateLimiter>()
             }
         }));
@@ -101,7 +101,7 @@ namespace Huobi.Net.UnitTests
         [Test]
         public async Task ValidateFuturesUsdtMarginedLinearSwapMarketDataCalls()
         {
-            await _usdtMarginedComparer.ProcessSubject("DataResponses/Futures/UsdtMargined/LinearSwapmarketData", c => c.UsdtMarginedApi.MarketData,
+            await _usdtMarginedComparer.ProcessSubject("DataResponses/Futures/UsdtMargined/LinearSwapmarketData", c => c.UsdtMarginSwapApi.MarketData,
                 //text文件名与类名对应
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {

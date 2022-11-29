@@ -13,9 +13,16 @@ using CryptoExchange.Net.Logging;
 using Huobi.Net.Clients.SpotApi;
 using Huobi.Net.Objects.Models;
 using CryptoExchange.Net.CommonObjects;
-using Huobi.Net.Objects.Models.Rest.Futures.UsdtMargined.LinearSwapTrade.Request;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade.Request;
 using System.Linq;
-
+using System.Diagnostics;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapReferenceData;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapMarketData;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.CommonBaseModels;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapStrategy;
+using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTransferring;
 #region Provide you API key/secret in these fields to retrieve data related to your account
 const string mainAccessKey = "Use Your Exchange Main Account Access Key";
 const string mainSecretKey = "Use Your Exchange Main Account SecretKey Key";
@@ -34,60 +41,33 @@ const string testQuoteCurrency = "usdt";
 const string testSymbol = "btcusdt";
 const string testETPSymbol = "btc3susdt";
 const string loanOrderId = "XXXXXXXX";
-
 const string testOrderId = "1111111111111111111";
 const string testClientOrderId = "XXXXXXXXXXXXXXXX";
-
 string listenKey = string.Empty;
 #endregion
-
-//配置一个默认的现货Rest Api 客户端
-HuobiSpotClient.SetDefaultOptions(options: new HuobiSpotClientOptions()
+//配置一个默认的Rest Api 客户端
+HuobiClient.SetDefaultOptions(options: new HuobiClientOptions()
 {
     //使用accessKey, secretKey生成一个新的API凭证
     ApiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey),
     //LogLevel = LogLevel.Debug
     LogLevel = LogLevel.Trace,
     //OutputOriginalData = true
-
 });
-
-//配置一个默认的U本位合约Rest Api 客户端
-HuobiUsdtMarginedClient.SetDefaultOptions(options: new HuobiUsdtMarginedClientOptions()
-{
-    //使用accessKey, secretKey生成一个新的API凭证
-    ApiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey),
-    //LogLevel = LogLevel.Debug
-    LogLevel = LogLevel.Trace,
-    //OutputOriginalData = true
-
-});
-
-//配置一个默认的现货webSocket Api 客户端
-HuobiSocketClient.SetDefaultOptions(new HuobiSpotSocketClientOptions()
+//配置一个默认的webSocket Api 客户端
+HuobiSocketClient.SetDefaultOptions(new HuobiSocketClientOptions()
 {
     ApiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey),
     //LogLevel = LogLevel.Debug
     LogLevel = LogLevel.Trace,
     //OutputOriginalData = true
 });
-
-//配置一个默认的U本位合约webSocket Api 客户端
-HuobiUsdtMarginedSocketClient.SetDefaultOptions(new HuobiUsdtMarginedSocketClientOptions()
-{
-    ApiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey),
-    //LogLevel = LogLevel.Debug
-    LogLevel = LogLevel.Trace,
-    //OutputOriginalData = true
-});
-
 string? read = "";
 while (read != "R" && read != "r" && read != "P" && read != "p" && read != "U" && read != "u")
 {
     Console.WriteLine("Run [R]est or [P]ublicSocket  or [U]serSocket example?");
     read = Console.ReadLine();
 }
-
 if (read == "R" || read == "r")
 {
     //一、交易所现货数据接口测试-已完成
@@ -97,7 +77,6 @@ if (read == "R" || read == "r")
     {
         await TestSpotApiExchangeDataEndpoints();
     }
-
     //二、交易所现货账户接口测试-开发中...
     Console.WriteLine($"Press enter to test spot api account endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
@@ -105,7 +84,6 @@ if (read == "R" || read == "r")
     {
         await TestSpotApiAccountEndpoints();
     }
-
     //三、交易所现货交易接口测试-已完成
     Console.WriteLine($"Press enter to test spot api trading endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
@@ -113,65 +91,57 @@ if (read == "R" || read == "r")
     {
         await TestSpotApiTradingEndpoints();
     }
-
     //四、交易所U本位合约基础信息接口测试-已完成
     Console.WriteLine($"Press enter to test usdt margined api reference data endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
-        await TestUsdtMarginedApiReferenceDataEndpoints();
+        await TestUsdtMarginSwapApiReferenceDataEndpoints();
     }
-
     //五、交易所U本位合约市场行情数据接口测试-已完成
     Console.WriteLine($"Press enter to test usdt margined api market data endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
-        await TestUsdtMarginedApiMarketDataEndpoints();
+        await TestUsdtMarginSwapApiMarketDataEndpoints();
     }
-
     //六、交易所U本位合约账户接口测试-已完成
     Console.WriteLine($"Press enter to test usdt margined api account endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
-        await TestUsdtMarginedApiAccountEndpoints();
+        await TestUsdtMarginSwapApiAccountEndpoints();
     }    
-
     //七、交易所U本位合约交易接口测试-已完成
     Console.WriteLine($"Press enter to test usdt margined api Trade endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
-        await TestUsdtMarginedApiTradeEndpoints();
+        await TestUsdtMarginSwapApiTradeEndpoints();
     }
-
     //八、交易所U本位合约策略订单接口测试-开发中...
     Console.WriteLine($"Press enter to test usdt margined api strategy order endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")                        
     {
-        await TestUsdtMarginedApiStrategyOrderEndpoints();
+        await TestUsdtMarginSwapApiStrategyOrderEndpoints();
     }
-
     //九、交易所U本位合约划转接口测试-已完成
     Console.WriteLine($"Press enter to test usdt margined api Trade endpoints, Press [S] to skip current test!");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
-        await TestUsdtMarginedApiTransferringEndpoints();
+        await TestUsdtMarginSwapApiTransferringEndpoints();
     }
 }
 else if (read == "P" || read == "p")
 {
     //现货公有数据WebSocket客户端（无需签名的现货数据订阅）
-    HuobiSocketClient? huobiPublicSocketClient = new();
+    HuobiSocketClient? huobiPublicSocketClient = new HuobiSocketClient();
     CallResult<UpdateSubscription>? publicSubscription = null;
-
     //U本位合约公有数据WebSocket客户端（无需签名的U本位合约数据订阅）
-    HuobiUsdtMarginedSocketClient? huobiPublicUsdtMarginedSocketClient = new();
+    HuobiSocketClient? huobiPublicUsdtMarginedSocketClient = new HuobiSocketClient();
     CallResult<UpdateSubscription>? publicUsdtMarginedSubscription = null;
-
     #region 现货订阅 全部交易代码市场聚合行情数据
     //订阅全部交易代码市场聚合行情数据
     Console.WriteLine($"Press enter to subscribe spot symbols ticker stream, Press [S] to skip current subscription");
@@ -194,19 +164,16 @@ else if (read == "P" || read == "p")
                 Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
             }
         });
-
         if (!publicSubscription.Success)
         {
             Console.WriteLine("Failed to sub" + publicSubscription.Error);
             Console.ReadLine();
             return;
         }
-
         publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
         publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
-
     #region 现货订阅 订阅K线
     //订阅一个交易代码，单时间区间
     Console.WriteLine($"Press enter to subscribe spot one symbol Kline stream, Press [S] to skip current subscription");
@@ -221,7 +188,6 @@ else if (read == "P" || read == "p")
         {
             if (!object.Equals(data, null))
             {
-
                 Console.WriteLine($"现货交易代码：{symbol} 开盘价格：{data.Data.OpenPrice} 收盘价格：{data.Data.ClosePrice} 最高价格：{data.Data.HighPrice} 最低价格：{data.Data.LowPrice}");
             }
             else
@@ -229,19 +195,16 @@ else if (read == "P" || read == "p")
                 Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
             }
         });
-
         if (!publicSubscription.Success)
         {
             Console.WriteLine("Failed to sub" + publicSubscription.Error);
             Console.ReadLine();
             return;
         }
-
         publicSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
         publicSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
-
     #region U本位合约订阅 WebSocket 获取K线
     //获取一个交易代码，指定时间区间
     Console.WriteLine($"Press enter to get usdt margined contract code klines, Press [S] to skip current subscription");
@@ -253,16 +216,14 @@ else if (read == "P" || read == "p")
         string clientId = $"火币U本位合约{contractCode} 获取K线数据";
         long from = 1667232000; //2022-11-01 00:00:00
         long to = 1667260800;   //2022-11-01 08:00:00
-
         Console.WriteLine($"U本位合约Websocket数据获取：获取U本位合约{contractCode} {klineInterval.ToString()} K线");
-        CallResult<IEnumerable<HuobiContractCodeKlineTick>>? huobiContractCodeTickList = await huobiPublicUsdtMarginedSocketClient.UsdtMarginedStreams.GetMarketContractCodeKlineAsync(
+        CallResult<IEnumerable<HuobiContractCodeKlineTick>>? huobiContractCodeTickList = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.GetMarketContractCodeKlineAsync(
             contractCode: contractCode,
             period: klineInterval,
             clientId: clientId,
             from: from,
             to:to
             );
-
         if (!object.Equals(huobiContractCodeTickList, null))
         {
             foreach (var item in huobiContractCodeTickList.Data)
@@ -281,7 +242,6 @@ else if (read == "P" || read == "p")
         }
     }
     #endregion
-
     #region U本位合约订阅 WebSocket 订阅K线
     //订阅一个交易代码，单时间区间
     Console.WriteLine($"Press enter to subscribe usdt margined contract code kline stream, Press [S] to skip current subscription");
@@ -291,9 +251,8 @@ else if (read == "P" || read == "p")
         string contractCode = "BTC-USDT";
         KlineInterval klineInterval = KlineInterval.FiveMinutes;
         string clientId = $"火币U本位合约{contractCode}订阅 K线数据";
-
         Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {klineInterval.ToString()} K线");
-        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginedStreams.SubscribeMarketContractCodeKlineAsync(
+        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeMarketContractCodeKlineAsync(
             contractCode,
             klineInterval,
             clientId, data =>
@@ -313,19 +272,16 @@ else if (read == "P" || read == "p")
                 Console.WriteLine($"订阅火币U本位合约公有数据异常：未正常接收到数据");
             }
         });
-
         if (!publicUsdtMarginedSubscription.Success)
         {
             Console.WriteLine("Failed to sub" + publicUsdtMarginedSubscription.Error);
             Console.ReadLine();
             return;
         }
-
         publicUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
         publicUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
-
     #region U本位合约订阅 WebSocket 订阅 Market Depth 数据
     //订阅一个交易代码，单时间区间
     Console.WriteLine($"Press enter to subscribe usdt margined contract code market depth stream, Press [S] to skip current subscription");
@@ -335,9 +291,8 @@ else if (read == "P" || read == "p")
         string contractCode = "BTC-USDT";
         string type = "step5";
         string clientId = $"火币U本位合约{contractCode}订阅 Market Depth 数据";
-
         Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {type} Market Depth");
-        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginedStreams.SubscribeMarketContractCodeDepthAsync(
+        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeMarketContractCodeDepthAsync(
             contractCode,
             type,
             clientId, data =>
@@ -359,14 +314,12 @@ else if (read == "P" || read == "p")
                     Console.WriteLine($"订阅火币U本位合约公有数据异常：未正常接收到数据");
                 }
             });
-
         if (!publicUsdtMarginedSubscription.Success)
         {
             Console.WriteLine("Failed to sub" + publicUsdtMarginedSubscription.Error);
             Console.ReadLine();
             return;
         }
-
         publicUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
         publicUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
@@ -377,12 +330,10 @@ else if (read == "U" || read == "u")
     //现货私有数据WebSocket客户端（需要签名的现货数据订阅）
     HuobiSocketClient? huobiPrivateSocketClient = new();
     CallResult<UpdateSubscription>? priavteSubscription = null;
-
     //U本位合约私有数据WebSocket客户端（无需签名的现货数据订阅）
-    HuobiUsdtMarginedSocketClient? huobiPrivateUsdtMarginedSocketClient = new();
+    HuobiSocketClient? huobiPrivateUsdtMarginedSocketClient = new();
     CallResult<UpdateSubscription>? privateUsdtMarginedSubscription = null;
-
-    #region 对现货WebSocket客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
+    #region 对现货、合约WebSocket客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
     //使用accessKey, secretKey生成一个新的API凭证
     ApiCredentials apiCredentials = new (mainAccessKey, mainSecretKey);
     //当前客户端使用新生成的API凭证
@@ -391,13 +342,12 @@ else if (read == "U" || read == "u")
     #endregion
 
     #region 现货订阅 账户资产变更（实时）
-    Console.WriteLine($"Press enter to subscribe account deals stream");
+    Console.WriteLine($"Press enter to subscribe account deals stream, Press [S] to skip current subscription");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
         //订阅账户变更
         priavteSubscription = await huobiPrivateSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(OnHuobiAccountUpdate, 1);
-
         /// <summary>
         /// 火币订阅账户变更：当账户更新时–HuobiAccountUpdate
         /// </summary>
@@ -406,7 +356,6 @@ else if (read == "U" || read == "u")
         {
             if (!object.Equals(data, null))
             {
-
                 Console.WriteLine($"账户编号：{data.Data.AccountId} 账户类型：{data.Data.AccountType} 币种名称：{data.Data.Asset} 数量：{data.Data.Balance} 更新时间：{data.Data.ChangeTime}");
             }
             else
@@ -414,7 +363,6 @@ else if (read == "U" || read == "u")
                 Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
             }
         }
-
         if (!priavteSubscription.Success)
         {
             Console.WriteLine("Failed to sub" + priavteSubscription.Error);
@@ -422,20 +370,18 @@ else if (read == "U" || read == "u")
             Console.ReadLine();
             return;
         }
-
         priavteSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
         priavteSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 
     #region 现货订阅 火币订阅清算后成交及撤单更新（实时）
-    Console.WriteLine($"Press enter to subscribe account deals stream");
+    Console.WriteLine($"Press enter to subscribe order details updates stream, Press [S] to skip current subscription");
     read = Console.ReadLine();
     if (read != "S" && read != "s")
     {
         //订阅火币订阅清算后成交及撤单更新
         priavteSubscription = await huobiPrivateSocketClient.SpotStreams.SubscribeToOrderDetailsUpdatesAsync(null, OnHuobiTradeUpdate, null);
-
         /// <summary>
         /// 火币订阅清算后成交及撤单更新：当订单成交后–OnHuobiTradeUpdate
         /// （策略补单功能在这里实现）
@@ -445,10 +391,8 @@ else if (read == "U" || read == "u")
         {
             DataEvent<HuobiTradeUpdate> response = data;
             HuobiTradeUpdate huobiTradeUpdate = data.Data;
-
             if (!object.Equals(data, null))
             {
-
                 Console.WriteLine($"账户编号：{huobiTradeUpdate.AccountId} 订单编号：{huobiTradeUpdate.OrderId} 用户自定义单号：{huobiTradeUpdate.ClientOrderId}\r\n" +
                     $"订单价格：{huobiTradeUpdate.OrderPrice} 订单数量：{huobiTradeUpdate.OrderQuantity} 订单状态：{huobiTradeUpdate.OrderStatus}\r\n" +
                     $"成交价格：{huobiTradeUpdate.Price} 成交数量：{huobiTradeUpdate.Quantity} 成交金额：{huobiTradeUpdate.Price * huobiTradeUpdate.Quantity}");
@@ -458,7 +402,6 @@ else if (read == "U" || read == "u")
                 Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
             }
         }
-
         if (!priavteSubscription.Success)
         {
             Console.WriteLine("Failed to sub" + priavteSubscription.Error);
@@ -466,24 +409,284 @@ else if (read == "U" || read == "u")
             Console.ReadLine();
             return;
         }
-
         priavteSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
         priavteSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
-}
 
+    #region U本位合约订阅 WebSocket 订阅【逐仓】订单成交数据
+    //订阅【逐仓】订单成交数据
+    Console.WriteLine($"Press enter to subscribe usdt margined isolated order data stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        #region 对合约WebSocket客户端的新实例使用新的设置(主账号）
+        //使用accessKey, secretKey生成一个新的API凭证
+        apiCredentials = new(mainAccessKey, mainSecretKey);
+        //当前客户端使用新生成的API凭证
+        huobiPrivateUsdtMarginedSocketClient.SetApiCredentials(apiCredentials);
+        #endregion
+        string contractCode = "*";
+        string clientId = $"火币U本位合约【逐仓】订阅{contractCode}订单成交数据";
+        Console.WriteLine($"U本位合约Websocket主题订阅：【逐仓】订阅{contractCode}订单成交数据");
+        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderContractCodeAsync(
+            contractCode,
+            clientId, data =>
+            {
+                if (!object.Equals(data, null))
+                {
+                    Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
+                    foreach (var item in data.Data.HuobiUsdtMarginedIsolatedWSTrades)
+                    {
+                        Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+                }
+            });
+        if (!privateUsdtMarginedSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            Console.ReadLine();
+            return;
+        }
+        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
+
+    #region U本位合约订阅 WebSocket 订阅【全仓】订单成交数据
+    //订阅【全仓】订单成交数据
+    Console.WriteLine($"Press enter to subscribe usdt margined cross order data stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        string contractCode = "*";
+        string clientId = $"火币U本位合约【全仓】订阅{contractCode}订单成交数据";
+        Console.WriteLine($"U本位合约Websocket主题订阅：【全仓】订阅{contractCode}订单成交数据");
+        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderCrossContractCodeAsync(
+            contractCode,
+            clientId, data =>
+            {
+                if (!object.Equals(data, null))
+                {
+                    Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
+                    foreach (var item in data.Data.HuobiUsdtMarginedCrossWSTrades)
+                    {
+                        Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+                }
+            });
+        if (!privateUsdtMarginedSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            Console.ReadLine();
+            return;
+        }
+        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
+
+    #region U本位合约订阅 WebSocket 订阅【逐仓】资产变动
+    //订阅【逐仓】资产变动
+    Console.WriteLine($"Press enter to subscribe usdt margined isolated account equity updates stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        #region 对合约WebSocket客户端的新实例使用新的设置(主账号）
+        //使用accessKey, secretKey生成一个新的API凭证
+        apiCredentials = new(mainAccessKey, mainSecretKey);
+        //当前客户端使用新生成的API凭证
+        huobiPrivateUsdtMarginedSocketClient.SetApiCredentials(apiCredentials);
+        #endregion
+        string contractCode = "DOGE-USDT";
+        string clientId = $"火币U本位合约【逐仓】订阅{contractCode}资产变动";
+        Console.WriteLine($"U本位合约Websocket主题订阅：【逐仓】订阅{contractCode}资产变动");
+        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsContractCodeAsync(
+            contractCode,
+            clientId, data =>
+            {
+                if (!object.Equals(data, null))
+                {
+                    foreach (var item in data.Data)
+                    {
+                        Console.WriteLine($"保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode} 持仓模式：{item.PositionMode} \r\n" +
+                            $"合约代码：{item.ContractCode} 账户权益：{item.MarginBalance} 可用保证金：{item.MarginAvailable} 冻结保证金：{item.MarginFrozen}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+                }
+            });
+        if (!privateUsdtMarginedSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            Console.ReadLine();
+            return;
+        }
+        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
+
+    #region U本位合约订阅 WebSocket 订阅【全仓】资产变动
+    //订阅【全仓】资产变动
+    Console.WriteLine($"Press enter to subscribe usdt margined cross account equity updates stream, Press [S] to skip current subscription");
+    read = Console.ReadLine();
+    if (read != "S" && read != "s")
+    {
+        string marginAccount = "USDT";
+        string clientId = $"火币U本位合约【全仓】订阅{marginAccount}资产变动";
+        Console.WriteLine($"U本位合约Websocket主题订阅：【全仓】订阅{marginAccount}资产变动");
+        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsCrossContractCodeAsync(
+            marginAccount,
+            clientId, data =>
+            {
+                if (!object.Equals(data, null))
+                {
+                    foreach (var item in data.Data)
+                    {
+                        Console.WriteLine($"保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode} 持仓模式：{item.PositionMode}");
+                        foreach (var contractDetail in item.ContractDetails)
+                        {
+                            Console.WriteLine($"合约代码：{contractDetail.ContractCode} 持仓保证金：{contractDetail.MarginPosition} 可用保证金：{contractDetail.MarginAvailable} 冻结保证金：{contractDetail.MarginFrozen}");
+                        }
+                        foreach (var futuresContractDetail in item.FuturesContractDetails)
+                        {
+                            Console.WriteLine($"合约代码：{futuresContractDetail.ContractCode} 持仓保证金：{futuresContractDetail.MarginPosition} 可用保证金：{futuresContractDetail.MarginAvailable} 冻结保证金：{futuresContractDetail.MarginFrozen}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+                }
+            });
+        if (!privateUsdtMarginedSubscription.Success)
+        {
+            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            Console.ReadLine();
+            return;
+        }
+        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    }
+    #endregion
+
+    //#region U本位合约订阅 WebSocket 订阅【逐仓】订单撮合数据
+    ////订阅【逐仓】订单撮合数据
+    //Console.WriteLine($"Press enter to subscribe usdt margined isolated account equity updates stream, Press [S] to skip current subscription");
+    //read = Console.ReadLine();
+    //if (read != "S" && read != "s")
+    //{
+    //    #region 对合约WebSocket客户端的新实例使用新的设置(主账号）
+    //    //使用accessKey, secretKey生成一个新的API凭证
+    //    apiCredentials = new(mainAccessKey, mainSecretKey);
+    //    //当前客户端使用新生成的API凭证
+    //    huobiPrivateUsdtMarginedSocketClient.SetApiCredentials(apiCredentials);
+    //    #endregion
+    //    string contractCode = "DOGE-USDT";
+    //    string clientId = $"火币U本位合约【逐仓】订阅{contractCode}订单撮合数据";
+    //    Console.WriteLine($"U本位合约Websocket主题订阅：【逐仓】订阅{contractCode}订单撮合数据");
+    //    privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeMatchOrdersContractCodeAsync(
+    //        contractCode,
+    //        clientId, data =>
+    //        {
+    //            if (!object.Equals(data, null))
+    //            {
+    //                Console.WriteLine($"保证金账户：{data.Data.MarginAccount} 合约代码：{data.Data.ContractCode} 订单编号：{data.Data.OrderId} 客户订单编号：{data.Data.OrderId} \r\n" +
+    //                    $"订单总委托数量：{data.Data.Volume} 委托价格：{data.Data.Price} 订单已成交数量：{data.Data.TradeVolume} 买卖方向：{data.Data.Direction} 开平方向：{data.Data.Offset} 杠杆倍数：{data.Data.LeverRate}");
+    //                foreach (var item in data.Data.WSIsolatedTradeInfos)
+    //                {
+    //                    Console.WriteLine($"交易标识：{item.Id} 撮合编号：{item.TradeId} 成交价格：{item.TradePrice} 成交量（张）：{item.TradeVolume} 成交金额：{item.TradeTurnover}");
+    //                }
+    //            }
+    //            else
+    //            {
+    //                Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+    //            }
+    //        });
+    //    if (!privateUsdtMarginedSubscription.Success)
+    //    {
+    //        Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+    //        Console.ReadLine();
+    //        return;
+    //    }
+    //    privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+    //    privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    //}
+    //#endregion
+
+    //#region U本位合约订阅 WebSocket 订阅【全仓】订单撮合数据
+    ////订阅【全仓】订单撮合数据
+    //Console.WriteLine($"Press enter to subscribe usdt margined cross account equity updates stream, Press [S] to skip current subscription");
+    //read = Console.ReadLine();
+    //if (read != "S" && read != "s")
+    //{
+    //    string contractCode = "DOGE-USDT";
+    //    string clientId = $"火币U本位合约【全仓】订阅{contractCode}订单撮合数据";
+    //    Console.WriteLine($"U本位合约Websocket主题订阅：【全仓】订阅{contractCode}订单撮合数据");
+    //    privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeMatchOrdersCrossContractCodeAsync(
+    //        contractCode,
+    //        clientId, data =>
+    //        {
+    //            if (!object.Equals(data, null))
+    //            {
+    //                Console.WriteLine($"保证金账户：{data.Data.MarginAccount} 合约代码：{data.Data.ContractCode} 订单编号：{data.Data.OrderId} 客户订单编号：{data.Data.OrderId} \r\n" +
+    //                    $"订单总委托数量：{data.Data.Volume} 委托价格：{data.Data.Price} 订单已成交数量：{data.Data.TradeVolume} 买卖方向：{data.Data.Direction} 开平方向：{data.Data.Offset} 杠杆倍数：{data.Data.LeverRate}");
+    //                foreach (var item in data.Data.WSCrossTradeInfos)
+    //                {
+    //                    Console.WriteLine($"交易标识：{item.Id} 撮合编号：{item.TradeId} 成交价格：{item.TradePrice} 成交量（张）：{item.TradeVolume} 成交金额：{item.TradeTurnover}");
+    //                }
+    //            }
+    //            else
+    //            {
+    //                Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+    //            }
+    //        });
+    //    if (!privateUsdtMarginedSubscription.Success)
+    //    {
+    //        Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+    //        Console.ReadLine();
+    //        return;
+    //    }
+    //    privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+    //    privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+    //}
+    //#endregion
+}
+static void ErrorInfoOutput<T>(WebCallResult<T> webCallResult, string serverName, string taskName)
+{
+    Console.WriteLine($"{serverName}：{taskName}异常\r\n" +
+    $"错误信息：{(webCallResult.Error == null ? "null" : webCallResult.Error)}\r\n" +
+    $"错误代码：{(webCallResult.Error == null ? "null" : webCallResult.Error.Code)}\r\n" +
+    $"错误提示：{(webCallResult.Error == null ? "null" : webCallResult.Error.Data)}");
+    string? read = string.Empty;
+    Console.WriteLine($"Return an error, press Enter to ignore the error and continue to run, Press [S] to stop test!");
+    read = Console.ReadLine();
+    if (read == "S" || read == "s")
+    {
+        Process.GetCurrentProcess().Kill();
+    }
+}
 //交易所现货数据接口测试-已完成
 static async Task TestSpotApiExchangeDataEndpoints()
 {
-    using (var huobiSpotRestClient = new HuobiSpotClient())
+    using (var huobiSpotRestClient = new HuobiClient())
     {
         #region 获取当前市场最新状态
         {
             await HandleRequest("Market Status", () => huobiSpotRestClient.SpotApi.ExchangeData.GetMarketStatusAsync(),
                 result => $"{result.Status.ToString()}"
                 );
-
             //Console.WriteLine("获取当前市场最新状态");
             //var result = await huobiSpotRestClient.SpotApi.ExchangeData.GetMarketStatusAsync();
             //if (result.Success)
@@ -503,14 +706,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             //}
             //else
             //{
-            //    Console.WriteLine($"火币现货服务器："+ "获取当前市场最新状态" + "异常\r\n" +
-            //        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-            //        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-            //        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            //    ErrorInfoOutput<HuobiMarketStatus>(result, "火币现货服务器", "获取服务器当前时间");
             //}
         }
         #endregion
-
         #region 获取服务器当前时间
         {
             Console.WriteLine("获取服务器当前时间");
@@ -525,14 +724,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取服务器当前时间" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<DateTime>(result, "火币现货服务器", "获取服务器当前时间");
             }
         }
         #endregion
-
         #region 获取币链参考信息
         {
             Console.WriteLine("获取币链参考信息");
@@ -546,14 +741,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取币链参考信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiAssetInfo>>(result, "火币现货服务器", "获取币链参考信息");
             }
         }
         #endregion
-
         #region 获取现货币种信息
         {
             Console.WriteLine("获取现货币种信息");
@@ -567,14 +758,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取现货币种信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<string>>(result, "火币现货服务器", "获取现货币种信息");
             }
         }
         #endregion
-
         #region 获取现货K线数据
         {
             Console.WriteLine("获取现货K线数据");
@@ -592,14 +779,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取现货K线数据" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiKline>>(result, "火币现货服务器", "获取现货K线数据");
             }
         }
         #endregion
-
         #region 获取现货交易代码
         {
             Console.WriteLine("获取现货交易代码");
@@ -613,14 +796,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取现货交易代码" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiSymbol>>(result, "火币现货服务器", "获取现货交易代码");
             }
         }
         #endregion
-
         #region 获取所有现货交易代码最新行情
         {
             Console.WriteLine("获取所有现货交易代码最新行情");
@@ -631,14 +810,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取所有现货交易代码最新行情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSymbolTicks>(result, "火币现货服务器", "获取所有现货交易代码最新行情");
             }
         }
         #endregion
-
         #region 获取指定现货杠杆代码ETP实时净值
         {
             Console.WriteLine("获取指定现货杠杆代码ETP实时净值");
@@ -649,14 +824,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取指定现货杠杆代码ETP实时净值" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiNav>(result, "火币现货服务器", "获取指定现货杠杆代码ETP实时净值");
             }
         }
         #endregion
-
         #region 获取指定现货交易代码市场行情深度
         {
             Console.WriteLine("获取指定现货交易代码市场行情深度");
@@ -670,14 +841,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取指定现货交易代码市场行情深度" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiOrderBook>(result, "火币现货服务器", "获取指定现货交易代码市场行情深度");
             }
         }
         #endregion
-
         #region 获取指定现货交易代码24小时行情汇总
         {
             Console.WriteLine("获取指定现货交易代码24小时行情汇总");
@@ -690,14 +857,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取指定现货交易代码24小时行情汇总" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSymbolDetails>(result, "火币现货服务器", "获取指定现货交易代码24小时行情汇总");
             }
         }
         #endregion
-
         #region 获取指定现货交易代码24小时行情汇总以及最佳买入卖出价格
         {
             Console.WriteLine("获取指定现货交易代码24小时行情汇总以及最佳买入卖出价格");
@@ -710,14 +873,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取指定现货交易代码24小时行情汇总以及最佳买入卖出价格" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSymbolTickMerged>(result, "火币现货服务器", "获取指定现货交易代码24小时行情汇总以及最佳买入卖出价格");
             }
         }
         #endregion
-
         #region 获取指定现货交易代码最近成交记录
         {
             Console.WriteLine("获取指定现货交易代码最近成交记录");
@@ -728,14 +887,10 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "获取指定现货交易代码最近成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSymbolTrade>(result, "火币现货服务器", "获取指定现货交易代码最近成交记录");
             }
         }
         #endregion
-
         #region 获取指定现货交易代码近期的所有交易记录
         {
             Console.WriteLine("获取指定现货交易代码近期的所有交易记录");
@@ -752,22 +907,17 @@ static async Task TestSpotApiExchangeDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器："+ "获取指定现货交易代码近期的所有交易记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiSymbolTrade>>(result, "火币现货服务器", "获取指定现货交易代码近期的所有交易记录");
             }            
         }
         #endregion
     }
 }
-
 //交易所现货账户接口测试-已完成
 static async Task TestSpotApiAccountEndpoints()
 {
     decimal loanAmount = 0.0M;
-
-    using (var huobiSpotRestClient = new HuobiSpotClient())
+    using (var huobiSpotRestClient = new HuobiClient())
     {
         #region 对HuobiClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
@@ -775,15 +925,12 @@ static async Task TestSpotApiAccountEndpoints()
         //当前客户端使用新生成的API凭证
         huobiSpotRestClient.SetApiCredentials(apiCredentials);
         #endregion
-
         #region 查询母子用户API Key信息
         {
             {
                 Console.WriteLine("查询母用户API Key信息");
-
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.APIKeyQueryAsync(long.Parse(mainUserId));
                 if (result.Success)
                 {
@@ -794,18 +941,13 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "查询母用户API Key信息" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiAPIKeyQuery>>(result, "火币现货服务器", "查询母用户API Key信息");
                 }
             }
             {
                 Console.WriteLine("查询子用户API Key信息");
-
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.APIKeyQueryAsync(long.Parse(subUserId));
                 if (result.Success)
                 {
@@ -816,23 +958,17 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "查询子用户API Key信息" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiAPIKeyQuery>>(result, "火币现货服务器", "查询子用户API Key信息");
                 }
             }
         }
         #endregion
-
         #region 通过用户账户Id查询账户流水
         {
             {
                 Console.WriteLine("通过用户账户Id查询账户流水(母用户示范）");
-
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAccountHistoryAsync(long.Parse(mainSportAccountId));
                 if (result.Success)
                 {
@@ -843,18 +979,13 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "通过用户账户Id查询账户流水(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiAccountHistory>>(result, "火币现货服务器", "通过用户账户Id查询账户流水(母用户示范）");
                 }
             }
             {
                 Console.WriteLine("通过用户账户Id查询账户流水(子用户示范）");
-
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAccountHistoryAsync(long.Parse(subSportAccountId));
                 if (result.Success)
                 {
@@ -865,23 +996,17 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "通过用户账户Id查询账户流水(子母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiAccountHistory>>(result, "火币现货服务器", "通过用户账户Id查询账户流水(子母用户示范）");
                 }
             }
         }
         #endregion
-
         #region 通过用户账户Id查询财务流水
         {
             {
                 Console.WriteLine("通过用户账户Id查询财务流水(母用户示范）");
-
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAccountLedgerAsync(long.Parse(mainSportAccountId));
                 if (result.Success)
                 {
@@ -892,18 +1017,13 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "通过用户账户Id查询财务流水(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiLedgerEntry>>(result, "火币现货服务器", "通过用户账户Id查询财务流水(母用户示范）");
                 }
             }
             {
                 Console.WriteLine("通过用户账户Id查询财务流水(子用户示范）");
-
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAccountLedgerAsync(long.Parse(subSportAccountId));
                 if (result.Success)
                 {
@@ -914,24 +1034,17 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "通过用户账户Id查询财务流水(子用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiLedgerEntry>>(result, "火币现货服务器", "通过用户账户Id查询财务流水(子用户示范）");
                 }
             }
-
         }
         #endregion
-
         #region 查询当前用户的所有账户ID
         {
             {
                 Console.WriteLine("查询当前用户的所有账户ID(母用户示范）");
-
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAccountsAsync();
                 if (result.Success)
                 {
@@ -942,18 +1055,13 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "查询当前用户的所有账户ID(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiAccount>>(result, "火币现货服务器", "查询当前用户的所有账户ID(母用户示范）");
                 }
             }
             {
                 Console.WriteLine("查询当前用户的所有账户ID(子用户示范）");
-
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAccountsAsync();
                 if (result.Success)
                 {
@@ -964,23 +1072,17 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "查询当前用户的所有账户ID(子用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiAccount>>(result, "火币现货服务器", "查询当前用户的所有账户ID(子用户示范）");
                 }
             }
         }
         #endregion
-
         #region 获取平台资产总估值(按照BTC或法币计价单位）
         {
             {
                 Console.WriteLine("获取平台资产总估值(母用户示范）");
-
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Spot);
                 if (result.Success)
                 {
@@ -988,10 +1090,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "现货账户" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "现货账户获取平台资产总估值(母用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Margin);
                 if (result.Success)
@@ -1000,10 +1099,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "杠杆账户" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "杠杆账户获取平台资产总估值(母用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Point);
                 if (result.Success)
@@ -1012,10 +1108,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "点卡账户" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "点卡账户获取平台资产总估值(母用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.CrossMargin);
                 if (result.Success)
@@ -1024,10 +1117,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "全仓杠杆账户" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "全仓杠杆账户获取平台资产总估值(母用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Minepool);
                 if (result.Success)
@@ -1036,10 +1126,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "矿池账户" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "矿池账户获取平台资产总估值(母用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Etf);
                 if (result.Success)
@@ -1048,10 +1135,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "ETF账户" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "ETF账户获取平台资产总估值(母用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.CryptoLoans);
                 if (result.Success)
@@ -1060,10 +1144,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "抵押借贷" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "抵押借贷获取平台资产总估值(母用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Otc);
                 if (result.Success)
@@ -1072,18 +1153,13 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "OTC账户" + "获取平台资产总估值(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "OTC账户获取平台资产总估值(母用户示范）");
                 }
             }
             {
                 Console.WriteLine("平台资产总估值(子用户示范）");
-
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Spot);
                 if (result.Success)
                 {
@@ -1091,10 +1167,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "现货账户" + "获取平台资产总估值(子用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "现货账户获取平台资产总估值(子用户示范）");
                 }
                 result = await huobiSpotRestClient.SpotApi.Account.GetAssetValuationAsync(AccountType.Margin);
                 if (result.Success)
@@ -1103,23 +1176,17 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "杠杆账户" + "获取平台资产总估值(子用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiAccountValuation>(result, "火币现货服务器", "杠杆账户获取平台资产总估值(子用户示范）");
                 }
             }
         }
         #endregion
-
         #region 获取账户余额
         {
             {
                 Console.WriteLine("获取账户余额(母用户示范）");
-
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetBalancesAsync(long.Parse(mainSportAccountId));
                 if (result.Success)
                 {
@@ -1131,12 +1198,8 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "现货账户" + "获取账户余额(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiBalance>>(result, "火币现货服务器", "现货账户获取账户余额(母用户示范）");
                 }
-
                 result = await huobiSpotRestClient.SpotApi.Account.GetBalancesAsync(long.Parse(mainUsdtMarginedAccountId));
                 if (result.Success)
                 {
@@ -1148,18 +1211,13 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "U本位合约账户" + "获取账户余额(母用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiBalance>>(result, "火币现货服务器", "U本位合约账户获取账户余额(母用户示范）");
                 }
             }
             {
                 Console.WriteLine("获取账户余额(子用户示范）");
-
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
                 var result = await huobiSpotRestClient.SpotApi.Account.GetBalancesAsync(long.Parse(subSportAccountId));
                 if (result.Success)
                 {
@@ -1171,12 +1229,8 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "现货账户" + "获取账户余额(子用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiBalance>>(result, "火币现货服务器", "现货账户获取账户余额(子用户示范）");
                 }
-
                 result = await huobiSpotRestClient.SpotApi.Account.GetBalancesAsync(long.Parse(subUsdtMarginedAccountId));
                 if (result.Success)
                 {
@@ -1188,22 +1242,16 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "U本位合约账户" + "获取账户余额(子用户示范）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiBalance>>(result, "火币现货服务器", "U本位合约账户获取账户余额(子用户示范）");
                 }
             }
         }
         #endregion
-
         #region 【全仓】查询借币币息率及额度
         {
             Console.WriteLine("【全仓】查询借币币息率及额度");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetCrossLoanInterestRateAndQuotaAsync();
             if (result.Success)
             {
@@ -1214,21 +1262,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "【全仓】查询借币币息率及额度" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiLoanInfoAsset>>(result, "火币现货服务器", "【全仓】查询借币币息率及额度");
             }
         }
         #endregion
-
         #region 【全仓】查询借币账户详情
         {
             Console.WriteLine("【全仓】查询借币账户详情");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetCrossMarginBalanceAsync();
             if (result.Success)
             {
@@ -1236,21 +1278,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "【全仓】查询借币账户详情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiMarginBalances>(result, "火币现货服务器", "【全仓】查询借币账户详情");
             }
         }
         #endregion
-
         #region 【全仓】查询借币订单
         {
             Console.WriteLine("【全仓】查询借币订单");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetCrossMarginClosedOrdersAsync();
             if (result.Success)
             {
@@ -1261,21 +1297,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "【全仓】查询借币订单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiMarginOrder>>(result, "火币现货服务器", "【全仓】查询借币订单");
             }
         }
         #endregion
-
         #region 查询指定币种充币地址
         {
             Console.WriteLine("查询指定币种充币地址");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetDepositAddressesAsync(testBaseCurrency);
             if (result.Success)
             {
@@ -1286,12 +1316,8 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询指定币种充币地址" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiDepositAddress>>(result, "火币现货服务器", "查询指定币种充币地址");
             }
-
             result = await huobiSpotRestClient.SpotApi.Account.GetDepositAddressesAsync(testQuoteCurrency);
             if (result.Success)
             {
@@ -1299,21 +1325,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询指定币种充币地址" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiDepositAddress>>(result, "火币现货服务器", "查询指定币种充币地址");
             }
         }
         #endregion
-
         #region 【逐仓】查询借币币息率及额度
         {
             Console.WriteLine("【逐仓】查询借币币息率及额度");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetIsolatedLoanInterestRateAndQuotaAsync();
             if (result.Success)
             {
@@ -1324,21 +1344,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "【逐仓】查询借币币息率及额度" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiLoanInfo>>(result, "火币现货服务器", "【逐仓】查询借币币息率及额度");
             }
         }
         #endregion
-
         #region 【逐仓】查询借币账户详情
         {
             Console.WriteLine("【逐仓】查询借币账户详情");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetIsolatedMarginBalanceAsync(testSymbol);
             if (result.Success)
             {
@@ -1346,21 +1360,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "【逐仓】查询借币账户详情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiMarginBalances>>(result, "火币现货服务器", "【逐仓】查询借币账户详情");
             }
         }
         #endregion
-
         #region 【逐仓】查询借币订单
         {
             Console.WriteLine("【逐仓】查询借币订单");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetIsolatedMarginClosedOrdersAsync(testSymbol);
             if (result.Success)
             {
@@ -1371,21 +1379,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "【逐仓】查询借币订单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiMarginOrder>>(result, "火币现货服务器", "【逐仓】查询借币订单");
             }
         }
         #endregion
-
         #region 查询还币交易记录
         {
             Console.WriteLine("查询还币交易记录");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetRepaymentHistoryAsync();
             if (result.Success)
             {
@@ -1396,21 +1398,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询还币交易记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiRepayment>>(result, "火币现货服务器", "查询还币交易记录");
             }
         }
         #endregion
-
         #region 主用户查询子用户余额
         {
             Console.WriteLine("主用户查询子用户余额");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetSubAccountBalancesAsync(long.Parse(subUserId));
             if (result.Success)
             {
@@ -1421,21 +1417,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "主用户查询子用户余额" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiBalance>>(result, "火币现货服务器", "主用户查询子用户余额");
             }
         }
         #endregion
-
         #region 主用户获取子用户列表
         {
             Console.WriteLine("主用户获取子用户列表");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetSubAccountUsersAsync();
             if (result.Success)
             {
@@ -1446,21 +1436,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "主用户获取子用户列表" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUser>>(result, "火币现货服务器", "主用户获取子用户列表");
             }
         }
         #endregion
-
         #region 主用户获取指定子用户的账户列表
         {
             Console.WriteLine("主用户获取指定子用户的账户列表");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetSubUserAccountsAsync(long.Parse(subUserId));
             if (result.Success)
             {
@@ -1468,21 +1452,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "主用户获取指定子用户的账户列表" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSubUserAccounts>(result, "火币现货服务器", "主用户获取指定子用户的账户列表");
             }
         }
         #endregion
-
         #region 主用户获取自身Uid
         {
             Console.WriteLine("主用户获取自身Uid");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetUserIdAsync();
             if (result.Success)
             {
@@ -1490,21 +1468,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "主用户获取自身Uid" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "主用户获取自身Uid");
             }
         }
         #endregion
-
         #region 查询充提记录
         {
             Console.WriteLine("查询充提记录");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.GetWithdrawDepositAsync(WithdrawDepositType.Withdraw);
             if (result.Success)
             {
@@ -1516,12 +1488,8 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询充值记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiWithdrawDeposit>>(result, "火币现货服务器", "查询充值记录");
             }
-
             result = await huobiSpotRestClient.SpotApi.Account.GetWithdrawDepositAsync(WithdrawDepositType.Deposit);
             if (result.Success)
             {
@@ -1533,21 +1501,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询提币记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiWithdrawDeposit>>(result, "火币现货服务器", "查询提币记录");
             }
         }
         #endregion
-
         #region 执行冻结或解冻子用户
         {
             Console.WriteLine("执行冻结或解冻子用户");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var Action = SubAccountManageAction.Unlock;
             if (Action == SubAccountManageAction.Unlock)
             {
@@ -1558,10 +1520,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "执行解冻子用户" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiLockOrUnlockSubUser>(result, "火币现货服务器", "执行解冻子用户");
                 }
             }
             else
@@ -1580,23 +1539,17 @@ static async Task TestSpotApiAccountEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币现货服务器：" + "执行冻结子用户" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiLockOrUnlockSubUser>(result, "火币现货服务器", "执行冻结子用户");
                     }
                 }
             }
         }
         #endregion
-
         #region 【全仓】归还借币
         {
             Console.WriteLine("【全仓】归还借币");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             if (loanAmount == 0)
             {
                 var result = await huobiSpotRestClient.SpotApi.Account.RepayCrossMarginLoanAsync(loanOrderId, loanAmount);
@@ -1606,10 +1559,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "【全仓】归还借币" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<object>(result, "火币现货服务器", "【全仓】归还借币");
                 }
             }
             else
@@ -1618,14 +1568,11 @@ static async Task TestSpotApiAccountEndpoints()
             }
         }
         #endregion
-
         #region 【逐仓】归还借币
         {
             Console.WriteLine("【逐仓】归还借币");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             if (loanAmount == 0)
             {
                 var result = await huobiSpotRestClient.SpotApi.Account.RepayIsolatedMarginLoanAsync(loanOrderId, loanAmount);
@@ -1635,10 +1582,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "【逐仓】归还借币" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<long>(result, "火币现货服务器", "【逐仓】归还借币");
                 }
             }
             else
@@ -1647,14 +1591,11 @@ static async Task TestSpotApiAccountEndpoints()
             }
         }
         #endregion
-
         #region 【通用】归还借币
         {
             Console.WriteLine("【通用】归还借币");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             if (loanAmount == 0)
             {
                 var result = await huobiSpotRestClient.SpotApi.Account.RepayMarginLoanAsync(mainSportAccountId, loanOrderId, loanAmount);
@@ -1664,10 +1605,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "【通用】归还借币" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiRepaymentResult>>(result, "火币现货服务器", "【通用】归还借币");
                 }
             }
             else
@@ -1676,14 +1614,11 @@ static async Task TestSpotApiAccountEndpoints()
             }
         }
         #endregion
-
         #region 【全仓】申请借币
         {
             Console.WriteLine("【全仓】申请借币");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             if (loanAmount == 0)
             {
                 var result = await huobiSpotRestClient.SpotApi.Account.RequestCrossMarginLoanAsync(
@@ -1696,10 +1631,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "【全仓】申请借币" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<long>(result, "火币现货服务器", "【全仓】申请借币");
                 }
             }
             else
@@ -1708,14 +1640,11 @@ static async Task TestSpotApiAccountEndpoints()
             }
         }
         #endregion
-
         #region 【逐仓】申请借币
         {
             Console.WriteLine("【逐仓】申请借币");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             if (loanAmount == 0)
             {
                 var result = await huobiSpotRestClient.SpotApi.Account.RequestIsolatedMarginLoanAsync(
@@ -1729,10 +1658,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "【逐仓】申请借币" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<long>(result, "火币现货服务器", "【逐仓】申请借币");
                 }
             }
             else
@@ -1741,14 +1667,11 @@ static async Task TestSpotApiAccountEndpoints()
             }
         }
         #endregion
-
         #region 子用户创建API Key
         {
             Console.WriteLine("子用户创建API Key");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.SubUserAPIKeyCreationAsync("otpToken", long.Parse(subUserId));
             if (result.Success)
             {
@@ -1756,21 +1679,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "子用户创建API Key" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSubUserAPIKeyCreation>(result, "火币现货服务器", "子用户创建API Key");
             }
         }
         #endregion
-
         #region 子用户删除API Key
         {
             Console.WriteLine("子用户删除API Key");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.SubUserAPIKeyDeletionAsync(long.Parse(subUserId), "AccessKeyValue");
             if (result.Success)
             {
@@ -1778,21 +1695,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "子用户删除API Key" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSubUserAPIKeyDeletion>(result, "火币现货服务器", "子用户删除API Key");
             }
         }
         #endregion
-
         #region 子用户修改API Key
         {
             Console.WriteLine("子用户修改API Key");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.SubUserAPIKeyModificationAsync(long.Parse(subUserId), "AccessKeyValue");
             if (result.Success)
             {
@@ -1800,21 +1711,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "子用户修改API Key" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiSubUserAPIKeyModification>(result, "火币现货服务器", "子用户修改API Key");
             }
         }
         #endregion
-
         #region 创建子用户
         {
             Console.WriteLine("创建子用户");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             HuobiCreateSubUserAccountRequestInfo huobiCreateSubUserAccountRequestInfo = new()
             {
                 UserName = "DaiPaxUsdt",
@@ -1829,21 +1734,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "创建子用户" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiSubUserCreation>>(result, "火币现货服务器", "创建子用户");
             }
         }
         #endregion
-
         #region 母子用户币种互转
         {
             Console.WriteLine("母子用户币种互转");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.TransferAssetAsync(
                 fromUserId: long.Parse(mainUserId),
                 fromAccountType: AccountType.Spot,
@@ -1860,21 +1759,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "母子用户币种互转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiTransactionResult>(result, "火币现货服务器", "母子用户币种互转");
             }
         }
         #endregion
-
         #region 全仓杠杆账户对现货账户进行资产划转
         {
             Console.WriteLine("全仓杠杆账户对现货账户进行资产划转");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.TransferCrossMarginToSpotAsync(
                 asset: testBaseCurrency,
                 quantity: 0.0M
@@ -1885,21 +1778,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "全仓杠杆账户对现货账户进行资产划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "全仓杠杆账户对现货账户进行资产划转");
             }
         }
         #endregion
-
         #region 逐仓杠杆账户对现货账户进行资产划转
         {
             Console.WriteLine("逐仓杠杆账户对现货账户进行资产划转");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.TransferIsolatedMarginToSpotAsync(
                 symbol: testSymbol,
                 asset: testBaseCurrency,
@@ -1911,21 +1798,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "逐仓杠杆账户对现货账户进行资产划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "逐仓杠杆账户对现货账户进行资产划转");
             }
         }
         #endregion
-
         #region 现货账户对全仓杠杆账户进行资产划转
         {
             Console.WriteLine("现货账户对全仓杠杆账户进行资产划转");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.TransferSpotToCrossMarginAsync(
                 asset: testBaseCurrency,
                 quantity: 0.0M
@@ -1936,21 +1817,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "现货账户对全仓杠杆账户进行资产划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "现货账户对全仓杠杆账户进行资产划转");
             }
         }
         #endregion
-
         #region 现货账户对逐仓杠杆账户进行资产划转
         {
             Console.WriteLine("现货账户对逐仓杠杆账户进行资产划转");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.TransferSpotToIsolatedMarginAsync(
                 symbol: testSymbol,
                 asset: testBaseCurrency,
@@ -1962,21 +1837,15 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "现货账户对逐仓杠杆账户进行资产划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "现货账户对逐仓杠杆账户进行资产划转");
             }
         }
         #endregion
-
         #region 母子用户间资产划转
         {
             Console.WriteLine("母子用户间资产划转");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.TransferWithSubAccountAsync(
                 subAccountId: long.Parse(subSportAccountId),
                 asset: testBaseCurrency,
@@ -1989,22 +1858,16 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "母子用户间资产划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "母子用户间资产划转");
             }
         }
         #endregion
-
         #region 主用户现货账户数字币提取到区块链地址
         //（已存在于提币地址列表）而不需要多重（短信、邮件）验证
         {
             Console.WriteLine("主用户现货账户数字币提取到区块链地址");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Account.WithdrawAsync(
                 address: "",
                 asset: testBaseCurrency,
@@ -2019,24 +1882,19 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "主用户现货账户数字币提取到区块链地址" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "主用户现货账户数字币提取到区块链地址");
             }
         }
         #endregion
     }
 }
-
 //现货账户和交易接口测试-已完成
 static async Task TestSpotApiTradingEndpoints()
 {
     string? testCancelOrderId = string.Empty;
     string? testCancelClientOrderId = string.Empty;
     string? testCancelConditionalClientOrderId = string.Empty;
-
-    using (var huobiSpotRestClient = new HuobiSpotClient())
+    using (var huobiSpotRestClient = new HuobiClient())
     {
         #region 对HuobiClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
@@ -2044,15 +1902,12 @@ static async Task TestSpotApiTradingEndpoints()
         //当前客户端使用新生成的API凭证
         huobiSpotRestClient.SetApiCredentials(apiCredentials);
         #endregion
-
         #region 现货普通订单下单
         {
             Console.WriteLine("现货普通订单下单");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.PlaceOrderAsync(
                 accountId: long.Parse(mainSportAccountId),
                 symbol: "USDCUSDT",
@@ -2062,7 +1917,7 @@ static async Task TestSpotApiTradingEndpoints()
                 price: (decimal)0.9,
                 clientOrderId: $"{testPlaceClientOrderId}",
                 source: null,
-                stopPrice: (decimal)0,
+                stopPrice: null,
                 stopOperator: null
                 );
             if (result.Success)
@@ -2073,21 +1928,15 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "现货普通订单下单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币现货服务器", "现货普通订单下单");
             }
         }
         #endregion
-
         #region 通过订单编号撤销一条订单
         {
             Console.WriteLine("通过订单编号撤销一条订单");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             if (!string.IsNullOrWhiteSpace(testCancelOrderId))
             {
                 var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrderAsync(
@@ -2100,32 +1949,20 @@ static async Task TestSpotApiTradingEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "通过订单编号撤销一条订单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<long>(result, "火币现货服务器", "通过订单编号撤销一条订单");
                 }
             }
             else
             {
                 Console.WriteLine($"火币现货服务器：" + "撤销订单无效" + "异常");
             }
-
-            //await HandleRequest("Cancel an active order", () => huobiSpotRestClient.SpotApi.Trading.CancelOrderAsync(
-            //    orderId: long.Parse(testCancelOrderId)                              //被撤销订单编号
-            //    ),
-            //    result => $"{result}"
-            //    );
         }
         #endregion
-
         #region 通过用户自定义单号撤销一条订单
         {
             Console.WriteLine("通过用户自定义单号撤销一条订单");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             if (!string.IsNullOrWhiteSpace(testCancelClientOrderId))
             {
                 var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrderByClientOrderIdAsync(
@@ -2138,10 +1975,7 @@ static async Task TestSpotApiTradingEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "通过用户自定义单号撤销一条订单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<long>(result, "火币现货服务器", "通过用户自定义单号撤销一条订单");
                 }
             }
             else
@@ -2150,20 +1984,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
         }
         #endregion
-
         #region 通过订单编号列表或用户自定义订单编号列表撤销订单
         {
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             Console.WriteLine("通过订单编号列表撤销订单");
-
             {
                 List<long> orderIdList = new();
                 if(!string.IsNullOrWhiteSpace(testCancelOrderId))
                     orderIdList.Add(long.Parse(testCancelOrderId));
                 IEnumerable<long> orderIds = orderIdList;
-
                 if (orderIds.Any())
                 {
                     var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrdersAsync(
@@ -2174,10 +2004,7 @@ static async Task TestSpotApiTradingEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币现货服务器：" + "通过订单编号列表撤销订单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiBatchCancelResult>(result, "火币现货服务器", "通过订单编号列表撤销订单");
                     }
                 }
                 else
@@ -2187,12 +2014,10 @@ static async Task TestSpotApiTradingEndpoints()
             }
             {
                 Console.WriteLine("通过用户自定义单号列表撤销多条订单");
-
                 List<string> clientOrderIdList = new();
                 if (!string.IsNullOrWhiteSpace(testCancelClientOrderId))
                     clientOrderIdList.Add(testCancelClientOrderId);
                 IEnumerable<string> clientOrderIds = clientOrderIdList;
-
                 if (clientOrderIds.Any())
                 {
                     var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrdersAsync(
@@ -2205,10 +2030,7 @@ static async Task TestSpotApiTradingEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币现货服务器：" + "通过用户自定义单号列表撤销订单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiBatchCancelResult>(result, "火币现货服务器", "通过用户自定义单号列表撤销订单");
                     }
                 }
                 else
@@ -2218,23 +2040,18 @@ static async Task TestSpotApiTradingEndpoints()
             }
         }
         #endregion
-
         #region 批量撤销所有订单（可限制账户Id/交易代码/交易方向/撤销数量）
         {
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             Console.WriteLine("批量撤销所有订单（可限制账户Id/交易代码/交易方向/撤销数量）");
-
             {
                 List<long> orderIdList = new();
                 orderIdList.Add(long.Parse(testOrderId));
                 IEnumerable<long> orderIds = orderIdList;
-
                 List<string> symbolList = new();
                 symbolList.Add("TestSymbol");
                 IEnumerable<string> symbols = symbolList;
-
                 var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrdersByCriteriaAsync(
                     accountId: long.Parse(mainSportAccountId),
                     symbols: symbols,
@@ -2247,23 +2064,17 @@ static async Task TestSpotApiTradingEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "批量撤销所有订单（可限制账户Id/交易代码/交易方向/撤销数量）" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiByCriteriaCancelResult>(result, "火币现货服务器", "批量撤销所有订单（可限制账户Id/交易代码/交易方向/撤销数量）");
                 }
             }
         }
         #endregion
-
         #region 现货策略委托下单
         {
             Console.WriteLine("现货策略委托下单");
             string testPlaceConditionalClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.PlaceConditionalOrderAsync(
                 accountId: long.Parse(mainSportAccountId),
                 symbol: "USDCUSDT",
@@ -2284,26 +2095,19 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "现货策略委托下单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiPlacedConditionalOrder>(result, "火币现货服务器", "现货策略委托下单");
             }
         }
         #endregion
-
         #region 通过用户自定义单号列表撤销未触发策略委托订单
         {
             Console.WriteLine("通过用户自定义单号列表撤销未触发策略委托订单");
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             List<string> clientOrderIdList = new();
             if (!string.IsNullOrWhiteSpace(testCancelConditionalClientOrderId))
                 clientOrderIdList.Add(testCancelConditionalClientOrderId);
             IEnumerable<string> clientOrderIds = clientOrderIdList;
-
             if (clientOrderIds.Any())
             {
                 var result = await huobiSpotRestClient.SpotApi.Trading.CancelConditionalOrdersAsync(
@@ -2314,34 +2118,21 @@ static async Task TestSpotApiTradingEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币现货服务器：" + "通过用户自定义单号列表撤销未触发策略委托订单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiConditionalOrderCancelResult>(result, "火币现货服务器", "通过用户自定义单号列表撤销未触发策略委托订单");
                 }
             }
             else
             {
                 Console.WriteLine($"火币现货服务器：" + "撤销未触发策略委托用户自定义单号列表" + "异常");
             }
-
-
-            //await HandleRequest("Cancel an active order", () => huobiSpotRestClient.SpotApi.Trading.CancelConditionalOrdersAsync(
-            //    clientOrderIds: clientOrderIds                              //被撤销的用户自定义订单编号列表
-            //    ),
-            //    result => $"{result}"
-            //    );
         }
         #endregion
-
         #region 通过订单编号获取指定订单详情
         {
             Console.WriteLine("通过订单编号获取指定订单详情");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOrderAsync(
                 orderId:long.Parse(testOrderId)
                 );
@@ -2351,22 +2142,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "通过订单编号获取指定订单详情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiOrder>(result, "火币现货服务器", "通过订单编号获取指定订单详情");
             }
         }
         #endregion
-
         #region 通过用户自定义单号获取指定订单详情
         {
             Console.WriteLine("通过用户自定义单号获取指定订单详情");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOrderByClientOrderIdAsync(
                 clientOrderId: testClientOrderId
                 );
@@ -2376,22 +2161,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "通过用户自定义单号获取指定订单详情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiOrder>(result, "火币现货服务器", "通过用户自定义单号获取指定订单详情");
             }
         }
         #endregion
-
         #region 查询当前未成交订单
         {
             Console.WriteLine("查询当前未成交订单");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOpenOrdersAsync();
             if (result.Success)
             {
@@ -2402,22 +2181,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询当前未成交订单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiOpenOrder>>(result, "火币现货服务器", "查询当前未成交订单");
             }
         }
         #endregion
-
         #region 查询当前未触发策略委托订单
         {
             Console.WriteLine("查询当前未触发策略委托订单");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOpenConditionalOrdersAsync();
             if (result.Success)
             {
@@ -2428,22 +2201,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询当前未触发策略委托订单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiConditionalOrder>>(result, "火币现货服务器", "查询当前未触发策略委托订单");
             }
         }
         #endregion
-
         #region 查询指定交易代码的历史订单
         {
             Console.WriteLine("查询指定交易代码的历史订单");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetClosedOrdersAsync(
                 symbol:testSymbol
                 );
@@ -2456,22 +2223,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询指定交易代码的历史订单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiOrder>>(result, "火币现货服务器", "查询指定交易代码的历史订单");
             }
         }
         #endregion
-
         #region 查询指定交易代码的策略委托历史
         {
             Console.WriteLine("查询指定交易代码的策略委托历史");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetClosedConditionalOrdersAsync(
                 symbol: testSymbol,
                 status: ConditionalOrderStatus.Created
@@ -2485,22 +2246,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询指定交易代码的策略委托历史" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiConditionalOrder>>(result, "火币现货服务器", "查询指定交易代码的策略委托历史");
             }
         }
         #endregion
-
         #region 查询最近48小时内历史订单
         {
             Console.WriteLine("查询最近48小时内历史订单");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetHistoricalOrdersAsync();
             if (result.Success)
             {
@@ -2511,22 +2266,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询最近48小时内历史订单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiOrder>>(result, "火币现货服务器", "查询最近48小时内历史订单");
             }
         }
         #endregion
-
         #region 通过用户自定义单号查询策略委托订单
         {
             Console.WriteLine("通过用户自定义单号查询策略委托订单");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetConditionalOrderAsync(
                 clientOrderId: testClientOrderId
                 );
@@ -2536,22 +2285,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "通过用户自定义单号查询策略委托订单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiConditionalOrder>(result, "火币现货服务器", "通过用户自定义单号查询策略委托订单");
             }
         }
         #endregion
-
         #region 查询指定订单编号的成交明细
         {
             Console.WriteLine("查询指定订单编号的成交明细");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOrderTradesAsync(
                 orderId: long.Parse(testOrderId)
                 );
@@ -2561,22 +2304,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询指定订单编号的成交明细" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiOrderTrade>>(result, "火币现货服务器", "查询指定订单编号的成交明细");
             }
         }
         #endregion
-
         #region 查询当前和历史成交记录
         {
             Console.WriteLine("查询当前和历史成交记录");
             string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
-
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-
             var result = await huobiSpotRestClient.SpotApi.Trading.GetUserTradesAsync();
             if (result.Success)
             {
@@ -2584,20 +2321,16 @@ static async Task TestSpotApiTradingEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币现货服务器：" + "查询当前和历史成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiOrderTrade>>(result, "火币现货服务器", "查询当前和历史成交记录");
             }
         }
         #endregion
     }
 }
-
 //交易所U本位合约基础信息接口测试-已完成
-static async Task TestUsdtMarginedApiReferenceDataEndpoints()
+static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
 {
-    using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
+    using (var huobiUsdtMarginedClient = new HuobiClient())
     {
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
@@ -2605,16 +2338,14 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
-
         #region 获取账户类型
         {
-            await HandleRequest("Swap Unified  Account Type \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapUnifiedAccountTypeAsync(),
+            await HandleRequest("Swap Unified  Account Type \r\n", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapUnifiedAccountTypeAsync(),
                 result => $"当前账户类型：{(result.AccountType == 1 ? "非统一账户（全仓逐仓账户）" : (result.AccountType == 2 ? "统一账户" : "未知账户类型"))}" 
                 );
-
-            #region 方法二 不需要等待输入回车后才执行
+            //#region 方法二 不需要等待输入回车后才执行
             //Console.WriteLine("获取账户类型");
-            //var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapUnifiedAccountTypeAsync();
+            //var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapUnifiedAccountTypeAsync();
             //if (result.Success)
             //{
             //    switch (result.Data.AccountType)
@@ -2629,20 +2360,16 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             //}
             //else
             //{
-            //    Console.WriteLine($"火币合约API服务器：" + "获取账户类型" + "异常\r\n" +
-            //        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-            //        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-            //        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            //    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapUnifiedAccountType>(result, "火币合约API服务器", "获取账户类型");
             //}
-            #endregion
+            //#endregion
         }
         #endregion
-
         #region 账户类型更改接口
         {
             Console.WriteLine("账户类型更改接口");
             int accountType = 1;                    //账户类型	1:非统一账户（全仓逐仓账户）2:统一账户
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.LinearSwapSwitchAccountTypeAsync(accountType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.LinearSwapSwitchAccountTypeAsync(accountType);
             if (result.Success)
             {
                 switch (result.Data.AccountType)
@@ -2657,37 +2384,29 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "账户类型更改接口" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapSwitchAccountType>(result, "火币合约API服务器", "账户类型更改接口");
             }
         }
         #endregion
-
         #region 【通用】获取合约资金费率
         {
             Console.WriteLine("【通用】获取合约资金费率");
             string contractCode = "BTC-USDT";
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapFundingRateAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapFundingRateAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码{contractCode}资金费率：{JsonConvert.SerializeObject(result.Data)}");
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约资金费率" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapFundingRate>(result, "火币合约API服务器", "【通用】获取合约资金费率");
             }
         }
         #endregion
-
         #region 【通用】批量获取合约资金费率
         {
             Console.WriteLine("【通用】批量获取合约资金费率");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapBatchFundingRateAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapBatchFundingRateAsync();
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -2697,20 +2416,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】批量获取合约资金费率" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapFundingRate>>(result, "火币合约API服务器", "【通用】批量获取合约资金费率");
             }
         }
         #endregion
-
         #region 【通用】获取合约的历史资金费率
         {
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【通用】获取合约的历史资金费率");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapHistoricalFundingRateAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapHistoricalFundingRateAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data.Data)
@@ -2720,21 +2434,16 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约的历史资金费率" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapHistoricalFundingRate>(result, "火币合约API服务器", "【通用】获取合约的历史资金费率"); 
             }
         }
         #endregion
-
         #region 【通用】获取强平订单(新)
         {
             int trade_type = 0;
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【通用】获取强平订单(新)");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapLiquidationOrdersAsync(trade_type, contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapLiquidationOrdersAsync(trade_type, contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -2744,20 +2453,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取强平订单(新)" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapLiquidationOrders>>(result, "火币合约API服务器", "【通用】获取强平订单(新)");
             }
         }
         #endregion
-
         #region 【通用】查询平台历史结算记录
         {
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【通用】查询平台历史结算记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapSettlementRecordsAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapSettlementRecordsAsync(contractCode);
             if (result.Success)
             {
                 //Console.WriteLine($"{JsonConvert.SerializeObject(result)}");
@@ -2768,21 +2472,16 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】查询平台历史结算记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedSettlementRecords>(result, "火币合约API服务器", "【通用】查询平台历史结算记录");
             }
         }
         #endregion
-
         #region 【通用】精英账户多空持仓对比-账户数
         {
             string contractCode = "DOGE-USDT";
             string period = "15min";
-
             Console.WriteLine("【通用】精英账户多空持仓对比-账户数");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapEliteAccountRatioAsync(contractCode, period);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapEliteAccountRatioAsync(contractCode, period);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode} 交易代码：{result.Data.Pair} 业务类型：{result.Data.BusinessType}");
@@ -2793,21 +2492,16 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】精英账户多空持仓对比-账户数" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedEliteAccountRatio>(result, "火币合约API服务器", "【通用】精英账户多空持仓对比-账户数");
             }
         }
         #endregion
-
         #region 【通用】精英账户多空持仓对比-持仓量
         {
             string contractCode = "DOGE-USDT";
             string period = "15min";
-
             Console.WriteLine("【通用】精英账户多空持仓对比-持仓量");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapElitePositionRatioAsync(contractCode, period);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapElitePositionRatioAsync(contractCode, period);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode} 交易代码：{result.Data.Pair} 业务类型：{result.Data.BusinessType}");
@@ -2818,18 +2512,14 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】精英账户多空持仓对比-持仓量" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedElitePositionRatio>(result, "火币合约API服务器", "【通用】精英账户多空持仓对比-持仓量");
             }
         }
         #endregion
-
         #region 【逐仓】查询系统状态
         {
             Console.WriteLine("【逐仓】查询系统状态");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapApiStateAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapApiStateAsync();
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -2839,20 +2529,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询系统状态" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedApiState>>(result, "火币合约API服务器", "【逐仓】查询系统状态");
             }
         }
         #endregion
-
         #region 【全仓】获取平台阶梯保证金
         {
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【全仓】获取平台阶梯保证金");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapCrossLadderMarginAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapCrossLadderMarginAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"【全仓】平台阶梯保证金：");
@@ -2871,20 +2556,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取平台阶梯保证金" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketCrossLadderMargin>>(result, "火币合约API服务器", "【全仓】获取平台阶梯保证金");
             }
         }
         #endregion
-
         #region 【逐仓】获取平台阶梯保证金
         {
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【逐仓】获取平台阶梯保证金");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapLadderMarginAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapLadderMarginAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"【逐仓】平台阶梯保证金：");
@@ -2903,23 +2583,18 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取平台阶梯保证金" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketIsolatedLadderMargin>>(result, "火币合约API服务器", "【逐仓】获取平台阶梯保证金");
             }
         }
         #endregion
-
         #region 【通用】获取预估结算价
         {
             string contractCode = "DOGE-USDT";
             string pair = "DOGE-USDT";
             string contractType = "swap";
             string businessType = "swap";
-
             Console.WriteLine("【通用】获取预估结算价");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapEstimatedSettlementPriceAsync(contractCode, pair, contractType, businessType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapEstimatedSettlementPriceAsync(contractCode, pair, contractType, businessType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -2929,20 +2604,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取预估结算价" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedEliteSettlementPrice>>(result, "火币合约API服务器", "【通用】获取预估结算价");
             }
         }
         #endregion
-
         #region 【逐仓】查询平台阶梯调整系数
         {
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【逐仓】查询平台阶梯调整系数");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapAdjustfactorAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapAdjustfactorAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"【逐仓】平台阶梯调整系数：");
@@ -2961,20 +2631,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询平台阶梯调整系数" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedAdjustfactor>>(result, "火币合约API服务器", "【逐仓】查询平台阶梯调整系数");
             }
         }
         #endregion
-
         #region 【全仓】查询平台阶梯调整系数
         {
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【全仓】查询平台阶梯调整系数");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapCrossAdjustfactorAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapCrossAdjustfactorAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"【全仓】平台阶梯调整系数：");
@@ -2993,20 +2658,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询平台阶梯调整系数" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossAdjustfactor>>(result, "火币合约API服务器", "【全仓】查询平台阶梯调整系数");
             }
         }
         #endregion
-
         #region 【通用】查询合约风险准备金余额历史数据
         {
             string contractCode = "DOGE-USDT";
-
             Console.WriteLine("【通用】查询合约风险准备金余额历史数据");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapInsuranceFundAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapInsuranceFundAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode} 业务类型：{result.Data.BusinessType}");
@@ -3017,21 +2677,16 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】查询合约风险准备金余额历史数据" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedInsuranceFund>(result, "火币合约API服务器", "【通用】查询合约风险准备金余额历史数据");
             }
         }
         #endregion
-
         #region 【通用】查询合约风险准备金余额和预估分摊比例
         {
             string contractCode = "DOGE-USDT";
             string businessType = "swap";
-
             Console.WriteLine("【通用】查询合约风险准备金余额和预估分摊比例");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapRiskInfoAsync(contractCode, businessType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapRiskInfoAsync(contractCode, businessType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3041,23 +2696,18 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】查询合约风险准备金余额和预估分摊比例" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedRiskInfo>>(result, "火币合约API服务器", "【通用】查询合约风险准备金余额和预估分摊比例");
             }
         }
         #endregion
-
         #region 【通用】获取合约最高限价和最低限价
         {
             string contractCode = "DOGE-USDT";
             string pair = "DOGE-USDT";
             string contractType = "swap";
             string businessType = "swap";
-
             Console.WriteLine("【通用】获取合约最高限价和最低限价");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapPriceLimitAsync(contractCode, pair, contractType, businessType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapPriceLimitAsync(contractCode, pair, contractType, businessType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3068,19 +2718,15 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约最高限价和最低限价" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapPriceLimit>>(result, "火币合约API服务器", "【通用】获取合约最高限价和最低限价");
             }
         }
         #endregion
-
         #region 【通用】获取当前合约总持仓量
         {
             Console.WriteLine("【通用】获取当前合约总持仓量");
             string contractCode = "BTC-USDT";
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapOpenInterestAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapOpenInterestAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码{contractCode}总持仓量");
@@ -3091,18 +2737,14 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取当前合约总持仓量" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapOpenInterest>>(result, "火币合约API服务器", "【通用】获取当前合约总持仓量");
             }
         }
         #endregion
-
         #region 【通用】获取合约信息
         {
             Console.WriteLine("【通用】获取合约信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapContractInfoAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapContractInfoAsync();
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3112,18 +2754,14 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapContractInfo>>(result, "火币合约API服务器", "【通用】获取合约信息");
             }
         }
         #endregion
-
         #region 【通用】获取合约指数信息
         {
             Console.WriteLine("【通用】获取合约指数信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapIndexAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapIndexAsync();
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3133,40 +2771,31 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约指数信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIndex>>(result, "火币合约API服务器", "【通用】获取合约指数信息");
             }
         }
         #endregion
-
         #region 【合约服务器】获取当前系统时间戳
         {
-            //await HandleRequest("Market Status", () => huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapServerTimestampAsync(),
+            //await HandleRequest("Market Status", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapServerTimestampAsync(),
             //    result => $"{result.ToString()}"
             //    );
-
             Console.WriteLine("【合约服务器】获取当前系统时间戳");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapServerTimestampAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapServerTimestampAsync();
             if (result.Success)
             {
                 Console.WriteLine($"当前系统时间戳:{result.Data.ToString()}\r\n");
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【合约服务器】获取当前系统时间戳" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币合约API服务器", "【合约服务器】获取当前系统时间戳");
             }
         }
         #endregion
-
         #region 【合约服务器】获取当前系统时间
         {
             Console.WriteLine("【合约服务器】获取当前系统时间");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapServerDateTimeAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapServerDateTimeAsync();
             if (result.Success)
             {
                 Console.WriteLine(
@@ -3177,26 +2806,21 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【合约服务器】获取当前系统时间" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<DateTime>(result, "火币合约API服务器", "【合约服务器】获取当前系统时间");
             }
         }
         #endregion
-
         #region 【U本位合约服务器】查询系统是否可用
         {
-            //await HandleRequest("Market Status \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapHeartbeatAsync(),
+            //await HandleRequest("Market Status \r\n", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapHeartbeatAsync(),
             //    result =>
             //    $"交割合约市场：{(result.Heartbeat == 1 ? "正常" : "停服维护")}\r\n" +
             //    $"币本位永续合约市场：{(result.SwapHeartbeat == 1 ? "正常" : "停服维护")}\r\n" +
             //    $"U本位合约市场：{(result.LinearSwapHeartbeat == 1 ? "正常" : "停服维护")}\r\n"
             //    );
-
             #region 方法二 不需要等待输入回车后才执行
             Console.WriteLine("【U本位合约服务器】查询系统是否可用");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapHeartbeatAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapHeartbeatAsync();
             if (result.Success)
             {
                 //Console.WriteLine($"{JsonConvert.SerializeObject(result.Data)}");
@@ -3236,32 +2860,25 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "获取合约服务器可用状态" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketHeartbeat>(result, "火币合约API服务器", "获取合约服务器可用状态");
             }
             #endregion
         }
         #endregion
-
         #region 【U本位合约服务器】获取当前系统状态
         {
             bool interfacePaused = true;
             if (interfacePaused == false)
             {
                 Console.WriteLine("【U本位合约服务器】获取当前系统状态");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.ReferenceData.GetLinearSwapSummaryAsync();
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapSummaryAsync();
                 if (result.Success)
                 {
                     Console.WriteLine($"{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【U本位合约服务器】获取当前系统状态" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketStatus>(result, "火币合约API服务器", "【U本位合约服务器】获取当前系统状态");
                 }
             }
             else
@@ -3272,11 +2889,10 @@ static async Task TestUsdtMarginedApiReferenceDataEndpoints()
         #endregion
     }
 }
-
 //交易所U本位合约市场行情数据接口测试-已完成
-static async Task TestUsdtMarginedApiMarketDataEndpoints()
+static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
 {
-    using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
+    using (var huobiUsdtMarginedClient = new HuobiClient())
     {
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
@@ -3284,20 +2900,17 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
         //当前客户端使用新生成的API凭证
         //huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
-
         #region 【通用】获取合约K线数据
         {
             string contractCode = "BTC-USDT";
             string period = "1day";
             long from = 1668355200;
             long to = 1668534210;
-
-            await HandleRequest("Linear Swap Ex Market History Kline \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapHistoryKlineAsync(contractCode, period, from, to),
+            await HandleRequest("Linear Swap Ex Market History Kline \r\n", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapHistoryKlineAsync(contractCode, period, from, to),
                 result => $"{contractCode}" + string.Join($" ", result.Select(s => $"\r\n开盘价：{s.Open}\t收盘价:{s.Close}\t最低价:{s.Low}\t最高价:{s.High}").Take(100)) + "\r\n......");
-
             #region 方法二 不需要等待输入回车后才执行，测试通过保留勿删！！！
             //Console.WriteLine("【通用】获取合约K线数据");
-            //var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapHistoryKlineAsync(contractCode, period, from, to);
+            //var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapHistoryKlineAsync(contractCode, period, from, to);
             //if (result.Success)
             //{
             //    Console.WriteLine($"{contractCode}合约K线数据");
@@ -3308,21 +2921,16 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             //}
             //else
             //{
-            //    Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约K线数据" + "异常\r\n" +
-            //        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-            //        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-            //        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            //    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketHistoryKline>>(result, "火币合约API服务器", "【通用】获取合约K线数据");
             //}
             #endregion
         }
         #endregion
-
         #region 【通用】获取合约行情深度数据
         {
             string contractCode = "BTC-USDT";
             string depthType = "step6";
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapDepthAsync(contractCode, depthType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapDepthAsync(contractCode, depthType);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约深度数据");
@@ -3342,23 +2950,18 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约行情深度数据" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketDepth>(result, "火币合约API服务器", "【通用】获取合约行情深度数据");
             }
         }
         #endregion
-
         #region 【通用】获取合约市场最优挂单
         {
             {
                 //string contractCode = "BTC-USDT";
                 //string businessType = "swap";
-                //var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapBboAsync(contractCode, businessType);
+                //var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBboAsync(contractCode, businessType);
             }
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapBboAsync(null, "All");
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBboAsync(null, "All");
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3369,21 +2972,16 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约市场最优挂单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketBbo>>(result, "火币合约API服务器", "【通用】获取合约市场最优挂单");
             }
         }
         #endregion
-
         #region 【通用】获取标记价格的K线数据
         {
             string contractCode = "BTC-USDT";
             string period = "1day";
             int size = 30;
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapMarkPriceKlineAsync(contractCode, period, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMarkPriceKlineAsync(contractCode, period, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}标记价格K线数据");
@@ -3394,19 +2992,14 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取标记价格的K线数据" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketHistoryMarkKline>>(result, "火币合约API服务器", "【通用】获取标记价格的K线数据");
             }
         }
         #endregion
-
         #region 【通用】获取聚合行情
         {
             string contractCode = "BTC-USDT";
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapMergedAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMergedAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}聚合行情");
@@ -3414,21 +3007,16 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取聚合行情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketDetailMerged>(result, "火币合约API服务器", "【通用】获取聚合行情");
             }
         }
         #endregion
-
         #region 【通用】批量获取聚合行情（V2)
         {
             //string contractCode = "BTC-USDT";
             //string businessType = "swap";
-            //var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapBatchMergedV2Async(contractCode, businessType);
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapBatchMergedV2Async();
+            //var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBatchMergedV2Async(contractCode, businessType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBatchMergedV2Async();
             if (result.Success)
             {
                 Console.WriteLine($"批量获取聚合行情（V2)");
@@ -3442,20 +3030,15 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】批量获取聚合行情（V2)" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketDetailBatchMerged>>(result, "火币合约API服务器", "【通用】批量获取聚合行情（V2)");
             }
         }
         #endregion
-
         #region 【通用】获取市场最近成交记录
         {
             string contractCode = "BTC-USDT";
             string businessType = "swap";
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapMarketTradeAsync(contractCode, businessType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMarketTradeAsync(contractCode, businessType);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}市场最近成交记录");
@@ -3466,20 +3049,15 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取市场最近成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketTrade>(result, "火币合约API服务器", "【通用】获取市场最近成交记录");
             }
         }
         #endregion
-
         #region 【通用】批量获取市场最近成交记录
         {
             string contractCode = "BTC-USDT";
             int size = 10;
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapMarketHistoryTradeAsync(contractCode, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMarketHistoryTradeAsync(contractCode, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}市场最近成交记录");
@@ -3493,14 +3071,10 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】批量获取市场最近成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketHistoryTrade>>(result, "火币合约API服务器", "【通用】批量获取市场最近成交记录");
             }
         }
         #endregion
-
         #region 【通用】平台历史持仓量查询
         {
             string period = "1day";
@@ -3509,8 +3083,7 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             string pair = "BTC-USDT";
             string contractType = "swap";            
             int size = 200;
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapHisOpenInterestAsync(period, amountType, contractCode, pair, contractType, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapHisOpenInterestAsync(period, amountType, contractCode, pair, contractType, size);
             if (result.Success)
             {
                 Console.WriteLine($"{result.Data.ContractCode}平台历史持仓量查询");
@@ -3521,21 +3094,16 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】平台历史持仓量查询" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketHisOpenInterest>(result, "火币合约API服务器", "【通用】平台历史持仓量查询");
             }
         }
         #endregion
-
         #region 【通用】获取合约的溢价指数K线
         {
             string contractCode = "BTC-USDT";
             string period = "1day";
             int size = 10;
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapPremiumIndexKlineAsync(contractCode, period, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapPremiumIndexKlineAsync(contractCode, period, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约的溢价指数K线");
@@ -3546,21 +3114,16 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约的溢价指数K线" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketPremiumIndexKline>>(result, "火币合约API服务器", "【通用】获取合约的溢价指数K线");
             }
         }
         #endregion
-
         #region 【通用】获取合约实时预测资金费率的K线数据
         {
             string contractCode = "BTC-USDT";
             string period = "1day";
             int size = 10;
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapEstimatedRateKlineAsync(contractCode, period, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapEstimatedRateKlineAsync(contractCode, period, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约实时预测资金费率的K线数据");
@@ -3571,22 +3134,17 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约实时预测资金费率的K线数据" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketEstimatedRateKline>>(result, "火币合约API服务器", "【通用】获取合约实时预测资金费率的K线数据");
             }
         }
         #endregion
-
         #region 【通用】获取合约基差数据
         {
             string contractCode = "BTC-USDT";
             string period = "1day";
             int size = 20;
             string basisPriceType = "open";
-
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.MarketData.GetLinearSwapBasisAsync(contractCode, period, size, basisPriceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBasisAsync(contractCode, period, size, basisPriceType);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约基差数据");
@@ -3597,20 +3155,16 @@ static async Task TestUsdtMarginedApiMarketDataEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取合约基差数据" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketHistoryBasis>>(result, "火币合约API服务器", "【通用】获取合约基差数据");
             }
         }
         #endregion
     }
 }
-
 //交易所U本位合约账户接口测试-已完成
-static async Task TestUsdtMarginedApiAccountEndpoints()
+static async Task TestUsdtMarginSwapApiAccountEndpoints()
 {
-    using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
+    using (var huobiUsdtMarginedClient = new HuobiClient())
     {
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
@@ -3618,36 +3172,29 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
-
         #region 【通用】获取账户合约总资产估值(PrivateData)
         {
             //资产估值币种，即按该币种为单位进行估值，不填默认"BTC"	"BTC", "USD", "USDT", "CNY", "EUR", "GBP", "VND", "HKD", "TWD", "MYR", "SGD", "KRW", "RUB", "TRY"
             string valuationAsset = "USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
-            await HandleRequest("Linear Swap Api Main Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapBalanceValuationAsync(valuationAsset),
+            await HandleRequest("Linear Swap Api Main Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapBalanceValuationAsync(valuationAsset),
             result => $"" + string.Join($" ", result.Select(s => $"\r\n合约总资产估值：{s.Balance} {s.ValuationAsset}").Take(100)) + "\r\n......");
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
-            await HandleRequest("Linear Swap Api Sub Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapBalanceValuationAsync(valuationAsset),
+            await HandleRequest("Linear Swap Api Sub Account Balance Valuation \r\n", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapBalanceValuationAsync(valuationAsset),
             result => $"" + string.Join($" ", result.Select(s => $"\r\n合约总资产估值：{s.Balance} {s.ValuationAsset}").Take(100)) + "\r\n......");
-
             #region 方法二 不需要等待输入回车后才执行，测试通过保留勿删！！！
             //#region 主用户客户端
             //apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             //huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             //#endregion
-
             //Console.WriteLine("【通用】获取账户合约总资产估值");
-            //var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapBalanceValuation(valuationAsset);
+            //var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapBalanceValuationAsync(valuationAsset);
             //if (result.Success)
             //{
             //    foreach (var item in result.Data)
@@ -3657,26 +3204,20 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             //}
             //else
             //{
-            //    Console.WriteLine($"火币合约API服务器：" + "【通用】获取账户合约总资产估值" + "异常\r\n" +
-            //        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-            //        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-            //        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+            //    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedBalanceValuation>>(result, "火币合约API服务器", "【通用】获取账户合约总资产估值");
             //}
             #endregion
         }
         #endregion
-
         #region 【逐仓】获取用户的合约账户信息(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取用户的合约账户信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAccountInfoAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapAccountInfoAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"【逐仓】获取用户的合约账户信息");
@@ -3688,25 +3229,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约账户信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAccountInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约账户信息");
             }
         }
         #endregion
-
         #region 【全仓】获取用户的合约账户信息(PrivateData)
         {
             string marginAccount = "USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取用户的合约账户信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAccountInfoAsync(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossAccountInfoAsync(marginAccount);
             if (result.Success)
             {
                 Console.WriteLine($"【全仓】获取用户的合约账户信息");
@@ -3724,25 +3259,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约账户信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossAccountInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约账户信息");
             }
         }
         #endregion
-
         #region 【逐仓】获取用户的合约持仓信息(PrivateData)
         {
             string contractCode = "BTC-USDT";
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取用户的合约持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapPositionInfoAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapPositionInfoAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3752,25 +3281,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约持仓信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedPositionInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约持仓信息");
             }
         }
         #endregion
-
         #region 【全仓】获取用户的合约持仓信息(PrivateData)
         {
             string contractCode = "BTC-USDT";
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取用户的合约持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossPositionInfoAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossPositionInfoAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3780,25 +3303,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约持仓信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossPositionInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约持仓信息");
             }
         }
         #endregion
-
         #region 【逐仓】查询用户账户和持仓信息(PrivateData)
         {
             string contractCode = "BTC-USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询用户账户和持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAccountPositionInfoAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapAccountPositionInfoAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3808,25 +3325,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询用户账户和持仓信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAccountPositionInfo>>(result, "火币合约API服务器", "【逐仓】查询用户账户和持仓信息");
             }
         }
         #endregion
-
         #region 【全仓】查询用户账户和持仓信息(PrivateData)
         {
             string marginAccount = "USDT";
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询用户账户和持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAccountPositionInfoAsync(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossAccountPositionInfoAsync(marginAccount);
             if (result.Success)
             {
                 foreach (var contractDetail in result.Data.ContractDetails)
@@ -3844,31 +3355,25 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询用户账户和持仓信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedCrossAccountPositionInfo>(result, "火币合约API服务器", "【全仓】查询用户账户和持仓信息");
             }
         }
         #endregion
-
         #region 【通用】批量设置子账户交易权限(PrivateData)
         {
             string subUid1 = "400293761";
             string subUid2 = "666666666";
             int subAuth = 1;
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】批量设置子账户交易权限");
             List<string> subUidList = new();
             subUidList.Add(subUid1);
             subUidList.Add(subUid2);
             IEnumerable<string> subUids = subUidList;
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.SetLinearSwapSubAuthAsync(subUids, subAuth);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.SetLinearSwapSubAuthAsync(subUids, subAuth);
             if (result.Success)
             { 
                 Console.WriteLine($"设置子账户交易权限返回结果：");
@@ -3886,25 +3391,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】批量设置子账户交易权限" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedSubAuth>(result, "火币合约API服务器", "【通用】批量设置子账户交易权限");
             }
         }
         #endregion
-
         #region 【逐仓】查询母账户下所有子账户资产信息(PrivateData)
         {
             string contractCode = "BTC-USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询母账户下所有子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountListAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapSubAccountListAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3918,25 +3417,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询母账户下所有子账户资产信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedSubAccountList>>(result, "火币合约API服务器", "【逐仓】查询母账户下所有子账户资产信息");
             }
         }
         #endregion
-
         #region 【全仓】查询母账户下所有子账户资产信息(PrivateData)
         {
             string marginAccount = "USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询母账户下所有子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountListAsync(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossSubAccountListAsync(marginAccount);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3950,27 +3443,21 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询母账户下所有子账户资产信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossSubAccountList>>(result, "火币合约API服务器", "【全仓】查询母账户下所有子账户资产信息");
             }
         }
         #endregion
-
         #region 【逐仓】批量获取子账户资产信息(PrivateData)
         {
             string contractCode = "BTC-USDT";
             int pageIndex = 1;
             int pageSize = 50;
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】批量获取子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountInfoListAsync(contractCode, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapSubAccountInfoListAsync(contractCode, pageIndex, pageSize);
             if (result.Success)
             {
                 foreach (var item in result.Data.SubAccountIsolatedInfoLists)
@@ -3984,27 +3471,21 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】批量获取子账户资产信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedIsolatedSubAccountInfoList>(result, "火币合约API服务器", "【逐仓】批量获取子账户资产信息");
             }
         }
         #endregion
-
         #region 【全仓】批量获取子账户资产信息(PrivateData)
         {
             string marginAccount = "USDT";
             int pageIndex = 1;
             int pageSize = 50;
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】批量获取子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountInfoListAsync(marginAccount, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossSubAccountInfoListAsync(marginAccount, pageIndex, pageSize);
             if (result.Success)
             {
                 foreach (var item in result.Data.SubAccountCrossInfoLists)
@@ -4018,26 +3499,20 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】批量获取子账户资产信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedCrossSubAccountInfoList>(result, "火币合约API服务器", "【全仓】批量获取子账户资产信息");
             }
         }
         #endregion
-
         #region 【逐仓】查询单个子账户资产信息(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             string subUid = "400293761";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询单个子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubAccountInfoAsync(long.Parse(subUid), contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapSubAccountInfoAsync(long.Parse(subUid), contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子账户用户编号：{subUid}");
@@ -4048,26 +3523,20 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询单个子账户资产信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAccountPositionInfo>>(result, "火币合约API服务器", "【逐仓】查询单个子账户资产信息");
             }
         }
         #endregion
-
         #region 【全仓】查询单个子账户资产信息(PrivateData)
         {
             string marginAccount = "USDT";
             string subUid = "400293761";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询单个子账户资产信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubAccountInfoAsync(long.Parse(subUid), marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossSubAccountInfoAsync(long.Parse(subUid), marginAccount);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4084,26 +3553,20 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询单个子账户资产信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossAccountPositionInfo>>(result, "火币合约API服务器", "【全仓】查询单个子账户资产信息");
             }
         }
         #endregion
-
         #region 【逐仓】查询单个子账户持仓信息(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             string subUid = "400293761";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询单个子账户持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapSubPositionInfoAsync(long.Parse(subUid), contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapSubPositionInfoAsync(long.Parse(subUid), contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子账户用户编号：{subUid}");
@@ -4115,28 +3578,22 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询单个子账户持仓信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiPosition>>(result, "火币合约API服务器", "【逐仓】查询单个子账户持仓信息");
             }
         }
         #endregion
-
         #region 【全仓】查询单个子账户持仓信息(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             string subUid = "292046353";
             string pair = "DOGE-USDT";
             string contractType = "swap";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询单个子账户持仓信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossSubPositionInfoAsync(long.Parse(subUid), contractCode, pair, contractType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossSubPositionInfoAsync(long.Parse(subUid), contractCode, pair, contractType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4146,36 +3603,27 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询单个子账户持仓信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossSubPositionInfo>>(result, "火币合约API服务器", "【全仓】查询单个子账户持仓信息");
             }
         }
         #endregion
-
         #region 【通用】查询用户财务记录(新)(PrivateData)
         {
             string marginAccount = "USDT";
-
             {
                 #region 主用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【通用】查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordAsync(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapFinancialRecordAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户财务记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【通用】查询用户财务记录(新)" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)");
                 }
             }
             {
@@ -4183,46 +3631,36 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【通用】查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordAsync(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapFinancialRecordAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户财务记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【通用】查询用户财务记录(新)" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)");
                 }
             }
         }
         #endregion
-
         #region 【通用】组合查询用户财务记录(新)(PrivateData)
         {
             string marginAccount = "USDT";
-
             {
                 #region 主用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【通用】组合查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordExactAsync(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapFinancialRecordExactAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户组合查询财务记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【通用】查询用户财务记录(新)(PrivateData)" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)(PrivateData)");
                 }
             }
             {
@@ -4230,46 +3668,36 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【通用】组合查询用户财务记录(新)");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFinancialRecordExactAsync(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapFinancialRecordExactAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户组合查询财务记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【通用】组合查询用户财务记录(新)" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】组合查询用户财务记录(新)");
                 }
             }
         }
         #endregion
-
         #region 【逐仓】查询用户结算记录(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             {
                 #region 主用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapUserSettlementRecordsAsync(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapUserSettlementRecordsAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询用户结算记录" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedIsolatedUserSettlementRecords>(result, "火币合约API服务器", "【逐仓】查询用户结算记录");
                 }
             }
             {
@@ -4277,46 +3705,36 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapUserSettlementRecordsAsync(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapUserSettlementRecordsAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询用户结算记录" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedIsolatedUserSettlementRecords>(result, "火币合约API服务器", "【逐仓】查询用户结算记录");
                 }
             }
         }
         #endregion
-
         #region 【全仓】查询用户结算记录(PrivateData)
         {
             string marginAccount = "USDT";
-
             {
                 #region 主用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossUserSettlementRecordsAsync(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossUserSettlementRecordsAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】查询用户结算记录" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedCrossUserSettlementRecords>(result, "火币合约API服务器", "【全仓】查询用户结算记录");
                 }
             }
             {
@@ -4324,36 +3742,29 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】查询用户结算记录");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossUserSettlementRecordsAsync(marginAccount);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossUserSettlementRecordsAsync(marginAccount);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户查询结算记录：{JsonConvert.SerializeObject(result.Data)}");
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】查询用户结算记录" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedCrossUserSettlementRecords>(result, "火币合约API服务器", "【全仓】查询用户结算记录");
                 }
             }
         }
         #endregion
-
         #region 【逐仓】查询用户可用杠杆倍数(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             {
                 #region 主用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】查询用户可用杠杆倍数");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAvailableLevelRateAsync(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapAvailableLevelRateAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"主用户查询可用杠杆倍数：");
@@ -4364,10 +3775,7 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询用户可用杠杆倍数" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAvailableLevelRate>>(result, "火币合约API服务器", "【逐仓】查询用户可用杠杆倍数");
                 }
             }
             {
@@ -4375,9 +3783,8 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】查询用户可用杠杆倍数");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapAvailableLevelRateAsync(contractCode);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapAvailableLevelRateAsync(contractCode);
                 if (result.Success)
                 {
                     Console.WriteLine($"子用户查询可用杠杆倍数：");
@@ -4388,26 +3795,20 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询用户可用杠杆倍数" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAvailableLevelRate>>(result, "火币合约API服务器", "【逐仓】查询用户可用杠杆倍数");
                 }
             }
         }
         #endregion
-
         #region 【全仓】查询用户可用杠杆倍数(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询用户可用杠杆倍数");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossAvailableLevelRateAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossAvailableLevelRateAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户查询可用杠杆倍数：");
@@ -4418,14 +3819,10 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询用户可用杠杆倍数" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossUserAvailableLevelRate>>(result, "火币合约API服务器", "【全仓】查询用户可用杠杆倍数");
             }
         }
         #endregion
-
         #region 【通用】查询用户当前的下单量限制(PrivateData)
         {
             string orderPriceType = "limit";
@@ -4433,14 +3830,12 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             //string pair = "DOGE-USDT";
             //string contractType = "swap";
             //string businessType = "swap";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】查询用户当前的下单量限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapOrderLimitAsync(orderPriceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapOrderLimitAsync(orderPriceType);
             if (result.Success)
             {
                 Console.WriteLine($"下单类型：{result.Data.OrderPriceType}");
@@ -4451,28 +3846,22 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】查询用户当前的下单量限制" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedSwapOrderLimit>(result, "火币合约API服务器", "【通用】查询用户当前的下单量限制");
             }
         }
         #endregion
-
         #region 【通用】查询用户当前的手续费费率(PrivateData)
         {
             string contractCode = "DOGE-USDT";            
             //string pair = "DOGE-USDT";
             //string contractType = "swap";
             //string businessType = "swap";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】查询用户当前的手续费费率");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapFeeAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapFeeAsync(contractCode);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4482,25 +3871,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】查询用户当前的手续费费率" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedSwapFee>>(result, "火币合约API服务器", "【通用】查询用户当前的手续费费率");
             }
         }
         #endregion
-
         #region 【逐仓】查询用户当前的划转限制(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询用户当前的划转限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapTransferLimitAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapTransferLimitAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户划转限制：");
@@ -4511,25 +3894,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询用户当前的划转限制" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedTransferLimit>>(result, "火币合约API服务器", "【逐仓】查询用户当前的划转限制");
             }
         }
         #endregion
-
         #region 【全仓】查询用户当前的划转限制(PrivateData)
         {
             string marginAccount = "USDT";            
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询用户当前的划转限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossTransferLimitAsync(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossTransferLimitAsync(marginAccount);
             if (result.Success)
             {
                 Console.WriteLine($"子用户划转限制：");
@@ -4540,25 +3917,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询用户当前的划转限制" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossTransferLimit>>(result, "火币合约API服务器", "【全仓】查询用户当前的划转限制");
             }
         }
         #endregion
-
         #region 【逐仓】用户持仓量限制的查询(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】用户持仓量限制的查询");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapPositionLimitAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapPositionLimitAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户持仓量限制：");
@@ -4569,25 +3940,19 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】用户持仓量限制的查询" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedPositionLimit>>(result, "火币合约API服务器", "【逐仓】用户持仓量限制的查询");
             }
         }
         #endregion
-
         #region 【全仓】用户持仓量限制的查询(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】用户持仓量限制的查询");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossPositionLimitAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossPositionLimitAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"子用户持仓量限制：");
@@ -4598,23 +3963,18 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】用户持仓量限制的查询" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossPositionLimit>>(result, "火币合约API服务器", "【全仓】用户持仓量限制的查询");
             }
         }
         #endregion
-
         #region 【逐仓】查询用户所有杠杆持仓量限制(PrivateData)
         {
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询用户所有杠杆持仓量限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapLeverPositionLimitAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapLeverPositionLimitAsync();
             if (result.Success)
             {
                 Console.WriteLine($"子用户所有杠杆持仓量限制：");
@@ -4629,23 +3989,18 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询用户所有杠杆持仓量限制" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedLeverPositionLimit>>(result, "火币合约API服务器", "【逐仓】查询用户所有杠杆持仓量限制");
             }
         }
         #endregion
-
         #region 【全仓】查询用户所有杠杆持仓量限制(PrivateData)
         {
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询用户所有杠杆持仓量限制");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapCrossLeverPositionLimitAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapCrossLeverPositionLimitAsync();
             if (result.Success)
             {
                 Console.WriteLine($"子用户所有杠杆持仓量限制：");
@@ -4660,14 +4015,10 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询用户所有杠杆持仓量限制" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossLeverPositionLimit>>(result, "火币合约API服务器", "【全仓】查询用户所有杠杆持仓量限制");
             }
         }
         #endregion
-
         #region 【通用】母子账户划转(PrivateData)
         {
             string subUid = "400293761";
@@ -4677,14 +4028,12 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             decimal amount = 1;
             string type = "master_to_sub";
             long clientOrderId = 1000000;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】母子账户划转");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.LinearSwapMasterSubTransferAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.LinearSwapMasterSubTransferAsync(
                 subUid: long.Parse(subUid),
                 asset: asset,
                 fromMarginAccount: fromMarginAccount,
@@ -4706,14 +4055,10 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】母子账户划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMasterSubTransfer>(result, "火币合约API服务器", "【通用】母子账户划转");
             }
         }
         #endregion
-
         #region 【通用】获取母账户下的所有母子账户划转记录(PrivateData)
         {
             string marginAccount = "BTC-USDT";
@@ -4721,14 +4066,12 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             int createDate = 90;
             int pageIndex = 1;
             int pageSize = 20;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】获取母账户下的所有母子账户划转记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapMasterSubTransferRecordAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapMasterSubTransferRecordAsync(
                 marginAccount: marginAccount,
                 transferType: transferType,
                 createDate: createDate,
@@ -4741,14 +4084,10 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取母账户下的所有母子账户划转记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<object>>(result, "火币合约API服务器", "【通用】获取母账户下的所有母子账户划转记录");
             }
         }
         #endregion
-
         #region 【通用】同账号不同保证金账户的划转(PrivateData)
         {
             string asset = "USDT";
@@ -4756,14 +4095,12 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             string toMarginAccount = "DOGE-USDT";
             decimal amount = 1;
             long clientOrderId = 1000000;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】同账号不同保证金账户的划转");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.LinearSwapTransferInnerAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.LinearSwapTransferInnerAsync(
                 asset: asset,
                 fromMarginAccount: fromMarginAccount,
                 toMarginAccount: toMarginAccount,
@@ -4783,66 +4120,53 @@ static async Task TestUsdtMarginedApiAccountEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】同账号不同保证金账户的划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedTransferInner>(result, "火币合约API服务器", "【通用】同账号不同保证金账户的划转");
             }
         }
         #endregion
-
         #region 【通用】获取用户的API指标禁用信息(PrivateData)
         {
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】获取用户的API指标禁用信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Account.GetLinearSwapApiTradingStatusAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.GetLinearSwapApiTradingStatusAsync();
             if (result.Success)
             {
                 Console.WriteLine($"{JsonConvert.SerializeObject(result.Data)}");                
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】获取用户的API指标禁用信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedApiTradingStatus>(result, "火币合约API服务器", "【通用】获取用户的API指标禁用信息");
             }
         }
         #endregion
     }
 }
-
 //交易所U本位合约交易接口测试-已完成
-static async Task TestUsdtMarginedApiTradeEndpoints()
+static async Task TestUsdtMarginSwapApiTradeEndpoints()
 {
-    using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
+    using (var huobiUsdtMarginedClient = new HuobiClient())
     {
         List<long> cancelIsolatedOrderIdList = new();
         List<long> cancelIsolatedClientOrderIdList = new();
-
         List<long> cancelCrossOrderIdList = new();
         List<long> cancelCrossClientOrderIdList = new();
-
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
         ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
-
         #region 【全仓】查询系统交易权限(PrivateData)
         {
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询系统交易权限");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossTradeStateAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossTradeStateAsync();
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4853,66 +4177,50 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询系统交易权限" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossTradeState>>(result, "火币合约API服务器", "【全仓】查询系统交易权限");
             }
         }
         #endregion
-
         #region 【逐仓】切换持仓模式(PrivateData)
         {
             string marginAccount = "DOGE-USDT";
             string positionMode = "dual_side";
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】切换持仓模式");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapSwitchPositionModeAsync(marginAccount, positionMode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapSwitchPositionModeAsync(marginAccount, positionMode);
             if (result.Success)
             {
                 Console.WriteLine($"保证金账户：{result.Data.MarginAccount} 持仓模式：{result.Data.PositionMode}");
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】切换持仓模式" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedSwitchPositionMode>(result, "火币合约API服务器", "【逐仓】切换持仓模式");
             }
         }
         #endregion
-
         #region 【全仓】切换持仓模式(PrivateData)
         {
             string marginAccount = "USDT";
             string positionMode = "dual_side";
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】切换持仓模式");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossSwitchPositionModeAsync(marginAccount, positionMode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossSwitchPositionModeAsync(marginAccount, positionMode);
             if (result.Success)
             {
                 Console.WriteLine($"保证金账户：{result.Data.MarginAccount} 持仓模式：{result.Data.PositionMode}");
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】切换持仓模式" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossSwitchPositionMode>(result, "火币合约API服务器", "【全仓】切换持仓模式");
             }
         }
         #endregion
-
         string? read = "";
         Console.WriteLine($"Note: The following operations(PlanOrder/BatchPlanOrder/CancelOrder/CancelAllOrder) will generate real order submission, cancellation and other operations, Press [Y] to run test!");
         read = Console.ReadLine();
@@ -4935,14 +4243,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 UmSlOrderPriceType? slOrderPriceType = null;
                 int? reduceOnly = null;
                 long? clientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now);
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】合约下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapOrderAsync(
                     contractCode: contractCode,
                     direction: direction,
                     offset: offset,
@@ -4970,14 +4276,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOrder>(result, "火币合约API服务器", "【逐仓】合约下单");
                 }
             }
             #endregion
-
             #region 【全仓】合约下单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
@@ -4997,14 +4299,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 string? contractType = "swap";
                 int? reduceOnly = null;
                 long? clientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now);
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】合约下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossOrderAsync(
                     contractCode: contractCode,
                     direction: direction,
                     offset: offset,
@@ -5034,14 +4334,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOrder>(result, "火币合约API服务器", "【全仓】合约下单");
                 }
             }
             #endregion
-
             #region 【逐仓】合约批量下单(PrivateData)
             {
                 HuobiUsdtMarginedIsolatedOrder isolatedOrder = new()
@@ -5065,14 +4361,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 List<HuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new();
                 isolatedOrderList.Add(isolatedOrder);
                 IEnumerable<HuobiUsdtMarginedIsolatedOrder> isolatedOrders = isolatedOrderList;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】合约批量下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapBatchorderAsync(isolatedOrders);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapBatchorderAsync(isolatedOrders);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -5085,7 +4379,6 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                         if (item.OrderId != null)
                         {
                             cancelIsolatedOrderIdList.Add((long)item.OrderId);
-
                         }
                         if (item.ClientOrderId != null)
                         {
@@ -5095,14 +4388,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约批量下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedBatchOrder>(result, "火币合约API服务器", "【逐仓】合约批量下单");
                 }
             }
             #endregion
-
             #region 【全仓】合约批量下单(PrivateData)
             {
                 HuobiUsdtMarginedCrossOrder crossOrder = new()
@@ -5128,14 +4417,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 List<HuobiUsdtMarginedCrossOrder> crossOrderList = new();
                 crossOrderList.Add(crossOrder);
                 IEnumerable<HuobiUsdtMarginedCrossOrder> crossOrders = crossOrderList;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】合约批量下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossBatchorderAsync(crossOrders);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossBatchorderAsync(crossOrders);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -5148,7 +4435,6 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                         if (item.OrderId != null)
                         {
                             cancelCrossOrderIdList.Add((long)item.OrderId);
-
                         }
                         if (item.ClientOrderId != null)
                         {
@@ -5158,27 +4444,19 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约批量下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossBatchOrder>(result, "火币合约API服务器", "【全仓】合约批量下单");
                 }
             }
             #endregion
-
             #region 【逐仓】撤销合约订单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
-
                 IEnumerable<long> cancelIsolatedOrderIds = cancelIsolatedOrderIdList;
-
                 IEnumerable<long> cancelIsolatedClientOrderIds = cancelIsolatedClientOrderIdList;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】撤销合约订单");
                 if ((cancelIsolatedOrderIds == null || !cancelIsolatedOrderIds.Any()) && (cancelIsolatedClientOrderIds == null || !cancelIsolatedClientOrderIds.Any()))
                 {
@@ -5186,7 +4464,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCancelAsync(contractCode, cancelIsolatedOrderIds, cancelIsolatedClientOrderIds);
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCancelAsync(contractCode, cancelIsolatedOrderIds, cancelIsolatedClientOrderIds);
                     if (result.Success)
                     {
                         foreach (var item in result.Data.ErrorsList)
@@ -5208,30 +4486,22 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币合约API服务器：" + "【逐仓】撤销合约订单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedCancel>(result, "火币合约API服务器", "【逐仓】撤销合约订单");
                     }
                 }
             }
             #endregion
-
             #region 【全仓】撤销合约订单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 string pair = "DOGE-USDT";
                 string contractType = "swap";
-
                 IEnumerable<long> cancelCrossOrderIds = cancelCrossOrderIdList;
-
                 IEnumerable<long> cancelCrossClientOrderIds = cancelCrossClientOrderIdList;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】撤销合约订单");
                 if ((cancelCrossOrderIds == null || !cancelCrossOrderIds.Any()) && (cancelCrossClientOrderIds == null || !cancelCrossClientOrderIds.Any()))
                 {
@@ -5239,7 +4509,7 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossCancelAsync(contractCode, cancelCrossOrderIds, cancelCrossClientOrderIds, pair, contractType);
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossCancelAsync(contractCode, cancelCrossOrderIds, cancelCrossClientOrderIds, pair, contractType);
                     if (result.Success)
                     {
                         foreach (var item in result.Data.ErrorsList)
@@ -5261,28 +4531,22 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币合约API服务器：" + "【全仓】撤销合约订单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossCancel>(result, "火币合约API服务器", "【全仓】撤销合约订单");
                     }
                 }
             }
             #endregion
-
             #region 【逐仓】撤销全部合约单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 string direction = "buy";
                 string offset = "open";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】撤销全部合约单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCancelAllAsync(contractCode, direction, offset);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCancelAllAsync(contractCode, direction, offset);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -5304,14 +4568,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】撤销全部合约单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedCancel>(result, "火币合约API服务器", "【逐仓】撤销全部合约单");
                 }
             }
             #endregion
-
             #region 【全仓】撤销全部合约单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
@@ -5319,14 +4579,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 string offset = "open";
                 string pair = "DOGE-USDT";
                 string contractType = "swap";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】撤销全部合约单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossCancelAllAsync(contractCode, pair, contractType, direction, offset);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossCancelAllAsync(contractCode, pair, contractType, direction, offset);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -5348,55 +4606,43 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】撤销全部合约单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossCancel>(result, "火币合约API服务器", "【全仓】撤销全部合约单");
                 }
             }
             #endregion
         }
-
         #region 【逐仓】切换杠杆(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             int leverRate = 10;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】切换杠杆");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapSwitchLeverRateAsync(contractCode, leverRate);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapSwitchLeverRateAsync(contractCode, leverRate);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】切换杠杆" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedSwitchLeverRate>(result, "火币合约API服务器", "【逐仓】切换杠杆");
             }
         }
         #endregion
-
         #region 【全仓】切换杠杆(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             int leverRate = 10;
             string pair = "DOGE-USDT";
             string contractType = "swap";
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】切换杠杆");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossSwitchLeverRateAsync(contractCode, leverRate, pair, contractType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossSwitchLeverRateAsync(contractCode, leverRate, pair, contractType);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}\r\n" +
@@ -5404,30 +4650,21 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】切换杠杆" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossSwitchLeverRate>(result, "火币合约API服务器", "【全仓】切换杠杆");
             }
         }
         #endregion
-
-
         #region 【逐仓】获取用户的合约订单信息(PrivateData)
         {
             string contractCode = "DOGE-USDT";
-
             IEnumerable<long> isolatedOrderIds = new List<long>() { 1044606768686141440, 987654321 };
-
             IEnumerable<long> isolatedClientOrderIds = new List<long>() { 123456789000, 987654321000 };
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取用户的合约订单信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5439,29 +4676,22 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约订单信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedOrderInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约订单信息");
             }
         }
         #endregion
-
         #region 【全仓】获取用户的合约订单信息(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             string pair = "DOGE-USDT";
-
             IEnumerable<long> isolatedOrderIds = new List<long>() { 1043342971513040896, 987654321 };
             IEnumerable<long> isolatedClientOrderIds = new List<long>() { 123456789000, 987654321000 };
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取用户的合约订单信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds, pair);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds, pair);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5474,14 +4704,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约订单信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossOrderInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约订单信息");
             }
         }
         #endregion
-
         #region 【逐仓】获取用户的合约订单明细信息(PrivateData)
         {
             long orderId = 1044606768686141440;
@@ -5490,14 +4716,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             int? orderType = null;
             int? pageIndex = null;
             int? pageSize = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取用户的合约订单明细信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOrderDetailAsync(orderId, contractCode, createdTimestamp, orderType, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapOrderDetailAsync(orderId, contractCode, createdTimestamp, orderType, pageIndex, pageSize);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
@@ -5510,14 +4734,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约订单明细信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOrderDetail>(result, "火币合约API服务器", "【逐仓】获取用户的合约订单明细信息");
             }
         }
         #endregion
-
         #region 【全仓】获取用户的合约订单明细信息(PrivateData)
         {
             long orderId = 1043342971513040896;
@@ -5527,14 +4747,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             int? orderType = null;
             int? pageIndex = null;
             int? pageSize = null;
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取用户的合约订单明细信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOrderDetailAsync(orderId, contractCode, pair, createdTimestamp, orderType, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossOrderDetailAsync(orderId, contractCode, pair, createdTimestamp, orderType, pageIndex, pageSize);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
@@ -5547,14 +4765,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约订单明细信息" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOrderDetail>(result, "火币合约API服务器", "【全仓】获取用户的合约订单明细信息");
             }
         }
         #endregion
-
         #region 【逐仓】获取用户的合约当前未成交委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
@@ -5562,14 +4776,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             int? pageSize = null;
             string? sortBy = "created_at";
             int? tradeType = 0;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取用户的合约当前未成交委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapOpenordersAsync(contractCode, pageIndex, pageSize, sortBy, tradeType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapOpenordersAsync(contractCode, pageIndex, pageSize, sortBy, tradeType);
             if (result.Success)
             {
                 Console.WriteLine($"总页数：{result.Data.TotalPage}  当前页：{result.Data.CurrentPage} 总条数：{result.Data.TotalSize}");
@@ -5583,14 +4795,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约当前未成交委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOpenOrders>(result, "火币合约API服务器", "【逐仓】获取用户的合约当前未成交委托");
             }
         }
         #endregion
-
         #region 【全仓】获取用户的合约当前未成交委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
@@ -5599,14 +4807,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             int? pageSize = null;
             string? sortBy = "created_at";
             int? tradeType = 0;
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取用户的合约当前未成交委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossOpenordersAsync(contractCode, pair, pageIndex, pageSize, sortBy, tradeType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossOpenordersAsync(contractCode, pair, pageIndex, pageSize, sortBy, tradeType);
             if (result.Success)
             {
                 Console.WriteLine($"总页数：{result.Data.TotalPage}  当前页：{result.Data.CurrentPage} 总条数：{result.Data.TotalSize}");
@@ -5620,14 +4826,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约当前未成交委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOpenOrders>(result, "火币合约API服务器", "【全仓】获取用户的合约当前未成交委托");
             }
         }
         #endregion
-
         #region 【逐仓】获取用户的合约历史委托(PrivateData)
         {
             int tradeType = 0;
@@ -5638,14 +4840,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             long? endTime = null;
             string? direct = null;
             long? fromId = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取用户的合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapHisordersAsync(tradeType, type, status, contractCode, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapHisordersAsync(tradeType, type, status, contractCode, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5658,14 +4858,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedHisOrder>>(result, "火币合约API服务器", "【逐仓】获取用户的合约历史委托");
             }
         }
         #endregion
-
         #region 【全仓】获取用户的合约历史委托(PrivateData)
         {
             int tradeType = 0;
@@ -5677,14 +4873,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             long? endTime = null;
             string? direct = null;
             long? fromId = null;
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取用户的合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossHisordersAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossHisordersAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5697,14 +4891,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossHisOrder>>(result, "火币合约API服务器", "【全仓】获取用户的合约历史委托");
             }
         }
         #endregion
-
         #region 【逐仓】组合查询合约历史委托(PrivateData)
         {
             int tradeType = 0;
@@ -5717,14 +4907,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             string? direct = null;
             long? fromId = null;
             string? priceType = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】组合查询合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5737,14 +4925,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】组合查询合约历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedHisOrder>>(result, "火币合约API服务器", "【逐仓】组合查询合约历史委托");
             }
         }
         #endregion
-
         #region 【全仓】组合查询合约历史委托(PrivateData)
         {
             int tradeType = 0;
@@ -5757,14 +4941,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             string? direct = null;
             long? fromId = null;
             string? priceType = null;
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】组合查询合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5777,14 +4959,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】组合查询合约历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossHisOrder>>(result, "火币合约API服务器", "【全仓】组合查询合约历史委托");
             }
         }
         #endregion
-
         #region 【逐仓】获取用户的合约历史成交记录(PrivateData)
         {
             int tradeType = 0;
@@ -5794,14 +4972,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             long? endTime = null;
             string? direct = null;
             long? fromId = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取用户的合约历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5814,14 +4990,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取用户的合约历史成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedMatchResults>>(result, "火币合约API服务器", "【逐仓】获取用户的合约历史成交记录");
             }
         }
         #endregion
-
         #region 【全仓】获取用户的合约历史成交记录(PrivateData)
         {
             int tradeType = 0;
@@ -5831,14 +5003,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             long? endTime = null;
             string? direct = null;
             long? fromId = null;
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取用户的合约历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5851,14 +5021,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取用户的合约历史成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossMatchResults>>(result, "火币合约API服务器", "【全仓】获取用户的合约历史成交记录");
             }
         }
         #endregion
-
         #region 【逐仓】组合查询用户历史成交记录(PrivateData)
         {
             int tradeType = 0;
@@ -5867,14 +5033,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             long? endTime = null;
             string? direct = null;
             long? fromId = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】组合查询用户历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapMatchresultsExactAsync(contractCode, tradeType, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapMatchresultsExactAsync(contractCode, tradeType, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5887,14 +5051,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】组合查询用户历史成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedMatchResults>>(result, "火币合约API服务器", "【逐仓】组合查询用户历史成交记录");
             }
         }
         #endregion
-
         #region 【全仓】组合查询用户历史成交记录(PrivateData)
         {
             int tradeType = 0;
@@ -5904,14 +5064,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             long? endTime = null;
             string? direct = null;
             long? fromId = null;
-
             #region 子用户客户端
             apiCredentials = new ApiCredentials(subAccessKey, subSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】组合查询用户历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.GetLinearSwapCrossMatchresultsExactAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossMatchresultsExactAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5924,14 +5082,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】组合查询用户历史成交记录" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossMatchResults>>(result, "火币合约API服务器", "【全仓】组合查询用户历史成交记录");
             }
         }
         #endregion
-
         Console.WriteLine($"Note: The following operations(LightningClosePosition) will generate real order submission, cancellation and other operations, Press [Y] to run test!");
         read = Console.ReadLine();
         if (read == "Y" || read == "y")
@@ -5943,14 +5097,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 string direction = UmDirection.buy.ToString();
                 long clientOrderId = 123456789000;
                 string OrderPriceType = "lightning";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】合约闪电平仓下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapLightningClosePositionAsync(contractCode, volume, direction, clientOrderId, OrderPriceType);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapLightningClosePositionAsync(contractCode, volume, direction, clientOrderId, OrderPriceType);
                 if (result.Success)
                 {
                     if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
@@ -5962,14 +5114,10 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约闪电平仓下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOrder>(result, "火币合约API服务器", "【逐仓】合约闪电平仓下单");
                 }
             }
             #endregion
-
             #region 【全仓】合约闪电平仓下单(PrivateData)
             {
                 long volume = 1;
@@ -5979,14 +5127,12 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 string? contract_type = "swap";
                 long clientOrderId = 123456789000;
                 string OrderPriceType = "lightning";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】合约闪电平仓下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Trade.LinearSwapCrossLightningClosePositionAsync(volume, direction, contractCode, pair, contract_type, clientOrderId, OrderPriceType);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossLightningClosePositionAsync(volume, direction, contractCode, pair, contract_type, clientOrderId, OrderPriceType);
                 if (result.Success)
                 {
                     if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
@@ -5998,37 +5144,30 @@ static async Task TestUsdtMarginedApiTradeEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约闪电平仓下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOrder>(result, "火币合约API服务器", "【全仓】合约闪电平仓下单");
                 }
             }
             #endregion
         }
     }
 }
-
 //交易所U本位合约策略订单接口测试-开发中...
-static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
+static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
 {
-    using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
+    using (var huobiUsdtMarginedClient = new HuobiClient())
     {
         List<long> cancelIsolatedTriggerOrderIdList = new();
         List<long> cancelIsolatedTpslOrderIdList = new();
         List<long> cancelIsolatedTrackOrderIdList = new();
-
         List<long> cancelCrossTriggerOrderIdList = new();
         List<long> cancelCrossTpslOrderIdList = new();
         List<long> cancelCrossTrackOrderIdList = new();
-
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
         ApiCredentials apiCredentials = new(mainAccessKey, mainSecretKey);
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
-
         string? read = "";
         Console.WriteLine($"Note: The following operations(triggerOrder,triggerCancel) will generate real order submission, cancellation and other operations, Press [Y] to run test!");
         read = Console.ReadLine();
@@ -6047,14 +5186,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 string? orderPriceType = "limit";
                 string? offset = "open";
                 int? leverRate = 20;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】合约计划委托下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTriggerOrderAsync(
                     contractCode, 
                     triggerType, 
                     triggerPrice,
@@ -6076,14 +5213,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约计划委托下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerOrder>(result, "火币合约API服务器", "【逐仓】合约计划委托下单");
                 }
             }
             #endregion
-
             #region 【全仓】合约计划委托下单(PrivateData)
             {
                 //全仓 20X 双向，卖出开空，高于0.095下单，限价0.10下单2张
@@ -6099,14 +5232,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 string? orderPriceType = "limit";
                 string? offset = "open";
                 int? leverRate = 20;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】合约计划委托下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTriggerOrderAsync(
                     triggerType,
                     triggerPrice,
                     volume,
@@ -6130,26 +5261,20 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约计划委托下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerOrder>(result, "火币合约API服务器", "【全仓】合约计划委托下单");
                 }
             }
             #endregion
-
             #region 【逐仓】合约计划委托撤单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 IEnumerable<long> cancelIsolatedTriggerOrderIds = cancelIsolatedTriggerOrderIdList;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】合约计划委托撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerCancelAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTriggerCancelAsync(
                     contractCode,
                     cancelIsolatedTriggerOrderIds
                     );
@@ -6174,28 +5299,22 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约计划委托撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】合约计划委托撤单");
                 }
             }
             #endregion
-
             #region 【全仓】合约计划委托撤单(PrivateData)
             {
                 IEnumerable<long> cancelCrossTriggerOrderIds = cancelCrossTriggerOrderIdList;
                 string? contractCode = "DOGE-USDT";
                 string? pair = "DOGE-USDT";
                 string? contractType = "swap";                
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】合约计划委托撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerCancelAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTriggerCancelAsync(
                     cancelCrossTriggerOrderIds,
                     contractCode,
                     pair,
@@ -6222,27 +5341,21 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约计划委托撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】合约计划委托撤单");
                 }
             }
             #endregion
-
             #region 【逐仓】合约计划委托全部撤单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 string? direction = null;
                 string? offset = null;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】合约计划委托全部撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTriggerCancelAllAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTriggerCancelAllAsync(
                     contractCode,
                     direction,
                     offset
@@ -6268,14 +5381,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】合约计划委托全部撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】合约计划委托全部撤单");
                 }
             }
             #endregion
-
             #region 【全仓】合约计划委托全部撤单(PrivateData)
             {
                 string? contractCode = "DOGE-USDT";
@@ -6283,14 +5392,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 string? contractType = "swap";
                 string? direction = "buy";
                 string? offset = "open";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】合约计划委托全部撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTriggerCancelAllAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTriggerCancelAllAsync(
                     contractCode,
                     pair,
                     contractType,
@@ -6318,29 +5425,23 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】合约计划委托全部撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】合约计划委托全部撤单");
                 }
             }
             #endregion
         }
-
         #region 【逐仓】获取计划委托当前委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             int? pageIndex = null;
             int? pageSize = null;
             int? tradeType = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取计划委托当前委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTriggerOpenordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapTriggerOpenordersAsync(
                 contractCode,
                 pageIndex,
                 pageSize,
@@ -6359,14 +5460,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取计划委托当前委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerOpenOrders>(result, "火币合约API服务器", "【逐仓】获取计划委托当前委托");
             }
         }
         #endregion
-
         #region 【全仓】获取计划委托当前委托(PrivateData)
         {
             string? contractCode = "DOGE-USDT";
@@ -6374,14 +5471,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             int? tradeType = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取计划委托当前委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTriggerOpenordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapCrossTriggerOpenordersAsync(
                 contractCode,
                 pair,
                 pageIndex,
@@ -6401,14 +5496,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】合约计划委托全部撤单" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerOpenOrders>(result, "火币合约API服务器", "【全仓】合约计划委托全部撤单");
             }
         }
         #endregion
-
         #region 【逐仓】获取计划委托历史委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
@@ -6418,14 +5509,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             string? sortBy = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】获取计划委托历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTriggerHisordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapTriggerHisordersAsync(
                 contractCode,
                 tradeType,
                 status,
@@ -6447,14 +5536,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】获取计划委托历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerHisorders>(result, "火币合约API服务器", "【逐仓】获取计划委托历史委托");
             }
         }
         #endregion
-
         #region 【全仓】获取计划委托历史委托(PrivateData)
         {
             int tradeType = 0;
@@ -6465,14 +5550,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             string? sortBy = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】获取计划委托历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTriggerHisordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapCrossTriggerHisordersAsync(
                 tradeType,
                 status,
                 createDate,
@@ -6495,14 +5578,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】获取计划委托历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerHisorders>(result, "火币合约API服务器", "【全仓】获取计划委托历史委托");
             }
         }
         #endregion
-
         Console.WriteLine($"Note: The following operations(TpslOrder,TpslCancel) will generate real order submission, cancellation and other operations, Press [Y] to run test!");
         read = Console.ReadLine();
         if (read == "Y" || read == "y")
@@ -6518,14 +5597,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 decimal? slTriggerPrice = 0.045M;
                 decimal? slOrderPrice = 0.04M;
                 string? slOrderPriceType = "limit";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】对仓位设置止盈止损订单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTpslOrderAsync(
                     contractCode,
                     direction,
                     volume,
@@ -6552,14 +5629,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】对仓位设置止盈止损订单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslOrder>(result, "火币合约API服务器", "【逐仓】对仓位设置止盈止损订单");
                 }
             }
             #endregion
-
             #region 【全仓】对仓位设置止盈止损订单(PrivateData)
             {
                 string direction = "sell";
@@ -6573,14 +5646,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 decimal? slTriggerPrice = 0.045M;
                 decimal? slOrderPrice = 0.04M;
                 string? slOrderPriceType = "limit";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】对仓位设置止盈止损订单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTpslOrderAsync(
                     direction,
                     volume,
                     contractCode,
@@ -6609,28 +5680,22 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】对仓位设置止盈止损订单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslOrder>(result, "火币合约API服务器", "【全仓】对仓位设置止盈止损订单");
                 }
             }
             #endregion
-
             #region 【逐仓】止盈止损订单撤单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 IEnumerable<long> cancelIsolatedTpslOrderIds = cancelIsolatedTpslOrderIdList;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 if (cancelIsolatedTpslOrderIdList != null && cancelIsolatedTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【逐仓】止盈止损订单撤单");
-                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancelAsync(
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTpslCancelAsync(
                         contractCode,
                         cancelIsolatedTpslOrderIds
                         );
@@ -6655,31 +5720,25 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币合约API服务器：" + "【逐仓】止盈止损订单撤单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单撤单");
                     }
                 }
             }
             #endregion
-
             #region 【全仓】止盈止损订单撤单(PrivateData)
             {
                 IEnumerable<long> cancelCrossTpslOrderIds = cancelCrossTpslOrderIdList;
                 string? contractCode = "DOGE-USDT";
                 string? pair = "DOGE-USDT";
                 string? contractType = "swap";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 if (cancelCrossTpslOrderIdList != null && cancelCrossTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【全仓】止盈止损订单撤单");
-                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancelAsync(
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTpslCancelAsync(
                         cancelCrossTpslOrderIds,
                         contractCode,
                         pair,
@@ -6706,29 +5765,23 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币合约API服务器：" + "【全仓】止盈止损订单撤单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单撤单");
                     }
                 }
             }
             #endregion
-
             #region 【逐仓】止盈止损订单全部撤单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 string? direction = "buy";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 if (cancelIsolatedTpslOrderIdList != null && cancelIsolatedTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【逐仓】止盈止损订单全部撤单");
-                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTpslCancelAllAsync(
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTpslCancelAllAsync(
                         contractCode,
                         direction
                         );
@@ -6753,31 +5806,25 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币合约API服务器：" + "【逐仓】止盈止损订单全部撤单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单全部撤单");
                     }
                 }
             }
             #endregion
-
             #region 【全仓】止盈止损订单全部撤单(PrivateData)
             {
                 string? contractCode = "DOGE-USDT";
                 string? pair = "DOGE-USDT";
                 string? contractType = "swap";
                 string? direction = "buy";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 if (cancelCrossTpslOrderIdList != null && cancelCrossTpslOrderIdList.Any())
                 {
                     Console.WriteLine("【全仓】止盈止损订单全部撤单");
-                    var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTpslCancelAllAsync(
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTpslCancelAllAsync(
                         contractCode,
                         pair,
                         contractType,
@@ -6804,30 +5851,24 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        Console.WriteLine($"火币合约API服务器：" + "【全仓】止盈止损订单全部撤单" + "异常\r\n" +
-                            $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                            $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                            $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单全部撤单");
                     }
                 }
             }
             #endregion
         }
-
         #region 【逐仓】查询止盈止损订单当前委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             int? pageIndex = null;
             int? pageSize = null;
             int? tradeType = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询止盈止损订单当前委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTpslOpenordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapTpslOpenordersAsync(
                 contractCode,
                 pageIndex,
                 pageSize,
@@ -6846,14 +5887,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询止盈止损订单当前委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslOpenOrders>(result, "火币合约API服务器", "【逐仓】查询止盈止损订单当前委托");
             }
         }
         #endregion
-
         #region 【全仓】查询止盈止损订单当前委托(PrivateData)
         {
             string? contractCode = "DOGE-USDT";
@@ -6861,14 +5898,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             int? tradeType = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询止盈止损订单当前委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTpslOpenordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapCrossTpslOpenordersAsync(
                 contractCode,
                 pair,
                 pageIndex,
@@ -6888,14 +5923,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询止盈止损订单当前委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslOpenOrders>(result, "火币合约API服务器", "【全仓】查询止盈止损订单当前委托");
             }
         }
         #endregion
-
         #region 【逐仓】查询止盈止损订单历史委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
@@ -6904,14 +5935,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             string? sortBy = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询止盈止损订单历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTpslHisordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapTpslHisordersAsync(
                 contractCode,
                 status,
                 createDate,
@@ -6932,14 +5961,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询止盈止损订单历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslHisorders>(result, "火币合约API服务器", "【逐仓】查询止盈止损订单历史委托");
             }
         }
         #endregion
-
         #region 【全仓】查询止盈止损订单历史委托(PrivateData)
         {
             string status = "0";
@@ -6949,14 +5974,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             string? sortBy = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询止盈止损订单历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTpslHisordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapCrossTpslHisordersAsync(
                 status,
                 createDate,
                 contractCode,
@@ -6978,26 +6001,20 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询止盈止损订单历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslHisorders>(result, "火币合约API服务器", "【全仓】查询止盈止损订单历史委托");
             }
         }
         #endregion
-
         #region 【逐仓】查询开仓单关联的止盈止损订单详情(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             long orderId = 123456789;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】查询开仓单关联的止盈止损订单详情");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapRelationTpslOrderAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapRelationTpslOrderAsync(
                 contractCode,
                 orderId
                 );
@@ -7008,7 +6025,6 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 Console.WriteLine($"买卖方向：{result.Data.Direction}  开平方向：{result.Data.Offset} 杠杆倍数：{result.Data.LeverRate}");
                 Console.WriteLine($"订单编号：{result.Data.OrderId}  客户订单编号：{result.Data.ClientOrderId}");
                 Console.WriteLine($"创建时间：{result.Data.CreatedTimestamp}  成交数量：{result.Data.TradeVolume} 成交总金额：{result.Data.TradeTurnover}");
-
                 foreach (var item in result.Data.HuobiUsdtMarginedIsolatedTpslOrderInfos)
                 {
                     Console.WriteLine($"关联订单信息：{JsonConvert.SerializeObject(item)}");
@@ -7016,27 +6032,21 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】查询开仓单关联的止盈止损订单详情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedRelationTpslOrder>(result, "火币合约API服务器", "【逐仓】查询开仓单关联的止盈止损订单详情");
             }
         }
         #endregion
-
         #region 【全仓】查询开仓单关联的止盈止损订单详情(PrivateData)
         {
             long orderId = 123456789;
             string? contractCode = "DOGE-USDT";
             string? pair = "DOGE-USDT";
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询开仓单关联的止盈止损订单详情");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossRelationTpslOrderAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapCrossRelationTpslOrderAsync(
                 orderId,
                 contractCode,
                 pair
@@ -7048,7 +6058,6 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 Console.WriteLine($"买卖方向：{result.Data.Direction}  开平方向：{result.Data.Offset} 杠杆倍数：{result.Data.LeverRate}");
                 Console.WriteLine($"订单编号：{result.Data.OrderId}  客户订单编号：{result.Data.ClientOrderId}");
                 Console.WriteLine($"创建时间：{result.Data.CreatedTimestamp}  成交数量：{result.Data.TradeVolume} 成交总金额：{result.Data.TradeTurnover}");
-
                 foreach (var item in result.Data.HuobiUsdtMarginedCrossTpslOrderInfos)
                 {
                     Console.WriteLine($"关联订单信息：{JsonConvert.SerializeObject(item)}");
@@ -7056,14 +6065,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询开仓单关联的止盈止损订单详情" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossRelationTpslOrder>(result, "火币合约API服务器", "【全仓】查询开仓单关联的止盈止损订单详情");
             }
         }
         #endregion
-
         Console.WriteLine($"Note: The following operations(TrackOrder,TrackCancel) will generate real order submission, cancellation and other operations, Press [Y] to run test!");
         read = Console.ReadLine();
         if (read == "Y" || read == "y")
@@ -7079,14 +6084,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 int? reduceOnly = 0;
                 int? leverRate = 20;
                 string? offset = "open";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】跟踪委托订单下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTrackOrderAsync(
                     contractCode,
                     direction,
                     volume,
@@ -7107,14 +6110,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】跟踪委托订单下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackOrder>(result, "火币合约API服务器", "【逐仓】跟踪委托订单下单");
                 }
             }
             #endregion
-
             #region 【全仓】跟踪委托订单下单(PrivateData)
             {
                 string direction = "sell";
@@ -7128,14 +6127,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 int? reduceOnly = 0;
                 string? offset = "open";
                 int? leverRate = 20;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】跟踪委托订单下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTrackOrderAsync(
                     direction,
                     volume,
                     callbackRate,
@@ -7158,26 +6155,20 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】跟踪委托订单下单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackOrder>(result, "火币合约API服务器", "【全仓】跟踪委托订单下单");
                 }
             }
             #endregion
-
             #region 【逐仓】跟踪委托订单撤单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 IEnumerable<long> cancelIsolatedTrackOrderIds = cancelIsolatedTrackOrderIdList;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】跟踪委托订单撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackCancelAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTrackCancelAsync(
                     contractCode,
                     cancelIsolatedTrackOrderIds
                     );
@@ -7202,28 +6193,22 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】跟踪委托订单撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackCancel>(result, "火币合约API服务器", "【逐仓】跟踪委托订单撤单");
                 }
             }
             #endregion
-
             #region 【全仓】跟踪委托订单撤单(PrivateData)
             {
                 IEnumerable<long> cancelCrossTrackOrderIds = cancelCrossTrackOrderIdList;
                 string? contractCode = "DOGE-USDT";
                 string? pair = "DOGE-USDT";
                 string? contractType = "swap";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】跟踪委托订单撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackCancelAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTrackCancelAsync(
                     cancelCrossTrackOrderIds,
                     contractCode,
                     pair,
@@ -7250,27 +6235,21 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】跟踪委托订单撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackCancel>(result, "火币合约API服务器", "【全仓】跟踪委托订单撤单");
                 }
             }
             #endregion
-
             #region 【逐仓】跟踪委托订单全部撤单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
                 string? direction = null;
                 string? offset = null;
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【逐仓】跟踪委托订单全部撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapTrackCancelAllAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapTrackCancelAllAsync(
                     contractCode,
                     direction,
                     offset
@@ -7296,14 +6275,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【逐仓】跟踪委托订单全部撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackCancel>(result, "火币合约API服务器", "【逐仓】跟踪委托订单全部撤单");
                 }
             }
             #endregion
-
             #region 【全仓】跟踪委托订单全部撤单(PrivateData)
             {
                 string? contractCode = "DOGE-USDT";
@@ -7311,14 +6286,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 string? contractType = "swap";
                 string? direction = "buy";
                 string? offset = "open";
-
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
-
                 Console.WriteLine("【全仓】跟踪委托订单全部撤单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.LinearSwapCrossTrackCancelAllAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.LinearSwapCrossTrackCancelAllAsync(
                     contractCode,
                     pair,
                     contractType,
@@ -7346,29 +6319,23 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    Console.WriteLine($"火币合约API服务器：" + "【全仓】跟踪委托订单全部撤单" + "异常\r\n" +
-                        $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                        $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                        $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackCancel>(result, "火币合约API服务器", "【全仓】跟踪委托订单全部撤单");
                 }
             }
             #endregion
         }
-
         #region 【逐仓】跟踪委托订单当前委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
             int? tradeType = null;
             int? pageIndex = null;
             int? pageSize = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】跟踪委托订单当前委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTrackOpenOrdersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapTrackOpenOrdersAsync(
                 contractCode,
                 tradeType,
                 pageIndex,
@@ -7387,14 +6354,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】跟踪委托订单当前委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackOpenOrders>(result, "火币合约API服务器", "【逐仓】跟踪委托订单当前委托");
             }
         }
         #endregion
-
         #region 【全仓】跟踪委托订单当前委托(PrivateData)
         {
             string? contractCode = "DOGE-USDT";
@@ -7402,14 +6365,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? tradeType = null;
             int? pageIndex = null;
             int? pageSize = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】跟踪委托订单当前委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTrackOpenordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapCrossTrackOpenordersAsync(
                 contractCode,
                 pair,
                 tradeType,
@@ -7429,14 +6390,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】跟踪委托订单当前委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackOpenOrders>(result, "火币合约API服务器", "【全仓】跟踪委托订单当前委托");
             }
         }
         #endregion
-
         #region 【逐仓】跟踪委托订单历史委托(PrivateData)
         {
             string contractCode = "DOGE-USDT";
@@ -7446,14 +6403,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             string? sortBy = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【逐仓】跟踪委托订单历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapTrackHisordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapTrackHisordersAsync(
                 contractCode,
                 status,
                 tradeType,
@@ -7475,14 +6430,10 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【逐仓】跟踪委托订单历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackHisorders>(result, "火币合约API服务器", "【逐仓】跟踪委托订单历史委托");
             }
         }
         #endregion
-
         #region 【全仓】跟踪委托订单历史委托(PrivateData)
         {
             string status = "0";
@@ -7493,14 +6444,12 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             int? pageIndex = null;
             int? pageSize = null;
             string? sortBy = null;
-
             #region 母用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】跟踪委托订单历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Strategy.GetLinearSwapCrossTrackHisordersAsync(
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Strategy.GetLinearSwapCrossTrackHisordersAsync(
                 status,
                 tradeType,
                 createDate,
@@ -7523,20 +6472,16 @@ static async Task TestUsdtMarginedApiStrategyOrderEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】跟踪委托订单历史委托" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackHisorders>(result, "火币合约API服务器", "【全仓】跟踪委托订单历史委托");
             }
         }
         #endregion
     }
 }
-
 //交易所U本位合约划转接口测试-已完成
-static async Task TestUsdtMarginedApiTransferringEndpoints()
+static async Task TestUsdtMarginSwapApiTransferringEndpoints()
 {
-    using (var huobiUsdtMarginedClient = new HuobiUsdtMarginedClient())
+    using (var huobiUsdtMarginedClient = new HuobiClient())
     {
         #region 对huobiUsdtMarginedClient客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
         //使用accessKey, secretKey生成一个新的API凭证
@@ -7544,18 +6489,15 @@ static async Task TestUsdtMarginedApiTransferringEndpoints()
         //当前客户端使用新生成的API凭证
         huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
         #endregion
-
         #region 【全仓】查询系统划转权限(PrivateData)
         {
             string? marginAccount = "USDT";
-
             #region 主用户客户端
             apiCredentials = new(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【全仓】查询系统划转权限");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Transferring.GetLinearSwapCrossTransferStateAsync(marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Transferring.GetLinearSwapCrossTransferStateAsync(marginAccount);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -7571,14 +6513,10 @@ static async Task TestUsdtMarginedApiTransferringEndpoints()
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【全仓】查询系统划转权限" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedSwapCrossTransferState>>(result, "火币合约API服务器", "【全仓】查询系统划转权限");
             }
         }
         #endregion
-
         #region 【通用】现货-U本位合约账户间进行资金的划转(PrivateData)
         {
             string from = "spot";
@@ -7586,30 +6524,24 @@ static async Task TestUsdtMarginedApiTransferringEndpoints()
             string currency = "usdt";
             decimal amount = 20;
             string marginAccount = "USDT";
-
             #region 主用户客户端
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
-
             Console.WriteLine("【通用】现货-U本位合约账户间进行资金的划转");
-            var result = await huobiUsdtMarginedClient.UsdtMarginedApi.Transferring.LinearSwapAccountTransferAsync(from, to, currency, amount, marginAccount);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Transferring.LinearSwapAccountTransferAsync(from, to, currency, amount, marginAccount);
             if (result.Success)
             {
                 Console.WriteLine($"从{from}账户划转{amount} {currency}到{to} {marginAccount}账户成功，划转单号：{result.Data}");
             }
             else
             {
-                Console.WriteLine($"火币合约API服务器：" + "【通用】现货-U本位合约账户间进行资金的划转" + "异常\r\n" +
-                    $"错误信息：{(result.Error == null ? "null" : result.Error)}\r\n" +
-                    $"错误代码：{(result.Error == null ? "null" : result.Error.Code)}\r\n" +
-                    $"错误提示：{(result.Error == null ? "null" : result.Error.Data)}");
+                ErrorInfoOutput<long>(result, "火币合约API服务器", "【通用】现货-U本位合约账户间进行资金的划转");
             }
         }
         #endregion
     }
 }
-
 static async Task HandleRequest<T>(string action, Func<Task<WebCallResult<T>>> request, Func<T, string> outputData)
 {
     Console.WriteLine("Press enter to continue");
@@ -7635,5 +6567,4 @@ static async Task HandleRequest<T>(string action, Func<Task<WebCallResult<T>>> r
         Console.WriteLine();
     }
 }
-
 Console.ReadLine();

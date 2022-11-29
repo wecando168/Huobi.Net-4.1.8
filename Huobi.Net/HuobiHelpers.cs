@@ -22,34 +22,27 @@ namespace Huobi.Net
         /// <returns></returns>
         public static IServiceCollection AddHuobi(
             this IServiceCollection services, 
-            Action<HuobiSpotClientOptions, HuobiSpotSocketClientOptions>? defaultOptionsCallback = null,
+            Action<HuobiClientOptions, HuobiSocketClientOptions>? defaultOptionsCallback = null,
             ServiceLifetime? socketClientLifeTime = null)
         {
             if (defaultOptionsCallback != null)
             {
-                var spotOptions = new HuobiSpotClientOptions();
-                var usdtMarginedOptions = new HuobiUsdtMarginedClientOptions();
-                var spotSocketOptions = new HuobiSpotSocketClientOptions();
-                var usdtMarginedSocketOptions = new HuobiUsdtMarginedSocketClientOptions();
-                defaultOptionsCallback?.Invoke(spotOptions, spotSocketOptions);
+                var options = new HuobiClientOptions();
+                var socketOptions = new HuobiSocketClientOptions();
+                defaultOptionsCallback?.Invoke(options, socketOptions);
 
-                HuobiSpotClient.SetDefaultOptions(spotOptions);
-                HuobiUsdtMarginedClient.SetDefaultOptions(usdtMarginedOptions);
-                HuobiSocketClient.SetDefaultOptions(spotSocketOptions);
-                HuobiUsdtMarginedSocketClient.SetDefaultOptions(usdtMarginedSocketOptions);
+                HuobiClient.SetDefaultOptions(options);
+                HuobiSocketClient.SetDefaultOptions(socketOptions);
             }
 
-            services.AddTransient<IHuobiSpotClient, HuobiSpotClient>();
-            services.AddTransient<IHuobiUsdtMarginedClient, HuobiUsdtMarginedClient>();
+            services.AddTransient<IHuobiClient, HuobiClient>();
             if (socketClientLifeTime == null)
             {
                 services.AddScoped<IHuobiSocketClient, HuobiSocketClient>();
-                services.AddScoped<IHuobiUsdtMarginedSocketClient, HuobiUsdtMarginedSocketClient>();
             }
             else
             {
                 services.Add(new ServiceDescriptor(typeof(IHuobiSocketClient), typeof(HuobiSocketClient), socketClientLifeTime.Value));
-                services.Add(new ServiceDescriptor(typeof(IHuobiUsdtMarginedSocketClient), typeof(HuobiUsdtMarginedSocketClient), socketClientLifeTime.Value));
             }
             return services;
         }
@@ -85,9 +78,33 @@ namespace Huobi.Net
             //@"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})$"
             //判定说明：
             //"0到9跟大写A到Z 2个以上" + "-" + "0到9跟大写A到Z 2个以上"
-            if (!Regex.IsMatch(contractCodeString, @"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})-\d{6}$") && !Regex.IsMatch(contractCodeString, @"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})"))
+            if (!Regex.IsMatch(contractCodeString, @"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})-\d{6}$") && !Regex.IsMatch(contractCodeString, @"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})") && contractCodeString != "*")
                 throw new ArgumentException($"{contractCodeString} is not a valid Huobi symbol. Should be [QuoteAsset][BaseAsset], e.g. ETHBTC");
             return contractCodeString;
+        }
+        
+        /// <summary>
+        /// Validate the string is a valid Huobi contract code.
+        /// </summary>
+        /// <param name="marginAccountString">string to validate</param>
+        public static string ValidateHuobiMarginAccount(this string marginAccountString)
+        {
+            if (string.IsNullOrEmpty(marginAccountString))
+                throw new ArgumentException("Contract code is not provided");
+            marginAccountString = marginAccountString.ToUpper(CultureInfo.InvariantCulture);
+            if (marginAccountString.ToUpper() != "USDT")
+                throw new ArgumentException($"{marginAccountString} is not a valid Huobi symbol. It mast be \"USDT\"");
+            ////交割合约正则表达
+            ////@"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})-\d{6}$"
+            ////判定说明：
+            ////"0到9跟大写A到Z 2个以上" + "-" + "0到9跟大写A到Z 2个以上" + "-" + "6个数字"
+            ////永续合约正则表达
+            ////@"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})$"
+            ////判定说明：
+            ////"0到9跟大写A到Z 2个以上" + "-" + "0到9跟大写A到Z 2个以上"
+            //if (!Regex.IsMatch(marginAccountString, @"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})-\d{6}$") && !Regex.IsMatch(marginAccountString, @"^(([A-Z]|[0-9]){2,})-(([A-Z]|[0-9]){2,})"))
+            //    throw new ArgumentException($"{marginAccountString} is not a valid Huobi symbol. Should be [QuoteAsset][BaseAsset], e.g. ETHBTC");
+            return marginAccountString;
         }
 
         /// <summary>

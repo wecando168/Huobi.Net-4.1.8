@@ -15,16 +15,16 @@ using CryptoExchange.Net.Objects;
 using Huobi.Net.Enums;
 using Huobi.Net.Interfaces.Clients.SpotApi;
 using Huobi.Net.Objects;
+using Huobi.Net.Objects.Internal;
 using Huobi.Net.Objects.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Huobi.Net.Clients.SpotApi
 {
     /// <inheritdoc />
     public class HuobiClientSpotApi : RestApiClient, IHuobiClientSpotApi, ISpotClient
     {
-        private readonly HuobiSpotClient _baseClient;
-        private readonly HuobiSpotClientOptions _options;
-        private readonly Log _log;
+        private readonly HuobiClientOptions _options;
 
         internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
 
@@ -52,12 +52,10 @@ namespace Huobi.Net.Clients.SpotApi
         #endregion
 
         #region constructor/destructor
-        internal HuobiClientSpotApi(Log log, HuobiSpotClient baseClient, HuobiSpotClientOptions options)
-            : base(options, options.SpotApiOptions)
+        internal HuobiClientSpotApi(Log log, HuobiClientOptions options)
+            : base(log, options, options.SpotApiOptions)
         {
-            _baseClient = baseClient;
             _options = options;
-            _log = log;
 
             Account = new HuobiClientSpotApiAccount(this);
             ExchangeData = new HuobiClientSpotApiExchangeData(this);
@@ -73,14 +71,79 @@ namespace Huobi.Net.Clients.SpotApi
 
         #region methods
 
-        internal Task<WebCallResult<T>> SendHuobiV2Request<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
-            => _baseClient.SendHuobiV2Request<T>(this, uri, method, cancellationToken, parameters, signed);
+        internal async Task<WebCallResult<T>> SendHuobiV2Request<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
+        {
+            var result = await SendRequestAsync<HuobiApiResponseV2<T>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.AsError<T>(result.Error!);
 
-        internal Task<WebCallResult<(T, DateTime)>> SendHuobiTimestampRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
-            => _baseClient.SendHuobiTimestampRequest<T>(this, uri, method, cancellationToken, parameters, signed);
+            if (result.Data.Code != 200)
+                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message));
 
-        internal Task<WebCallResult<T>> SendHuobiRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, int? weight = 1, bool ignoreRatelimit = false)
-            => _baseClient.SendHuobiRequest<T>(this, uri, method, cancellationToken, parameters, signed, weight, ignoreRatelimit);
+            return result.As(result.Data.Data);
+        }
+
+        internal async Task<WebCallResult<T>> SendHuobiV3Request<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
+        {
+            var result = await SendRequestAsync<HuobiApiResponseV3<T>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.AsError<T>(result.Error!);
+
+            if (result.Data.Code != 200)
+                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message));
+
+            return result.As(result.Data.Data);
+        }
+
+        internal async Task<WebCallResult<(T, DateTime)>> SendHuobiTimestampRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false)
+        {
+            var result = await SendRequestAsync<HuobiBasicResponse<T>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.AsError<(T, DateTime)>(result.Error!);
+
+            if (result.Data.ErrorCode != null)
+                return result.AsError<(T, DateTime)>(new ServerError($"{result.Data.ErrorCode}-{result.Data.ErrorMessage}"));
+
+            return result.As((result.Data.Data, result.Data.Timestamp));
+        }
+
+        internal async Task<WebCallResult<T>> SendHuobiRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, int? weight = 1, bool ignoreRatelimit = false)
+        {
+            var result = await SendRequestAsync<HuobiBasicResponse<T>>(uri, method, cancellationToken, parameters, signed, requestWeight: weight ?? 1, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.AsError<T>(result.Error!);
+
+            if (result.Data.ErrorCode != null)
+                return result.AsError<T>(new ServerError(result.Data.ErrorCode, result.Data.ErrorMessage));
+
+            return result.As(result.Data.Data);
+        }
+
+        /// <inheritdoc />
+        protected override Task<ServerError?> TryParseErrorAsync(JToken data)
+        {
+            if (data["code"] != null && data["code"]?.Value<int>() != 200)
+            {
+                if (data["err-code"] != null)
+                    return Task.FromResult<ServerError?>(new ServerError($"{(string)data["err-code"]!}, {(string)data["err-msg"]!}"));
+
+                return Task.FromResult<ServerError?>(new ServerError($"{(string)data["code"]!}, {(string)data["message"]!}"));
+            }
+
+            if (data["err-code"] == null && data["err-msg"] == null)
+                return Task.FromResult<ServerError?>(null);
+
+            return Task.FromResult<ServerError?>(new ServerError($"{(string)data["err-code"]!}, {(string)data["err-msg"]!}"));
+        }
+
+        /// <inheritdoc />
+        protected override Error ParseErrorResponse(JToken error)
+        {
+            if (error["err-code"] == null || error["err-msg"] == null)
+                return new ServerError(error.ToString());
+
+            return new ServerError($"{(string)error["err-code"]!}, {(string)error["err-msg"]!}");
+        }
 
         /// <summary>
         /// Construct url
@@ -143,7 +206,7 @@ namespace Huobi.Net.Clients.SpotApi
             var ticker = tickers.Data.Ticks.SingleOrDefault(s => s.Symbol == symbol);
             return tickers.As(new Ticker
             {
-                SourceObject =ticker,
+                SourceObject = ticker,
                 HighPrice = ticker.HighPrice,
                 Symbol = ticker.Symbol,
                 LastPrice = ticker.ClosePrice,
@@ -216,7 +279,7 @@ namespace Huobi.Net.Clients.SpotApi
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Huobi " + nameof(ISpotClient.GetRecentTradesAsync), nameof(symbol));
-            
+
             var trades = await ExchangeData.GetTradeHistoryAsync(symbol, 100, ct).ConfigureAwait(false);
             if (!trades)
                 return trades.As<IEnumerable<Trade>>(null);
@@ -240,7 +303,7 @@ namespace Huobi.Net.Clients.SpotApi
                 throw new ArgumentException(nameof(accountId) + " required for Huobi " + nameof(ISpotClient.PlaceOrderAsync), nameof(accountId));
 
             var huobiType = GetOrderType(type);
-            var result = await Trading.PlaceOrderAsync(id, symbol, side == CommonOrderSide.Sell ? Enums.OrderSide.Sell: Enums.OrderSide.Buy, huobiType, quantity, price, clientOrderId: clientOrderId, ct: ct).ConfigureAwait(false);
+            var result = await Trading.PlaceOrderAsync(id, symbol, side == CommonOrderSide.Sell ? Enums.OrderSide.Sell : Enums.OrderSide.Buy, huobiType, quantity, price, clientOrderId: clientOrderId, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<OrderId>(null);
             return result.As(new OrderId()
@@ -252,7 +315,7 @@ namespace Huobi.Net.Clients.SpotApi
 
         async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
-            if(!long.TryParse(orderId, out var id))
+            if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException("Invalid order id for Huobi " + nameof(ISpotClient.GetOrderAsync), nameof(orderId));
 
             var order = await Trading.GetOrderAsync(id, ct: ct).ConfigureAwait(false);
@@ -268,9 +331,9 @@ namespace Huobi.Net.Clients.SpotApi
                 QuantityFilled = order.Data.QuantityFilled,
                 Symbol = order.Data.Symbol,
                 Timestamp = order.Data.CreateTime,
-                Side = order.Data.Side == OrderSide.Buy ? CommonOrderSide.Buy: CommonOrderSide.Sell,
-                Type = order.Data.Type == OrderType.Limit ? CommonOrderType.Limit: order.Data.Type == OrderType.Market ? CommonOrderType.Market: CommonOrderType.Other,
-                Status = order.Data.State == OrderState.Canceled || order.Data.State == OrderState.PartiallyCanceled ? CommonOrderStatus.Canceled: order.Data.State == OrderState.Filled ? CommonOrderStatus.Filled: CommonOrderStatus.Active
+                Side = order.Data.Side == OrderSide.Buy ? CommonOrderSide.Buy : CommonOrderSide.Sell,
+                Type = order.Data.Type == OrderType.Limit ? CommonOrderType.Limit : order.Data.Type == OrderType.Market ? CommonOrderType.Market : CommonOrderType.Other,
+                Status = order.Data.State == OrderState.Canceled || order.Data.State == OrderState.PartiallyCanceled ? CommonOrderStatus.Canceled : order.Data.State == OrderState.Filled ? CommonOrderStatus.Filled : CommonOrderStatus.Active
             });
         }
 
@@ -303,7 +366,7 @@ namespace Huobi.Net.Clients.SpotApi
             if (!orders)
                 return orders.As<IEnumerable<Order>>(null);
 
-            return orders.As(orders.Data.Select(o =>            
+            return orders.As(orders.Data.Select(o =>
                 new Order
                 {
                     SourceObject = o,

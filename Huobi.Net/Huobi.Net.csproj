@@ -60,5 +60,7 @@
     <Folder Include="Objects\Models\Rest\Futures\CoinMarginedFutures\" />
     <Folder Include="Objects\Models\Rest\Futures\CoinMarginedSwaps\" />
     <Folder Include="Objects\Models\Rest\Spot\" />
+    <Folder Include="Objects\Models\Socket\Future\UsdtMargined\WebSocketMarket\" />
+    <Folder Include="Objects\Models\Socket\Future\UsdtMargined\WebSocketIndexAndBasis\" />
   </ItemGroup>
 </Project>
