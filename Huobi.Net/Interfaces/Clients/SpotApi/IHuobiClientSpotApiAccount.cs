@@ -417,7 +417,7 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="subUserId">Sub user id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiMarginBalances>> GetCrossMarginBalanceAsync(int? subUserId = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<HuobiMarginBalances>>> GetCrossMarginBalanceAsync(int? subUserId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get repayment history

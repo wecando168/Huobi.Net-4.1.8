@@ -416,12 +416,12 @@ namespace Huobi.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiMarginBalances>> GetCrossMarginBalanceAsync(int? subUserId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<HuobiMarginBalances>>> GetCrossMarginBalanceAsync(int? subUserId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("sub-uid", subUserId);
 
-            return await _baseClient.SendHuobiRequest<HuobiMarginBalances>(_baseClient.GetUrl($"cross-margin/accounts/balance", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendHuobiRequest<IEnumerable<HuobiMarginBalances>>(_baseClient.GetUrl($"cross-margin/accounts/balance", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
