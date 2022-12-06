@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -52,9 +52,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CryptoExchange.Net-5.2.4\CryptoExchange.Net\CryptoExchange.Net.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Clients\CoinMarginedSwapsApi\" />
     <Folder Include="Clients\CoinMarginedFuturesApi\" />
     <Folder Include="Objects\Models\Rest\Futures\CoinMarginedFutures\" />
@@ -62,5 +59,8 @@
     <Folder Include="Objects\Models\Rest\Spot\" />
     <Folder Include="Objects\Models\Socket\Future\UsdtMargined\WebSocketMarket\" />
     <Folder Include="Objects\Models\Socket\Future\UsdtMargined\WebSocketIndexAndBasis\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CryptoExchange.Net-5.3.0\CryptoExchange.Net\CryptoExchange.Net.csproj" />
   </ItemGroup>
 </Project>

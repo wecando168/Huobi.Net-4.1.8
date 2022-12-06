@@ -24,14 +24,14 @@ using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapStrategy;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTransferring;
 #region Provide you API key/secret in these fields to retrieve data related to your account
-const string mainAccessKey = "vfd5ghr532-757119b1-3ccc6002-67c50";
-const string mainSecretKey = "9dc518ee-667d2e86-048ed301-5b46a";
+const string mainAccessKey = "Use Your Exchange Main Account Access Key";
+const string mainSecretKey = "Use Your Exchange Main Account SecretKey Key";
 const string mainUserId = "291452314";
 const string mainSportAccountId = "36724729";
 const string mainUsdtMarginedAccountId = "53229551";
 
-const string subAccessKey = "bvrge3rf7j-f8038d3d-c71c64be-aeec6";
-const string subSecretKey = "b8935467-9a4338be-c9c4da6f-50d5b";
+const string subAccessKey = "Use Your Exchange Sub Account Access Key";
+const string subSecretKey = "Use Your Exchange Sub Account SecretKey Key";
 const string subUserId = "292046353";
 const string subSportAccountId = "36845384";
 const string subUsdtMarginedAccountId = "36845384";

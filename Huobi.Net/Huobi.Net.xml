@@ -9772,7 +9772,7 @@
             开仓均价
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.costHold">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.CostHold">
             <summary>
             持仓均价
             </summary>
@@ -9787,14 +9787,9 @@
             收益率
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.Profit">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.LeverRate">
             <summary>
-            收益
-            </summary>
-        </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.MarginAsset">
-            <summary>
-            保证金币种（计价币种）
+            杠杠倍数
             </summary>
         </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.PositionMargin">
@@ -9802,19 +9797,24 @@
             持仓保证金
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.LeverRate">
-            <summary>
-            杠杠倍数
-            </summary>
-        </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.Direction">
             <summary>
             仓位方向	"buy":买，即多仓 "sell":卖，即空仓
             </summary>
         </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.Profit">
+            <summary>
+            收益
+            </summary>
+        </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.LastPrice">
             <summary>
             最新价
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.MarginAsset">
+            <summary>
+            保证金币种（计价币种）
             </summary>
         </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.MarginMode">
@@ -9827,9 +9827,9 @@
             保证金账户	比如“BTC-USDT”
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.BusinessType">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.ContractType">
             <summary>
-            业务类型	futures：交割、swap：永续
+            合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）
             </summary>
         </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.Pair">
@@ -9837,14 +9837,44 @@
             交易对	如：“BTC-USDT”
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.ContractType">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.BusinessType">
             <summary>
-            合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）
+            业务类型	futures：交割、swap：永续
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.TradePartition">
+            <summary>
+            成交分区：USDT
             </summary>
         </member>
         <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.PositionMode">
             <summary>
             持仓模式	single_side：单向持仓；dual_side：双向持仓
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.StoreTime">
+            <summary>
+            存储时间
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.LiquidationPrice">
+            <summary>
+            预估强平价
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.MarketClosingSlippage">
+            <summary>
+            收市滑点
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.RiskRate">
+            <summary>
+            风险率
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionInfo.WithdrawAvailable">
+            <summary>
+            可用提现
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedCrossPositionLimit">

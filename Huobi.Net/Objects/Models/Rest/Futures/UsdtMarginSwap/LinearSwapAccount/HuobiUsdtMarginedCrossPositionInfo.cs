@@ -58,7 +58,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         /// </summary>
         [JsonProperty("cost_hold", NullValueHandling = NullValueHandling.Ignore)]
 
-        public decimal costHold { get; set; } = default;
+        public decimal CostHold { get; set; } = default;
 
         /// <summary>
         /// 未实现盈亏
@@ -75,18 +75,11 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         public decimal ProfitRate { get; set; } = default;
 
         /// <summary>
-        /// 收益
+        /// 杠杠倍数
         /// </summary>
-        [JsonProperty("profit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
 
-        public decimal Profit { get; set; } = default;
-
-        /// <summary>
-        /// 保证金币种（计价币种）
-        /// </summary>
-        [JsonProperty("margin_asset", NullValueHandling = NullValueHandling.Ignore)]
-
-        public string MarginAsset { get; set; } = string.Empty;
+        public int LeverRate { get; set; } = default;
 
         /// <summary>
         /// 持仓保证金
@@ -96,13 +89,6 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         public decimal PositionMargin { get; set; } = default;
 
         /// <summary>
-        /// 杠杠倍数
-        /// </summary>
-        [JsonProperty("lever_rate", NullValueHandling = NullValueHandling.Ignore)]
-
-        public int LeverRate { get; set; } = default;
-
-        /// <summary>
         /// 仓位方向	"buy":买，即多仓 "sell":卖，即空仓
         /// </summary>
         [JsonProperty("direction", NullValueHandling = NullValueHandling.Ignore)]
@@ -110,11 +96,25 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         public string Direction { get; set; } = string.Empty;
 
         /// <summary>
+        /// 收益
+        /// </summary>
+        [JsonProperty("profit", NullValueHandling = NullValueHandling.Ignore)]
+
+        public decimal Profit { get; set; } = default;
+
+        /// <summary>
         /// 最新价
         /// </summary>
         [JsonProperty("last_price", NullValueHandling = NullValueHandling.Ignore)]
 
         public decimal LastPrice { get; set; } = default;
+
+        /// <summary>
+        /// 保证金币种（计价币种）
+        /// </summary>
+        [JsonProperty("margin_asset", NullValueHandling = NullValueHandling.Ignore)]
+
+        public string MarginAsset { get; set; } = string.Empty;        
 
         /// <summary>
         /// 保证金模式	cross：全仓模式；
@@ -131,11 +131,11 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         public string MarginAccount { get; set; } = string.Empty;
 
         /// <summary>
-        /// 业务类型	futures：交割、swap：永续
+        /// 合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）
         /// </summary>
-        [JsonProperty("business_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("contract_type", NullValueHandling = NullValueHandling.Ignore)]
 
-        public string BusinessType { get; set; } = string.Empty;
+        public string ContractType { get; set; } = string.Empty;
 
         /// <summary>
         /// 交易对	如：“BTC-USDT”
@@ -145,11 +145,18 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         public string Pair { get; set; } = string.Empty;
 
         /// <summary>
-        /// 合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）
+        /// 业务类型	futures：交割、swap：永续
         /// </summary>
-        [JsonProperty("contract_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("business_type", NullValueHandling = NullValueHandling.Ignore)]
 
-        public string ContractType { get; set; } = string.Empty;
+        public string BusinessType { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 成交分区：USDT
+        /// </summary>
+        [JsonProperty("trade_partition", NullValueHandling = NullValueHandling.Ignore)]
+
+        public string TradePartition { get; set; } = string.Empty;
 
         /// <summary>
         /// 持仓模式	single_side：单向持仓；dual_side：双向持仓
@@ -157,5 +164,40 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         [JsonProperty("position_mode", NullValueHandling = NullValueHandling.Ignore)]
 
         public string PositionMode { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 存储时间
+        /// </summary>
+        [JsonProperty("store_time", NullValueHandling = NullValueHandling.Ignore)]
+
+        public long StoreTime { get; set; } = default;
+
+        /// <summary>
+        /// 预估强平价
+        /// </summary>
+        [JsonProperty("liquidation_price", NullValueHandling = NullValueHandling.Ignore)]
+
+        public decimal LiquidationPrice { get; set; } = default;
+
+        /// <summary>
+        /// 收市滑点
+        /// </summary>
+        [JsonProperty("market_closing_slippage", NullValueHandling = NullValueHandling.Ignore)]
+
+        public string MarketClosingSlippage { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 风险率
+        /// </summary>
+        [JsonProperty("risk_rate", NullValueHandling = NullValueHandling.Ignore)]
+
+        public string RiskRate { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 可用提现
+        /// </summary>
+        [JsonProperty("withdraw_available", NullValueHandling = NullValueHandling.Ignore)]
+
+        public string WithdrawAvailable { get; set; } = string.Empty;
     }
 }
