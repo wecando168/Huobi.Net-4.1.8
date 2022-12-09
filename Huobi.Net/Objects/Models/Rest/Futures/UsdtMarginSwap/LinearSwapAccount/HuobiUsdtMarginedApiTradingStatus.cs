@@ -46,13 +46,13 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
         /// 撤单率（Cancel Order Ratio）
         /// </summary>
         [JsonProperty("COR", NullValueHandling = NullValueHandling.Ignore)]
-        public CancelOrderRatio cancelOrderRatio { get; set; }
+        public CancelOrderRatio? CancelOrderRatio { get; set; }
 
         /// <summary>
         /// 总禁用次数（Total Disable Number）
         /// </summary>
         [JsonProperty("TDN", NullValueHandling = NullValueHandling.Ignore)]
-        public TotalDisableNumber totalDisableNumber { get; set; } = default!;
+        public TotalDisableNumber TotalDisableNumber { get; set; } = default!;
     }
 
     /// <summary>

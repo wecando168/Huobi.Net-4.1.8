@@ -23,18 +23,19 @@ using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.Com
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapStrategy;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTransferring;
+using Huobi.Net.Objects.Models.Socket.Futures.UsdtMargined.WebSocketOrderAndAccounts;
 #region Provide you API key/secret in these fields to retrieve data related to your account
 const string mainAccessKey = "Use Your Exchange Main Account Access Key";
 const string mainSecretKey = "Use Your Exchange Main Account SecretKey Key";
-const string mainUserId = "291452314";
-const string mainSportAccountId = "36724729";
-const string mainUsdtMarginedAccountId = "53229551";
+const string mainUserId = "Use Your Exchange Main Account UserId";
+const string mainSportAccountId = "Use Your Exchange Main Account Sport Account Id";
+const string mainUsdtMarginedAccountId = "Use Your Exchange Main Account Margined Account Id";
 
 const string subAccessKey = "Use Your Exchange Sub Account Access Key";
 const string subSecretKey = "Use Your Exchange Sub Account SecretKey Key";
-const string subUserId = "292046353";
-const string subSportAccountId = "36845384";
-const string subUsdtMarginedAccountId = "36845384";
+const string subUserId = "Use Your Exchange Sub Account UserId";
+const string subSportAccountId = "Use Your Exchange Sub Account Sport Account Id";
+const string subUsdtMarginedAccountId = "Use Your Exchange Sub Account Margined Account Id";
 
 const string testBaseCurrency = "btc";
 const string testQuoteCurrency = "usdt";
@@ -137,10 +138,10 @@ if (read == "R" || read == "r")
 else if (read == "P" || read == "p")
 {
     //现货公有数据WebSocket客户端（无需签名的现货数据订阅）
-    HuobiSocketClient? huobiPublicSocketClient = new HuobiSocketClient();
+    HuobiSocketClient? huobiPublicSocketClient = new();
     CallResult<UpdateSubscription>? publicSubscription = null;
     //U本位合约公有数据WebSocket客户端（无需签名的U本位合约数据订阅）
-    HuobiSocketClient? huobiPublicUsdtMarginedSocketClient = new HuobiSocketClient();
+    HuobiSocketClient? huobiPublicUsdtMarginedSocketClient = new();
     CallResult<UpdateSubscription>? publicUsdtMarginedSubscription = null;
     #region 现货订阅 全部交易代码市场聚合行情数据
     //订阅全部交易代码市场聚合行情数据
@@ -216,7 +217,7 @@ else if (read == "P" || read == "p")
         string clientId = $"火币U本位合约{contractCode} 获取K线数据";
         long from = 1667232000; //2022-11-01 00:00:00
         long to = 1667260800;   //2022-11-01 08:00:00
-        Console.WriteLine($"U本位合约Websocket数据获取：获取U本位合约{contractCode} {klineInterval.ToString()} K线");
+        Console.WriteLine($"U本位合约Websocket数据获取：获取U本位合约{contractCode} {klineInterval} K线");
         CallResult<IEnumerable<HuobiContractCodeKlineTick>>? huobiContractCodeTickList = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.GetMarketContractCodeKlineAsync(
             contractCode: contractCode,
             period: klineInterval,
@@ -251,7 +252,7 @@ else if (read == "P" || read == "p")
         string contractCode = "BTC-USDT";
         KlineInterval klineInterval = KlineInterval.FiveMinutes;
         string clientId = $"火币U本位合约{contractCode}订阅 K线数据";
-        Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {klineInterval.ToString()} K线");
+        Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {klineInterval} K线");
         publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeMarketContractCodeKlineAsync(
             contractCode,
             klineInterval,
@@ -436,9 +437,16 @@ else if (read == "U" || read == "u")
                 if (!object.Equals(data, null))
                 {
                     Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
-                    foreach (var item in data.Data.HuobiUsdtMarginedIsolatedWSTrades)
+                    foreach (HuobiUsdtMarginedWSTrade item in data.Data.HuobiUsdtMarginedIsolatedWSTrades)
                     {
-                        Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                        try
+                        {
+                            Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                        }
+                        catch(Exception exception)
+                        {
+                            Console.WriteLine($"{exception}");
+                        }
                     }
                 }
                 else
@@ -475,7 +483,14 @@ else if (read == "U" || read == "u")
                     Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
                     foreach (var item in data.Data.HuobiUsdtMarginedCrossWSTrades)
                     {
-                        Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                        try
+                        {
+                            Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine($"{exception}");
+                        }
                     }
                 }
                 else
@@ -685,7 +700,7 @@ static async Task TestSpotApiExchangeDataEndpoints()
         #region 获取当前市场最新状态
         {
             await HandleRequest("Market Status", () => huobiSpotRestClient.SpotApi.ExchangeData.GetMarketStatusAsync(),
-                result => $"{result.Status.ToString()}"
+                result => $"{result.Status}"
                 );
             //Console.WriteLine("获取当前市场最新状态");
             //var result = await huobiSpotRestClient.SpotApi.ExchangeData.GetMarketStatusAsync();
@@ -717,7 +732,7 @@ static async Task TestSpotApiExchangeDataEndpoints()
             if (result.Success)
             {
                 Console.WriteLine(
-                    $"现货市场服务器当前时间:{result.Data.ToString()}\r\n" +
+                    $"现货市场服务器当前时间:{result.Data}\r\n" +
                     $"本地时间:{result.Data.ToLocalTime()}\r\n" +
                     $"时差:{(result.Data.ToLocalTime() - result.Data).TotalHours}小时"
                     );
@@ -1905,7 +1920,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 现货普通订单下单
         {
             Console.WriteLine("现货普通订单下单");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.PlaceOrderAsync(
@@ -2046,11 +2061,15 @@ static async Task TestSpotApiTradingEndpoints()
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             Console.WriteLine("批量撤销所有订单（可限制账户Id/交易代码/交易方向/撤销数量）");
             {
-                List<long> orderIdList = new();
-                orderIdList.Add(long.Parse(testOrderId));
+                List<long> orderIdList = new()
+                {
+                    long.Parse(testOrderId)
+                };
                 IEnumerable<long> orderIds = orderIdList;
-                List<string> symbolList = new();
-                symbolList.Add("TestSymbol");
+                List<string> symbolList = new()
+                {
+                    "TestSymbol"
+                };
                 IEnumerable<string> symbols = symbolList;
                 var result = await huobiSpotRestClient.SpotApi.Trading.CancelOrdersByCriteriaAsync(
                     accountId: long.Parse(mainSportAccountId),
@@ -2072,7 +2091,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 现货策略委托下单
         {
             Console.WriteLine("现货策略委托下单");
-            string testPlaceConditionalClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceConditionalClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.PlaceConditionalOrderAsync(
@@ -2130,7 +2149,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 通过订单编号获取指定订单详情
         {
             Console.WriteLine("通过订单编号获取指定订单详情");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOrderAsync(
@@ -2149,7 +2168,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 通过用户自定义单号获取指定订单详情
         {
             Console.WriteLine("通过用户自定义单号获取指定订单详情");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOrderByClientOrderIdAsync(
@@ -2168,7 +2187,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 查询当前未成交订单
         {
             Console.WriteLine("查询当前未成交订单");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOpenOrdersAsync();
@@ -2188,7 +2207,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 查询当前未触发策略委托订单
         {
             Console.WriteLine("查询当前未触发策略委托订单");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOpenConditionalOrdersAsync();
@@ -2208,7 +2227,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 查询指定交易代码的历史订单
         {
             Console.WriteLine("查询指定交易代码的历史订单");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetClosedOrdersAsync(
@@ -2230,7 +2249,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 查询指定交易代码的策略委托历史
         {
             Console.WriteLine("查询指定交易代码的策略委托历史");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetClosedConditionalOrdersAsync(
@@ -2253,7 +2272,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 查询最近48小时内历史订单
         {
             Console.WriteLine("查询最近48小时内历史订单");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetHistoricalOrdersAsync();
@@ -2273,7 +2292,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 通过用户自定义单号查询策略委托订单
         {
             Console.WriteLine("通过用户自定义单号查询策略委托订单");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetConditionalOrderAsync(
@@ -2292,7 +2311,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 查询指定订单编号的成交明细
         {
             Console.WriteLine("查询指定订单编号的成交明细");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetOrderTradesAsync(
@@ -2311,7 +2330,7 @@ static async Task TestSpotApiTradingEndpoints()
         #region 查询当前和历史成交记录
         {
             Console.WriteLine("查询当前和历史成交记录");
-            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow).ToString()}";
+            string testPlaceClientOrderId = $"NewOrder{DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)}";
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
             var result = await huobiSpotRestClient.SpotApi.Trading.GetUserTradesAsync();
@@ -2784,7 +2803,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ReferenceData.GetLinearSwapServerTimestampAsync();
             if (result.Success)
             {
-                Console.WriteLine($"当前系统时间戳:{result.Data.ToString()}\r\n");
+                Console.WriteLine($"当前系统时间戳:{result.Data}\r\n");
             }
             else
             {
@@ -2799,7 +2818,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             if (result.Success)
             {
                 Console.WriteLine(
-                    $"合约服务器时间:{result.Data.ToString()}\r\n" +
+                    $"合约服务器时间:{result.Data}\r\n" +
                     $"本地时间:{result.Data.ToLocalTime()}\r\n" +
                     $"时差:{(result.Data.ToLocalTime() - result.Data).TotalHours}小时"
                     );
@@ -3089,7 +3108,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
                 Console.WriteLine($"{result.Data.ContractCode}平台历史持仓量查询");
                 foreach (var item in result.Data.Ticks)
                 {
-                    Console.WriteLine($"持仓量：{item.Volume.ToString("N3")} {(item.AmountType == 1 ? "张" : "币")}\t总持仓额：{item.Value.ToString("N3")}\t统计时间{(DateTimeConverter.ConvertFromMilliseconds(item.Timestamp))}");
+                    Console.WriteLine($"持仓量：{item.Volume:N3} {(item.AmountType == 1 ? "张" : "币")}\t总持仓额：{item.Value:N3}\t统计时间{(DateTimeConverter.ConvertFromMilliseconds(item.Timestamp))}");
                 }
             }
             else
@@ -3369,9 +3388,11 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【通用】批量设置子账户交易权限");
-            List<string> subUidList = new();
-            subUidList.Add(subUid1);
-            subUidList.Add(subUid2);
+            List<string> subUidList = new()
+            {
+                subUid1,
+                subUid2
+            };
             IEnumerable<string> subUids = subUidList;
             var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Account.SetLinearSwapSubAuthAsync(subUids, subAuth);
             if (result.Success)
@@ -4358,8 +4379,10 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                     ReduceOnly = null,
                     ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
                 };
-                List<HuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new();
-                isolatedOrderList.Add(isolatedOrder);
+                List<HuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new()
+                {
+                    isolatedOrder
+                };
                 IEnumerable<HuobiUsdtMarginedIsolatedOrder> isolatedOrders = isolatedOrderList;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
@@ -4414,8 +4437,10 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                     ReduceOnly = null,
                     ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
                 };
-                List<HuobiUsdtMarginedCrossOrder> crossOrderList = new();
-                crossOrderList.Add(crossOrder);
+                List<HuobiUsdtMarginedCrossOrder> crossOrderList = new()
+                {
+                    crossOrder
+                };
                 IEnumerable<HuobiUsdtMarginedCrossOrder> crossOrders = crossOrderList;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
@@ -5667,12 +5692,12 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 if (result.Success)
                 {
                     Console.WriteLine($"【全仓】止盈止损订单下单结果");
-                    if (result.Data.TpOrder != null)
+                    if (result.Data.TpOrder != null && result.Data.TpOrder.OrderId != null)
                     {
                         Console.WriteLine($"止盈订单编号：{result.Data.TpOrder.OrderId}");
                         cancelCrossTpslOrderIdList.Add((long)result.Data.TpOrder.OrderId);
                     }
-                    if (result.Data.SlOrder != null)
+                    if (result.Data.SlOrder != null && result.Data.SlOrder.OrderId != null)
                     {
                         Console.WriteLine($"止损订单编号：{result.Data.SlOrder.OrderId}");
                         cancelCrossTpslOrderIdList.Add((long)result.Data.SlOrder.OrderId);
@@ -5720,7 +5745,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单撤单");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单撤单");
                     }
                 }
             }
@@ -5765,7 +5790,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单撤单");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单撤单");
                     }
                 }
             }
@@ -5806,7 +5831,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单全部撤单");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单全部撤单");
                     }
                 }
             }
@@ -5851,7 +5876,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单全部撤单");
+                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单全部撤单");
                     }
                 }
             }

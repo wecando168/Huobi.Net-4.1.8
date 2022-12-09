@@ -117,7 +117,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapStrateg
         /// 字符串类型的订单ID
         /// </summary>
         [JsonProperty("order_id_str", NullValueHandling = NullValueHandling.Ignore)]
-        public long? OrderIdStr { get; set; } = default(long);
+        public string? OrderIdStr { get; set; } = string.Empty;
 
         /// <summary>
         /// 订单来源（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发 ）

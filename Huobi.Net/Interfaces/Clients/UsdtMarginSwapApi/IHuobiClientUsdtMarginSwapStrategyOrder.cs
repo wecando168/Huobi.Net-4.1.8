@@ -200,8 +200,8 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTriggerOpenOrders>> GetLinearSwapCrossTriggerOpenordersAsync(
-            string? contractCode,
-            string? pair,
+            string? contractCode = null,
+            string? pair = null,
             int? pageIndex = null,
             int? pageSize = null,
             int? tradeType = null,
@@ -335,7 +335,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="orderIdList">止盈止损订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）	</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>> LinearSwapTpslCancelAsync(
+        Task<WebCallResult<HuobiUsdtMarginedMarketSwapIsolatedTpslCancel>> LinearSwapTpslCancelAsync(
             string contractCode,
             IEnumerable<long>? orderIdList,             
             CancellationToken ct = default);
@@ -352,7 +352,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>> LinearSwapCrossTpslCancelAsync(
+        Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTpslCancel>> LinearSwapCrossTpslCancelAsync(
             IEnumerable<long>? orderIdList,
             string? contractCode,
             string? pair,
@@ -370,7 +370,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="direction">买卖方向（不填默认全部）	"buy":买 "sell":卖</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>> LinearSwapTpslCancelAllAsync(
+        Task<WebCallResult<HuobiUsdtMarginedMarketSwapIsolatedTpslCancel>> LinearSwapTpslCancelAllAsync(
             string contractCode,
             string? direction,
             CancellationToken ct = default
@@ -388,7 +388,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="direction">买卖方向（不填默认全部）	"buy":买 "sell":卖</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>> LinearSwapCrossTpslCancelAllAsync(            
+        Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTpslCancel>> LinearSwapCrossTpslCancelAllAsync(            
             string? contractCode,
             string? pair,
             string? contractType,
@@ -430,8 +430,8 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTpslOpenOrders>> GetLinearSwapCrossTpslOpenordersAsync(
-            string? contractCode,
-            string? pair,
+            string? contractCode = null,
+            string? pair = null,
             int? pageIndex = null,
             int? pageSize = null,
             int? tradeType = null,

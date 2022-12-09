@@ -15,7 +15,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapMarketD
         /// 当前系统时间戳
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// 当前系统时间戳

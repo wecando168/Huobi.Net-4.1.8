@@ -86,7 +86,7 @@ namespace Huobi.Net.Objects.Models
         /// K线ID,也就是K线时间戳，K线起始时间戳
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Id { get; set; }
+        public long? Id { get; set; } = default;
 
         /// <summary>
         /// 合约订单编号

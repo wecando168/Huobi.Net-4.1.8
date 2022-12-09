@@ -18,7 +18,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Huobi.Net.Clients
 {
-    /// <inheritdoc cref="IHuobiUsdtMarginedClient" />
+    /// <inheritdoc cref="IHuobiClient" />
     public class HuobiClient : BaseRestClient, IHuobiClient
     {
         #region Api clients

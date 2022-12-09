@@ -5,7 +5,7 @@
     </assembly>
     <members>
         <member name="T:Huobi.Net.Clients.HuobiClient">
-            <inheritdoc cref="!:IHuobiUsdtMarginedClient" />
+            <inheritdoc cref="T:Huobi.Net.Interfaces.Clients.IHuobiClient" />
         </member>
         <member name="P:Huobi.Net.Clients.HuobiClient.SpotApi">
             <inheritdoc />
@@ -9422,12 +9422,12 @@
             计划恢复时间，单位：毫秒
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedApiTradingStatus.cancelOrderRatio">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedApiTradingStatus.CancelOrderRatio">
             <summary>
             撤单率（Cancel Order Ratio）
             </summary>
         </member>
-        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedApiTradingStatus.totalDisableNumber">
+        <member name="P:Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.HuobiUsdtMarginedApiTradingStatus.TotalDisableNumber">
             <summary>
             总禁用次数（Total Disable Number）
             </summary>

@@ -583,10 +583,6 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             {
                 parameters.AddOptionalParameter("pair", pair);
             }
-            else
-            {
-                throw new InvalidOperationException("Parameters contract_code and pair must have at least one");
-            }
             parameters.AddOptionalParameter("page_index", pageIndex);
             parameters.AddOptionalParameter("page_size", pageSize);
             parameters.AddOptionalParameter("sort_by", sortBy);
