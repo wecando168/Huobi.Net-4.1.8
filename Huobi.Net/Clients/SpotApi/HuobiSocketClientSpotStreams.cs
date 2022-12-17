@@ -301,7 +301,8 @@ namespace Huobi.Net.Clients.SpotApi
             {
                 DeserializeAndInvoke(data, onAccountUpdate);
             });
-            return await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
+            var subscribe = await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
+            return subscribe;
         }
 
         /// <inheritdoc />

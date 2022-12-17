@@ -563,8 +563,9 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         public async Task<CallResult<UpdateSubscription>> SubscribeOrderContractCodeAsync(string contractCode, string clientId, Action<DataEvent <HuobiUsdtMarginedMarketSubscribeOrderData>> onData, CancellationToken ct = default)
         {
             contractCode = contractCode.ValidateHuobiContractCode();
-            HuobiSubscribeRequest? request = new HuobiSubscribeRequest
+            var request = new HuobiSocketRequest2
                 (
+                "sub",
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"orders.{contractCode}"
                 );
@@ -587,8 +588,9 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         public async Task<CallResult<UpdateSubscription>> SubscribeOrderCrossContractCodeAsync(string contractCode, string clientId, Action<DataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData>> onData, CancellationToken ct = default)
         {
             contractCode = contractCode.ValidateHuobiContractCode();
-            HuobiSubscribeRequest? request = new HuobiSubscribeRequest
+            var request = new HuobiSocketRequest2
                 (
+                "sub",
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"orders_cross.{contractCode}"
                 );
@@ -610,8 +612,9 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         public async Task<CallResult<UpdateSubscription>> SubscribeAccountsContractCodeAsync(string contractCode, string clientId, Action<DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribePositionInfo>>> onData, CancellationToken ct = default)
         {
             contractCode = contractCode.ValidateHuobiContractCode();
-            HuobiSubscribeRequest? request = new HuobiSubscribeRequest
+            var request = new HuobiSocketRequest2
                 (
+                "sub",
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"accounts.{contractCode}"
                 );
@@ -633,17 +636,23 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         public async Task<CallResult<UpdateSubscription>> SubscribeAccountsCrossContractCodeAsync(string marginAccount, string clientId, Action<DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>>> onData, CancellationToken ct = default)
         {
             marginAccount = marginAccount.ValidateHuobiMarginAccount();
-            HuobiSubscribeRequest? request = new HuobiSubscribeRequest
+            var request = new HuobiSocketRequest2
                 (
+                "sub",
                 NextId().ToString(CultureInfo.InvariantCulture),
-                $"accounts_cross.{marginAccount}"
+                $"accounts_cross.{marginAccount}"                
                 );
+            //var internalHandler = new Action<DataEvent<JToken>>(data =>
+            //{
+            //    DeserializeAndInvoke(data, onData);
+            //});
             Action<DataEvent<HuobiDataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>>>>
                 (
                 data =>
                 onData(data.As(data.Data.Data, marginAccount))
                 );
-            return await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
+            var subscribe = await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
+            return subscribe;
         }
 
         /// <inheritdoc />
@@ -783,6 +792,17 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         #region private
+
+        private void DeserializeAndInvoke<T>(DataEvent<JToken> data, Action<DataEvent<T>>? action, string? symbol = null)
+        {
+            var obj = Deserialize<T>(data.Data["data"]!);
+            if (!obj)
+            {
+                _log.Write(LogLevel.Error, $"Failed to deserialize {typeof(T).Name}: " + obj.Error);
+                return;
+            }
+            action?.Invoke(data.As(obj.Data, symbol));
+        }
 
         private void PingHandlerV1(MessageEvent messageEvent)
         {

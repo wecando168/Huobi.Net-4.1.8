@@ -332,16 +332,16 @@ else if (read == "P" || read == "p")
 else if (read == "U" || read == "u")
 {
     //现货私有数据WebSocket客户端（需要签名的现货数据订阅）
-    HuobiSocketClient? huobiPrivateSocketClient = new();
-    CallResult<UpdateSubscription>? priavteSubscription = null;
-    //U本位合约私有数据WebSocket客户端（无需签名的现货数据订阅）
+    HuobiSocketClient? huobiPrivateSpotSocketClient = new();
+    CallResult<UpdateSubscription>? priavteSub = null;
+    //U本位合约私有数据WebSocket客户端（需要签名的合约数据订阅）
     HuobiSocketClient? huobiPrivateUsdtMarginedSocketClient = new();
-    CallResult<UpdateSubscription>? privateUsdtMarginedSubscription = null;
+    CallResult<UpdateSubscription>? privateSub = null;
     #region 对现货、合约WebSocket客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
     //使用accessKey, secretKey生成一个新的API凭证
     ApiCredentials apiCredentials = new (mainAccessKey, mainSecretKey);
     //当前客户端使用新生成的API凭证
-    huobiPrivateSocketClient.SetApiCredentials(apiCredentials);
+    huobiPrivateSpotSocketClient.SetApiCredentials(apiCredentials);
     huobiPrivateUsdtMarginedSocketClient.SetApiCredentials(apiCredentials);
     #endregion
 
@@ -351,7 +351,7 @@ else if (read == "U" || read == "u")
     if (read != "S" && read != "s")
     {
         //订阅账户变更
-        priavteSubscription = await huobiPrivateSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(OnHuobiAccountUpdate, 1);
+        priavteSub = await huobiPrivateSpotSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(OnHuobiAccountUpdate, 1);
         /// <summary>
         /// 火币订阅账户变更：当账户更新时–HuobiAccountUpdate
         /// </summary>
@@ -367,15 +367,15 @@ else if (read == "U" || read == "u")
                 Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
             }
         }
-        if (!priavteSubscription.Success)
+        if (!priavteSub.Success)
         {
-            Console.WriteLine("Failed to sub" + priavteSubscription.Error);
+            Console.WriteLine("Failed to sub" + priavteSub.Error);
             Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
             Console.ReadLine();
             return;
         }
-        priavteSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        priavteSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        priavteSub.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        priavteSub.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 
@@ -385,7 +385,7 @@ else if (read == "U" || read == "u")
     if (read != "S" && read != "s")
     {
         //订阅火币订阅清算后成交及撤单更新
-        priavteSubscription = await huobiPrivateSocketClient.SpotStreams.SubscribeToOrderDetailsUpdatesAsync(null, OnHuobiTradeUpdate, null);
+        priavteSub = await huobiPrivateSpotSocketClient.SpotStreams.SubscribeToOrderDetailsUpdatesAsync(null, OnHuobiTradeUpdate, null);
         /// <summary>
         /// 火币订阅清算后成交及撤单更新：当订单成交后–OnHuobiTradeUpdate
         /// （策略补单功能在这里实现）
@@ -406,15 +406,15 @@ else if (read == "U" || read == "u")
                 Console.WriteLine($"订阅火币公有数据异常：未正常接收到数据");
             }
         }
-        if (!priavteSubscription.Success)
+        if (!priavteSub.Success)
         {
-            Console.WriteLine("Failed to sub" + priavteSubscription.Error);
+            Console.WriteLine("Failed to sub" + priavteSub.Error);
             Console.WriteLine($"Please check if \"AccessKey\", \"SecretKey\" and \"WebSocket Api Server Host\" are valid");
             Console.ReadLine();
             return;
         }
-        priavteSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        priavteSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        priavteSub.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        priavteSub.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 
@@ -433,38 +433,38 @@ else if (read == "U" || read == "u")
         string contractCode = "*";
         string clientId = $"火币U本位合约【逐仓】订阅{contractCode}订单成交数据";
         Console.WriteLine($"U本位合约Websocket主题订阅：【逐仓】订阅{contractCode}订单成交数据");
-        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderContractCodeAsync(
-            contractCode,
-            clientId, data =>
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderContractCodeAsync(contractCode, clientId, OnIsolatedOrderDataUpdate);
+        
+        void OnIsolatedOrderDataUpdate(DataEvent<HuobiUsdtMarginedMarketSubscribeOrderData> data)
+        {
+            if (!object.Equals(data, null))
             {
-                if (!object.Equals(data, null))
+                Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
+                foreach (HuobiUsdtMarginedWSTrade item in data.Data.HuobiUsdtMarginedIsolatedWSTrades)
                 {
-                    Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
-                    foreach (HuobiUsdtMarginedWSTrade item in data.Data.HuobiUsdtMarginedIsolatedWSTrades)
+                    try
                     {
-                        try
-                        {
-                            Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
-                        }
-                        catch(Exception exception)
-                        {
-                            Console.WriteLine($"{exception}");
-                        }
+                        Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine($"{exception}");
                     }
                 }
-                else
-                {
-                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
-                }
-            });
-        if (!privateUsdtMarginedSubscription.Success)
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+            }
+        }
+        if (!privateSub.Success)
         {
-            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            Console.WriteLine("Failed to sub" + privateSub.Error);
             Console.ReadLine();
             return;
         }
-        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        privateSub.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateSub.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 
@@ -477,38 +477,38 @@ else if (read == "U" || read == "u")
         string contractCode = "*";
         string clientId = $"火币U本位合约【全仓】订阅{contractCode}订单成交数据";
         Console.WriteLine($"U本位合约Websocket主题订阅：【全仓】订阅{contractCode}订单成交数据");
-        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderCrossContractCodeAsync(
-            contractCode,
-            clientId, data =>
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderCrossContractCodeAsync(contractCode, clientId, OnCrossOrderDataUpdate);
+        
+        void OnCrossOrderDataUpdate(DataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData> data)
+        {
+            if (!object.Equals(data, null))
             {
-                if (!object.Equals(data, null))
+                Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
+                foreach (var item in data.Data.HuobiUsdtMarginedCrossWSTrades)
                 {
-                    Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
-                    foreach (var item in data.Data.HuobiUsdtMarginedCrossWSTrades)
+                    try
                     {
-                        try
-                        {
-                            Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
-                        }
-                        catch (Exception exception)
-                        {
-                            Console.WriteLine($"{exception}");
-                        }
+                        Console.WriteLine($"{JsonConvert.DeserializeObject(item.ToString())}");
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine($"{exception}");
                     }
                 }
-                else
-                {
-                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
-                }
-            });
-        if (!privateUsdtMarginedSubscription.Success)
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+            }
+        }
+        if (!privateSub.Success)
         {
-            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            Console.WriteLine("Failed to sub" + privateSub.Error);
             Console.ReadLine();
             return;
         }
-        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        privateSub.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateSub.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 
@@ -527,31 +527,31 @@ else if (read == "U" || read == "u")
         string contractCode = "DOGE-USDT";
         string clientId = $"火币U本位合约【逐仓】订阅{contractCode}资产变动";
         Console.WriteLine($"U本位合约Websocket主题订阅：【逐仓】订阅{contractCode}资产变动");
-        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsContractCodeAsync(
-            contractCode,
-            clientId, data =>
-            {
-                if (!object.Equals(data, null))
-                {
-                    foreach (var item in data.Data)
-                    {
-                        Console.WriteLine($"保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode} 持仓模式：{item.PositionMode} \r\n" +
-                            $"合约代码：{item.ContractCode} 账户权益：{item.MarginBalance} 可用保证金：{item.MarginAvailable} 冻结保证金：{item.MarginFrozen}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
-                }
-            });
-        if (!privateUsdtMarginedSubscription.Success)
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsContractCodeAsync(contractCode, clientId, OnIsolatedAccountUpdate);
+        
+        void OnIsolatedAccountUpdate(DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribePositionInfo>> data)
         {
-            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            if (!object.Equals(data, null))
+            {
+                foreach (var item in data.Data)
+                {
+                    Console.WriteLine($"保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode} 持仓模式：{item.PositionMode} \r\n" +
+                        $"合约代码：{item.ContractCode} 账户权益：{item.MarginBalance} 可用保证金：{item.MarginAvailable} 冻结保证金：{item.MarginFrozen}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+            }
+        }
+        if (!privateSub.Success)
+        {
+            Console.WriteLine("Failed to sub" + privateSub.Error);
             Console.ReadLine();
             return;
         }
-        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        privateSub.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateSub.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 
@@ -564,38 +564,39 @@ else if (read == "U" || read == "u")
         string marginAccount = "USDT";
         string clientId = $"火币U本位合约【全仓】订阅{marginAccount}资产变动";
         Console.WriteLine($"U本位合约Websocket主题订阅：【全仓】订阅{marginAccount}资产变动");
-        privateUsdtMarginedSubscription = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsCrossContractCodeAsync(
-            marginAccount,
-            clientId, data =>
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsCrossContractCodeAsync(marginAccount, clientId, OnCrossAccountUpdate);
+        
+        void OnCrossAccountUpdate(DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>> data)
+        {
+            if (!object.Equals(data, null))
             {
-                if (!object.Equals(data, null))
+                foreach (var item in data.Data)
                 {
-                    foreach (var item in data.Data)
+                    Console.WriteLine($"保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode} 持仓模式：{item.PositionMode}");
+                    foreach (var contractDetail in item.ContractDetails)
                     {
-                        Console.WriteLine($"保证金账户：{item.MarginAccount} 保证金模式：{item.MarginMode} 持仓模式：{item.PositionMode}");
-                        foreach (var contractDetail in item.ContractDetails)
-                        {
-                            Console.WriteLine($"合约代码：{contractDetail.ContractCode} 持仓保证金：{contractDetail.MarginPosition} 可用保证金：{contractDetail.MarginAvailable} 冻结保证金：{contractDetail.MarginFrozen}");
-                        }
-                        foreach (var futuresContractDetail in item.FuturesContractDetails)
-                        {
-                            Console.WriteLine($"合约代码：{futuresContractDetail.ContractCode} 持仓保证金：{futuresContractDetail.MarginPosition} 可用保证金：{futuresContractDetail.MarginAvailable} 冻结保证金：{futuresContractDetail.MarginFrozen}");
-                        }
+                        Console.WriteLine($"合约代码：{contractDetail.ContractCode} 持仓保证金：{contractDetail.MarginPosition} 可用保证金：{contractDetail.MarginAvailable} 冻结保证金：{contractDetail.MarginFrozen}");
+                    }
+                    foreach (var futuresContractDetail in item.FuturesContractDetails)
+                    {
+                        Console.WriteLine($"合约代码：{futuresContractDetail.ContractCode} 持仓保证金：{futuresContractDetail.MarginPosition} 可用保证金：{futuresContractDetail.MarginAvailable} 冻结保证金：{futuresContractDetail.MarginFrozen}");
                     }
                 }
-                else
-                {
-                    Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
-                }
-            });
-        if (!privateUsdtMarginedSubscription.Success)
+            }
+            else
+            {
+                Console.WriteLine($"订阅火币U本位合约私有数据异常：未正常接收到数据");
+            }
+        }
+
+        if (!privateSub.Success)
         {
-            Console.WriteLine("Failed to sub" + privateUsdtMarginedSubscription.Error);
+            Console.WriteLine("Failed to sub" + privateSub.Error);
             Console.ReadLine();
             return;
         }
-        privateUsdtMarginedSubscription.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
-        privateUsdtMarginedSubscription.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
+        privateSub.Data.ConnectionLost += () => Console.WriteLine("Connection lost, trying to reconnect..");
+        privateSub.Data.ConnectionRestored += (t) => Console.WriteLine("Connection restored");
     }
     #endregion
 
