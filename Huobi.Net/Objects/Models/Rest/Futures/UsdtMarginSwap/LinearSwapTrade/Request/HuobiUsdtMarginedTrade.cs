@@ -52,7 +52,7 @@ namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade.R
         /// taker或maker
         /// </summary>
         [JsonProperty("role", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? Role { get; set; } = default;
+        public string? Role { get; set; } = default;
 
         /// <summary>
         /// 创建时间

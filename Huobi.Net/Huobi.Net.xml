@@ -703,7 +703,7 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerOrderAsync(System.String,System.String,System.Decimal,System.Int64,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.String,System.Decimal,System.Int64,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmTriggerType},System.Decimal,System.Int64,System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
@@ -730,10 +730,10 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTriggerHisordersAsync(System.Int32,System.String,System.Int32,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslOrderAsync(System.String,System.String,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslOrderAsync(System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Decimal,System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
@@ -769,7 +769,7 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackOrderAsync(System.String,System.String,System.Int32,System.Decimal,System.Decimal,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackOrderAsync(System.String,System.Int32,System.Decimal,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Int64,System.Decimal,System.Decimal,System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
@@ -808,10 +808,10 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrade.LinearSwapCrossSwitchPositionModeAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrade.LinearSwapOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmLeverRate,System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmTpOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmSlOrderPriceType},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrade.LinearSwapOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmLeverRate,System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrade.LinearSwapCrossOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmLeverRate,System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmTpOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmSlOrderPriceType},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrade.LinearSwapCrossOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrade.LinearSwapBatchorderAsync(System.Collections.Generic.IEnumerable{Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade.Request.HuobiUsdtMarginedIsolatedOrder},System.Threading.CancellationToken)">
@@ -4882,7 +4882,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.String,System.Decimal,System.Int64,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmTriggerType},System.Decimal,System.Int64,System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】合约计划委托下单(PrivateData)
@@ -5022,7 +5022,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTpslOrderAsync(System.String,System.String,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTpslOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】对仓位设置止盈止损订单(PrivateData)
@@ -5041,7 +5041,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTpslOrderAsync(System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTpslOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Decimal,System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】对仓位设置止盈止损订单(PrivateData)
@@ -5219,7 +5219,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTrackOrderAsync(System.String,System.Int32,System.Decimal,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTrackOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Int64,System.Decimal,System.Decimal,System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】跟踪委托订单下单(PrivateData)
@@ -5401,7 +5401,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapTrade.LinearSwapOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmLeverRate,System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmTpOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmSlOrderPriceType},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapTrade.LinearSwapOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmLeverRate,System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】合约下单(PrivateData)
@@ -5426,7 +5426,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapTrade.LinearSwapCrossOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmLeverRate,System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmTpOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmSlOrderPriceType},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapTrade.LinearSwapCrossOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Int64,CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】合约下单(PrivateData)

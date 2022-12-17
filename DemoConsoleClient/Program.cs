@@ -46,6 +46,7 @@ const string testOrderId = "1111111111111111111";
 const string testClientOrderId = "XXXXXXXXXXXXXXXX";
 string listenKey = string.Empty;
 #endregion
+
 //配置一个默认的Rest Api 客户端
 HuobiClient.SetDefaultOptions(options: new HuobiClientOptions()
 {
@@ -55,6 +56,7 @@ HuobiClient.SetDefaultOptions(options: new HuobiClientOptions()
     LogLevel = LogLevel.Trace,
     //OutputOriginalData = true
 });
+
 //配置一个默认的webSocket Api 客户端
 HuobiSocketClient.SetDefaultOptions(new HuobiSocketClientOptions()
 {
@@ -63,6 +65,7 @@ HuobiSocketClient.SetDefaultOptions(new HuobiSocketClientOptions()
     LogLevel = LogLevel.Trace,
     //OutputOriginalData = true
 });
+
 string? read = "";
 while (read != "R" && read != "r" && read != "P" && read != "p" && read != "U" && read != "u")
 {
@@ -4255,13 +4258,13 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 decimal? price = 0.04M;
                 UmLeverRate leverRate = UmLeverRate.LeverRate_20;
                 long volume = 1;
-                UmOrderPriceType orderPriceType = UmOrderPriceType.limit;
+                UmOrderPriceType orderPriceType = UmOrderPriceType.Limit;
                 decimal? tpTriggerPrice = null;
                 decimal? tpOrderPrice = null;
-                UmTpOrderPriceType? tpOrderPriceType = null;
+                UmOrderPriceType? tpOrderPriceType = null;
                 decimal? slTriggerPrice = null;
                 decimal? slOrderPrice = null;
-                UmSlOrderPriceType? slOrderPriceType = null;
+                UmOrderPriceType? slOrderPriceType = null;
                 int? reduceOnly = null;
                 long? clientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now);
                 #region 母用户客户端
@@ -4309,16 +4312,16 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 decimal price = 0.04M;
                 UmLeverRate leverRate = UmLeverRate.LeverRate_20;
                 long volume = 1;
-                UmOrderPriceType orderPriceType = UmOrderPriceType.limit;
+                UmOrderPriceType orderPriceType = UmOrderPriceType.Limit;
                 decimal? tpTriggerPrice = null;
                 decimal? tpOrderPrice = null;
-                UmTpOrderPriceType? tpOrderPriceType = null;
+                UmOrderPriceType? tpOrderPriceType = null;
                 decimal? slTriggerPrice = null;
                 decimal? slOrderPrice = null;
-                UmSlOrderPriceType? slOrderPriceType = null;
+                UmOrderPriceType? slOrderPriceType = null;
                 string? pair = "DOGE-USDT";
-                string? contractType = "swap";
-                int? reduceOnly = null;
+                UmContractType? contractType = UmContractType.swap;
+                UmReduceOnly? reduceOnly = null;
                 long? clientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now);
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
@@ -4364,12 +4367,12 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 HuobiUsdtMarginedIsolatedOrder isolatedOrder = new()
                 {
                     ContractCode = "DOGE-USDT",
-                    Direction = UmDirection.buy.ToString(),
-                    Offset = UmOffset.open.ToString(),
+                    Direction = EnumConverter.GetString(UmDirection.buy),
+                    Offset = EnumConverter.GetString(UmOffset.open),
                     Price = 0.04M,
                     LeverRate = UmLeverRate.LeverRate_20.GetHashCode(),
                     Volume = 1,
-                    OrderPriceType = UmOrderPriceType.limit.ToString(),
+                    OrderPriceType = EnumConverter.GetString(UmOrderPriceType.Limit),
                     TpTriggerPrice = null,
                     TpOrderPrice = null,
                     TpOrderPriceType = null,
@@ -4420,12 +4423,12 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 HuobiUsdtMarginedCrossOrder crossOrder = new()
                 {
                     ContractCode = "DOGE-USDT",
-                    Direction = UmDirection.buy.ToString(),
-                    Offset = UmOffset.open.ToString(),
+                    Direction = EnumConverter.GetString(UmDirection.buy),
+                    Offset = EnumConverter.GetString(UmOffset.open),
                     Price = 0.04M,
                     LeverRate = UmLeverRate.LeverRate_20.GetHashCode(),
                     Volume = 1,
-                    OrderPriceType = UmOrderPriceType.limit.ToString(),
+                    OrderPriceType = EnumConverter.GetString(UmOrderPriceType.Limit),
                     TpTriggerPrice = null,
                     TpOrderPrice = null,
                     TpOrderPriceType = null,
@@ -5245,18 +5248,18 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             #region 【全仓】合约计划委托下单(PrivateData)
             {
                 //全仓 20X 双向，卖出开空，高于0.095下单，限价0.10下单2张
-                string triggerType = "ge";
+                UmTriggerType? triggerType = UmTriggerType.ge;
                 decimal triggerPrice = 0.095M;
                 long volume = 2;
-                string direction = "sell";
+                UmDirection? direction = UmDirection.sell;
                 string? contractCode = "DOGE-USDT";
                 string? pair = "DOGE-USDT";
-                string? contractType = "swap";
-                int? reduceOnly = 0;
+                UmContractType? contractType = UmContractType.swap;
+                UmReduceOnly? reduceOnly = UmReduceOnly.NotReduceOnly;
                 decimal? orderPrice = 0.10M;
-                string? orderPriceType = "limit";
-                string? offset = "open";
-                int? leverRate = 20;
+                UmOrderPriceType orderPriceType = UmOrderPriceType.Limit;
+                UmOffset offset = UmOffset.open;
+                UmLeverRate? leverRate = UmLeverRate.LeverRate_20;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
@@ -5614,14 +5617,14 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             #region 【逐仓】对仓位设置止盈止损订单(PrivateData)
             {
                 string contractCode = "DOGE-USDT";
-                string direction = "sell";
+                UmDirection direction = UmDirection.sell;
                 decimal volume = 2;
                 decimal? tpTriggerPrice = 0.095M;
                 decimal? tpOrderPrice = 0.10M;
-                string? tpOrderPriceType = "limit";
+                UmOrderPriceType tpOrderPriceType = UmOrderPriceType.Limit;
                 decimal? slTriggerPrice = 0.045M;
                 decimal? slOrderPrice = 0.04M;
-                string? slOrderPriceType = "limit";
+                UmOrderPriceType slOrderPriceType = UmOrderPriceType.Limit;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
@@ -5660,17 +5663,17 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             #endregion
             #region 【全仓】对仓位设置止盈止损订单(PrivateData)
             {
-                string direction = "sell";
+                UmDirection? direction = UmDirection.sell;
                 decimal volume = 2;
                 string? contractCode = "DOGE-USDT";
                 string? pair = "DOGE-USDT";
-                string? contractType = "swap";
+                UmContractType contractType = UmContractType.swap;
                 decimal? tpTriggerPrice = 0.095M;
                 decimal? tpOrderPrice = 0.10M;
-                string? tpOrderPriceType = "limit";
+                UmOrderPriceType tpOrderPriceType = UmOrderPriceType.Limit;
                 decimal? slTriggerPrice = 0.045M;
                 decimal? slOrderPrice = 0.04M;
-                string? slOrderPriceType = "limit";
+                UmOrderPriceType slOrderPriceType = UmOrderPriceType.Limit;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
@@ -6141,17 +6144,17 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             #endregion
             #region 【全仓】跟踪委托订单下单(PrivateData)
             {
-                string direction = "sell";
+                UmDirection? direction = UmDirection.sell;
                 int volume = 2;
                 decimal callbackRate = 0.005M;
                 decimal activePrice = 0.95M;
-                string orderPriceType = "formula_price";
+                UmOrderPriceType? orderPriceType = UmOrderPriceType.Optimal5;
                 string? contractCode = "DOGE-USDT";
                 string? pair = "DOGE-USDT";
-                string? contractType = "swap";
-                int? reduceOnly = 0;
-                string? offset = "open";
-                int? leverRate = 20;
+                UmContractType? contractType = UmContractType.swap;
+                UmReduceOnly? reduceOnly = UmReduceOnly.NotReduceOnly;
+                UmOffset? offset = UmOffset.open;
+                UmLeverRate? leverRate = UmLeverRate.LeverRate_20;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);

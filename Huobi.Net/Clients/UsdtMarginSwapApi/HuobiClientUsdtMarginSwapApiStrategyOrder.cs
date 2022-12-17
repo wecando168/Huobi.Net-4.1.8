@@ -14,6 +14,7 @@ using Huobi.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
 using Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapStrategy;
+using CryptoExchange.Net.CommonObjects;
 
 namespace Huobi.Net.Clients.UsdtMarginSwapApi
 {
@@ -101,18 +102,18 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTriggerOrder>> LinearSwapCrossTriggerOrderAsync(
-            string triggerType,
+            UmTriggerType? triggerType,
             decimal triggerPrice,
             long volume,
-            string direction,
+            UmDirection? direction,
             string? contractCode,
             string? pair,
-            string? contractType,
-            int? reduceOnly,
+            UmContractType? contractType,
+            UmReduceOnly? reduceOnly,
             decimal? orderPrice,
-            string? orderPriceType,
-            string? offset,
-            int? leverRate,
+            UmOrderPriceType? orderPriceType,
+            UmOffset? offset,
+            UmLeverRate? leverRate,
             CancellationToken ct = default
             )
         {
@@ -123,7 +124,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 {"volume", volume },
                 {"direction", direction }
             };
-            if(string.IsNullOrWhiteSpace(contractCode) && (string.IsNullOrWhiteSpace(pair) || string.IsNullOrWhiteSpace(contractType)))
+            if(string.IsNullOrWhiteSpace(contractCode) && (string.IsNullOrWhiteSpace(pair) || object.Equals(contractType,null)))
             {
                 throw new ArgumentException($"At least one of \"contract code\" and \"pair + contract type\" is not null");
             }
@@ -139,7 +140,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                     parameters.AddOptionalParameter("contract_type", contractType);
                 }
             }
-            parameters.AddOptionalParameter("reduce_only", reduceOnly == null ? null : reduceOnly.ToString());
+            parameters.AddOptionalParameter("reduce_only", object.Equals(reduceOnly, null) ? null : reduceOnly.ToString());
             parameters.AddOptionalParameter("order_price", orderPrice);
             parameters.AddOptionalParameter("order_price_type", orderPriceType);
             parameters.AddOptionalParameter("offset", offset);
@@ -425,14 +426,14 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         /// <inheritdoc />
         public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapIsolatedTpslOrder>> LinearSwapTpslOrderAsync(
             string contractCode,
-            string direction,
+            UmDirection direction,
             decimal volume,
             decimal? tpTriggerPrice,
             decimal? tpOrderPrice,
-            string? tpOrderPriceType,
+            UmOrderPriceType tpOrderPriceType,
             decimal? slTriggerPrice,
             decimal? slOrderPrice,
-            string? slOrderPriceType,
+            UmOrderPriceType slOrderPriceType,
             CancellationToken ct = default
             )
         {
@@ -459,17 +460,17 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTpslOrder>> LinearSwapCrossTpslOrderAsync(
-            string direction,
+            UmDirection? direction,
             decimal volume,
             string? contractCode,
             string? pair,
-            string? contractType,
+            UmContractType? contractType,
             decimal? tpTriggerPrice,
             decimal? tpOrderPrice,
-            string? tpOrderPriceType,
+            UmOrderPriceType? tpOrderPriceType,
             decimal? slTriggerPrice,
             decimal? slOrderPrice,
-            string? slOrderPriceType,
+            UmOrderPriceType? slOrderPriceType,
             CancellationToken ct = default
             )
         {
@@ -478,7 +479,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 {"direction", direction },
                 {"volume", volume },
             };
-            if (string.IsNullOrWhiteSpace(contractCode) && (string.IsNullOrWhiteSpace(pair) || string.IsNullOrWhiteSpace(contractType)))
+            if (string.IsNullOrWhiteSpace(contractCode) && (string.IsNullOrWhiteSpace(pair) || object.Equals(contractType,null)))
             {
                 throw new ArgumentException($"At least one of \"contract code\" and \"pair + contract type\" is not null");
             }
@@ -864,17 +865,17 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTrackOrder>> LinearSwapCrossTrackOrderAsync(
-            string direction,
-            int volume,
+            UmDirection? direction,
+            long volume,
             decimal callbackRate,
             decimal activePrice,
-            string orderPriceType,
+            UmOrderPriceType? orderPriceType,
             string? contractCode,
             string? pair,
-            string? contractType,
-            int? reduceOnly,
-            string offset,
-            int? leverRate,
+            UmContractType? contractType,
+            UmReduceOnly? reduceOnly,
+            UmOffset? offset,
+            UmLeverRate? leverRate,
             CancellationToken ct = default
             )
         {
@@ -886,7 +887,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 {"active_price", activePrice },
                 {"order_price_type", orderPriceType },
             };
-            if (string.IsNullOrWhiteSpace(contractCode) && (string.IsNullOrWhiteSpace(pair) || string.IsNullOrWhiteSpace(contractType)))
+            if (string.IsNullOrWhiteSpace(contractCode) && (string.IsNullOrWhiteSpace(pair) || object.Equals(contractType, null)))
             {
                 throw new ArgumentException($"At least one of \"contract code\" and \"pair + contract type\" is not null");
             }

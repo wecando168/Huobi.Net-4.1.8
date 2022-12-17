@@ -14,6 +14,7 @@ using Huobi.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
 using Huobi.Net.Interfaces.Clients.SpotApi;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapStrategy;
+using CryptoExchange.Net.CommonObjects;
 
 namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
 {
@@ -75,20 +76,20 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTriggerOrder>> LinearSwapCrossTriggerOrderAsync(
-            string triggerType,
+            UmTriggerType? triggerType,
             decimal triggerPrice,
             long volume,
-            string direction,
+            UmDirection? direction,
             string? contractCode,
             string? pair,
-            string? contractType,
-            int? reduceOnly,
+            UmContractType? contractType,
+            UmReduceOnly? reduceOnly,
             decimal? orderPrice,
-            string? orderPriceType,
-            string? offset,
-            int? leverRate, 
+            UmOrderPriceType? orderPriceType,
+            UmOffset? offset,
+            UmLeverRate? leverRate, 
             CancellationToken ct = default
-            );
+            ); 
 
         /// <summary>
         /// 
@@ -281,14 +282,14 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <returns></returns>
         Task<WebCallResult<HuobiUsdtMarginedMarketSwapIsolatedTpslOrder>> LinearSwapTpslOrderAsync(
             string contractCode,
-            string direction,
+            UmDirection direction,
             decimal volume,
             decimal? tpTriggerPrice,
             decimal? tpOrderPrice,
-            string? tpOrderPriceType,
+            UmOrderPriceType tpOrderPriceType,
             decimal? slTriggerPrice,
             decimal? slOrderPrice,
-            string? slOrderPriceType,
+            UmOrderPriceType slOrderPriceType,
             CancellationToken ct = default
             );
 
@@ -311,19 +312,19 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="slOrderPriceType">止损委托类型  不填默认为limit; 限价：limit ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTpslOrder>> LinearSwapCrossTpslOrderAsync(
-            string direction,
+            UmDirection? direction,
             decimal volume,
             string? contractCode,
             string? pair,
-            string? contractType,
+            UmContractType? contractType,
             decimal? tpTriggerPrice,
             decimal? tpOrderPrice,
-            string? tpOrderPriceType,
+            UmOrderPriceType? tpOrderPriceType,
             decimal? slTriggerPrice,
             decimal? slOrderPrice,
-            string? slOrderPriceType,
+            UmOrderPriceType? slOrderPriceType,
             CancellationToken ct = default
-            );
+            ); 
 
         /// <summary>
         /// 
@@ -572,17 +573,17 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<HuobiUsdtMarginedMarketSwapCrossTrackOrder>> LinearSwapCrossTrackOrderAsync(
-            string direction,
-            int volume,
+            UmDirection? direction,
+            long volume,
             decimal callbackRate,
             decimal activePrice,
-            string orderPriceType,
+            UmOrderPriceType? orderPriceType,
             string? contractCode,
             string? pair,
-            string? contractType,            
-            int? reduceOnly,
-            string offset,
-            int? leverRate,            
+            UmContractType? contractType,            
+            UmReduceOnly? reduceOnly,
+            UmOffset? offset,
+            UmLeverRate? leverRate,            
             CancellationToken ct = default
             );
 

@@ -11,6 +11,9 @@ using CryptoExchange.Net.CommonObjects;
 using Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade.Request;
+using Huobi.Net.Converters;
+using Newtonsoft.Json;
+using CryptoExchange.Net.Converters;
 
 namespace Huobi.Net.Clients.UsdtMarginSwapApi
 {
@@ -121,10 +124,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             UmOrderPriceType orderPriceType,
             decimal? tpTriggerPrice,
             decimal? tpOrderPrice,
-            UmTpOrderPriceType? tpOrderPriceType,
+            UmOrderPriceType? tpOrderPriceType,
             decimal? slTriggerPrice,
             decimal? slOrderPrice,
-            UmSlOrderPriceType? slOrderPriceType,
+            UmOrderPriceType? slOrderPriceType,
             int? reduceOnly = null,
             long? clientOrderId = null,
             CancellationToken ct = default
@@ -164,43 +167,52 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             UmDirection direction,
             UmOffset? offset,
             decimal? price,
-            UmLeverRate leverRate,
+            UmLeverRate? leverRate,
             long volume,
             UmOrderPriceType orderPriceType,
             decimal? tpTriggerPrice,
             decimal? tpOrderPrice,
-            UmTpOrderPriceType? tpOrderPriceType,
+            UmOrderPriceType? tpOrderPriceType,
             decimal? slTriggerPrice,
             decimal? slOrderPrice,
-            UmSlOrderPriceType? slOrderPriceType,
+            UmOrderPriceType? slOrderPriceType,
             string? pair = null,
-            string? contractType = null,
-            int? reduceOnly = null,
+            UmContractType? contractType = null,
+            UmReduceOnly? reduceOnly = null,
             long? clientOrderId = null,
             CancellationToken ct = default
             )
         {
+            var priceTypeConverter = new OrderPriceTypeConverter(false);
             var parameters = new Dictionary<string, object>
             {
                 {"contract_code", contractCode },
                 {"volume", volume },
-                {"direction", direction.ToString() },
+                {"direction", EnumConverter.GetString(direction) },
                 {"lever_rate", leverRate.GetHashCode() },
-                {"order_price_type", orderPriceType.ToString() }
+                {"order_price_type", EnumConverter.GetString(orderPriceType)}
             };
-            parameters.AddOptionalParameter("pair", pair);
-            parameters.AddOptionalParameter("contract_type", contractType);
-            parameters.AddOptionalParameter("reduce_only", reduceOnly == null ? null : reduceOnly.ToString());
+            if(!object.Equals(pair,null) && !object.Equals(contractType,null) && object.Equals(contractCode,null)) 
+            {
+                parameters.AddOptionalParameter("pair", pair);
+                parameters.AddOptionalParameter("contract_type", EnumConverter.GetString(contractType));
+            }            
+            parameters.AddOptionalParameter("reduce_only", reduceOnly.GetHashCode());
             parameters.AddOptionalParameter("client_order_id", clientOrderId);
             parameters.AddOptionalParameter("price", price);
-            parameters.AddOptionalParameter("offset", offset.ToString());
-            parameters.AddOptionalParameter("tp_trigger_price", tpTriggerPrice);
-            parameters.AddOptionalParameter("tp_order_price", tpOrderPrice);
-            parameters.AddOptionalParameter("tp_order_price_type", tpOrderPriceType == null ? null : tpOrderPriceType.ToString());
-            parameters.AddOptionalParameter("sl_trigger_price", slTriggerPrice);
-            parameters.AddOptionalParameter("sl_order_price", slOrderPrice);
-            parameters.AddOptionalParameter("sl_order_price_type", slOrderPriceType == null ? null : slOrderPriceType.ToString());
-
+            parameters.AddOptionalParameter("offset", EnumConverter.GetString(offset));
+            if (!object.Equals(tpTriggerPrice, null) && !object.Equals(tpOrderPrice, null) && !object.Equals(tpOrderPriceType, null))
+            {
+                parameters.AddOptionalParameter("tp_trigger_price", tpTriggerPrice);
+                parameters.AddOptionalParameter("tp_order_price", tpOrderPrice);
+                parameters.AddOptionalParameter("tp_order_price_type", EnumConverter.GetString(tpOrderPriceType));
+            }
+            if (!object.Equals(slTriggerPrice, null) && !object.Equals(slOrderPrice, null) && !object.Equals(slOrderPriceType, null))
+            {
+                parameters.AddOptionalParameter("sl_trigger_price", slTriggerPrice);
+                parameters.AddOptionalParameter("sl_order_price", slOrderPrice);
+                parameters.AddOptionalParameter("sl_order_price_type", EnumConverter.GetString(slOrderPriceType));
+            }
             return await _baseClient.SendHuobiRequest<HuobiUsdtMarginedMarketSwapCrossOrder>(
                 uri: _baseClient.GetUrl(LinearSwapCrossOrderEndpoint, ApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Post,
