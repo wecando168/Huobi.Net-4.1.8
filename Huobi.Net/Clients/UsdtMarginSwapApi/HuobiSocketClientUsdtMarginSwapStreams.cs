@@ -569,10 +569,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"orders.{contractCode}"
                 );
-            Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscribeOrderData>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscribeOrderData>>>
+            Action<DataEvent<HuobiUsdtMarginedMarketSubscribeOrderData>>? internalHandler = new Action<DataEvent<HuobiUsdtMarginedMarketSubscribeOrderData>>
                 (
                 data =>
-                onData(data.As(data.Data.Data, contractCode))
+                onData(data.As(data.Data, $"orders.{contractCode}"))
                 );
             return await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -594,10 +594,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"orders_cross.{contractCode}"
                 );
-            Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData>>>
+            Action<DataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData>>? internalHandler = new Action<DataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData>>
                 (
                 data =>
-                onData(data.As(data.Data.Data, contractCode))
+                onData(data.As(data.Data, $"orders_cross.{contractCode}"))
                 );
             return await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -618,10 +618,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"accounts.{contractCode}"
                 );
-            Action<DataEvent<HuobiDataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribePositionInfo>>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribePositionInfo>>>>
+            Action<DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribePositionInfo>>>? internalHandler = new Action<DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribePositionInfo>>>
                 (
                 data =>
-                onData(data.As(data.Data.Data, contractCode))
+                onData(data.As(data.Data, $"accounts.{contractCode}"))
                 );
             return await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -646,10 +646,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             //{
             //    DeserializeAndInvoke(data, onData);
             //});
-            Action<DataEvent<HuobiDataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>>>>
+            Action<DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>>>? internalHandler = new Action<DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>>>
                 (
                 data =>
-                onData(data.As(data.Data.Data, marginAccount))
+                onData(data.As(data.Data, $"accounts_cross.{marginAccount}"))
                 );
             var subscribe = await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
             return subscribe;
@@ -694,10 +694,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"matchOrders.{contractCode}"
                 );
-            Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscriboMatchOrder>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscriboMatchOrder>>>
+            Action<DataEvent<HuobiUsdtMarginedMarketSubscriboMatchOrder>>? internalHandler = new Action<DataEvent<HuobiUsdtMarginedMarketSubscriboMatchOrder>>
                 (
                 data =>
-                onData(data.As(data.Data.Data, contractCode))
+                onData(data.As(data.Data, $"matchOrders.{contractCode}"))
                 );
             return await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -717,10 +717,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 NextId().ToString(CultureInfo.InvariantCulture),
                 $"matchOrders_cross.{contractCode}"
                 );
-            Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscriboCrossMatchOrder>>>? internalHandler = new Action<DataEvent<HuobiDataEvent<HuobiUsdtMarginedMarketSubscriboCrossMatchOrder>>>
+            Action<DataEvent<HuobiUsdtMarginedMarketSubscriboCrossMatchOrder>>? internalHandler = new Action<DataEvent<HuobiUsdtMarginedMarketSubscriboCrossMatchOrder>>
                 (
                 data =>
-                onData(data.As(data.Data.Data, contractCode))
+                onData(data.As(data.Data, $"matchOrders_cross.{contractCode}"))
                 );
             return await SubscribeAsync(_baseAddressAuthenticated, request, null, true, internalHandler, ct).ConfigureAwait(false);
         }

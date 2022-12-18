@@ -339,7 +339,7 @@ else if (read == "U" || read == "u")
     CallResult<UpdateSubscription>? privateSub = null;
     #region 对现货、合约WebSocket客户端的新实例使用新的设置(这里不设置则使用之前的默认设置）
     //使用accessKey, secretKey生成一个新的API凭证
-    ApiCredentials apiCredentials = new (mainAccessKey, mainSecretKey);
+    ApiCredentials apiCredentials = new (subAccessKey, subSecretKey);
     //当前客户端使用新生成的API凭证
     huobiPrivateSpotSocketClient.SetApiCredentials(apiCredentials);
     huobiPrivateUsdtMarginedSocketClient.SetApiCredentials(apiCredentials);
@@ -481,9 +481,9 @@ else if (read == "U" || read == "u")
         
         void OnCrossOrderDataUpdate(DataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData> data)
         {
-            if (!object.Equals(data, null))
+            if (!object.Equals(data , null) && !object.Equals(data.Data, null))
             {
-                Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
+                Console.WriteLine($"用户编号：{data.Data.Uid} 合约代码：{data.Data.Topic} 生成时间：{DateTimeConverter.ConvertFromMilliseconds(double.Parse(data.Data.Timestamp.ToString()))} 订单编号：{data.Data.OrderId}");
                 foreach (var item in data.Data.HuobiUsdtMarginedCrossWSTrades)
                 {
                     try

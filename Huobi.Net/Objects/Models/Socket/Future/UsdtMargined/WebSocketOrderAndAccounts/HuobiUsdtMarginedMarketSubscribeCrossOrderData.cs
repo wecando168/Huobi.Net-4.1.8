@@ -230,19 +230,19 @@ namespace Huobi.Net.Objects.Models.Socket.Futures.UsdtMargined.WebSocketOrderAnd
         public decimal? RealProfit { get; set; } = default;
 
         /// <summary>
-        /// 是否为只减仓订单	0:表示为非只减仓订单，1:表示为只减仓订单
-        /// </summary>
-        [JsonProperty("reduce_only", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ReduceOnly { get; set; } = default;
-
-        /// <summary>
         /// 成交分区 如 USDT
         /// </summary>
         [JsonProperty("trade_partition", NullValueHandling = NullValueHandling.Ignore)]
         public string TradePartition { get; set; } = string.Empty;
 
         /// <summary>
-        /// 逐仓合约成交明细列表
+        /// 是否为只减仓订单	0:表示为非只减仓订单，1:表示为只减仓订单
+        /// </summary>
+        [JsonProperty("reduce_only", NullValueHandling = NullValueHandling.Ignore)]
+        public int? ReduceOnly { get; set; } = default;
+
+        /// <summary>
+        /// 全仓合约成交明细列表
         /// </summary>
         [JsonProperty("trades", NullValueHandling = NullValueHandling.Ignore)]
         public IEnumerable<HuobiUsdtMarginedWSCrossTrade> HuobiUsdtMarginedCrossWSTrades { get; set; } = Array.Empty<HuobiUsdtMarginedWSCrossTrade>();
