@@ -2648,6 +2648,11 @@
             Withdraw
             </summary>
         </member>
+        <member name="M:Huobi.Net.HuobiAuthenticationProvider.AuthenticateRequest(CryptoExchange.Net.RestApiClient,System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.ArrayParametersSerialization,CryptoExchange.Net.Objects.HttpMethodParameterPosition,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.Collections.Generic.Dictionary{System.String,System.String}@)">
+            <summary>
+            这是一个不做字典排序的签名方法，这里不需要实现，火币是要求排序的
+            </summary>
+        </member>
         <member name="T:Huobi.Net.HuobiHelpers">
             <summary>
             Helpers for Huobi
