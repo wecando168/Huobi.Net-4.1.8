@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Huobi.Net.ConsoleClient", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoConsoleClient", "DemoConsoleClient\DemoConsoleClient.csproj", "{AAFCAB6A-FAE8-4B0E-8BFA-62278FDECC1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoExchange.Net", "..\CryptoExchange.Net-5.3.0\CryptoExchange.Net\CryptoExchange.Net.csproj", "{3FCAE902-D12C-4012-B422-E55558128FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoExchange.Net", "..\CryptoExchange.Net-5.3.1\CryptoExchange.Net\CryptoExchange.Net.csproj", "{E059BC8C-B2E3-42FD-8F97-70F299E0F9A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{AAFCAB6A-FAE8-4B0E-8BFA-62278FDECC1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAFCAB6A-FAE8-4B0E-8BFA-62278FDECC1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAFCAB6A-FAE8-4B0E-8BFA-62278FDECC1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FCAE902-D12C-4012-B422-E55558128FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FCAE902-D12C-4012-B422-E55558128FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FCAE902-D12C-4012-B422-E55558128FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FCAE902-D12C-4012-B422-E55558128FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E059BC8C-B2E3-42FD-8F97-70F299E0F9A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E059BC8C-B2E3-42FD-8F97-70F299E0F9A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E059BC8C-B2E3-42FD-8F97-70F299E0F9A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E059BC8C-B2E3-42FD-8F97-70F299E0F9A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

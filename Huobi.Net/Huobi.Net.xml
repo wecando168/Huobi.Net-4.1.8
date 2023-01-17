@@ -580,6 +580,102 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiAccount.GetLinearSwapApiTradingStatusAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetContractInfoAsync(System.String,System.Nullable{Huobi.Net.Enums.MarginMode},System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetSwapIndexPriceAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetSwapPriceLimitationAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetSwapOpenInterestAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetOrderBookAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetBestOfferAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetMarketDataAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetMarketDatasAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLastTradesAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetRecentTradesAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetSwapRiskInfoAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetInsuranceFundHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetIsolatedMarginAdjustFactorInfoAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetCrossMarginAdjustFactorInfoAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetOpenInterestAsync(Huobi.Net.Enums.InterestPeriod,Huobi.Net.Enums.Unit,System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetIsolatedMarginTieredInfoAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetCrossTieredMarginInfoAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetIsolatedStatusAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetCrossMarginTransferStatusAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetCrossMarginTradeStatusAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLiquidationOrdersAsync(System.Int32,Huobi.Net.Enums.LiquidationTradeType,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetHistoricalSettlementRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetFundingRateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetFundingRatesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetHistoricalFundingRatesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetPremiumIndexKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetEstimatedFundingRateKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetBasisDataAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Int32,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetEstimatedSettlementPriceAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData">
             <inheritdoc />
         </member>
@@ -884,6 +980,75 @@
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrade.LinearSwapCrossLightningClosePositionAsync(System.Int64,System.String,System.String,System.String,System.String,System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.PlaceIsolatedMarginOrderAsync(System.String,System.Decimal,Huobi.Net.Enums.OrderSide,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.Offset},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.PlaceCrossMarginOrderAsync(System.Decimal,Huobi.Net.Enums.OrderSide,System.Decimal,System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.Offset},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.CancelIsolatedMarginOrderAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.CancelIsolatedMarginOrdersAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.CancelCrossMarginOrderAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.CancelCrossMarginOrdersAsync(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.CancelAllIsolatedMarginOrdersAsync(System.String,System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{Huobi.Net.Enums.Offset},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.CancelAllCrossMarginOrdersAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{Huobi.Net.Enums.Offset},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.ChangeIsolatedMarginLeverageAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.ChangeCrossMarginLeverageAsync(System.Int32,System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOrderAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOrdersAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOrderAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOrdersAsync(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOrderDetailsAsync(System.String,System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOrderDetailsAsync(System.String,System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{Huobi.Net.Enums.MarginTradeType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOpenOrdersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{Huobi.Net.Enums.MarginTradeType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginClosedOrdersAsync(System.String,Huobi.Net.Enums.MarginTradeType,System.Boolean,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetCrossMarginClosedOrdersAsync(Huobi.Net.Enums.MarginTradeType,System.Boolean,System.Int32,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginUserTradesAsync(System.String,Huobi.Net.Enums.MarginTradeType,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.GetCrossMarginUserTradesAsync(System.String,Huobi.Net.Enums.MarginTradeType,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTransferring">
@@ -4382,6 +4547,870 @@
             Transferring
             划转接口
             </summary>
+        </member>
+        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount">
+            <summary>
+            Huobi usdt swap account endpoints
+            </summary>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetAssetValuationAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get asset values
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-asset-valuation"/></para>
+            </summary>
+            <param name="asset">The asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetIsolatedMarginAccountInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin account info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-user-s-account-information"/></para>
+            </summary>
+            <param name="contractCode">Optional contract code filter</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetCrossMarginAccountInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin account info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-user-39-s-account-information"/></para>
+            </summary>
+            <param name="marginAccount">Optional margin account filter</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetCrossMarginAssetAndPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin assets and positions
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-assets-and-positions"/></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetCrossMarginAvailableLeverageAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin available leverage
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-user-s-available-leverage" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetCrossMarginPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin positions
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-user-39-s-position-information" /></para>
+            </summary>
+            <param name="contractCode">Filter by contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetCrossMarginSettlementRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin settlement records
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-settlement-records-of-users" /></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetCrossMarginSubAccountsAssetsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin sub account assets
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-assets-information-of-all-sub-accounts-under-the-master-account" /></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetFinancialRecordsAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Huobi.Net.Enums.FinancialRecordType},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get financial records
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-account-financial-records" /></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="contractCode">Contract code</param>
+            <param name="types">Filter by type</param>
+            <param name="createDate">Filter by create date</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetIsolatedMarginAssetAndPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin assets and positisons
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-assets-and-positions" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetIsolatedMarginAvailableLeverageAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin available leverage
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-user-s-available-leverage" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetIsolatedMarginPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin position info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-user-s-position-information" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetIsolatedMarginSettlementRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin settlement records
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-settlement-records-of-users" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetIsolatedMarginSubAccountsAssetsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin sub account assets
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-assets-information-of-all-sub-accounts-under-the-master-account" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetMasterSubTransferRecordsAsync(System.String,System.Int32,System.Nullable{Huobi.Net.Enums.MasterSubTransferType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get master sub account transfer records
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-transfer-records-between-master-and-sub-account" /></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="daysInHistory">Days in history</param>
+            <param name="type">Filter by type</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.GetTradingFeesAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get trading fees
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-information-on-swap-trading-fee" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="businessType">Business tpye</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.ModifyCrossMarginPositionModeAsync(System.String,Huobi.Net.Enums.PositionMode,System.Threading.CancellationToken)">
+            <summary>
+            Switch cross margin position mode
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-switch-position-mode" /></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="positionMode">Position mode</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.ModifyIsolatedMarginPositionModeAsync(System.String,Huobi.Net.Enums.PositionMode,System.Threading.CancellationToken)">
+            <summary>
+            Switch isolated margin position mode
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-switch-position-mode" /></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="positionMode">Position mode</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.SetSubAccountsTradingPermissionsAsync(System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Set sub account trading permissions
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-set-a-batch-of-sub-account-trading-permissions" /></para>
+            </summary>
+            <param name="subAccountUids">Uids of the subaccounts</param>
+            <param name="enabled">Enable trading</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.TransferMarginAccountsAsync(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Transfer between margin accounts
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-transfer-between-different-margin-accounts-under-the-same-account" /></para>
+            </summary>
+            <param name="asset">Asset to transfer</param>
+            <param name="fromMarginAccount">From account</param>
+            <param name="toMarginAccount">To account</param>
+            <param name="quantity">Quantity to transfer</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiAccount.TransferMasterSubAsync(System.String,System.String,System.String,System.String,System.Decimal,Huobi.Net.Enums.MasterSubTransferType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Transfer between master and sub account
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-transfer-between-master-and-sub-account" /></para>
+            </summary>
+            <param name="subUid">Sub account uid</param>
+            <param name="asset">Asset to transfer</param>
+            <param name="fromMarginAccount">From account</param>
+            <param name="toMarginAccount">To account</param>
+            <param name="quantity">Quantity to transfer</param>
+            <param name="type">Type</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData">
+            <summary>
+            Huobi usdt margin swap exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            </summary>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetBasisDataAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get basis data
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-basis-data" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="interval">Kline interval</param>
+            <param name="limit">Limit</param>
+            <param name="basisPriceType">Price type (open, close, high, low, average)</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetBestOfferAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get the best current offer
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-get-market-bbo-data" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="type">Type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetContractInfoAsync(System.String,System.Nullable{Huobi.Net.Enums.MarginMode},System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get contract info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-swap-info" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="supportMarginMode">Support margin mode</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetCrossMarginAdjustFactorInfoAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin adjust factor info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-information-on-tiered-adjustment-factor" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="asset">Asset</param>
+            <param name="contractType">Type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetCrossMarginTradeStatusAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin trade status
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-information-on-trade-state" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Asset</param>
+            <param name="contractType">Type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetCrossMarginTransferStatusAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin transfer status
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-information-on-transfer-state" /></para>
+            </summary>
+            <param name="marginAccount">Margin account</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetCrossTieredMarginInfoAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <summary>
+            Get cross tiered margin info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-query-information-on-tiered-margin" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetEstimatedFundingRateKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get estimated funding rate kliens
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-estimated-funding-rate-kline-data" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="interval">Kline interval</param>
+            <param name="limit">Limit</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetEstimatedSettlementPriceAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get estimated settlement price
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-get-the-estimated-settlement-price" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetFundingRateAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get funding rate
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-funding-rate" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetFundingRatesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get funding rates
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-a-batch-of-funding-rate" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetHistoricalFundingRatesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get historical funding rates
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-historical-funding-rate" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetHistoricalSettlementRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get historical settlement records
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-historical-settlement-records-of-the-platform-interface" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetInsuranceFundHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get insurance fund history
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-history-records-of-insurance-fund-balance" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetIsolatedMarginAdjustFactorInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin adjust factor info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-information-on-tiered-adjustment-factor" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetIsolatedStatusAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin status
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-information-on-system-status" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetIsolatedMarginTieredInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin tier info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-query-information-on-tiered-margin" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get klines
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-get-kline-data" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="interval">Kline interval</param>
+            <param name="limit">Limit</param>
+            <param name="from">Filter by start time</param>
+            <param name="to">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLastTradesAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get last trades
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-the-last-trade-of-a-contract" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLiquidationOrdersAsync(System.Int32,Huobi.Net.Enums.LiquidationTradeType,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get liquidation orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-liquidation-orders" /></para>
+            </summary>
+            <param name="createDate">Create date</param>
+            <param name="tradeType">Trade type</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetMarketDataAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get market data
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-get-market-data-overview" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetMarketDatasAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get market datas
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-get-a-batch-of-market-data-overview" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetOpenInterestAsync(Huobi.Net.Enums.InterestPeriod,Huobi.Net.Enums.Unit,System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get open interest
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-information-on-open-interest" /></para>
+            </summary>
+            <param name="period">Period</param>
+            <param name="unit">Unit</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="type">Type</param>
+            <param name="limit">Limit</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetOrderBookAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get order book
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-get-market-depth" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="step">Merge step</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetPremiumIndexKlinesAsync(System.String,Huobi.Net.Enums.KlineInterval,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get premium index klines
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-premium-index-kline-data" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="interval">Interval</param>
+            <param name="limit">Limit</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetRecentTradesAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get recent trades
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-a-batch-of-trade-records-of-a-contract" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="limit">Limit</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get server time
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#get-current-system-timestamp" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetSwapIndexPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get swap index price
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-swap-index-price-information" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetSwapOpenInterestAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get swap open interest
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-get-swap-open-interest-information" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="businessType">Business tpye</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetSwapPriceLimitationAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get swap price limitation
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-swap-price-limitation" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract tpye</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetSwapRiskInfoAsync(System.String,System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
+            <summary>
+            Get swap risk info
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#general-query-information-on-contract-insurance-fund-balance-and-estimated-clawback-rate" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading">
+            <summary>
+            Huobi usdt margin swap trading endpoints, placing and mananging orders.
+            </summary>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.CancelAllCrossMarginOrdersAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{Huobi.Net.Enums.Offset},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all cross margin orders fitting the parameters
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-cancel-all-orders" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="side">Side</param>
+            <param name="offset">Offset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.CancelAllIsolatedMarginOrdersAsync(System.String,System.Nullable{Huobi.Net.Enums.OrderSide},System.Nullable{Huobi.Net.Enums.Offset},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all isolated margin order fitting the parameters
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-cancel-all-orders" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="side">Side</param>
+            <param name="offset">Offset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.CancelCrossMarginOrderAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <summary>
+            Cancel cross margin order
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-cancel-all-orders" /></para>
+            </summary>
+            <param name="orderId">The order id</param>
+            <param name="clientOrderId">The client order id</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.CancelCrossMarginOrdersAsync(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <summary>
+            Cancel cross margin orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-cancel-all-orders" /></para>
+            </summary>
+            <param name="orderIds">Order ids</param>
+            <param name="clientOrderIds">Client order ids</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.CancelIsolatedMarginOrderAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel isolated margin order
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-cancel-an-order" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="orderId">Order id</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.CancelIsolatedMarginOrdersAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel isolated margin orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-cancel-an-order" /></para>
+            </summary>
+            <param name="contractCode">Contract  code</param>
+            <param name="orderId">Order ids</param>
+            <param name="clientOrderId">Client order ids</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.ChangeCrossMarginLeverageAsync(System.Int32,System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Threading.CancellationToken)">
+            <summary>
+            Change cross margin leverage
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-switch-leverage" /></para>
+            </summary>
+            <param name="leverageRate">Leverage rate</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.ChangeIsolatedMarginLeverageAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Change isolated margin leverage
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-switch-leverage" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="leverageRate">Leverage rate</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetCrossMarginClosedOrdersAsync(Huobi.Net.Enums.MarginTradeType,System.Boolean,System.Int32,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin closed orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-get-history-orders-new" /></para>
+            </summary>
+            <param name="tradeType">Trade type</param>
+            <param name="allOrders">All orders</param>
+            <param name="daysInHistory">Days in history</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="sortBy">Sort by</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOpenOrdersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{Huobi.Net.Enums.MarginTradeType},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin open orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-current-unfilled-order-acquisition" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="sortBy">Sort by</param>
+            <param name="tradeType">Trade type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOrderAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin order
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-get-information-of-order" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="orderId">Order id</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOrderDetailsAsync(System.String,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin order details
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-get-detail-information-of-order" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="orderId">Order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetCrossMarginOrdersAsync(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-get-information-of-order" /></para>
+            </summary>
+            <param name="orderIds">Order ids</param>
+            <param name="clientOrderIds">Client order ids</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetCrossMarginUserTradesAsync(System.String,Huobi.Net.Enums.MarginTradeType,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin user trades
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-get-history-match-results" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="tradeType">Trade type</param>
+            <param name="daysInHistory">Days in history</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginClosedOrdersAsync(System.String,Huobi.Net.Enums.MarginTradeType,System.Boolean,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin closed orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-get-history-orders" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="tradeType">Trade type</param>
+            <param name="allOrders">All orders</param>
+            <param name="daysInHistory">Days in history</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="sortBy">Sort by</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{Huobi.Net.Enums.MarginTradeType},System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin open orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-current-unfilled-order-acquisition" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="sortBy">Sort by</param>
+            <param name="tradeType">Trade type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOrderAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get isoalted margin order
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-get-information-of-an-order" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="orderId">Order id</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOrderDetailsAsync(System.String,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin order details
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-order-details-acquisition" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="orderId">Order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginOrdersAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin orders
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-get-information-of-an-order" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="orderIds">Order ids</param>
+            <param name="clientOrderIds">Client order ids</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.GetIsolatedMarginUserTradesAsync(System.String,Huobi.Net.Enums.MarginTradeType,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin user trades
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-acquire-history-match-results-new" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="tradeType">Trade type</param>
+            <param name="daysInHistory">Days in history</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.PlaceCrossMarginOrderAsync(System.Decimal,Huobi.Net.Enums.OrderSide,System.Decimal,System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.Offset},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Place a new cross margin order
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#cross-place-an-order" /></para>
+            </summary>
+            <param name="quantity">Order quantity</param>
+            <param name="side">Order side</param>
+            <param name="leverageRate">Leverage rate</param>
+            <param name="contractCode">Contract code</param>
+            <param name="symbol">Symbol</param>
+            <param name="contractType">Contract type</param>
+            <param name="price">Price</param>
+            <param name="offset">Offset</param>
+            <param name="orderPriceType">Order price type</param>
+            <param name="takeProfitTriggerPrice">Take profit trigger price</param>
+            <param name="takeProfitOrderPrice">Take profit order price</param>
+            <param name="takeProfitOrderPriceType">Take profit order price type</param>
+            <param name="stopLossTriggerPrice">Stop loss trigger price</param>
+            <param name="stopLossOrderPrice">Stop loss order price</param>
+            <param name="stopLossOrderPriceType">Stop loss order price type</param>
+            <param name="reduceOnly">Reduce only</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiTrading.PlaceIsolatedMarginOrderAsync(System.String,System.Decimal,Huobi.Net.Enums.OrderSide,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.Offset},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Huobi.Net.Enums.OrderPriceType},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Place a new isolated margin order
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/en/#isolated-place-an-order" /></para>
+            </summary>
+            <param name="contractCode">Contract code</param>
+            <param name="quantity">Quantity</param>
+            <param name="side">Order side</param>
+            <param name="leverageRate">Leverage rate</param>
+            <param name="price">Price</param>
+            <param name="offset">Offset</param>
+            <param name="orderPriceType">Order price type</param>
+            <param name="takeProfitTriggerPrice">Take profit trigger price</param>
+            <param name="takeProfitOrderPrice">Take profit order price</param>
+            <param name="takeProfitOrderPriceType">Take profit order price type</param>
+            <param name="stopLossTriggerPrice">Stop loss trigger price</param>
+            <param name="stopLossOrderPrice">Stop loss order price</param>
+            <param name="stopLossOrderPriceType">Stop loss order price type</param>
+            <param name="reduceOnly">Reduce only</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapMarketData">
             <summary>
@@ -8790,6 +9819,36 @@
         <member name="P:Huobi.Net.Objects.Models.HuobiSymbolTick.LastTradeQuantity">
             <summary>
             Last trade quantity
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.HuobiSymbolStatus">
+            <summary>
+            Status of the symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSymbolStatus.Status">
+            <summary>
+            The status
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSymbolStatus.HaltStartTime">
+            <summary>
+            Start time of when market halted
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSymbolStatus.HaltEndTime">
+            <summary>
+            Estimated end time of the halt
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSymbolStatus.HaltReason">
+            <summary>
+            Reason for halting
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.HuobiSymbolStatus.AffectedSymbols">
+            <summary>
+            Affected symbols, comma separated or 'all' if all symbols are affected
             </summary>
         </member>
         <member name="T:Huobi.Net.Objects.Models.HuobiSymbolTickMerged">
@@ -19612,6 +20671,56 @@
             Update sequence number
             </summary>
         </member>
+        <member name="T:Huobi.Net.Objects.Models.Socket.HuobiBestOfferUpdate">
+            <summary>
+            Best offer update
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiBestOfferUpdate.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiBestOfferUpdate.Id">
+            <summary>
+            Update id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiBestOfferUpdate.Bid">
+            <summary>
+            Best bid
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiBestOfferUpdate.Ask">
+            <summary>
+            Best ask
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapIncementalOrderBook">
+            <summary>
+            Incremental order book update
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapIncementalOrderBook.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapIncementalOrderBook.Id">
+            <summary>
+            Update id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapIncementalOrderBook.Bids">
+            <summary>
+            List of changed bids
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapIncementalOrderBook.Asks">
+            <summary>
+            List of changed asks
+            </summary>
+        </member>
         <member name="T:Huobi.Net.Objects.Models.Socket.HuobiOrderCancelationUpdate">
             <summary>
             Cancelation details
@@ -19952,6 +21061,36 @@
             The Count
             </summary>
         </member>
+        <member name="T:Huobi.Net.Objects.Models.Socket.HuobiSymbolTickUpdate">
+            <summary>
+            Symbol update
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiSymbolTickUpdate.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiSymbolTickUpdate.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiSymbolTickUpdate.TradeTurnover">
+            <summary>
+            Turnover
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiSymbolTickUpdate.BestBid">
+            <summary>
+            Best bid
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiSymbolTickUpdate.BestAsk">
+            <summary>
+            Best ask
+            </summary>
+        </member>
         <member name="T:Huobi.Net.Objects.Models.Socket.HuobiTradeUpdate">
             <summary>
             Trade update
@@ -20070,6 +21209,2841 @@
         <member name="P:Huobi.Net.Objects.Models.Socket.HuobiTradeUpdate.OrderStatus">
             <summary>
             Order status
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapBasisUpdate">
+            <summary>
+            Basis update
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapBasisUpdate.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapBasisUpdate.IndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapBasisUpdate.ContractPrice">
+            <summary>
+            Contract price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapBasisUpdate.Basis">
+            <summary>
+            Basis
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapBasisUpdate.BasisRate">
+            <summary>
+            Basis rate
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradesUpdate">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradesUpdate.Id">
+            <summary>
+            Update id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradesUpdate.Timestamp">
+            <summary>
+            Update timestamp
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradesUpdate.Trades">
+            <summary>
+            Trades
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate.Amount">
+            <summary>
+            Amount of trades
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate.Id">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.Socket.HuobiUsdtMarginSwapTradeUpdate.TradeTurnover">
+            <summary>
+            Turnover
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiAssetValue">
+            <summary>
+            Asset valuation
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiAssetValue.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiAssetValue.Balance">
+            <summary>
+            Balance
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBasisData">
+            <summary>
+            Basis data
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBasisData.Basis">
+            <summary>
+            Basis
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBasisData.BasisRate">
+            <summary>
+            Basis rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBasisData.ContractPrice">
+            <summary>
+            Contract price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBasisData.IndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBasisData.Id">
+            <summary>
+            Unique id
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBatchResult">
+            <summary>
+            Batch result
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBatchResult.Errors">
+            <summary>
+            Errors in the batch
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBatchResult.Successes">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBatchError">
+            <summary>
+            Batch operation error
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBatchError.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBatchError.ErrorCode">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiBatchError.ErrorMessage">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo">
+            <summary>
+            Contract info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.ContractSize">
+            <summary>
+            Contract size
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.PriceTick">
+            <summary>
+            Price tick
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.DeliveryDate">
+            <summary>
+            Deliverty date
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.DeliveryTime">
+            <summary>
+            Delivery time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.CreateDate">
+            <summary>
+            Created date
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.SettlementDate">
+            <summary>
+            Settlement date
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractInfo.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus">
+            <summary>
+            Contract status
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.Open">
+            <summary>
+            Open order access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.Close">
+            <summary>
+            Close order access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.Cancel">
+            <summary>
+            Cancel order access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.TranferIn">
+            <summary>
+            Deposit access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.TransferOut">
+            <summary>
+            Withdrawal access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.MasterTransferSub">
+            <summary>
+            Transfer from master to sub
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.SubTransferMaster">
+            <summary>
+            Transfer from sub to master
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.MasterTransferSubInnerIn">
+            <summary>
+            Master transfer sub inner in
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.MasterTransferSubInnerOut">
+            <summary>
+            Master transfer sub inner out
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.SubTransferMasterInnerIn">
+            <summary>
+            Sub transfer master inner in
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.SubTransferMasterInnerOut">
+            <summary>
+            Sub transfer master inner out
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.TransferInnerIn">
+            <summary>
+            Transfer inner in
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiContractStatus.TransferInnerOut">
+            <summary>
+            Tranfer inner out
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract">
+            <summary>
+            Cross margin account contract details
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.ContractCode">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.MarginPosition">
+            <summary>
+            Margin position
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.MarginFrozen">
+            <summary>
+            Margin frozen
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.MarginAvailable">
+            <summary>
+            Margin available
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.ProfitUnreal">
+            <summary>
+            Profit unreal
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.LiquidationPrice">
+            <summary>
+            Liquidation price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.LeverRate">
+            <summary>
+            Lever rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.AdjustFactor">
+            <summary>
+            Adjust factor
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountContract.TradePartition">
+            <summary>
+            Trade partition
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo">
+            <summary>
+            Account info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginPosition">
+            <summary>
+            Margin position
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginFrozen">
+            <summary>
+            Margin frozen
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginAvailable">
+            <summary>
+            Margin available
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.ProfitReal">
+            <summary>
+            Profit real
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.ProfitUnreal">
+            <summary>
+            Profit unreal
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.RiskRate">
+            <summary>
+            Risk rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.WithdrawAvailable">
+            <summary>
+            Withdraw available
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginStatic">
+            <summary>
+            Margin static
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.PositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.ContractDetails">
+            <summary>
+            Contract details
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAccountInfo.FuturesContractDetails">
+            <summary>
+            Futures contract details
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAssetsAndPositions">
+            <summary>
+            Cross margin assets and positions info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginAssetsAndPositions.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageAvailable">
+            <summary>
+            Available leverage info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageAvailable.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageAvailable.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageAvailable.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginOrderPage">
+            <summary>
+            Order page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginOrderPage.Orders">
+            <summary>
+            Orders
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAssets">
+            <summary>
+            Sub account assets info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAssets.SubUid">
+            <summary>
+            Sub account uid
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAssets.Assets">
+            <summary>
+            Assets
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAsset">
+            <summary>
+            Sub account asset info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAsset.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAsset.RiskRate">
+            <summary>
+            Risk rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAsset.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAsset.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSubAccountAsset.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus">
+            <summary>
+            Cross margin trade status
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.Open">
+            <summary>
+            Open order access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.Close">
+            <summary>
+            Close order access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.Cancel">
+            <summary>
+            Cancel order access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTradeStatus.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus">
+            <summary>
+            Cross margin transfer status
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.TranferIn">
+            <summary>
+            Deposit access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.TransferOut">
+            <summary>
+            Withdrawal access
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.MasterTransferSub">
+            <summary>
+            Transfer from master to sub
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.SubTransferMaster">
+            <summary>
+            Transfer from sub to master
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.MasterTransferSubInnerIn">
+            <summary>
+            Master transfer sub inner in
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.MasterTransferSubInnerOut">
+            <summary>
+            Master transfer sub inner out
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.SubTransferMasterInnerIn">
+            <summary>
+            Sub transfer master inner in
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.SubTransferMasterInnerOut">
+            <summary>
+            Sub transfer master inner out
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.TransferInnerIn">
+            <summary>
+            Transfer inner in
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginTransferStatus.TransferInnerOut">
+            <summary>
+            Tranfer inner out
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecordPage">
+            <summary>
+            User settlement record page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecordPage.TotalPages">
+            <summary>
+            Total pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecordPage.CurrentPage">
+            <summary>
+            Current pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecordPage.TotalRecords">
+            <summary>
+            Total amount of records
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecordPage.Records">
+            <summary>
+            Records
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord">
+            <summary>
+            User settlement record
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.MarginBalanceInit">
+            <summary>
+            Margin balance init
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.SettlementProfitReal">
+            <summary>
+            Settlement profit realized
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.SettlementTime">
+            <summary>
+            Settlement time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.Clawback">
+            <summary>
+            Clawback
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.FundingFee">
+            <summary>
+            Funding fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.OffsetProfitLoss">
+            <summary>
+            Offset profit loss
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserSettlementRecord.ContractDetails">
+            <summary>
+            Contract details
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSettlementAccountContract">
+            <summary>
+            Settlement contract details
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSettlementAccountContract.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSettlementAccountContract.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSettlementAccountContract.OffsetProfitLoss">
+            <summary>
+            Offset profit loss
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSettlementAccountContract.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSettlementAccountContract.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginSettlementAccountContract.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition">
+            <summary>
+            Settlement position
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.Direction">
+            <summary>
+            Direction
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.CostOpen">
+            <summary>
+            Cost open
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.CostHoldPre">
+            <summary>
+            Cost hold before settlement
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.ColdHold">
+            <summary>
+            Cost hold after settlement
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.SettlementProfitUnreal">
+            <summary>
+            Settlement profit unreal
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.SettlementPrice">
+            <summary>
+            Settlement price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPosition.SettlementType">
+            <summary>
+            Settlement type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserTradePage">
+            <summary>
+            Margin user trade page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserTradePage.Trades">
+            <summary>
+            Trades
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserTrade">
+            <summary>
+            User trade info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserTrade.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserTrade.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginUserTrade.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiEstimatedSettlementPrice">
+            <summary>
+            Estimated settlement price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiEstimatedSettlementPrice.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiEstimatedSettlementPrice.EstimatedSettlementPrice">
+            <summary>
+            Estimated settlement price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiEstimatedSettlementPrice.SettlementType">
+            <summary>
+            Settlement type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiEstimatedSettlementPrice.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiEstimatedSettlementPrice.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiEstimatedSettlementPrice.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecordsPage">
+            <summary>
+            Financial records page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecordsPage.TotalPages">
+            <summary>
+            Total amount of pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecordsPage.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecordsPage.TotalRecords">
+            <summary>
+            Total amount of records
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecordsPage.Records">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord">
+            <summary>
+            Financial records
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.Id">
+            <summary>
+            Record id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.Type">
+            <summary>
+            Record type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFinancialRecord.FaceMarginAccount">
+            <summary>
+            Face margin account
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate.EstimatedRate">
+            <summary>
+            Estimated rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate.FundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate.Asset">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate.FundingTime">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRate.NextFundingTime">
+            <summary>
+            Next funding time
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRatePage">
+            <summary>
+            Funding rates page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRatePage.TotalPages">
+            <summary>
+            Total pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRatePage.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRatePage.TotalResults">
+            <summary>
+            Total results
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFundingRatePage.Rates">
+            <summary>
+            Rates
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate">
+            <summary>
+            Historical funding rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate.AveragePremiumIndex">
+            <summary>
+            Average premium index
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate.FundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate.RealizedRate">
+            <summary>
+            Realized rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate.FundingTime">
+            <summary>
+            Funding time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate.Asset">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiHistoricalFundingRate.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo">
+            <summary>
+            Insurance info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.TotalPage">
+            <summary>
+            Total amount of pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.TotalSize">
+            <summary>
+            Total amount of results
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceInfo.History">
+            <summary>
+            The history data
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceValue">
+            <summary>
+            Insurance value
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceValue.InsuranceFund">
+            <summary>
+            Insurance fund
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiInsuranceValue.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo">
+            <summary>
+            Account info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.Asset">
+            <summary>
+            Asset info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginPosition">
+            <summary>
+            Margin position
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginFrozen">
+            <summary>
+            Margin frozen
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginAvailable">
+            <summary>
+            Margin available
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.ProfitReal">
+            <summary>
+            Profit real
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.ProfitUnreal">
+            <summary>
+            Profit unreal
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.RiskRate">
+            <summary>
+            Risk rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.WithdrawAvailable">
+            <summary>
+            Withdraw available
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.LiquidationPrice">
+            <summary>
+            Liquidation price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.LeverRate">
+            <summary>
+            Lever rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.AdjustFactor">
+            <summary>
+            Adjust factor
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginStatic">
+            <summary>
+            Margin static
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAccountInfo.PositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAssetsAndPositions">
+            <summary>
+            Isolated margin assets and positions info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginAssetsAndPositions.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageAvailable">
+            <summary>
+            Available leverage info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageAvailable.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageAvailable.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageAvailable.AvailableLevelRate">
+            <summary>
+            Available rates
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder">
+            <summary>
+            Isolated margin order info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Quantity">
+            <summary>
+            Quantity of contract
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.OrderPriceType">
+            <summary>
+            Order price type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Side">
+            <summary>
+            Direction
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Offset">
+            <summary>
+            Offset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.LeverageRate">
+            <summary>
+            Leverage rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.CancelTime">
+            <summary>
+            Cancel time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.QuantityFilled">
+            <summary>
+            Quantity filled
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.ValueFilled">
+            <summary>
+            Value of the quantity filled
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.AverageFillPrice">
+            <summary>
+            Average fill price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.MarginFrozen">
+            <summary>
+            Margin frozen
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Profit">
+            <summary>
+            Profit
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.OrderSource">
+            <summary>
+            Source
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.LiquidationType">
+            <summary>
+            Liquidation type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.IsTakeProfitStopLoss">
+            <summary>
+            Is take profit/stop loss
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.RealProfit">
+            <summary>
+            Real profit
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.ReduceOnly">
+            <summary>
+            Reduce only
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrder.Trades">
+            <summary>
+            Trades
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginOrder">
+            <summary>
+            Cross margin order info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginOrder.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginOrder.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrderPage">
+            <summary>
+            Order page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginOrderPage.Orders">
+            <summary>
+            Orders
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAssets">
+            <summary>
+            Sub account assets info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAssets.SubUid">
+            <summary>
+            Sub account uid
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAssets.Assets">
+            <summary>
+            Assets
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset">
+            <summary>
+            Sub account asset info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.LiquidationPrice">
+            <summary>
+            Liquidation price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.RiskRate">
+            <summary>
+            Risk rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginSubAccountAsset.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecordPage">
+            <summary>
+            User settlement record page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecordPage.TotalPages">
+            <summary>
+            Total pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecordPage.CurrentPage">
+            <summary>
+            Current pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecordPage.TotalRecords">
+            <summary>
+            Total amount of records
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecordPage.Records">
+            <summary>
+            Records
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord">
+            <summary>
+            User settlement record
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.MarginBalanceInit">
+            <summary>
+            Margin balance init
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.SettlementProfitReal">
+            <summary>
+            Settlement profit realized
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.SettlementTime">
+            <summary>
+            Settlement time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.Clawback">
+            <summary>
+            Clawback
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.FundingFee">
+            <summary>
+            Funding fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.OffsetProfitLoss">
+            <summary>
+            Offset profit loss
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserSettlementRecord.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition">
+            <summary>
+            Settlement position
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.Direction">
+            <summary>
+            Direction
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.CostOpen">
+            <summary>
+            Cost open
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.CostHoldPre">
+            <summary>
+            Cost hold before settlement
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.ColdHold">
+            <summary>
+            Cost hold after settlement
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.SettlementProfitUnreal">
+            <summary>
+            Settlement profit unreal
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.SettlementPrice">
+            <summary>
+            Settlement price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSettlementPosition.SettlementType">
+            <summary>
+            Settlement type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTradePage">
+            <summary>
+            Margin user trade page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTradePage.Trades">
+            <summary>
+            Trades
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade">
+            <summary>
+            User trade info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.MatchId">
+            <summary>
+            Match id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.Offset">
+            <summary>
+            Offset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.OffsetProfitloss">
+            <summary>
+            Offset profit loss
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginUserTrade.ReduceOnly">
+            <summary>
+            Reduce only
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTrade">
+            <summary>
+            Last trade data
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTrade.Amount">
+            <summary>
+            Amount of contracts
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTrade.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTrade.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTrade.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTrade.Direction">
+            <summary>
+            Direction
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTrade.QuoteQuantity">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLastTrade">
+            <summary>
+            Last trade info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLastTrade.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLastTrade.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageRate">
+            <summary>
+            Leverage rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageRate.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageRate.Mode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiIsolatedMarginLeverageRate.LeverageRate">
+            <summary>
+            Leverage rate
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageRate">
+            <summary>
+            Leverage rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageRate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageRate.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossMarginLeverageRate.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrderPage">
+            <summary>
+            Liquidation order page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrderPage.TotalPages">
+            <summary>
+            Total pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrderPage.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrderPage.TotalSize">
+            <summary>
+            Total results
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrderPage.Orders">
+            <summary>
+            Orders
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder">
+            <summary>
+            Liquidation order
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Direction">
+            <summary>
+            Direction
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Offset">
+            <summary>
+            Offset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Turnover">
+            <summary>
+            Turnover
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiLiquidationOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails">
+            <summary>
+            Isolated margin order info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails.IntrumentPrice">
+            <summary>
+            Instrument price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails.FinalInterest">
+            <summary>
+            Final interest
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails.AdjustValue">
+            <summary>
+            Adjust value
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails.TotalPages">
+            <summary>
+            Total pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails.TotalRecords">
+            <summary>
+            Total amount of records
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginOrderDetails.Trades">
+            <summary>
+            Trades
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.Price">
+            <summary>
+            Trade price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.Quantity">
+            <summary>
+            Trade quantity
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.Value">
+            <summary>
+            Trade value
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.Role">
+            <summary>
+            Trade role
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.FeeAssset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.Profit">
+            <summary>
+            Profit
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarginTrade.RealProfit">
+            <summary>
+            Real profit
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarketData">
+            <summary>
+            Market data
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarketData.Ask">
+            <summary>
+            Best ask
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMarketData.Bid">
+            <summary>
+            Best bid
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer">
+            <summary>
+            Transfer between master and sub account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.FromMarginAccount">
+            <summary>
+            From margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.ToMarginAccount">
+            <summary>
+            To margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.SubUid">
+            <summary>
+            Sub uid
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.SubAccountName">
+            <summary>
+            Sub account name
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.Type">
+            <summary>
+            Transfer type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiMasterSubTransfer.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest">
+            <summary>
+            Open interest
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.TradeAmount">
+            <summary>
+            Trade amount
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.TradeVolume">
+            <summary>
+            Trade volume
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.TradeTurnover">
+            <summary>
+            Trade turnover
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterest.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValue">
+            <summary>
+            Open interest value
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValue.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValue.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValue.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValue.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValue.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValue.Tick">
+            <summary>
+            Tick
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValueTick">
+            <summary>
+            Open interest value tick
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValueTick.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValueTick.Unit">
+            <summary>
+            Unit
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValueTick.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOpenInterestValueTick.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiOrderId.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPage">
+            <summary>
+            Page of data
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPage.TotalPages">
+            <summary>
+            Total amount of pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPage.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPage.TotalRecords">
+            <summary>
+            Total amount of records
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPlacedOrderId">
+            <summary>
+            Placed order id 
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPlacedOrderId.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPlacedOrderId.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition">
+            <summary>
+            Isolated margin position info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.Available">
+            <summary>
+            Available
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.Frozen">
+            <summary>
+            Frozen
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.CostOpen">
+            <summary>
+            Opening average price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.CostHold">
+            <summary>
+            Average price of position
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.ProfitUnreal">
+            <summary>
+            Unrealized pnl
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.ProfitRate">
+            <summary>
+            Profit rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.LeverRate">
+            <summary>
+            Leverage rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.PositionMargin">
+            <summary>
+            Position margin
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.Side">
+            <summary>
+            Order direction
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.Profit">
+            <summary>
+            Profit
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.LastPrice">
+            <summary>
+            Last price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPosition.PositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPositionMode.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPositionMode.PositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation">
+            <summary>
+            Price limitation
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation.HighLimit">
+            <summary>
+            High limit
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation.LowLimit">
+            <summary>
+            Low limit
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiPriceLimitation.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPage">
+            <summary>
+            Settlement page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPage.TotalPages">
+            <summary>
+            Total pages
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPage.CurrentPage">
+            <summary>
+            Current page
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPage.TotalSize">
+            <summary>
+            Total size
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementPage.Records">
+            <summary>
+            Records
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord">
+            <summary>
+            Settlement info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.SettlementTime">
+            <summary>
+            Settlement time
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.ClawbackRatio">
+            <summary>
+            Clawback ratio
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.SettlementPrice">
+            <summary>
+            Settlement price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.SettlementType">
+            <summary>
+            Settlement type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSettlementRecord.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSubAccountResult">
+            <summary>
+            sub account results
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSubAccountResult.Successes">
+            <summary>
+            Successfully updated ids
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSubAccountResult.Errors">
+            <summary>
+            Errors
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSubAccountError">
+            <summary>
+            Sub account error info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSubAccountError.SubUid">
+            <summary>
+            Sub uid
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSubAccountError.ErrorCode">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSubAccountError.ErrorMessage">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapAdjustFactorInfo">
+            <summary>
+            Adjust factor info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapAdjustFactorInfo.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapAdjustFactorInfo.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapAdjustFactorInfo.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapAdjustFactorInfo.List">
+            <summary>
+            list
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSwapAdjustFactorInfo">
+            <summary>
+            Cross margin adjust factor info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSwapAdjustFactorInfo.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSwapAdjustFactorInfo.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiCrossSwapAdjustFactorInfo.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorInfo">
+            <summary>
+            Factor info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorInfo.LeverRate">
+            <summary>
+            Lever rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorInfo.Ladders">
+            <summary>
+            Ladders
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorEntry">
+            <summary>
+            Factor info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorEntry.Ladder">
+            <summary>
+            Ladder
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorEntry.MinSize">
+            <summary>
+            Min size
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorEntry.MaxSize">
+            <summary>
+            Max size
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiFactorEntry.AdjustFactor">
+            <summary>
+            Adjust factor
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapBestOffer">
+            <summary>
+            Best offer
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapBestOffer.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapBestOffer.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapBestOffer.Ask">
+            <summary>
+            Best ask
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapBestOffer.Bid">
+            <summary>
+            Best bid
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapBestOffer.Id">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapBestOffer.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapIndex">
+            <summary>
+            Swap index
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapIndex.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapIndex.IndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapIndex.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapRiskInfo">
+            <summary>
+            Swap risk info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapRiskInfo.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapRiskInfo.InsuranceFund">
+            <summary>
+            Insurance fund
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapRiskInfo.EstimatedClawback">
+            <summary>
+            Estimated clawback
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapRiskInfo.BusinuessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapRiskInfo.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiSwapRiskInfo.TradePartition">
+            <summary>
+            Trade partition
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginInfo">
+            <summary>
+            Tiered margin info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginInfo.MarginAccount">
+            <summary>
+            Margin account
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginInfo.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginInfo.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginInfo.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginInfo.List">
+            <summary>
+            List
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredCrossMarginInfo">
+            <summary>
+            Tiered cross margin info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredCrossMarginInfo.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredCrossMarginInfo.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredCrossMarginInfo.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginRate">
+            <summary>
+            Margin rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginRate.LeverRate">
+            <summary>
+            Lever rate
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginRate.Ladders">
+            <summary>
+            Ladders
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginLadder">
+            <summary>
+            Ladder info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginLadder.MinMarginBalance">
+            <summary>
+            Min marging balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginLadder.MaxMarginBalance">
+            <summary>
+            Max margin balance
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginLadder.MinMarginAvailable">
+            <summary>
+            Min margin available
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTieredMarginLadder.MaxMarginAvailable">
+            <summary>
+            Max margin available
+            </summary>
+        </member>
+        <member name="T:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee">
+            <summary>
+            Trading fee info
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.ContractCode">
+            <summary>
+            Contract code
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.OpenMakerFee">
+            <summary>
+            Open position maker fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.OpenTakerFee">
+            <summary>
+            Open position taker fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.CloseMakerfee">
+            <summary>
+            Close position maker fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.CloseTakerFee">
+            <summary>
+            Close position taker fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.DeliveryFee">
+            <summary>
+            Delivery fee
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Huobi.Net.Objects.Models.UsdtMarginSwap.HuobiTradingFee.Symbol">
+            <summary>
+            Symbol
             </summary>
         </member>
         <member name="T:Huobi.Net.SymbolOrderBooks.HuobiSpotSymbolOrderBook">

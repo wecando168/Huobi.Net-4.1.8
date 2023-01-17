@@ -106,7 +106,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         /// <param name="apiPath">API路径</param>
         /// <param name="version"></param>
         /// <returns></returns>
-        internal Uri GetUrl(string endpoint, ApiPath? apiPath = null, string? version = null)
+        internal Uri GetUrl(string endpoint, ApiPath? apiPath, string? version = null)
         {
             var result = BaseAddress;
 
@@ -118,6 +118,15 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             else
                 result = result.AppendPath($"v{version}", endpoint);
             return new Uri(result);
+        }
+
+        internal async Task<WebCallResult<DateTime>> SendTimestampRequestAsync(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, int? weight = 1, bool ignoreRatelimit = false)
+        {
+            var result = await SendRequestAsync<HuobiBasicResponse<string>>(uri, method, cancellationToken, parameters, signed, requestWeight: weight ?? 1, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.AsError<DateTime>(result.Error!);
+
+            return result.As(result.Data.Timestamp);
         }
 
         #region methods
