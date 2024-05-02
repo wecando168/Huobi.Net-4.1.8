@@ -2929,7 +2929,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             string period = "1day";
             long from = 1668355200;
             long to = 1668534210;
-            await HandleRequest("Linear Swap Ex Market History Kline \r\n", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapHistoryKlineAsync(contractCode, period, from, to),
+            await HandleRequest("Linear Swap Ex Market History Kline \r\n", () => huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapHistoryKlineAsync(contractCode, period, from, to),
                 result => $"{contractCode}" + string.Join($" ", result.Select(s => $"\r\n开盘价：{s.Open}\t收盘价:{s.Close}\t最低价:{s.Low}\t最高价:{s.High}").Take(100)) + "\r\n......");
             #region 方法二 不需要等待输入回车后才执行，测试通过保留勿删！！！
             //Console.WriteLine("【通用】获取合约K线数据");
@@ -2953,7 +2953,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
         {
             string contractCode = "BTC-USDT";
             string depthType = "step6";
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapDepthAsync(contractCode, depthType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapDepthAsync(contractCode, depthType);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约深度数据");
@@ -2984,7 +2984,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
                 //string businessType = "swap";
                 //var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBboAsync(contractCode, businessType);
             }
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBboAsync(null, "All");
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapBboAsync(null, "All");
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -3004,7 +3004,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             string contractCode = "BTC-USDT";
             string period = "1day";
             int size = 30;
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMarkPriceKlineAsync(contractCode, period, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapMarkPriceKlineAsync(contractCode, period, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}标记价格K线数据");
@@ -3022,7 +3022,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
         #region 【通用】获取聚合行情
         {
             string contractCode = "BTC-USDT";
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMergedAsync(contractCode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapMergedAsync(contractCode);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}聚合行情");
@@ -3039,7 +3039,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             //string contractCode = "BTC-USDT";
             //string businessType = "swap";
             //var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBatchMergedV2Async(contractCode, businessType);
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBatchMergedV2Async();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapBatchMergedV2Async();
             if (result.Success)
             {
                 Console.WriteLine($"批量获取聚合行情（V2)");
@@ -3061,7 +3061,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
         {
             string contractCode = "BTC-USDT";
             string businessType = "swap";
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMarketTradeAsync(contractCode, businessType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapMarketTradeAsync(contractCode, businessType);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}市场最近成交记录");
@@ -3080,7 +3080,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
         {
             string contractCode = "BTC-USDT";
             int size = 10;
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapMarketHistoryTradeAsync(contractCode, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapMarketHistoryTradeAsync(contractCode, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}市场最近成交记录");
@@ -3106,7 +3106,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             string pair = "BTC-USDT";
             string contractType = "swap";            
             int size = 200;
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapHisOpenInterestAsync(period, amountType, contractCode, pair, contractType, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapHisOpenInterestAsync(period, amountType, contractCode, pair, contractType, size);
             if (result.Success)
             {
                 Console.WriteLine($"{result.Data.ContractCode}平台历史持仓量查询");
@@ -3126,7 +3126,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             string contractCode = "BTC-USDT";
             string period = "1day";
             int size = 10;
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapPremiumIndexKlineAsync(contractCode, period, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapPremiumIndexKlineAsync(contractCode, period, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约的溢价指数K线");
@@ -3146,7 +3146,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             string contractCode = "BTC-USDT";
             string period = "1day";
             int size = 10;
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapEstimatedRateKlineAsync(contractCode, period, size);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapEstimatedRateKlineAsync(contractCode, period, size);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约实时预测资金费率的K线数据");
@@ -3167,7 +3167,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             string period = "1day";
             int size = 20;
             string basisPriceType = "open";
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.MarketData.GetLinearSwapBasisAsync(contractCode, period, size, basisPriceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.ExchangeData.GetLinearSwapBasisAsync(contractCode, period, size, basisPriceType);
             if (result.Success)
             {
                 Console.WriteLine($"{contractCode}合约基差数据");

@@ -71,8 +71,8 @@ namespace Huobi.Net.UnitTests.TestImplementations
         {
             HuobiSocketClient client;
             client = options != null ? new HuobiSocketClient(options) : new HuobiSocketClient(new HuobiSocketClientOptions() { LogLevel = LogLevel.Debug, ApiCredentials = new ApiCredentials("Test", "Test") });
-            client.SpotStreams.SocketFactory = Mock.Of<IWebsocketFactory>();
-            Mock.Get(client.SpotStreams.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
+            client.SpotApi.SocketFactory = Mock.Of<IWebsocketFactory>();
+            Mock.Get(client.SpotApi.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
             return client;
         }
 
@@ -80,8 +80,8 @@ namespace Huobi.Net.UnitTests.TestImplementations
         {
             HuobiSocketClient client;
             client = options != null ? new HuobiSocketClient(options) : new HuobiSocketClient(new HuobiSocketClientOptions() { LogLevel = LogLevel.Trace, ApiCredentials = new ApiCredentials("Test", "Test") });
-            client.SpotStreams.SocketFactory = Mock.Of<IWebsocketFactory>();
-            Mock.Get(client.SpotStreams.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
+            client.SpotApi.SocketFactory = Mock.Of<IWebsocketFactory>();
+            Mock.Get(client.SpotApi.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
             return client;
         }
 

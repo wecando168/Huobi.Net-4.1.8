@@ -425,7 +425,7 @@
         <member name="P:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApi.ReferenceData">
             <inheritdoc />
         </member>
-        <member name="P:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApi.MarketData">
+        <member name="P:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApi.ExchangeData">
             <inheritdoc />
         </member>
         <member name="P:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApi.Account">
@@ -676,43 +676,40 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetEstimatedSettlementPriceAsync(System.String,System.String,System.Nullable{Huobi.Net.Enums.ContractType},System.Nullable{Huobi.Net.Enums.BusinessType},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapBasisAsync(System.String,System.String,System.Int32,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapBasisAsync(System.String,System.String,System.Int32,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapBatchMergedV2Async(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapBatchMergedV2Async(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapBboAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapBboAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapDepthAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapDepthAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapEstimatedRateKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapEstimatedRateKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapHisOpenInterestAsync(System.String,System.Int32,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapHisOpenInterestAsync(System.String,System.Int32,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapHistoryKlineAsync(System.String,System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapHistoryKlineAsync(System.String,System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMarketTradeAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapMarketTradeAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMarketHistoryTradeAsync(System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapMarketHistoryTradeAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMarkPriceKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapMarkPriceKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMergedAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapMergedAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiMarketData.GetLinearSwapPremiumIndexKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapPremiumIndexKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData">
@@ -4513,7 +4510,7 @@
             基础信息接口
             </summary>
         </member>
-        <member name="P:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApi.MarketData">
+        <member name="P:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApi.ExchangeData">
             <summary>
             Market Data
             市场行情接口
@@ -5106,6 +5103,149 @@
             </summary>
             <param name="contractCode">Contract code</param>
             <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapDepthAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取行情深度数据(PublicData)
+            <para><a href="GET /linear-swap-ex/market/depth"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#da161d5f98"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识 	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="depthType">深度类型	(150档数据) step0, step1, step2, step3, step4, step5, step14, step15, step16, step17（合并深度1-5,14-17）；step0时，不合并深度, (20档数据) step6, step7, step8, step9, step10, step11, step12, step13, step18, step19（合并深度7-13,18-19）；step6时，不合并深度</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapBboAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取市场最优挂单(PublicData)
+            <para><a href="GET /linear-swap-ex/market/bbo"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#a8b3d9b85f"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="businessType">业务类型，不填默认永续</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapHistoryKlineAsync(System.String,System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取K线数据(PublicData)
+            <para><a href="GET /linear-swap-ex/market/history/kline"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day,1week,1mon</param>
+            <param name="from">开始时间戳 10位 单位S</param>
+            <param name="to">结束时间戳 10位 单位S</param>
+            <param name="size">获取数量，默认150	</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMarkPriceKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取标记价格的 K 线数据(PublicData)
+            <para><a href="GET /index/market/history/linear_swap_mark_price_kline"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k-2"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
+            <param name="size">K线获取数量</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMergedAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取聚合行情(PublicData)
+            <para><a href="GET /linear-swap-ex/market/detail/merged"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#e194051200"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapBatchMergedV2Async(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 批量获取聚合行情(V2)(PublicData)
+            <para><a href="GET /v2/linear-swap-ex/market/detail/batch_merged"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#v2"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="businessType">业务类型，不填默认永续</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMarketTradeAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取市场最近成交记录(PublicData)
+            <para><a href="GET /linear-swap-ex/market/trade"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#09bcc28ca0"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="businessType">业务类型，不填默认永续</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapMarketHistoryTradeAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 批量获取最近的交易记录(PublicData)
+            <para><a href="GET /linear-swap-ex/market/history/trade"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#481f3a0ae8"/></para>
+            </summary>
+            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
+            <param name="size">获取交易记录的数量，默认1	</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapHisOpenInterestAsync(System.String,System.Int32,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 【通用】平台历史持仓量查询(PublicData)
+            <para><a href="GET /linear-swap-api/v1/swap_his_open_interest"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#903bf620df"/></para>
+            </summary>
+            <param name="pair">交易对	BTC-USDT</param>
+            <param name="amountType">计价单位	1:张，2:币</param>
+            <param name="contractCode">合约代码	永续："BTC-USDT"... ，交割："BTC-USDT-210625"...</param>
+            <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>
+            <param name="period">时间周期类型	1小时:"60min"，4小时:"4hour"，12小时:"12hour"，1天:"1day"</param>
+            <param name="size">获取数量,默认为：48</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapPremiumIndexKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 【通用】获取溢价指数K线数据(PublicData)
+            <para><a href="GET /index/market/history/linear_swap_premium_index_kline"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k-3"/></para>
+            </summary>
+            <param name="contractCode">合约代码	"BTC-USDT","ETH-USDT"...</param>
+            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
+            <param name="size">K线获取数量	[1,2000]</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapEstimatedRateKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取预测资金费率的K线数据(PublicData)
+            <para><a href="GET /index/market/history/linear_swap_estimated_rate_kline"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k-4"/></para>
+            </summary>
+            <param name="contractCode">合约代码	"BTC-USDT","ETH-USDT"...</param>
+            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
+            <param name="size">K线获取数量	[1,2000]</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IHuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapBasisAsync(System.String,System.String,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            WWT新增接口 获取基差数据(PublicData)
+            <para><a href="GET /index/market/history/linear_swap_basis"/></para>
+            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#98b476b452"/></para>
+            </summary>
+            <param name="contractCode">合约代码	"BTC-USDT","ETH-USDT"...</param>
+            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
+            <param name="size">K线获取数量	[1,2000]</param>
+            <param name="basisPriceType">基差价格类型，表示在周期内计算基差使用的价格类型， 不填，默认使用开盘价	开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average </param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -6469,166 +6609,6 @@
             <param name="clientId">选填;Client 请求唯一 ID</param>
             <param name="onData">更新处理程序 The handler for updates</param>
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData">
-            <summary>
-            市场行情接口
-            </summary>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapDepthAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            
-            获取行情深度数据(PublicData)
-            <para><a href="GET /linear-swap-ex/market/depth"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#da161d5f98"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识 	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="depthType">深度类型	(150档数据) step0, step1, step2, step3, step4, step5, step14, step15, step16, step17（合并深度1-5,14-17）；step0时，不合并深度, (20档数据) step6, step7, step8, step9, step10, step11, step12, step13, step18, step19（合并深度7-13,18-19）；step6时，不合并深度</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapBboAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            
-            获取市场最优挂单(PublicData)
-            <para><a href="GET /linear-swap-ex/market/bbo"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#a8b3d9b85f"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="businessType">业务类型，不填默认永续</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapHistoryKlineAsync(System.String,System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            
-            获取K线数据(PublicData)
-            <para><a href="GET /linear-swap-ex/market/history/kline"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day,1week,1mon</param>
-            <param name="from">开始时间戳 10位 单位S</param>
-            <param name="to">结束时间戳 10位 单位S</param>
-            <param name="size">获取数量，默认150	</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapMarkPriceKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            
-            获取标记价格的 K 线数据(PublicData)
-            <para><a href="GET /index/market/history/linear_swap_mark_price_kline"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k-2"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
-            <param name="size">K线获取数量</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapMergedAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            
-            获取聚合行情(PublicData)
-            <para><a href="GET /linear-swap-ex/market/detail/merged"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#e194051200"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapBatchMergedV2Async(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            
-            批量获取聚合行情(V2)(PublicData)
-            <para><a href="GET /v2/linear-swap-ex/market/detail/batch_merged"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#v2"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="businessType">业务类型，不填默认永续</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapMarketTradeAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            
-            获取市场最近成交记录(PublicData)
-            <para><a href="GET /linear-swap-ex/market/trade"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#09bcc28ca0"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="businessType">业务类型，不填默认永续</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapMarketHistoryTradeAsync(System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            
-            批量获取最近的交易记录(PublicData)
-            <para><a href="GET /linear-swap-ex/market/history/trade"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#481f3a0ae8"/></para>
-            </summary>
-            <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
-            <param name="size">获取交易记录的数量，默认1	</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapHisOpenInterestAsync(System.String,System.Int32,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            
-            【通用】平台历史持仓量查询(PublicData)
-            <para><a href="GET /linear-swap-api/v1/swap_his_open_interest"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#903bf620df"/></para>
-            </summary>
-            <param name="pair">交易对	BTC-USDT</param>
-            <param name="amountType">计价单位	1:张，2:币</param>
-            <param name="contractCode">合约代码	永续："BTC-USDT"... ，交割："BTC-USDT-210625"...</param>
-            <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>
-            <param name="period">时间周期类型	1小时:"60min"，4小时:"4hour"，12小时:"12hour"，1天:"1day"</param>
-            <param name="size">获取数量,默认为：48</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapPremiumIndexKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            
-            【通用】获取溢价指数K线数据(PublicData)
-            <para><a href="GET /index/market/history/linear_swap_premium_index_kline"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k-3"/></para>
-            </summary>
-            <param name="contractCode">合约代码	"BTC-USDT","ETH-USDT"...</param>
-            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
-            <param name="size">K线获取数量	[1,2000]</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapEstimatedRateKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            
-            获取预测资金费率的K线数据(PublicData)
-            <para><a href="GET /index/market/history/linear_swap_estimated_rate_kline"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#k-4"/></para>
-            </summary>
-            <param name="contractCode">合约代码	"BTC-USDT","ETH-USDT"...</param>
-            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
-            <param name="size">K线获取数量	[1,2000]</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapMarketData.GetLinearSwapBasisAsync(System.String,System.String,System.Int32,System.String,System.Threading.CancellationToken)">
-            <summary>
-            
-            获取基差数据(PublicData)
-            <para><a href="GET /index/market/history/linear_swap_basis"/></para>
-            <para><a href="https://huobiapi.github.io/docs/usdt_swap/v1/cn/#98b476b452"/></para>
-            </summary>
-            <param name="contractCode">合约代码	"BTC-USDT","ETH-USDT"...</param>
-            <param name="period">K线类型	1min, 5min, 15min, 30min, 60min,4hour,1day, 1week,1mon</param>
-            <param name="size">K线获取数量	[1,2000]</param>
-            <param name="basisPriceType">基差价格类型，表示在周期内计算基差使用的价格类型， 不填，默认使用开盘价	开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average </param>
-            <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
         <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData">

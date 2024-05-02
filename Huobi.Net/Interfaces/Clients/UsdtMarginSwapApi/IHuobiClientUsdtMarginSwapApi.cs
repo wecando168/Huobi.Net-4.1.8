@@ -39,7 +39,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// Market Data
         /// 市场行情接口
         /// </summary>
-        IWWTHuobiClientUsdtMarginSwapMarketData MarketData { get; }
+        IHuobiClientUsdtMarginSwapApiExchangeData ExchangeData { get; }
 
         /// <summary>
         /// Account

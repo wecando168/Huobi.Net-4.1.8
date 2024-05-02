@@ -47,7 +47,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         public IWWTHuobiClientUsdtMarginSwapReferenceData ReferenceData { get; }
 
         /// <inheritdoc />
-        public IWWTHuobiClientUsdtMarginSwapMarketData MarketData { get; }
+        public IHuobiClientUsdtMarginSwapApiExchangeData ExchangeData { get; }
 
         /// <inheritdoc />
         public IHuobiClientUsdtMarginSwapAccount Account { get; }
@@ -72,7 +72,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             _log = log;
 
             ReferenceData = new HuobiClientUsdtMarginSwapApiReferenceData(this);
-            MarketData = new HuobiClientUsdtMarginSwapApiMarketData(this);
+            ExchangeData = new HuobiClientUsdtMarginSwapApiExchangeData(this);
             Account = new HuobiClientUsdtMarginSwapApiAccount(this);
             Trading = new HuobiClientUsdtMarginSwapApiTrading(this);
             Strategy = new HuobiClientUsdtMarginSwapApiStrategyOrder(this);

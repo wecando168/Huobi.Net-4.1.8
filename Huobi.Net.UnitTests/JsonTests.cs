@@ -101,7 +101,7 @@ namespace Huobi.Net.UnitTests
         [Test]
         public async Task ValidateFuturesUsdtMarginedLinearSwapMarketDataCalls()
         {
-            await _usdtMarginedComparer.ProcessSubject("DataResponses/Futures/UsdtMargined/LinearSwapmarketData", c => c.UsdtMarginSwapApi.MarketData,
+            await _usdtMarginedComparer.ProcessSubject("DataResponses/Futures/UsdtMargined/LinearSwapmarketData", c => c.UsdtMarginSwapApi.ExchangeData,
                 //text文件名与类名对应
                 useNestedObjectPropertyForCompare: new Dictionary<string, string>
                 {

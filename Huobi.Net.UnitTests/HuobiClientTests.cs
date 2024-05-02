@@ -14,6 +14,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Huobi.Net.Clients;
 using Huobi.Net.Clients.SpotApi;
+using Huobi.Net.Interfaces.Clients.SpotApi;
 
 namespace Huobi.Net.UnitTests
 {
@@ -76,7 +77,7 @@ namespace Huobi.Net.UnitTests
         [Test]
         public void CheckRestInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(HuobiClientSpotApi));
+            var assembly = Assembly.GetAssembly(typeof(IHuobiClientSpotApi));
             var ignore = new string[] { "IHuobiClientSpot" };
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IHuobiClientSpot") && !ignore.Contains(t.Name));
 
