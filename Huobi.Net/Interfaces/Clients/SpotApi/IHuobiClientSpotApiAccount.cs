@@ -1,9 +1,4 @@
-﻿using CryptoExchange.Net.Objects;
-using Huobi.Net.Enums;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Huobi.Net.Enums;
 using Huobi.Net.Objects.Models;
 
 namespace Huobi.Net.Interfaces.Clients.SpotApi

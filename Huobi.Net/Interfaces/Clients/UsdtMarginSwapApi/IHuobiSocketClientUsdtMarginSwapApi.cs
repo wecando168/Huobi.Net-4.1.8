@@ -1,25 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Logging;
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
-using Huobi.Net.Converters;
+﻿using CryptoExchange.Net.Sockets;
 using Huobi.Net.Enums;
-using Huobi.Net.Interfaces.Clients.SpotApi;
-using Huobi.Net.Objects;
-using Huobi.Net.Objects.Internal;
 using Huobi.Net.Objects.Models;
-using Huobi.Net.Objects.Models.Socket;
 using Huobi.Net.Objects.Models.Socket.Futures.UsdtMargined.WebSocketOrderAndAccounts;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using HuobiOrderUpdate = Huobi.Net.Objects.Models.Socket.HuobiOrderUpdate;
 
 namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
 {

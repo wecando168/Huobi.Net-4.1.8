@@ -1,10 +1,5 @@
-﻿using CryptoExchange.Net.Objects;
-using Huobi.Net.Enums;
+﻿using Huobi.Net.Enums;
 using Huobi.Net.Objects.Models.UsdtMarginSwap;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
 {

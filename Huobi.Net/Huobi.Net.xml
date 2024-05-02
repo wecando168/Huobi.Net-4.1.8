@@ -6611,12 +6611,12 @@
             <param name="ct">用于关闭此订阅的取消令牌 Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData">
+        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData">
             <summary>
             基础信息接口
             </summary>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapUnifiedAccountTypeAsync(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapUnifiedAccountTypeAsync(System.Threading.CancellationToken)">
             <summary>
             
             【通用】账户类型查询(PublicData)
@@ -6627,7 +6627,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.LinearSwapSwitchAccountTypeAsync(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.LinearSwapSwitchAccountTypeAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
             
             【通用】账户类型更改接口(PublicData)
@@ -6639,7 +6639,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapFundingRateAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapFundingRateAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取合约的资金费率(PublicData)
@@ -6650,7 +6650,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapBatchFundingRateAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapBatchFundingRateAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】批量获取合约资金费率(PublicData)
@@ -6661,7 +6661,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapHistoricalFundingRateAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapHistoricalFundingRateAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取合约的历史资金费率(PublicData)
@@ -6674,7 +6674,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapLiquidationOrdersAsync(System.Int32,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapLiquidationOrdersAsync(System.Int32,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取强平订单(PublicData)
@@ -6691,7 +6691,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapSettlementRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapSettlementRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【通用】平台历史结算记录(PublicData)
@@ -6706,7 +6706,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapEliteAccountRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapEliteAccountRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】精英账户多空持仓对比-账户数(PublicData)
@@ -6718,7 +6718,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapElitePositionRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapElitePositionRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】精英账户多空持仓对比-持仓量(PublicData)
@@ -6730,7 +6730,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapApiStateAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapApiStateAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】查询系统状态(PublicData)
@@ -6741,7 +6741,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapCrossLadderMarginAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapCrossLadderMarginAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】获取平台阶梯保证金
@@ -6755,7 +6755,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapLadderMarginAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapLadderMarginAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】获取平台阶梯保证金
@@ -6766,7 +6766,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapEstimatedSettlementPriceAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapEstimatedSettlementPriceAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取预估结算价(PublicData)
@@ -6780,7 +6780,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapAdjustfactorAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapAdjustfactorAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】查询平台阶梯调整系数(PublicData)
@@ -6791,7 +6791,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapCrossAdjustfactorAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapCrossAdjustfactorAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】查询平台阶梯调整系数(PublicData)
@@ -6805,7 +6805,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapInsuranceFundAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapInsuranceFundAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取风险准备金历史数据(PublicData)
@@ -6818,7 +6818,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapRiskInfoAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapRiskInfoAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】查询合约风险准备金和预估分摊比例(PublicData)
@@ -6830,7 +6830,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapPriceLimitAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapPriceLimitAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
              <summary>
              
             【通用】 获取合约最高限价和最低限价(PublicData)
@@ -6844,7 +6844,7 @@
              <param name="ct">Cancellation token</param>
              <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapOpenInterestAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapOpenInterestAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取当前合约总持仓量(PublicData)
@@ -6858,7 +6858,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapContractInfoAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapContractInfoAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>T
             Query Swap InfoT
             【通用】获取合约信息(PublicData)
@@ -6874,7 +6874,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapIndexAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapIndexAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Query Swap Indoex Price Information
             【通用】获取合约指数信息(PublicData)
@@ -6886,7 +6886,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapServerTimestampAsync(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapServerTimestampAsync(System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取当前系统时间戳(PublicData)
@@ -6897,7 +6897,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapServerDateTimeAsync(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapServerDateTimeAsync(System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取当前系统时间(PublicData)
@@ -6908,7 +6908,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapHeartbeatAsync(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapHeartbeatAsync(System.Threading.CancellationToken)">
             <summary>
             
             【通用】查询系统是否可用(PublicData)
@@ -6919,7 +6919,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapReferenceData.GetLinearSwapSummaryAsync(System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapSummaryAsync(System.Threading.CancellationToken)">
             <summary>
             
             【通用】获取当前系统状态(PublicData)
@@ -6930,12 +6930,12 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder">
+        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder">
             <summary>
             策略接口
             </summary>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTriggerOrderAsync(System.String,System.String,System.Decimal,System.Int64,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerOrderAsync(System.String,System.String,System.Decimal,System.Int64,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】合约计划委托下单(PrivateData)
@@ -6955,7 +6955,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmTriggerType},System.Decimal,System.Int64,System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmTriggerType},System.Decimal,System.Int64,System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】合约计划委托下单(PrivateData)
@@ -6977,7 +6977,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTriggerCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】合约计划委托撤单(PrivateData)
@@ -6989,7 +6989,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTriggerCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】合约计划委托撤单(PrivateData)
@@ -7003,7 +7003,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTriggerCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】合约计划委托全部撤单(PrivateData)
@@ -7016,7 +7016,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTriggerCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】合约计划委托全部撤单(PrivateData)
@@ -7031,7 +7031,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapTriggerOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTriggerOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】获取计划委托当前委托(PrivateData)
@@ -7045,7 +7045,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapCrossTriggerOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTriggerOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】获取计划委托当前委托(PrivateData)
@@ -7060,7 +7060,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapTriggerHisordersAsync(System.String,System.Int32,System.String,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTriggerHisordersAsync(System.String,System.Int32,System.String,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】获取计划委托历史委托(PrivateData)
@@ -7077,7 +7077,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapCrossTriggerHisordersAsync(System.Int32,System.String,System.Int32,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTriggerHisordersAsync(System.Int32,System.String,System.Int32,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】获取计划委托历史委托(PrivateData)
@@ -7095,7 +7095,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTpslOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】对仓位设置止盈止损订单(PrivateData)
@@ -7114,7 +7114,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTpslOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Decimal,System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Decimal,System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】对仓位设置止盈止损订单(PrivateData)
@@ -7134,7 +7134,7 @@
             <param name="slOrderPriceType">止损委托类型  不填默认为limit; 限价：limit ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTpslCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】止盈止损订单撤单(PrivateData)
@@ -7146,7 +7146,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTpslCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】止盈止损订单撤单(PrivateData)
@@ -7160,7 +7160,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTpslCancelAllAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslCancelAllAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】止盈止损订单全部撤单(PrivateData)
@@ -7172,7 +7172,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTpslCancelAllAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslCancelAllAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】止盈止损订单全部撤单(PrivateData)
@@ -7186,7 +7186,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapTpslOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTpslOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】查询止盈止损订单当前委托(PrivateData)
@@ -7200,7 +7200,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapCrossTpslOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTpslOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】查询止盈止损订单当前委托(PrivateData)
@@ -7215,7 +7215,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapTpslHisordersAsync(System.String,System.String,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTpslHisordersAsync(System.String,System.String,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】查询止盈止损订单历史委托(PrivateData)
@@ -7231,7 +7231,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapCrossTpslHisordersAsync(System.String,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTpslHisordersAsync(System.String,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】查询止盈止损订单历史委托(PrivateData)
@@ -7248,7 +7248,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapRelationTpslOrderAsync(System.String,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapRelationTpslOrderAsync(System.String,System.Int64,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】查询开仓单关联的止盈止损订单(PrivateData)
@@ -7260,7 +7260,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapCrossRelationTpslOrderAsync(System.Int64,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossRelationTpslOrderAsync(System.Int64,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】查询开仓单关联的止盈止损订单(PrivateData)
@@ -7273,7 +7273,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTrackOrderAsync(System.String,System.String,System.Int32,System.Decimal,System.Decimal,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackOrderAsync(System.String,System.String,System.Int32,System.Decimal,System.Decimal,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】跟踪委托订单下单(PrivateData)
@@ -7292,7 +7292,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTrackOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Int64,System.Decimal,System.Decimal,System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Int64,System.Decimal,System.Decimal,System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】跟踪委托订单下单(PrivateData)
@@ -7313,7 +7313,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTrackCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】跟踪委托订单撤单(PrivateData)
@@ -7325,7 +7325,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTrackCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】跟踪委托订单撤单(PrivateData)
@@ -7339,7 +7339,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapTrackCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】跟踪委托订单全部撤单(PrivateData)
@@ -7352,7 +7352,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.LinearSwapCrossTrackCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】跟踪委托订单全部撤单(PrivateData)
@@ -7367,7 +7367,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapTrackOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTrackOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【逐仓】跟踪委托订单当前委托(PrivateData)
@@ -7381,7 +7381,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapCrossTrackOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTrackOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             
             【全仓】跟踪委托订单当前委托(PrivateData)
@@ -7396,7 +7396,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapTrackHisordersAsync(System.String,System.String,System.Int32,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTrackHisordersAsync(System.String,System.String,System.Int32,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             
             跟踪委托订单历史委托(PrivateData)
@@ -7413,7 +7413,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapStrategyOrder.GetLinearSwapCrossTrackHisordersAsync(System.String,System.Int32,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTrackHisordersAsync(System.String,System.Int32,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】跟踪委托订单历史委托(PrivateData)
@@ -7431,12 +7431,12 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapTransferring">
+        <member name="T:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiTransferring">
             <summary>
             U本位合约划转接口
             </summary>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapTransferring.GetLinearSwapCrossTransferStateAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiTransferring.GetLinearSwapCrossTransferStateAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             
             【全仓】查询系统划转权限(PrivateData)
@@ -7447,7 +7447,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapTransferring.LinearSwapAccountTransferAsync(System.String,System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+        <member name="M:Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi.IWWTHuobiClientUsdtMarginSwapApiTransferring.LinearSwapAccountTransferAsync(System.String,System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <summary>
             
             【通用】现货-U本位合约账户间进行资金的划转(PrivateData)

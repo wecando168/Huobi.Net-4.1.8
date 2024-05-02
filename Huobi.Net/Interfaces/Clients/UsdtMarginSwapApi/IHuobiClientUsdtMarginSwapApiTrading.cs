@@ -1,12 +1,8 @@
 ﻿using CryptoExchange.Net.CommonObjects;
-using CryptoExchange.Net.Objects;
 using Huobi.Net.Enums;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade.Request;
 using Huobi.Net.Objects.Models.UsdtMarginSwap;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
 {

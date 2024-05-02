@@ -18,7 +18,7 @@ using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTransferrin
 namespace Huobi.Net.Clients.UsdtMarginSwapApi
 {
     /// <inheritdoc />
-    public class WWTHuobiClientUsdtMarginSwapApiTransferring : IWWTHuobiClientUsdtMarginSwapTransferring
+    public class WWTHuobiClientUsdtMarginSwapApiTransferring : IWWTHuobiClientUsdtMarginSwapApiTransferring
     {
         // U本位合约划转接口
         private const string GetLinearSwapCrossTransferStateEndpoint = "/swap_cross_transfer_state";                            // 【全仓】查询系统划转权限

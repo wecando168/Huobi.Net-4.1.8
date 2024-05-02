@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces;
-using Huobi.Net.Interfaces.Clients.SpotApi;
+﻿using Huobi.Net.Interfaces.Clients.SpotApi;
 using Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi;
 
 namespace Huobi.Net.Interfaces.Clients
