@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
-using Huobi.Net.Enums;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
+﻿namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
 {
     /// <summary>
     /// 【通用】获取账户合约总资产估值

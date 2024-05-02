@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
-using Huobi.Net.Enums;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapMarketData
+﻿namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapMarketData
 {
     /// <summary>
     /// 【通用】平台历史持仓量查询

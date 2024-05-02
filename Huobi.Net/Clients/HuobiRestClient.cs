@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using Huobi.Net.Clients.SpotApi;
+﻿using Huobi.Net.Clients.SpotApi;
 using Huobi.Net.Clients.UsdtMarginSwapApi;
 using Huobi.Net.Interfaces.Clients;
 using Huobi.Net.Interfaces.Clients.SpotApi;
 using Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi;
 using Huobi.Net.Objects;
-using Huobi.Net.Objects.Internal;
-using Newtonsoft.Json.Linq;
 
 namespace Huobi.Net.Clients
 {

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
-using Huobi.Net.Enums;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
+﻿namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
 {
     /// <summary>
     /// 【全仓】查询单个子账户持仓信息(PrivateData)

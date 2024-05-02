@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-
-namespace Huobi.Net.Objects.Models.Socket
+﻿namespace Huobi.Net.Objects.Models.Socket
 {
     /// <summary>
     /// Incremental order book update

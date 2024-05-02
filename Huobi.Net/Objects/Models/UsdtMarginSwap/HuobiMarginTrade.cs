@@ -1,8 +1,6 @@
 ﻿using CryptoExchange.Net.Converters;
 using Huobi.Net.Converters;
 using Huobi.Net.Enums;
-using Newtonsoft.Json;
-using System;
 
 namespace Huobi.Net.Objects.Models.UsdtMarginSwap
 {

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
-using Huobi.Net.Enums;
-using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount.CommonBaseModels;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
+﻿namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount
 {
     /// <summary>
     /// 【通用】查询用户当前的手续费费率(PrivateData)

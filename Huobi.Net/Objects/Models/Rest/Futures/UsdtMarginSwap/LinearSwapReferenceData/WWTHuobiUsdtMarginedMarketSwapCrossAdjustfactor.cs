@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using Huobi.Net.Enums;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapReferenceData
+﻿namespace Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapReferenceData
 {
     /// <summary>
     /// 【全仓】查询平台阶梯调整系数

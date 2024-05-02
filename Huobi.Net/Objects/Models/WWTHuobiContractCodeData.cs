@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models
+﻿namespace Huobi.Net.Objects.Models
 {
     /// <summary>
     /// Contract code data

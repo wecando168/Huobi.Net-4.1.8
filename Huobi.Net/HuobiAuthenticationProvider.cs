@@ -1,15 +1,5 @@
-﻿using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
-using Huobi.Net.Objects.Internal;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using Huobi.Net.Objects.Internal;
 using System.Net;
-using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 

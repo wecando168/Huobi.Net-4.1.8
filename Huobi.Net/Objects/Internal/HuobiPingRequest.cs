@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Internal
+﻿namespace Huobi.Net.Objects.Internal
 {
     internal class HuobiPingRequest
     {

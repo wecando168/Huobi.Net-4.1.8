@@ -1,20 +1,11 @@
-﻿using CryptoExchange.Net;
-using CryptoExchange.Net.CommonObjects;
+﻿using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
 using Huobi.Net.Converters;
 using Huobi.Net.Enums;
 using Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade;
 using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade.Request;
 using Huobi.Net.Objects.Models.UsdtMarginSwap;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Huobi.Net.Clients.UsdtMarginSwapApi
 {

@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-
-namespace Huobi.Net.Objects.Models.UsdtMarginSwap
+﻿namespace Huobi.Net.Objects.Models.UsdtMarginSwap
 {
     /// <summary>
     /// Batch result

@@ -1,8 +1,4 @@
-﻿using Huobi.Net.Converters;
-using Huobi.Net.Enums;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models
+﻿namespace Huobi.Net.Objects.Models
 {
     /// <summary>
     /// Lock/Unlock Sub User

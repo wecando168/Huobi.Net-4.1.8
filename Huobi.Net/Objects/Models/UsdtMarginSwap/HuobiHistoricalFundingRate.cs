@@ -1,7 +1,4 @@
 ﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
 namespace Huobi.Net.Objects.Models.UsdtMarginSwap
 {

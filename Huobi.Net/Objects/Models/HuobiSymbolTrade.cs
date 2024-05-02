@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
+﻿using CryptoExchange.Net.Converters;
 using Huobi.Net.Converters;
 using Huobi.Net.Enums;
-using Newtonsoft.Json;
 
 namespace Huobi.Net.Objects.Models
 {

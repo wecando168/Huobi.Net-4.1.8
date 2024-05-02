@@ -1,7 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
-using Newtonsoft.Json;
+﻿using CryptoExchange.Net.Converters;
 
 namespace Huobi.Net.Objects.Models
 {

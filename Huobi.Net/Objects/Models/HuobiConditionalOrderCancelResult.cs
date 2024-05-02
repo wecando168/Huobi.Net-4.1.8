@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Huobi.Net.Objects.Models
+﻿namespace Huobi.Net.Objects.Models
 {
     /// <summary>
     /// Conditional order cancelation result

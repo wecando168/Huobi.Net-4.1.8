@@ -1,8 +1,5 @@
 ﻿using Huobi.Net.Converters;
 using Huobi.Net.Enums;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
 namespace Huobi.Net.Objects.Models
 {

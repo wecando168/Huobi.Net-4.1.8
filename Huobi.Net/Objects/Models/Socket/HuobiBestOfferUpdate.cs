@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.Socket
+﻿namespace Huobi.Net.Objects.Models.Socket
 {
     /// <summary>
     /// Best offer update

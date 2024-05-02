@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.UsdtMarginSwap
+﻿namespace Huobi.Net.Objects.Models.UsdtMarginSwap
 {
     /// <summary>
     /// Basis data

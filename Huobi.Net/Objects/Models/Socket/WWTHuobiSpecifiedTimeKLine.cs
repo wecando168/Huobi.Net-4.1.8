@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models.Socket
+﻿namespace Huobi.Net.Objects.Models.Socket
 {
     /// <summary>
     /// Huobi specified time KLine

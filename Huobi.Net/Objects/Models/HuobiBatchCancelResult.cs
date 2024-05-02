@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Huobi.Net.Objects.Models
+﻿namespace Huobi.Net.Objects.Models
 {
     /// <summary>
     /// Result of a batch cancel
