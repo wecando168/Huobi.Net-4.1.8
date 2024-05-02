@@ -33,13 +33,13 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// Reference Data
         /// 基础信息接口
         /// </summary>
-        IHuobiClientUsdtMarginSwapReferenceData ReferenceData { get; }
+        IWWTHuobiClientUsdtMarginSwapReferenceData ReferenceData { get; }
 
         /// <summary>
         /// Market Data
         /// 市场行情接口
         /// </summary>
-        IHuobiClientUsdtMarginSwapMarketData MarketData { get; }
+        IWWTHuobiClientUsdtMarginSwapMarketData MarketData { get; }
 
         /// <summary>
         /// Account
@@ -57,12 +57,12 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// Strategy
         /// 策略接口
         /// </summary>
-        IHuobiClientUsdtMarginSwapStrategyOrder Strategy { get; }
+        IWWTHuobiClientUsdtMarginSwapStrategyOrder Strategy { get; }
 
         /// <summary>
         /// Transferring
         /// 划转接口
         /// </summary>
-        IHuobiClientUsdtMarginSwapTransferring Transferring { get; }
+        IWWTHuobiClientUsdtMarginSwapTransferring Transferring { get; }
     }
 }

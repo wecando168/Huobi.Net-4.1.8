@@ -20,7 +20,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
     /// <summary>
     /// 市场行情接口
     /// </summary>
-    public interface IHuobiClientUsdtMarginSwapMarketData
+    public interface IWWTHuobiClientUsdtMarginSwapMarketData
     {
         /// <summary>
         /// 

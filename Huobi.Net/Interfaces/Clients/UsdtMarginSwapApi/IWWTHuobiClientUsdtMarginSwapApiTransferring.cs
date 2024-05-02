@@ -19,7 +19,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
     /// <summary>
     /// U本位合约划转接口
     /// </summary>
-    public interface IHuobiClientUsdtMarginSwapTransferring
+    public interface IWWTHuobiClientUsdtMarginSwapTransferring
     {
         /// <summary>
         /// 

@@ -44,10 +44,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         #region Api clients
 
         /// <inheritdoc />
-        public IHuobiClientUsdtMarginSwapReferenceData ReferenceData { get; }
+        public IWWTHuobiClientUsdtMarginSwapReferenceData ReferenceData { get; }
 
         /// <inheritdoc />
-        public IHuobiClientUsdtMarginSwapMarketData MarketData { get; }
+        public IWWTHuobiClientUsdtMarginSwapMarketData MarketData { get; }
 
         /// <inheritdoc />
         public IHuobiClientUsdtMarginSwapAccount Account { get; }
@@ -56,10 +56,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         public IHuobiClientUsdtMarginSwapApiTrading Trading { get; }
 
         /// <inheritdoc />
-        public IHuobiClientUsdtMarginSwapStrategyOrder Strategy { get; }
+        public IWWTHuobiClientUsdtMarginSwapStrategyOrder Strategy { get; }
 
         /// <inheritdoc />
-        public IHuobiClientUsdtMarginSwapTransferring Transferring { get; }
+        public IWWTHuobiClientUsdtMarginSwapTransferring Transferring { get; }
 
 
         #endregion

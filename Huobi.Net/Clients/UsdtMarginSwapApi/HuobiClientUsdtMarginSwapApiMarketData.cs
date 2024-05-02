@@ -18,7 +18,7 @@ using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapAccount;
 namespace Huobi.Net.Clients.UsdtMarginSwapApi
 {
     /// <inheritdoc />
-    public class HuobiClientUsdtMarginSwapApiMarketData : IHuobiClientUsdtMarginSwapMarketData
+    public class HuobiClientUsdtMarginSwapApiMarketData : IWWTHuobiClientUsdtMarginSwapMarketData
     {
         // 市场行情接口
         private const string GetLinearSwapDepthEndpoint = "/depth";                                             // 【通用】获取行情深度数据(PublicData)

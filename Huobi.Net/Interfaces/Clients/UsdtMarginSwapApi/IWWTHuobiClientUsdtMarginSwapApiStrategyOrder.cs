@@ -21,7 +21,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
     /// <summary>
     /// 策略接口
     /// </summary>
-    public interface IHuobiClientUsdtMarginSwapStrategyOrder
+    public interface IWWTHuobiClientUsdtMarginSwapStrategyOrder
     {
         /// <summary>
         /// 
