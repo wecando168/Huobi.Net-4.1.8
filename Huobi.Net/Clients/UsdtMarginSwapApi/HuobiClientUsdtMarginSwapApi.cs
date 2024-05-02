@@ -106,12 +106,12 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         /// <param name="apiPath">API路径</param>
         /// <param name="version"></param>
         /// <returns></returns>
-        internal Uri GetUrl(string endpoint, ApiPath? apiPath, string? version = null)
+        internal Uri GetUrl(string endpoint, WWTApiPath? apiPath, string? version = null)
         {
             var result = BaseAddress;
 
             if (!object.Equals(apiPath, null))
-                result = BaseAddress.AppendPath(ApiPathExtensions.GetString((ApiPath)apiPath));
+                result = BaseAddress.AppendPath(WWTApiPathExtensions.GetString((WWTApiPath)apiPath));
 
             if (version == null)
                 result = result.AppendPath(endpoint);

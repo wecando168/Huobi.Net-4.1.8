@@ -436,7 +436,7 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<HuobiRepayment>>> GetRepaymentHistoryAsync(long? repayId = null, long? accountId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, string? sort = null, int? limit = null, long? fromId = null, CancellationToken ct = default);
-
+        
         /// <summary>
         /// Get Current Fee Rate Applied to The User
         /// 获取用户当前手续费率
@@ -451,18 +451,18 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Sub user creation
-        /// 子用户创建
+        /// WWT新增接口 子用户创建
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-creation" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#95d89cba52" /></para>
         /// </summary>
         /// <param name="huobiCreateSubUserAccountRequest">Huobi create sub user account request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Huobi sub user account list</returns>
-        Task<WebCallResult<IEnumerable<HuobiSubUserCreation>>> SubUserCreationAsync(HuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiSubUserCreation>>> SubUserCreationAsync(WWTHuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest, CancellationToken ct = default);
 
         /// <summary>
         /// Lock/Unlock Sub User
-        /// 冻结/解冻子用户
+        /// WWT新增接口 冻结/解冻子用户
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#lock-unlock-sub-user" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#41965cbe31" /></para>
         /// </summary>
@@ -470,11 +470,11 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="action">Action type(lock or unlock)</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long subUid, SubAccountManageAction action, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiLockOrUnlockSubUser>> LockOrUnlockSubUserAsync(long subUid, WWTSubAccountManageAction action, CancellationToken ct = default);
 
         /// <summary>
         /// Sub user API key creation
-        /// 子用户API key创建
+        /// WWT新增接口 子用户API key创建
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-creation" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-2" /></para>
         /// </summary>
@@ -485,11 +485,11 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="ipAddresses">The IPv4/IPv6 host address or IPv4 network address bound to the API key: At most 20 IPv4/IPv6 host address(es) and/or IPv4 network address(es) can bind with one API key, separated by comma. For example: 202.106.196.115, 202.106.96.0/24. An API key not linked with an IP address but has trading or withdrawal permissions will be automatically deactivated after 90 days of inactivity.</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiSubUserAPIKeyCreation>> SubUserAPIKeyCreationAsync(string otpToken, long? subUid = null, string? note = null, string permission = "readOnly", string? ipAddresses = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiSubUserAPIKeyCreation>> SubUserAPIKeyCreationAsync(string otpToken, long? subUid = null, string? note = null, string permission = "readOnly", string? ipAddresses = null, CancellationToken ct = default);
 
         /// <summary>
         /// Sub user API key modification
-        /// 修改子用户API key
+        /// WWT新增接口 修改子用户API key
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-modification" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-3" /></para>
         /// </summary>
@@ -500,11 +500,11 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="ipAddresses">The IPv4/IPv6 host address or IPv4 network address bound to the API key: At most 20 IPv4/IPv6 host address(es) and/or IPv4 network address(es) can bind with one API key, separated by comma. For example: 202.106.196.115, 202.106.96.0/24. An API key not linked with an IP address but has trading or withdrawal permissions will be automatically deactivated after 90 days of inactivity.</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiSubUserAPIKeyModification>> SubUserAPIKeyModificationAsync(long? subUid, string accessKey, string? note = null, string permission = "readOnly", string? ipAddresses = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiSubUserAPIKeyModification>> SubUserAPIKeyModificationAsync(long? subUid, string accessKey, string? note = null, string permission = "readOnly", string? ipAddresses = null, CancellationToken ct = default);
 
         /// <summary>
         /// Sub user API key deletion
-        /// 删除子用户API key
+        /// WWT新增接口 删除子用户API key
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#sub-user-api-key-deletion" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key-4" /></para>
         /// </summary>
@@ -512,11 +512,11 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="accessKey">access key</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiSubUserAPIKeyDeletion>> SubUserAPIKeyDeletionAsync(long? subUid = null, string? accessKey = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiSubUserAPIKeyDeletion>> SubUserAPIKeyDeletionAsync(long? subUid = null, string? accessKey = null, CancellationToken ct = default);
 
         /// <summary>
         /// API key query
-        /// 母子用户API key信息查询
+        /// WWT新增接口 母子用户API key信息查询
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#api-key-query" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#api-key" /></para>
         /// </summary>
@@ -524,6 +524,6 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <param name="accessKey">API key的access key，若缺省，则返回UID对应用户的所有API key. The access key of the API key, if not specified, it will return all API keys belong to the UID.</param>
         /// <param name="ct">Action type(lock or unlock)</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiAPIKeyQuery>>> APIKeyQueryAsync(long? uid = null, string? accessKey = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiAPIKeyQuery>>> APIKeyQueryAsync(long? uid = null, string? accessKey = null, CancellationToken ct = default);
     }
 }

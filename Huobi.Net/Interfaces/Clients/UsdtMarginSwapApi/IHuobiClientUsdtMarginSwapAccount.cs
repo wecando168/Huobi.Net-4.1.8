@@ -32,7 +32,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="valuationAsset">string	资产估值币种，即按该币种为单位进行估值，不填默认"BTC"	"BTC", "USD", "USDT", "CNY", "EUR", "GBP", "VND", "HKD", "TWD", "MYR", "SGD", "KRW", "RUB", "TRY"</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedBalanceValuation>>> GetLinearSwapBalanceValuationAsync(string? valuationAsset = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedBalanceValuation>>> GetLinearSwapBalanceValuationAsync(string? valuationAsset = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -43,7 +43,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码	永续："BTC-USDT"... ，交割："BTC-USDT-210625"...</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedAccountInfo>>> GetLinearSwapAccountInfoAsync(string? contractCode = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedAccountInfo>>> GetLinearSwapAccountInfoAsync(string? contractCode = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -54,7 +54,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="marginAccount">保证金账户，不填则返回所有全仓保证金账户	"USDT"，目前只有一个全仓账户（USDT）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossAccountInfo>>> GetLinearSwapCrossAccountInfoAsync(string? marginAccount = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossAccountInfo>>> GetLinearSwapCrossAccountInfoAsync(string? marginAccount = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -65,7 +65,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedPositionInfo>>> GetLinearSwapPositionInfoAsync(string? contractCode = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedPositionInfo>>> GetLinearSwapPositionInfoAsync(string? contractCode = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -78,7 +78,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="umContractType">合约类型</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossPositionInfo>>> GetLinearSwapCrossPositionInfoAsync(string? contractCode = null, string? pair = null, UmContractType? umContractType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossPositionInfo>>> GetLinearSwapCrossPositionInfoAsync(string? contractCode = null, string? pair = null, UmContractType? umContractType = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -89,7 +89,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码	"BTC-USDT"...</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedAccountPositionInfo>>> GetLinearSwapAccountPositionInfoAsync(string contractCode, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedAccountPositionInfo>>> GetLinearSwapAccountPositionInfoAsync(string contractCode, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -100,7 +100,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="marginAccount">保证金账户	"USDT"，目前只有一个全仓账户（USDT）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedCrossAccountPositionInfo>> GetLinearSwapCrossAccountPositionInfoAsync(string marginAccount, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedCrossAccountPositionInfo>> GetLinearSwapCrossAccountPositionInfoAsync(string marginAccount, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -112,7 +112,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="subAuth">子账户交易权限，1 开启，0关闭</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedSubAuth>> SetLinearSwapSubAuthAsync(IEnumerable<string> subUidList, int subAuth, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedSubAuth>> SetLinearSwapSubAuthAsync(IEnumerable<string> subUidList, int subAuth, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -123,7 +123,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码,如果缺省，默认返回所有合约	"BTC-USDT"...</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedSubAccountList>>> GetLinearSwapSubAccountListAsync(string? contractCode = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedSubAccountList>>> GetLinearSwapSubAccountListAsync(string? contractCode = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -134,7 +134,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="marginAccount">保证金账户，不填则返回所有全仓保证金账户	"USDT"，目前只有一个全仓账户（USDT）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossSubAccountList>>> GetLinearSwapCrossSubAccountListAsync(string? marginAccount = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossSubAccountList>>> GetLinearSwapCrossSubAccountListAsync(string? marginAccount = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="pageSize">不填默认20，不得多于50 </param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedIsolatedSubAccountInfoList>> GetLinearSwapSubAccountInfoListAsync(string? contratcCode = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedIsolatedSubAccountInfoList>> GetLinearSwapSubAccountInfoListAsync(string? contratcCode = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -160,7 +160,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="pageSize">不填默认20，不得多于50 </param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedCrossSubAccountInfoList>> GetLinearSwapCrossSubAccountInfoListAsync(string? marginAccount = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedCrossSubAccountInfoList>> GetLinearSwapCrossSubAccountInfoListAsync(string? marginAccount = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -172,7 +172,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码 ,如果缺省，默认返回所有合约	"BTC-USDT"...</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedAccountPositionInfo>>> GetLinearSwapSubAccountInfoAsync(long subUid, string? contractCode = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedAccountPositionInfo>>> GetLinearSwapSubAccountInfoAsync(long subUid, string? contractCode = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -184,7 +184,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="marginAccount">保证金账户，不填则返回所有全仓保证金账户	"USDT"，目前只有一个全仓账户（USDT）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossAccountPositionInfo>>> GetLinearSwapCrossSubAccountInfoAsync(long subUid, string? marginAccount = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossAccountPositionInfo>>> GetLinearSwapCrossSubAccountInfoAsync(long subUid, string? marginAccount = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -196,7 +196,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码，如果缺省，默认返回所有合约	"BTC-USDT"...</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiPosition>>> GetLinearSwapSubPositionInfoAsync(long subUid, string? contractCode = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiPosition>>> GetLinearSwapSubPositionInfoAsync(long subUid, string? contractCode = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -210,7 +210,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractType">合约类型	swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossSubPositionInfo>>> GetLinearSwapCrossSubPositionInfoAsync(long subUid, string? contractCode = null, string? pair = null, string? contractType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossSubPositionInfo>>> GetLinearSwapCrossSubPositionInfoAsync(long subUid, string? contractCode = null, string? pair = null, string? contractType = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -227,7 +227,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="fromId">如果是向前(prev)查询，则赋值为上一次查询结果中得到的最小query_id ；如果是向后(next)查询，则赋值为上一次查询结果中得到的最大query_id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedFinancialRecord>>> GetLinearSwapFinancialRecordAsync(string marginAccount, string ? contractCode = null, string ? type = null, long ? startTime = null, long ? endTime = null, string ? direct = null, long ? fromId = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedFinancialRecord>>> GetLinearSwapFinancialRecordAsync(string marginAccount, string ? contractCode = null, string ? type = null, long ? startTime = null, long ? endTime = null, string ? direct = null, long ? fromId = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -244,7 +244,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="fromId">如果是向前(prev)查询，则赋值为上一次查询结果中得到的最小query_id ；如果是向后(next)查询，则赋值为上一次查询结果中得到的最大query_id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedFinancialRecord>>> GetLinearSwapFinancialRecordExactAsync(string marginAccount, string? contractCode = null, string? type = null, long? startTime = null, long? endTime = null, string? direct = null, long? fromId = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedFinancialRecord>>> GetLinearSwapFinancialRecordExactAsync(string marginAccount, string? contractCode = null, string? type = null, long? startTime = null, long? endTime = null, string? direct = null, long? fromId = null, CancellationToken ct = default);
 
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="pageSize">页大小 不填默认20，不得多于50（超过则按照50进行查询）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedIsolatedUserSettlementRecords>> GetLinearSwapUserSettlementRecordsAsync(string contractCode, long? startTime = null, long? endTime = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedIsolatedUserSettlementRecords>> GetLinearSwapUserSettlementRecordsAsync(string contractCode, long? startTime = null, long? endTime = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -275,7 +275,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="pageSize">页大小 不填默认20，不得多于50（超过则按照50进行查询）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedCrossUserSettlementRecords>> GetLinearSwapCrossUserSettlementRecordsAsync(string marginAccount, long? startTime = null, long? endTime = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedCrossUserSettlementRecords>> GetLinearSwapCrossUserSettlementRecordsAsync(string marginAccount, long? startTime = null, long? endTime = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -300,7 +300,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="businessType">业务类型，不填默认永续	futures：交割、swap：永续、all：全部</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossUserAvailableLevelRate>>> GetLinearSwapCrossAvailableLevelRateAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossUserAvailableLevelRate>>> GetLinearSwapCrossAvailableLevelRateAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -315,7 +315,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="businessType">业务类型，不填默认永续	futures：交割、swap：永续、all：全部</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedSwapOrderLimit>> GetLinearSwapOrderLimitAsync(string orderPriceType, string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedSwapOrderLimit>> GetLinearSwapOrderLimitAsync(string orderPriceType, string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -329,7 +329,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="businessType">业务类型，不填默认永续	futures：交割、swap：永续、all：全部</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedSwapFee>>> GetLinearSwapFeeAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedSwapFee>>> GetLinearSwapFeeAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -340,7 +340,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码	永续：“BTC-USDT”... ，交割：“BTC-USDT-210625”...</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedTransferLimit>>> GetLinearSwapTransferLimitAsync(string? contractCode = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedTransferLimit>>> GetLinearSwapTransferLimitAsync(string? contractCode = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -351,7 +351,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="marginAccount">保证金账户，不填则返回所有全仓保证金账户	"USDT"，目前只有一个全仓账户（USDT）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossTransferLimit>>> GetLinearSwapCrossTransferLimitAsync(string? marginAccount = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossTransferLimit>>> GetLinearSwapCrossTransferLimitAsync(string? marginAccount = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -362,7 +362,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码	"BTC-USDT"... ,如果缺省，默认返回所有合约</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedPositionLimit>>> GetLinearSwapPositionLimitAsync(string? contractCode = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedPositionLimit>>> GetLinearSwapPositionLimitAsync(string? contractCode = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -376,7 +376,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="businessType">业务类型，不填默认永续	futures：交割、swap：永续、all：全部</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossPositionLimit>>> GetLinearSwapCrossPositionLimitAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossPositionLimit>>> GetLinearSwapCrossPositionLimitAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -388,7 +388,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="leverRate">杠杆倍数，不填返回所有杠杆倍数	</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedIsolatedLeverPositionLimit>>> GetLinearSwapLeverPositionLimitAsync(string? contractCode = null, int? leverRate = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedIsolatedLeverPositionLimit>>> GetLinearSwapLeverPositionLimitAsync(string? contractCode = null, int? leverRate = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -403,7 +403,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="leverRate">杠杆倍数，不填返回所有杠杆倍数	</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedCrossLeverPositionLimit>>> GetLinearSwapCrossLeverPositionLimitAsync(string? businessType = null, string? contractType = null, string? pair = null, string? contractCode = null, int? leverRate = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedCrossLeverPositionLimit>>> GetLinearSwapCrossLeverPositionLimitAsync(string? businessType = null, string? contractType = null, string? pair = null, string? contractCode = null, int? leverRate = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -420,7 +420,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="clientOrderId">客户自己填写和维护的订单号，必须为数字	[1-9223372036854775807]</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMasterSubTransfer>> LinearSwapMasterSubTransferAsync(long subUid, string asset, string fromMarginAccount, string toMarginAccount, decimal amount, string type, long? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedMasterSubTransfer>> LinearSwapMasterSubTransferAsync(long subUid, string asset, string fromMarginAccount, string toMarginAccount, decimal amount, string type, long? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -450,7 +450,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="clientOrderId">客户自己填写和维护的订单号,必须为数字	[1-9223372036854775807]</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedTransferInner>> LinearSwapTransferInnerAsync(string asset, string fromMarginAccount, string toMarginAccount, decimal amount, long? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedTransferInner>> LinearSwapTransferInnerAsync(string asset, string fromMarginAccount, string toMarginAccount, decimal amount, long? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -460,6 +460,6 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedApiTradingStatus>> GetLinearSwapApiTradingStatusAsync(CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedApiTradingStatus>> GetLinearSwapApiTradingStatusAsync(CancellationToken ct = default);
     }
 }

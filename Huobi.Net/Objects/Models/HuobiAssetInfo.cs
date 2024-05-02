@@ -9,7 +9,7 @@ namespace Huobi.Net.Objects.Models
     /// <summary>
     /// Info on an asset
     /// </summary>
-    public class HuobiAssetInfo 
+    public class HuobiAssetInfo
     {
         /// <summary>
         /// Asset

@@ -154,15 +154,15 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/en/#search-match-results" /></para>
         /// <para><a href="https://huobiapi.github.io/docs/spot/v1/cn/#0fa6055598" /></para>
         /// </summary>
-        /// <param name="states">Only return trades with specific states</param>
-        /// <param name="symbol">The symbol to retrieve trades for</param>
-        /// <param name="types">The type of orders to return</param>
-        /// <param name="startTime">Only get orders after this date</param>
-        /// <param name="endTime">Only get orders before this date</param>
-        /// <param name="fromId">Only get orders with ID before or after this. Used together with the direction parameter</param>
-        /// <param name="direction">Direction of the results to return when using the fromId parameter</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="ct">Cancellation token</param>
+        /// <param name="states">仅返回具有特定状态的交易 Only return trades with specific states</param>
+        /// <param name="symbol">要检索交易的交易对 The symbol to retrieve trades for</param>
+        /// <param name="types">要返回的订单类型 The type of orders to return</param>
+        /// <param name="startTime">仅获取此日期之后的订单 Only get orders after this date</param>
+        /// <param name="endTime">仅获取此日期之前的订单 Only get orders before this date</param>
+        /// <param name="fromId">仅获取在此之前或之后具有ID的订单。与方向参数一起使用 Only get orders with ID before or after this. Used together with the direction parameter</param>
+        /// <param name="direction">使用fromId参数时返回的结果的方向 Direction of the results to return when using the fromId parameter</param>
+        /// <param name="limit">最大结果数 The max number of results</param>
+        /// <param name="ct">取消令牌 Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<HuobiOrderTrade>>> GetUserTradesAsync(IEnumerable<OrderState>? states = null, string? symbol = null, IEnumerable<OrderType>? types = null, DateTime? startTime = null, DateTime? endTime = null, long? fromId = null, FilterDirection? direction = null, int? limit = null, CancellationToken ct = default);
 

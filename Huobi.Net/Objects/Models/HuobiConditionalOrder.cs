@@ -15,13 +15,13 @@ namespace Huobi.Net.Objects.Models
         /// </summary>
         public long AccountId { get; set; }
         /// <summary>
-        /// Order id（https://github.com/JKorf/Huobi.Net/issues/89）
-        /// </summary>
-        public long OrderId { get; set; }
-        /// <summary>
         /// Source
         /// </summary>
         public string Source { get; set; } = string.Empty;
+        /// <summary>
+        /// Order id
+        /// </summary>
+        public string? OrderId { get; set; }
         /// <summary>
         /// Client order id
         /// </summary>

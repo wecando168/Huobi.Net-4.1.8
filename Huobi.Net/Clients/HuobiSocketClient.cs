@@ -13,10 +13,10 @@ namespace Huobi.Net.Clients
     {
         #region fields
         /// <inheritdoc />
-        public IHuobiSocketClientSpotStreams SpotStreams { get; }
+        public IHuobiSocketClientSpotApi SpotApi { get; }
 
         /// <inheritdoc />
-        public IHuobiSocketClientUsdtMarginSwapStreams UsdtMarginSwapStreams { get; }
+        public IHuobiSocketClientUsdtMarginSwapApi UsdtMarginSwapApi { get; }
         #endregion
 
         #region ctor
@@ -33,8 +33,8 @@ namespace Huobi.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public HuobiSocketClient(HuobiSocketClientOptions options) : base("Huobi", options)
         {
-            SpotStreams = AddApiClient(new HuobiSocketClientSpotStreams(log, options));
-            UsdtMarginSwapStreams = AddApiClient(new HuobiSocketClientUsdtMarginSwapStreams(log, options));
+            SpotApi = AddApiClient(new HuobiSocketClientSpotApi(log, options));
+            UsdtMarginSwapApi = AddApiClient(new HuobiSocketClientUsdtMarginSwapApi(log, options));
         }
         #endregion
 

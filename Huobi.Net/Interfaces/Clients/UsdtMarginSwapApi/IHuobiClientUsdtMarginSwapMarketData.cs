@@ -32,7 +32,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="depthType">深度类型	(150档数据) step0, step1, step2, step3, step4, step5, step14, step15, step16, step17（合并深度1-5,14-17）；step0时，不合并深度, (20档数据) step6, step7, step8, step9, step10, step11, step12, step13, step18, step19（合并深度7-13,18-19）；step6时，不合并深度</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketDepth>> GetLinearSwapDepthAsync(string contractCode, string depthType, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedMarketDepth>> GetLinearSwapDepthAsync(string contractCode, string depthType, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -44,7 +44,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="businessType">业务类型，不填默认永续</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketBbo>>> GetLinearSwapBboAsync(string? contractCode = null, string? businessType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketBbo>>> GetLinearSwapBboAsync(string? contractCode = null, string? businessType = null, CancellationToken ct = default);
 
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="size">获取数量，默认150	</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketHistoryKline>>> GetLinearSwapHistoryKlineAsync(string contractCode, string period, long from, long to, int? size = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketHistoryKline>>> GetLinearSwapHistoryKlineAsync(string contractCode, string period, long from, long to, int? size = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -73,7 +73,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="size">K线获取数量</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketHistoryMarkKline>>> GetLinearSwapMarkPriceKlineAsync(string contractCode, string period, int size, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketHistoryMarkKline>>> GetLinearSwapMarkPriceKlineAsync(string contractCode, string period, int size, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -84,7 +84,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="contractCode">合约代码 或 合约标识	永续："BTC-USDT" ... ，交割：“BTC-USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketDetailMerged>> GetLinearSwapMergedAsync(string contractCode, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedMarketDetailMerged>> GetLinearSwapMergedAsync(string contractCode, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -96,7 +96,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="businessType">业务类型，不填默认永续</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketDetailBatchMerged>>> GetLinearSwapBatchMergedV2Async(string? contractCode = null, string? businessType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketDetailBatchMerged>>> GetLinearSwapBatchMergedV2Async(string? contractCode = null, string? businessType = null, CancellationToken ct = default);
 
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="businessType">业务类型，不填默认永续</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketTrade>> GetLinearSwapMarketTradeAsync(string? contractCode = null, string? businessType = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedMarketTrade>> GetLinearSwapMarketTradeAsync(string? contractCode = null, string? businessType = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -121,7 +121,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="size">获取交易记录的数量，默认1	</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketHistoryTrade>>> GetLinearSwapMarketHistoryTradeAsync(string contractCode, int size, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketHistoryTrade>>> GetLinearSwapMarketHistoryTradeAsync(string contractCode, int size, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -137,7 +137,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="size">获取数量,默认为：48</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiUsdtMarginedMarketHisOpenInterest>> GetLinearSwapHisOpenInterestAsync(string period, int amountType, string contractCode, string? pair = null, string? contractType = null, int? size = null, CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiUsdtMarginedMarketHisOpenInterest>> GetLinearSwapHisOpenInterestAsync(string period, int amountType, string contractCode, string? pair = null, string? contractType = null, int? size = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -150,7 +150,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="size">K线获取数量	[1,2000]</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketPremiumIndexKline>>> GetLinearSwapPremiumIndexKlineAsync(string contractCode, string period, int size, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketPremiumIndexKline>>> GetLinearSwapPremiumIndexKlineAsync(string contractCode, string period, int size, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -163,7 +163,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="size">K线获取数量	[1,2000]</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketEstimatedRateKline>>> GetLinearSwapEstimatedRateKlineAsync(string contractCode, string period, int size, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketEstimatedRateKline>>> GetLinearSwapEstimatedRateKlineAsync(string contractCode, string period, int size, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -177,6 +177,6 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="basisPriceType">基差价格类型，表示在周期内计算基差使用的价格类型， 不填，默认使用开盘价	开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average </param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketHistoryBasis>>> GetLinearSwapBasisAsync(string contractCode, string period, int size, string? basisPriceType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketHistoryBasis>>> GetLinearSwapBasisAsync(string contractCode, string period, int size, string? basisPriceType = null, CancellationToken ct = default);
     }
 }

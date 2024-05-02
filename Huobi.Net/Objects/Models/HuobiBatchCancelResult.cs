@@ -13,7 +13,7 @@ namespace Huobi.Net.Objects.Models
         /// Orders that were successfully canceled
         /// </summary>
         [JsonProperty("success")]
-        public IEnumerable<long>? Successful { get; set; } = Array.Empty<long>();
+        public IEnumerable<long> Successful { get; set; } = Array.Empty<long>();
         /// <summary>
         /// Orders that failed to cancel
         /// </summary>

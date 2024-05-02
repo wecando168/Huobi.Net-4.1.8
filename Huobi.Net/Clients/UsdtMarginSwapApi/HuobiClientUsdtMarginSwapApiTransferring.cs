@@ -32,7 +32,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedSwapCrossTransferState>>> GetLinearSwapCrossTransferStateAsync(
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedSwapCrossTransferState>>> GetLinearSwapCrossTransferStateAsync(
             string marginAccount, 
             CancellationToken ct = default
             )
@@ -40,8 +40,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("margin_account", marginAccount);
 
-            return await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedSwapCrossTransferState>>(
-                uri: _baseClient.GetUrl(GetLinearSwapCrossTransferStateEndpoint, ApiPath.LinearSwapApi, "1"),
+            return await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedSwapCrossTransferState>>(
+                uri: _baseClient.GetUrl(GetLinearSwapCrossTransferStateEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,

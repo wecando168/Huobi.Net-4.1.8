@@ -153,7 +153,7 @@ else if (read == "P" || read == "p")
     if (read != "S" && read != "s")
     {
         Console.WriteLine($"现货Websocket主题订阅：获取全部交易代码市场聚合行情数据");
-        publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToTickerUpdatesAsync(data =>
+        publicSubscription = await huobiPublicSocketClient.SpotApi.SubscribeToTickerUpdatesAsync(data =>
         {
             if (!object.Equals(data, null))
             {
@@ -186,7 +186,7 @@ else if (read == "P" || read == "p")
     {
         string symbol = "BTCUSDT";
         KlineInterval klineInterval = KlineInterval.FiveMinutes;
-        publicSubscription = await huobiPublicSocketClient.SpotStreams.SubscribeToKlineUpdatesAsync(
+        publicSubscription = await huobiPublicSocketClient.SpotApi.SubscribeToKlineUpdatesAsync(
             symbol,
             klineInterval, data =>
         {
@@ -221,7 +221,7 @@ else if (read == "P" || read == "p")
         long from = 1667232000; //2022-11-01 00:00:00
         long to = 1667260800;   //2022-11-01 08:00:00
         Console.WriteLine($"U本位合约Websocket数据获取：获取U本位合约{contractCode} {klineInterval} K线");
-        CallResult<IEnumerable<HuobiContractCodeKlineTick>>? huobiContractCodeTickList = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.GetMarketContractCodeKlineAsync(
+        CallResult<IEnumerable<HuobiContractCodeKlineTick>>? huobiContractCodeTickList = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapApi.GetMarketContractCodeKlineAsync(
             contractCode: contractCode,
             period: klineInterval,
             clientId: clientId,
@@ -256,7 +256,7 @@ else if (read == "P" || read == "p")
         KlineInterval klineInterval = KlineInterval.FiveMinutes;
         string clientId = $"火币U本位合约{contractCode}订阅 K线数据";
         Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {klineInterval} K线");
-        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeMarketContractCodeKlineAsync(
+        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapApi.SubscribeMarketContractCodeKlineAsync(
             contractCode,
             klineInterval,
             clientId, data =>
@@ -296,7 +296,7 @@ else if (read == "P" || read == "p")
         string type = "step5";
         string clientId = $"火币U本位合约{contractCode}订阅 Market Depth 数据";
         Console.WriteLine($"U本位合约Websocket主题订阅：订阅U本位合约{contractCode} {type} Market Depth");
-        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeMarketContractCodeDepthAsync(
+        publicUsdtMarginedSubscription = await huobiPublicUsdtMarginedSocketClient.UsdtMarginSwapApi.SubscribeMarketContractCodeDepthAsync(
             contractCode,
             type,
             clientId, data =>
@@ -351,7 +351,7 @@ else if (read == "U" || read == "u")
     if (read != "S" && read != "s")
     {
         //订阅账户变更
-        priavteSub = await huobiPrivateSpotSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(OnHuobiAccountUpdate, 1);
+        priavteSub = await huobiPrivateSpotSocketClient.SpotApi.SubscribeToAccountUpdatesAsync(OnHuobiAccountUpdate, 1);
         /// <summary>
         /// 火币订阅账户变更：当账户更新时–HuobiAccountUpdate
         /// </summary>
@@ -385,7 +385,7 @@ else if (read == "U" || read == "u")
     if (read != "S" && read != "s")
     {
         //订阅火币订阅清算后成交及撤单更新
-        priavteSub = await huobiPrivateSpotSocketClient.SpotStreams.SubscribeToOrderDetailsUpdatesAsync(null, OnHuobiTradeUpdate, null);
+        priavteSub = await huobiPrivateSpotSocketClient.SpotApi.SubscribeToOrderDetailsUpdatesAsync(null, OnHuobiTradeUpdate, null);
         /// <summary>
         /// 火币订阅清算后成交及撤单更新：当订单成交后–OnHuobiTradeUpdate
         /// （策略补单功能在这里实现）
@@ -433,9 +433,9 @@ else if (read == "U" || read == "u")
         string contractCode = "*";
         string clientId = $"火币U本位合约【逐仓】订阅{contractCode}订单成交数据";
         Console.WriteLine($"U本位合约Websocket主题订阅：【逐仓】订阅{contractCode}订单成交数据");
-        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderContractCodeAsync(contractCode, clientId, OnIsolatedOrderDataUpdate);
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapApi.SubscribeOrderContractCodeAsync(contractCode, clientId, OnIsolatedOrderDataUpdate);
         
-        void OnIsolatedOrderDataUpdate(DataEvent<HuobiUsdtMarginedMarketSubscribeOrderData> data)
+        void OnIsolatedOrderDataUpdate(DataEvent<WWTHuobiUsdtMarginedMarketSubscribeOrderData> data)
         {
             if (!object.Equals(data, null))
             {
@@ -477,9 +477,9 @@ else if (read == "U" || read == "u")
         string contractCode = "*";
         string clientId = $"火币U本位合约【全仓】订阅{contractCode}订单成交数据";
         Console.WriteLine($"U本位合约Websocket主题订阅：【全仓】订阅{contractCode}订单成交数据");
-        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeOrderCrossContractCodeAsync(contractCode, clientId, OnCrossOrderDataUpdate);
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapApi.SubscribeOrderCrossContractCodeAsync(contractCode, clientId, OnCrossOrderDataUpdate);
         
-        void OnCrossOrderDataUpdate(DataEvent<HuobiUsdtMarginedMarketSubscribeCrossOrderData> data)
+        void OnCrossOrderDataUpdate(DataEvent<WWTHuobiUsdtMarginedMarketSubscribeCrossOrderData> data)
         {
             if (!object.Equals(data , null) && !object.Equals(data.Data, null))
             {
@@ -527,9 +527,9 @@ else if (read == "U" || read == "u")
         string contractCode = "DOGE-USDT";
         string clientId = $"火币U本位合约【逐仓】订阅{contractCode}资产变动";
         Console.WriteLine($"U本位合约Websocket主题订阅：【逐仓】订阅{contractCode}资产变动");
-        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsContractCodeAsync(contractCode, clientId, OnIsolatedAccountUpdate);
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapApi.SubscribeAccountsContractCodeAsync(contractCode, clientId, OnIsolatedAccountUpdate);
         
-        void OnIsolatedAccountUpdate(DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribePositionInfo>> data)
+        void OnIsolatedAccountUpdate(DataEvent<IEnumerable<WWTHuobiUsdtMarginedAccountSebscribePositionInfo>> data)
         {
             if (!object.Equals(data, null))
             {
@@ -564,9 +564,9 @@ else if (read == "U" || read == "u")
         string marginAccount = "USDT";
         string clientId = $"火币U本位合约【全仓】订阅{marginAccount}资产变动";
         Console.WriteLine($"U本位合约Websocket主题订阅：【全仓】订阅{marginAccount}资产变动");
-        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapStreams.SubscribeAccountsCrossContractCodeAsync(marginAccount, clientId, OnCrossAccountUpdate);
+        privateSub = await huobiPrivateUsdtMarginedSocketClient.UsdtMarginSwapApi.SubscribeAccountsCrossContractCodeAsync(marginAccount, clientId, OnCrossAccountUpdate);
         
-        void OnCrossAccountUpdate(DataEvent<IEnumerable<HuobiUsdtMarginedAccountSebscribeCrossPositionInfo>> data)
+        void OnCrossAccountUpdate(DataEvent<IEnumerable<WWTHuobiUsdtMarginedAccountSebscribeCrossPositionInfo>> data)
         {
             if (!object.Equals(data, null))
             {
@@ -960,7 +960,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<IEnumerable<HuobiAPIKeyQuery>>(result, "火币现货服务器", "查询母用户API Key信息");
+                    ErrorInfoOutput<IEnumerable<WWTHuobiAPIKeyQuery>>(result, "火币现货服务器", "查询母用户API Key信息");
                 }
             }
             {
@@ -977,7 +977,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<IEnumerable<HuobiAPIKeyQuery>>(result, "火币现货服务器", "查询子用户API Key信息");
+                    ErrorInfoOutput<IEnumerable<WWTHuobiAPIKeyQuery>>(result, "火币现货服务器", "查询子用户API Key信息");
                 }
             }
         }
@@ -1529,8 +1529,8 @@ static async Task TestSpotApiAccountEndpoints()
             Console.WriteLine("执行冻结或解冻子用户");
             apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
             huobiSpotRestClient.SetApiCredentials(apiCredentials);
-            var Action = SubAccountManageAction.Unlock;
-            if (Action == SubAccountManageAction.Unlock)
+            var Action = WWTSubAccountManageAction.Unlock;
+            if (Action == WWTSubAccountManageAction.Unlock)
             {
                 var result = await huobiSpotRestClient.SpotApi.Account.LockOrUnlockSubUserAsync(long.Parse(subUserId), Action);
                 if (result.Success)
@@ -1539,7 +1539,7 @@ static async Task TestSpotApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiLockOrUnlockSubUser>(result, "火币现货服务器", "执行解冻子用户");
+                    ErrorInfoOutput<WWTHuobiLockOrUnlockSubUser>(result, "火币现货服务器", "执行解冻子用户");
                 }
             }
             else
@@ -1558,7 +1558,7 @@ static async Task TestSpotApiAccountEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiLockOrUnlockSubUser>(result, "火币现货服务器", "执行冻结子用户");
+                        ErrorInfoOutput<WWTHuobiLockOrUnlockSubUser>(result, "火币现货服务器", "执行冻结子用户");
                     }
                 }
             }
@@ -1698,7 +1698,7 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiSubUserAPIKeyCreation>(result, "火币现货服务器", "子用户创建API Key");
+                ErrorInfoOutput<WWTHuobiSubUserAPIKeyCreation>(result, "火币现货服务器", "子用户创建API Key");
             }
         }
         #endregion
@@ -1714,7 +1714,7 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiSubUserAPIKeyDeletion>(result, "火币现货服务器", "子用户删除API Key");
+                ErrorInfoOutput<WWTHuobiSubUserAPIKeyDeletion>(result, "火币现货服务器", "子用户删除API Key");
             }
         }
         #endregion
@@ -1730,7 +1730,7 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiSubUserAPIKeyModification>(result, "火币现货服务器", "子用户修改API Key");
+                ErrorInfoOutput<WWTHuobiSubUserAPIKeyModification>(result, "火币现货服务器", "子用户修改API Key");
             }
         }
         #endregion
@@ -1745,7 +1745,7 @@ static async Task TestSpotApiAccountEndpoints()
                 Note = "NoteText"
             };
             IEnumerable<HuobiCreateSubUserAccountRequestInfo> UserList = new HuobiCreateSubUserAccountRequestInfo[] { huobiCreateSubUserAccountRequestInfo };
-            HuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest = new(UserList);
+            WWTHuobiCreateSubUserAccountRequest huobiCreateSubUserAccountRequest = new(UserList);
             var result = await huobiSpotRestClient.SpotApi.Account.SubUserCreationAsync(huobiCreateSubUserAccountRequest);
             if (result.Success)
             {
@@ -1753,7 +1753,7 @@ static async Task TestSpotApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiSubUserCreation>>(result, "火币现货服务器", "创建子用户");
+                ErrorInfoOutput<IEnumerable<WWTHuobiSubUserCreation>>(result, "火币现货服务器", "创建子用户");
             }
         }
         #endregion
@@ -2407,7 +2407,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapSwitchAccountType>(result, "火币合约API服务器", "账户类型更改接口");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapSwitchAccountType>(result, "火币合约API服务器", "账户类型更改接口");
             }
         }
         #endregion
@@ -2422,7 +2422,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapFundingRate>(result, "火币合约API服务器", "【通用】获取合约资金费率");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapFundingRate>(result, "火币合约API服务器", "【通用】获取合约资金费率");
             }
         }
         #endregion
@@ -2439,7 +2439,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapFundingRate>>(result, "火币合约API服务器", "【通用】批量获取合约资金费率");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapFundingRate>>(result, "火币合约API服务器", "【通用】批量获取合约资金费率");
             }
         }
         #endregion
@@ -2457,7 +2457,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapHistoricalFundingRate>(result, "火币合约API服务器", "【通用】获取合约的历史资金费率"); 
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapHistoricalFundingRate>(result, "火币合约API服务器", "【通用】获取合约的历史资金费率"); 
             }
         }
         #endregion
@@ -2476,7 +2476,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapLiquidationOrders>>(result, "火币合约API服务器", "【通用】获取强平订单(新)");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapLiquidationOrders>>(result, "火币合约API服务器", "【通用】获取强平订单(新)");
             }
         }
         #endregion
@@ -2495,7 +2495,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedSettlementRecords>(result, "火币合约API服务器", "【通用】查询平台历史结算记录");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedSettlementRecords>(result, "火币合约API服务器", "【通用】查询平台历史结算记录");
             }
         }
         #endregion
@@ -2515,7 +2515,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedEliteAccountRatio>(result, "火币合约API服务器", "【通用】精英账户多空持仓对比-账户数");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedEliteAccountRatio>(result, "火币合约API服务器", "【通用】精英账户多空持仓对比-账户数");
             }
         }
         #endregion
@@ -2535,7 +2535,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedElitePositionRatio>(result, "火币合约API服务器", "【通用】精英账户多空持仓对比-持仓量");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedElitePositionRatio>(result, "火币合约API服务器", "【通用】精英账户多空持仓对比-持仓量");
             }
         }
         #endregion
@@ -2552,7 +2552,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedApiState>>(result, "火币合约API服务器", "【逐仓】查询系统状态");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedApiState>>(result, "火币合约API服务器", "【逐仓】查询系统状态");
             }
         }
         #endregion
@@ -2579,7 +2579,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketCrossLadderMargin>>(result, "火币合约API服务器", "【全仓】获取平台阶梯保证金");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketCrossLadderMargin>>(result, "火币合约API服务器", "【全仓】获取平台阶梯保证金");
             }
         }
         #endregion
@@ -2606,7 +2606,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketIsolatedLadderMargin>>(result, "火币合约API服务器", "【逐仓】获取平台阶梯保证金");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketIsolatedLadderMargin>>(result, "火币合约API服务器", "【逐仓】获取平台阶梯保证金");
             }
         }
         #endregion
@@ -2627,7 +2627,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedEliteSettlementPrice>>(result, "火币合约API服务器", "【通用】获取预估结算价");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedEliteSettlementPrice>>(result, "火币合约API服务器", "【通用】获取预估结算价");
             }
         }
         #endregion
@@ -2654,7 +2654,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedAdjustfactor>>(result, "火币合约API服务器", "【逐仓】查询平台阶梯调整系数");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedAdjustfactor>>(result, "火币合约API服务器", "【逐仓】查询平台阶梯调整系数");
             }
         }
         #endregion
@@ -2681,7 +2681,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossAdjustfactor>>(result, "火币合约API服务器", "【全仓】查询平台阶梯调整系数");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossAdjustfactor>>(result, "火币合约API服务器", "【全仓】查询平台阶梯调整系数");
             }
         }
         #endregion
@@ -2700,7 +2700,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedInsuranceFund>(result, "火币合约API服务器", "【通用】查询合约风险准备金余额历史数据");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedInsuranceFund>(result, "火币合约API服务器", "【通用】查询合约风险准备金余额历史数据");
             }
         }
         #endregion
@@ -2719,7 +2719,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedRiskInfo>>(result, "火币合约API服务器", "【通用】查询合约风险准备金余额和预估分摊比例");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedRiskInfo>>(result, "火币合约API服务器", "【通用】查询合约风险准备金余额和预估分摊比例");
             }
         }
         #endregion
@@ -2741,7 +2741,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapPriceLimit>>(result, "火币合约API服务器", "【通用】获取合约最高限价和最低限价");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapPriceLimit>>(result, "火币合约API服务器", "【通用】获取合约最高限价和最低限价");
             }
         }
         #endregion
@@ -2760,7 +2760,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapOpenInterest>>(result, "火币合约API服务器", "【通用】获取当前合约总持仓量");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapOpenInterest>>(result, "火币合约API服务器", "【通用】获取当前合约总持仓量");
             }
         }
         #endregion
@@ -2777,7 +2777,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapContractInfo>>(result, "火币合约API服务器", "【通用】获取合约信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapContractInfo>>(result, "火币合约API服务器", "【通用】获取合约信息");
             }
         }
         #endregion
@@ -2794,7 +2794,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIndex>>(result, "火币合约API服务器", "【通用】获取合约指数信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIndex>>(result, "火币合约API服务器", "【通用】获取合约指数信息");
             }
         }
         #endregion
@@ -2883,7 +2883,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketHeartbeat>(result, "火币合约API服务器", "获取合约服务器可用状态");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketHeartbeat>(result, "火币合约API服务器", "获取合约服务器可用状态");
             }
             #endregion
         }
@@ -2901,7 +2901,7 @@ static async Task TestUsdtMarginSwapApiReferenceDataEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketStatus>(result, "火币合约API服务器", "【U本位合约服务器】获取当前系统状态");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketStatus>(result, "火币合约API服务器", "【U本位合约服务器】获取当前系统状态");
                 }
             }
             else
@@ -2973,7 +2973,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketDepth>(result, "火币合约API服务器", "【通用】获取合约行情深度数据");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketDepth>(result, "火币合约API服务器", "【通用】获取合约行情深度数据");
             }
         }
         #endregion
@@ -2995,7 +2995,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketBbo>>(result, "火币合约API服务器", "【通用】获取合约市场最优挂单");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketBbo>>(result, "火币合约API服务器", "【通用】获取合约市场最优挂单");
             }
         }
         #endregion
@@ -3015,7 +3015,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketHistoryMarkKline>>(result, "火币合约API服务器", "【通用】获取标记价格的K线数据");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketHistoryMarkKline>>(result, "火币合约API服务器", "【通用】获取标记价格的K线数据");
             }
         }
         #endregion
@@ -3030,7 +3030,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketDetailMerged>(result, "火币合约API服务器", "【通用】获取聚合行情");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketDetailMerged>(result, "火币合约API服务器", "【通用】获取聚合行情");
             }
         }
         #endregion
@@ -3053,7 +3053,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketDetailBatchMerged>>(result, "火币合约API服务器", "【通用】批量获取聚合行情（V2)");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketDetailBatchMerged>>(result, "火币合约API服务器", "【通用】批量获取聚合行情（V2)");
             }
         }
         #endregion
@@ -3072,7 +3072,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketTrade>(result, "火币合约API服务器", "【通用】获取市场最近成交记录");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketTrade>(result, "火币合约API服务器", "【通用】获取市场最近成交记录");
             }
         }
         #endregion
@@ -3094,7 +3094,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketHistoryTrade>>(result, "火币合约API服务器", "【通用】批量获取市场最近成交记录");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketHistoryTrade>>(result, "火币合约API服务器", "【通用】批量获取市场最近成交记录");
             }
         }
         #endregion
@@ -3117,7 +3117,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketHisOpenInterest>(result, "火币合约API服务器", "【通用】平台历史持仓量查询");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketHisOpenInterest>(result, "火币合约API服务器", "【通用】平台历史持仓量查询");
             }
         }
         #endregion
@@ -3137,7 +3137,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketPremiumIndexKline>>(result, "火币合约API服务器", "【通用】获取合约的溢价指数K线");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketPremiumIndexKline>>(result, "火币合约API服务器", "【通用】获取合约的溢价指数K线");
             }
         }
         #endregion
@@ -3157,7 +3157,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketEstimatedRateKline>>(result, "火币合约API服务器", "【通用】获取合约实时预测资金费率的K线数据");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketEstimatedRateKline>>(result, "火币合约API服务器", "【通用】获取合约实时预测资金费率的K线数据");
             }
         }
         #endregion
@@ -3178,7 +3178,7 @@ static async Task TestUsdtMarginSwapApiMarketDataEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketHistoryBasis>>(result, "火币合约API服务器", "【通用】获取合约基差数据");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketHistoryBasis>>(result, "火币合约API服务器", "【通用】获取合约基差数据");
             }
         }
         #endregion
@@ -3252,7 +3252,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAccountInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约账户信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedAccountInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约账户信息");
             }
         }
         #endregion
@@ -3282,7 +3282,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossAccountInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约账户信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossAccountInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约账户信息");
             }
         }
         #endregion
@@ -3304,7 +3304,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedPositionInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约持仓信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedPositionInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约持仓信息");
             }
         }
         #endregion
@@ -3326,7 +3326,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossPositionInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约持仓信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossPositionInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约持仓信息");
             }
         }
         #endregion
@@ -3348,7 +3348,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAccountPositionInfo>>(result, "火币合约API服务器", "【逐仓】查询用户账户和持仓信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedAccountPositionInfo>>(result, "火币合约API服务器", "【逐仓】查询用户账户和持仓信息");
             }
         }
         #endregion
@@ -3378,7 +3378,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedCrossAccountPositionInfo>(result, "火币合约API服务器", "【全仓】查询用户账户和持仓信息");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedCrossAccountPositionInfo>(result, "火币合约API服务器", "【全仓】查询用户账户和持仓信息");
             }
         }
         #endregion
@@ -3416,7 +3416,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedSubAuth>(result, "火币合约API服务器", "【通用】批量设置子账户交易权限");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedSubAuth>(result, "火币合约API服务器", "【通用】批量设置子账户交易权限");
             }
         }
         #endregion
@@ -3442,7 +3442,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedSubAccountList>>(result, "火币合约API服务器", "【逐仓】查询母账户下所有子账户资产信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedSubAccountList>>(result, "火币合约API服务器", "【逐仓】查询母账户下所有子账户资产信息");
             }
         }
         #endregion
@@ -3468,7 +3468,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossSubAccountList>>(result, "火币合约API服务器", "【全仓】查询母账户下所有子账户资产信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossSubAccountList>>(result, "火币合约API服务器", "【全仓】查询母账户下所有子账户资产信息");
             }
         }
         #endregion
@@ -3496,7 +3496,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedIsolatedSubAccountInfoList>(result, "火币合约API服务器", "【逐仓】批量获取子账户资产信息");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedIsolatedSubAccountInfoList>(result, "火币合约API服务器", "【逐仓】批量获取子账户资产信息");
             }
         }
         #endregion
@@ -3524,7 +3524,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedCrossSubAccountInfoList>(result, "火币合约API服务器", "【全仓】批量获取子账户资产信息");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedCrossSubAccountInfoList>(result, "火币合约API服务器", "【全仓】批量获取子账户资产信息");
             }
         }
         #endregion
@@ -3548,7 +3548,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedAccountPositionInfo>>(result, "火币合约API服务器", "【逐仓】查询单个子账户资产信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedAccountPositionInfo>>(result, "火币合约API服务器", "【逐仓】查询单个子账户资产信息");
             }
         }
         #endregion
@@ -3578,7 +3578,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossAccountPositionInfo>>(result, "火币合约API服务器", "【全仓】查询单个子账户资产信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossAccountPositionInfo>>(result, "火币合约API服务器", "【全仓】查询单个子账户资产信息");
             }
         }
         #endregion
@@ -3603,7 +3603,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiPosition>>(result, "火币合约API服务器", "【逐仓】查询单个子账户持仓信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiPosition>>(result, "火币合约API服务器", "【逐仓】查询单个子账户持仓信息");
             }
         }
         #endregion
@@ -3628,7 +3628,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossSubPositionInfo>>(result, "火币合约API服务器", "【全仓】查询单个子账户持仓信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossSubPositionInfo>>(result, "火币合约API服务器", "【全仓】查询单个子账户持仓信息");
             }
         }
         #endregion
@@ -3648,7 +3648,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)");
+                    ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)");
                 }
             }
             {
@@ -3664,7 +3664,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)");
+                    ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)");
                 }
             }
         }
@@ -3685,7 +3685,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)(PrivateData)");
+                    ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】查询用户财务记录(新)(PrivateData)");
                 }
             }
             {
@@ -3701,7 +3701,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】组合查询用户财务记录(新)");
+                    ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedFinancialRecord>>(result, "火币合约API服务器", "【通用】组合查询用户财务记录(新)");
                 }
             }
         }
@@ -3722,7 +3722,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedIsolatedUserSettlementRecords>(result, "火币合约API服务器", "【逐仓】查询用户结算记录");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedIsolatedUserSettlementRecords>(result, "火币合约API服务器", "【逐仓】查询用户结算记录");
                 }
             }
             {
@@ -3738,7 +3738,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedIsolatedUserSettlementRecords>(result, "火币合约API服务器", "【逐仓】查询用户结算记录");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedIsolatedUserSettlementRecords>(result, "火币合约API服务器", "【逐仓】查询用户结算记录");
                 }
             }
         }
@@ -3759,7 +3759,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedCrossUserSettlementRecords>(result, "火币合约API服务器", "【全仓】查询用户结算记录");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedCrossUserSettlementRecords>(result, "火币合约API服务器", "【全仓】查询用户结算记录");
                 }
             }
             {
@@ -3775,7 +3775,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedCrossUserSettlementRecords>(result, "火币合约API服务器", "【全仓】查询用户结算记录");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedCrossUserSettlementRecords>(result, "火币合约API服务器", "【全仓】查询用户结算记录");
                 }
             }
         }
@@ -3844,7 +3844,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossUserAvailableLevelRate>>(result, "火币合约API服务器", "【全仓】查询用户可用杠杆倍数");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossUserAvailableLevelRate>>(result, "火币合约API服务器", "【全仓】查询用户可用杠杆倍数");
             }
         }
         #endregion
@@ -3871,7 +3871,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedSwapOrderLimit>(result, "火币合约API服务器", "【通用】查询用户当前的下单量限制");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedSwapOrderLimit>(result, "火币合约API服务器", "【通用】查询用户当前的下单量限制");
             }
         }
         #endregion
@@ -3896,7 +3896,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedSwapFee>>(result, "火币合约API服务器", "【通用】查询用户当前的手续费费率");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedSwapFee>>(result, "火币合约API服务器", "【通用】查询用户当前的手续费费率");
             }
         }
         #endregion
@@ -3919,7 +3919,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedTransferLimit>>(result, "火币合约API服务器", "【逐仓】查询用户当前的划转限制");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedTransferLimit>>(result, "火币合约API服务器", "【逐仓】查询用户当前的划转限制");
             }
         }
         #endregion
@@ -3942,7 +3942,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossTransferLimit>>(result, "火币合约API服务器", "【全仓】查询用户当前的划转限制");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossTransferLimit>>(result, "火币合约API服务器", "【全仓】查询用户当前的划转限制");
             }
         }
         #endregion
@@ -3965,7 +3965,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedPositionLimit>>(result, "火币合约API服务器", "【逐仓】用户持仓量限制的查询");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedPositionLimit>>(result, "火币合约API服务器", "【逐仓】用户持仓量限制的查询");
             }
         }
         #endregion
@@ -3988,7 +3988,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossPositionLimit>>(result, "火币合约API服务器", "【全仓】用户持仓量限制的查询");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossPositionLimit>>(result, "火币合约API服务器", "【全仓】用户持仓量限制的查询");
             }
         }
         #endregion
@@ -4014,7 +4014,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedIsolatedLeverPositionLimit>>(result, "火币合约API服务器", "【逐仓】查询用户所有杠杆持仓量限制");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedIsolatedLeverPositionLimit>>(result, "火币合约API服务器", "【逐仓】查询用户所有杠杆持仓量限制");
             }
         }
         #endregion
@@ -4040,7 +4040,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedCrossLeverPositionLimit>>(result, "火币合约API服务器", "【全仓】查询用户所有杠杆持仓量限制");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedCrossLeverPositionLimit>>(result, "火币合约API服务器", "【全仓】查询用户所有杠杆持仓量限制");
             }
         }
         #endregion
@@ -4080,7 +4080,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMasterSubTransfer>(result, "火币合约API服务器", "【通用】母子账户划转");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMasterSubTransfer>(result, "火币合约API服务器", "【通用】母子账户划转");
             }
         }
         #endregion
@@ -4145,7 +4145,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedTransferInner>(result, "火币合约API服务器", "【通用】同账号不同保证金账户的划转");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedTransferInner>(result, "火币合约API服务器", "【通用】同账号不同保证金账户的划转");
             }
         }
         #endregion
@@ -4163,7 +4163,7 @@ static async Task TestUsdtMarginSwapApiAccountEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedApiTradingStatus>(result, "火币合约API服务器", "【通用】获取用户的API指标禁用信息");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedApiTradingStatus>(result, "火币合约API服务器", "【通用】获取用户的API指标禁用信息");
             }
         }
         #endregion
@@ -4202,7 +4202,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossTradeState>>(result, "火币合约API服务器", "【全仓】查询系统交易权限");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossTradeState>>(result, "火币合约API服务器", "【全仓】查询系统交易权限");
             }
         }
         #endregion
@@ -4222,7 +4222,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedSwitchPositionMode>(result, "火币合约API服务器", "【逐仓】切换持仓模式");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedSwitchPositionMode>(result, "火币合约API服务器", "【逐仓】切换持仓模式");
             }
         }
         #endregion
@@ -4242,7 +4242,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossSwitchPositionMode>(result, "火币合约API服务器", "【全仓】切换持仓模式");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossSwitchPositionMode>(result, "火币合约API服务器", "【全仓】切换持仓模式");
             }
         }
         #endregion
@@ -4301,7 +4301,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOrder>(result, "火币合约API服务器", "【逐仓】合约下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedOrder>(result, "火币合约API服务器", "【逐仓】合约下单");
                 }
             }
             #endregion
@@ -4359,13 +4359,13 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOrder>(result, "火币合约API服务器", "【全仓】合约下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossOrder>(result, "火币合约API服务器", "【全仓】合约下单");
                 }
             }
             #endregion
             #region 【逐仓】合约批量下单(PrivateData)
             {
-                HuobiUsdtMarginedIsolatedOrder isolatedOrder = new()
+                WWTHuobiUsdtMarginedIsolatedOrder isolatedOrder = new()
                 {
                     ContractCode = "DOGE-USDT",
                     Direction = EnumConverter.GetString(UmDirection.buy),
@@ -4383,11 +4383,11 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                     ReduceOnly = null,
                     ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
                 };
-                List<HuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new()
+                List<WWTHuobiUsdtMarginedIsolatedOrder> isolatedOrderList = new()
                 {
                     isolatedOrder
                 };
-                IEnumerable<HuobiUsdtMarginedIsolatedOrder> isolatedOrders = isolatedOrderList;
+                IEnumerable<WWTHuobiUsdtMarginedIsolatedOrder> isolatedOrders = isolatedOrderList;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
@@ -4415,13 +4415,13 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedBatchOrder>(result, "火币合约API服务器", "【逐仓】合约批量下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedBatchOrder>(result, "火币合约API服务器", "【逐仓】合约批量下单");
                 }
             }
             #endregion
             #region 【全仓】合约批量下单(PrivateData)
             {
-                HuobiUsdtMarginedCrossOrder crossOrder = new()
+                WWTHuobiUsdtMarginedCrossOrder crossOrder = new()
                 {
                     ContractCode = "DOGE-USDT",
                     Direction = EnumConverter.GetString(UmDirection.buy),
@@ -4441,11 +4441,11 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                     ReduceOnly = null,
                     ClientOrderId = DateTimeConverter.ConvertToMicroseconds(DateTime.Now)
                 };
-                List<HuobiUsdtMarginedCrossOrder> crossOrderList = new()
+                List<WWTHuobiUsdtMarginedCrossOrder> crossOrderList = new()
                 {
                     crossOrder
                 };
-                IEnumerable<HuobiUsdtMarginedCrossOrder> crossOrders = crossOrderList;
+                IEnumerable<WWTHuobiUsdtMarginedCrossOrder> crossOrders = crossOrderList;
                 #region 母用户客户端
                 apiCredentials = new ApiCredentials(mainAccessKey, mainSecretKey);
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
@@ -4473,7 +4473,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossBatchOrder>(result, "火币合约API服务器", "【全仓】合约批量下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossBatchOrder>(result, "火币合约API服务器", "【全仓】合约批量下单");
                 }
             }
             #endregion
@@ -4515,7 +4515,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedCancel>(result, "火币合约API服务器", "【逐仓】撤销合约订单");
+                        ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedCancel>(result, "火币合约API服务器", "【逐仓】撤销合约订单");
                     }
                 }
             }
@@ -4560,7 +4560,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossCancel>(result, "火币合约API服务器", "【全仓】撤销合约订单");
+                        ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossCancel>(result, "火币合约API服务器", "【全仓】撤销合约订单");
                     }
                 }
             }
@@ -4597,7 +4597,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedCancel>(result, "火币合约API服务器", "【逐仓】撤销全部合约单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedCancel>(result, "火币合约API服务器", "【逐仓】撤销全部合约单");
                 }
             }
             #endregion
@@ -4635,7 +4635,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossCancel>(result, "火币合约API服务器", "【全仓】撤销全部合约单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossCancel>(result, "火币合约API服务器", "【全仓】撤销全部合约单");
                 }
             }
             #endregion
@@ -4656,7 +4656,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedSwitchLeverRate>(result, "火币合约API服务器", "【逐仓】切换杠杆");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedSwitchLeverRate>(result, "火币合约API服务器", "【逐仓】切换杠杆");
             }
         }
         #endregion
@@ -4679,7 +4679,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossSwitchLeverRate>(result, "火币合约API服务器", "【全仓】切换杠杆");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossSwitchLeverRate>(result, "火币合约API服务器", "【全仓】切换杠杆");
             }
         }
         #endregion
@@ -4705,7 +4705,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedOrderInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约订单信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedOrderInfo>>(result, "火币合约API服务器", "【逐仓】获取用户的合约订单信息");
             }
         }
         #endregion
@@ -4733,7 +4733,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossOrderInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约订单信息");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossOrderInfo>>(result, "火币合约API服务器", "【全仓】获取用户的合约订单信息");
             }
         }
         #endregion
@@ -4763,7 +4763,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOrderDetail>(result, "火币合约API服务器", "【逐仓】获取用户的合约订单明细信息");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedOrderDetail>(result, "火币合约API服务器", "【逐仓】获取用户的合约订单明细信息");
             }
         }
         #endregion
@@ -4794,7 +4794,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOrderDetail>(result, "火币合约API服务器", "【全仓】获取用户的合约订单明细信息");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossOrderDetail>(result, "火币合约API服务器", "【全仓】获取用户的合约订单明细信息");
             }
         }
         #endregion
@@ -4824,7 +4824,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOpenOrders>(result, "火币合约API服务器", "【逐仓】获取用户的合约当前未成交委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedOpenOrders>(result, "火币合约API服务器", "【逐仓】获取用户的合约当前未成交委托");
             }
         }
         #endregion
@@ -4855,7 +4855,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOpenOrders>(result, "火币合约API服务器", "【全仓】获取用户的合约当前未成交委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossOpenOrders>(result, "火币合约API服务器", "【全仓】获取用户的合约当前未成交委托");
             }
         }
         #endregion
@@ -4887,7 +4887,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedHisOrder>>(result, "火币合约API服务器", "【逐仓】获取用户的合约历史委托");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedHisOrder>>(result, "火币合约API服务器", "【逐仓】获取用户的合约历史委托");
             }
         }
         #endregion
@@ -4920,7 +4920,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossHisOrder>>(result, "火币合约API服务器", "【全仓】获取用户的合约历史委托");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossHisOrder>>(result, "火币合约API服务器", "【全仓】获取用户的合约历史委托");
             }
         }
         #endregion
@@ -4954,7 +4954,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedHisOrder>>(result, "火币合约API服务器", "【逐仓】组合查询合约历史委托");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedHisOrder>>(result, "火币合约API服务器", "【逐仓】组合查询合约历史委托");
             }
         }
         #endregion
@@ -4988,7 +4988,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossHisOrder>>(result, "火币合约API服务器", "【全仓】组合查询合约历史委托");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossHisOrder>>(result, "火币合约API服务器", "【全仓】组合查询合约历史委托");
             }
         }
         #endregion
@@ -5019,7 +5019,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedMatchResults>>(result, "火币合约API服务器", "【逐仓】获取用户的合约历史成交记录");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedMatchResults>>(result, "火币合约API服务器", "【逐仓】获取用户的合约历史成交记录");
             }
         }
         #endregion
@@ -5050,7 +5050,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossMatchResults>>(result, "火币合约API服务器", "【全仓】获取用户的合约历史成交记录");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossMatchResults>>(result, "火币合约API服务器", "【全仓】获取用户的合约历史成交记录");
             }
         }
         #endregion
@@ -5080,7 +5080,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedMatchResults>>(result, "火币合约API服务器", "【逐仓】组合查询用户历史成交记录");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedMatchResults>>(result, "火币合约API服务器", "【逐仓】组合查询用户历史成交记录");
             }
         }
         #endregion
@@ -5111,7 +5111,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedMarketSwapCrossMatchResults>>(result, "火币合约API服务器", "【全仓】组合查询用户历史成交记录");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossMatchResults>>(result, "火币合约API服务器", "【全仓】组合查询用户历史成交记录");
             }
         }
         #endregion
@@ -5143,7 +5143,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedOrder>(result, "火币合约API服务器", "【逐仓】合约闪电平仓下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedOrder>(result, "火币合约API服务器", "【逐仓】合约闪电平仓下单");
                 }
             }
             #endregion
@@ -5173,7 +5173,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossOrder>(result, "火币合约API服务器", "【全仓】合约闪电平仓下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossOrder>(result, "火币合约API服务器", "【全仓】合约闪电平仓下单");
                 }
             }
             #endregion
@@ -5242,7 +5242,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerOrder>(result, "火币合约API服务器", "【逐仓】合约计划委托下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTriggerOrder>(result, "火币合约API服务器", "【逐仓】合约计划委托下单");
                 }
             }
             #endregion
@@ -5290,7 +5290,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerOrder>(result, "火币合约API服务器", "【全仓】合约计划委托下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTriggerOrder>(result, "火币合约API服务器", "【全仓】合约计划委托下单");
                 }
             }
             #endregion
@@ -5328,7 +5328,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】合约计划委托撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】合约计划委托撤单");
                 }
             }
             #endregion
@@ -5370,7 +5370,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】合约计划委托撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】合约计划委托撤单");
                 }
             }
             #endregion
@@ -5410,7 +5410,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】合约计划委托全部撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTriggerCancel>(result, "火币合约API服务器", "【逐仓】合约计划委托全部撤单");
                 }
             }
             #endregion
@@ -5454,7 +5454,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】合约计划委托全部撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTriggerCancel>(result, "火币合约API服务器", "【全仓】合约计划委托全部撤单");
                 }
             }
             #endregion
@@ -5489,7 +5489,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerOpenOrders>(result, "火币合约API服务器", "【逐仓】获取计划委托当前委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTriggerOpenOrders>(result, "火币合约API服务器", "【逐仓】获取计划委托当前委托");
             }
         }
         #endregion
@@ -5525,7 +5525,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerOpenOrders>(result, "火币合约API服务器", "【全仓】合约计划委托全部撤单");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTriggerOpenOrders>(result, "火币合约API服务器", "【全仓】合约计划委托全部撤单");
             }
         }
         #endregion
@@ -5565,7 +5565,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTriggerHisorders>(result, "火币合约API服务器", "【逐仓】获取计划委托历史委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTriggerHisorders>(result, "火币合约API服务器", "【逐仓】获取计划委托历史委托");
             }
         }
         #endregion
@@ -5607,7 +5607,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTriggerHisorders>(result, "火币合约API服务器", "【全仓】获取计划委托历史委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTriggerHisorders>(result, "火币合约API服务器", "【全仓】获取计划委托历史委托");
             }
         }
         #endregion
@@ -5658,7 +5658,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslOrder>(result, "火币合约API服务器", "【逐仓】对仓位设置止盈止损订单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTpslOrder>(result, "火币合约API服务器", "【逐仓】对仓位设置止盈止损订单");
                 }
             }
             #endregion
@@ -5709,7 +5709,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslOrder>(result, "火币合约API服务器", "【全仓】对仓位设置止盈止损订单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTpslOrder>(result, "火币合约API服务器", "【全仓】对仓位设置止盈止损订单");
                 }
             }
             #endregion
@@ -5749,7 +5749,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单撤单");
+                        ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTpslCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单撤单");
                     }
                 }
             }
@@ -5794,7 +5794,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单撤单");
+                        ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTpslCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单撤单");
                     }
                 }
             }
@@ -5835,7 +5835,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单全部撤单");
+                        ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTpslCancel>(result, "火币合约API服务器", "【逐仓】止盈止损订单全部撤单");
                     }
                 }
             }
@@ -5880,7 +5880,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                     }
                     else
                     {
-                        ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单全部撤单");
+                        ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTpslCancel>(result, "火币合约API服务器", "【全仓】止盈止损订单全部撤单");
                     }
                 }
             }
@@ -5916,7 +5916,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslOpenOrders>(result, "火币合约API服务器", "【逐仓】查询止盈止损订单当前委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTpslOpenOrders>(result, "火币合约API服务器", "【逐仓】查询止盈止损订单当前委托");
             }
         }
         #endregion
@@ -5952,7 +5952,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslOpenOrders>(result, "火币合约API服务器", "【全仓】查询止盈止损订单当前委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTpslOpenOrders>(result, "火币合约API服务器", "【全仓】查询止盈止损订单当前委托");
             }
         }
         #endregion
@@ -5990,7 +5990,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTpslHisorders>(result, "火币合约API服务器", "【逐仓】查询止盈止损订单历史委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTpslHisorders>(result, "火币合约API服务器", "【逐仓】查询止盈止损订单历史委托");
             }
         }
         #endregion
@@ -6030,7 +6030,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTpslHisorders>(result, "火币合约API服务器", "【全仓】查询止盈止损订单历史委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTpslHisorders>(result, "火币合约API服务器", "【全仓】查询止盈止损订单历史委托");
             }
         }
         #endregion
@@ -6061,7 +6061,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedRelationTpslOrder>(result, "火币合约API服务器", "【逐仓】查询开仓单关联的止盈止损订单详情");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedRelationTpslOrder>(result, "火币合约API服务器", "【逐仓】查询开仓单关联的止盈止损订单详情");
             }
         }
         #endregion
@@ -6094,7 +6094,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossRelationTpslOrder>(result, "火币合约API服务器", "【全仓】查询开仓单关联的止盈止损订单详情");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossRelationTpslOrder>(result, "火币合约API服务器", "【全仓】查询开仓单关联的止盈止损订单详情");
             }
         }
         #endregion
@@ -6139,7 +6139,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackOrder>(result, "火币合约API服务器", "【逐仓】跟踪委托订单下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTrackOrder>(result, "火币合约API服务器", "【逐仓】跟踪委托订单下单");
                 }
             }
             #endregion
@@ -6184,7 +6184,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackOrder>(result, "火币合约API服务器", "【全仓】跟踪委托订单下单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTrackOrder>(result, "火币合约API服务器", "【全仓】跟踪委托订单下单");
                 }
             }
             #endregion
@@ -6222,7 +6222,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackCancel>(result, "火币合约API服务器", "【逐仓】跟踪委托订单撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTrackCancel>(result, "火币合约API服务器", "【逐仓】跟踪委托订单撤单");
                 }
             }
             #endregion
@@ -6264,7 +6264,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackCancel>(result, "火币合约API服务器", "【全仓】跟踪委托订单撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTrackCancel>(result, "火币合约API服务器", "【全仓】跟踪委托订单撤单");
                 }
             }
             #endregion
@@ -6304,7 +6304,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackCancel>(result, "火币合约API服务器", "【逐仓】跟踪委托订单全部撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTrackCancel>(result, "火币合约API服务器", "【逐仓】跟踪委托订单全部撤单");
                 }
             }
             #endregion
@@ -6348,7 +6348,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
                 }
                 else
                 {
-                    ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackCancel>(result, "火币合约API服务器", "【全仓】跟踪委托订单全部撤单");
+                    ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTrackCancel>(result, "火币合约API服务器", "【全仓】跟踪委托订单全部撤单");
                 }
             }
             #endregion
@@ -6383,7 +6383,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackOpenOrders>(result, "火币合约API服务器", "【逐仓】跟踪委托订单当前委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTrackOpenOrders>(result, "火币合约API服务器", "【逐仓】跟踪委托订单当前委托");
             }
         }
         #endregion
@@ -6419,7 +6419,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackOpenOrders>(result, "火币合约API服务器", "【全仓】跟踪委托订单当前委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTrackOpenOrders>(result, "火币合约API服务器", "【全仓】跟踪委托订单当前委托");
             }
         }
         #endregion
@@ -6459,7 +6459,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapIsolatedTrackHisorders>(result, "火币合约API服务器", "【逐仓】跟踪委托订单历史委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapIsolatedTrackHisorders>(result, "火币合约API服务器", "【逐仓】跟踪委托订单历史委托");
             }
         }
         #endregion
@@ -6501,7 +6501,7 @@ static async Task TestUsdtMarginSwapApiStrategyOrderEndpoints()
             }
             else
             {
-                ErrorInfoOutput<HuobiUsdtMarginedMarketSwapCrossTrackHisorders>(result, "火币合约API服务器", "【全仓】跟踪委托订单历史委托");
+                ErrorInfoOutput<WWTHuobiUsdtMarginedMarketSwapCrossTrackHisorders>(result, "火币合约API服务器", "【全仓】跟踪委托订单历史委托");
             }
         }
         #endregion
@@ -6542,7 +6542,7 @@ static async Task TestUsdtMarginSwapApiTransferringEndpoints()
             }
             else
             {
-                ErrorInfoOutput<IEnumerable<HuobiUsdtMarginedSwapCrossTransferState>>(result, "火币合约API服务器", "【全仓】查询系统划转权限");
+                ErrorInfoOutput<IEnumerable<WWTHuobiUsdtMarginedSwapCrossTransferState>>(result, "火币合约API服务器", "【全仓】查询系统划转权限");
             }
         }
         #endregion

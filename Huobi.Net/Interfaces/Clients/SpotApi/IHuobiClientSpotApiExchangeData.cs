@@ -117,7 +117,7 @@ namespace Huobi.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<HuobiMarketStatus>> GetMarketStatusAsync(CancellationToken ct = default);
+        Task<WebCallResult<WWTHuobiMarketStatus>> GetMarketStatusAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets a list of supported symbols

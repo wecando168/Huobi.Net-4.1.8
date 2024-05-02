@@ -55,10 +55,10 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapUnifiedAccountType>> GetLinearSwapUnifiedAccountTypeAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedMarketSwapUnifiedAccountType>> GetLinearSwapUnifiedAccountTypeAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.SendHuobiV3Request<HuobiUsdtMarginedMarketSwapUnifiedAccountType>(
-                uri: _baseClient.GetUrl(GetLinearSwapUnifiedAccountTypeEndpoint, ApiPath.LinearSwapApi, "3"),
+            var result = await _baseClient.SendHuobiV3Request<WWTHuobiUsdtMarginedMarketSwapUnifiedAccountType>(
+                uri: _baseClient.GetUrl(GetLinearSwapUnifiedAccountTypeEndpoint, WWTApiPath.LinearSwapApi, "3"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: null,
@@ -68,15 +68,15 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapSwitchAccountType>> LinearSwapSwitchAccountTypeAsync(int accountType, CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedMarketSwapSwitchAccountType>> LinearSwapSwitchAccountTypeAsync(int accountType, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
                 { "account_type", accountType }
             };
 
-            var result = await _baseClient.SendHuobiV3Request<HuobiUsdtMarginedMarketSwapSwitchAccountType>(
-                uri: _baseClient.GetUrl(LinearSwapSwitchAccountTypeEndpoint, ApiPath.LinearSwapApi, "3"),
+            var result = await _baseClient.SendHuobiV3Request<WWTHuobiUsdtMarginedMarketSwapSwitchAccountType>(
+                uri: _baseClient.GetUrl(LinearSwapSwitchAccountTypeEndpoint, WWTApiPath.LinearSwapApi, "3"),
                 method: HttpMethod.Post,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -86,15 +86,15 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapFundingRate>> GetLinearSwapFundingRateAsync(string contractCode, CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedMarketSwapFundingRate>> GetLinearSwapFundingRateAsync(string contractCode, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
                 { "contract_code", contractCode }
             };
 
-            var result = await _baseClient.SendHuobiRequest<HuobiUsdtMarginedMarketSwapFundingRate>(
-                uri: _baseClient.GetUrl(GetLinearSwapFundingRateEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedMarketSwapFundingRate>(
+                uri: _baseClient.GetUrl(GetLinearSwapFundingRateEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -105,13 +105,13 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
 
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapFundingRate>>> GetLinearSwapBatchFundingRateAsync(string? contractCode = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapFundingRate>>> GetLinearSwapBatchFundingRateAsync(string? contractCode = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapFundingRate>>(
-                uri: _baseClient.GetUrl(GetLinearSwapBatchFundingRateEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapFundingRate>>(
+                uri: _baseClient.GetUrl(GetLinearSwapBatchFundingRateEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -121,7 +121,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedMarketSwapHistoricalFundingRate>> GetLinearSwapHistoricalFundingRateAsync(string contractCode, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedMarketSwapHistoricalFundingRate>> GetLinearSwapHistoricalFundingRateAsync(string contractCode, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default)
         {
             if (pageSize > 50)
             {
@@ -134,8 +134,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("page_index", pageIndex == null ? 1 : pageIndex);
             parameters.AddOptionalParameter("page_size", pageSize == null ? 20 : pageSize);
 
-            var result = await _baseClient.SendHuobiRequest<HuobiUsdtMarginedMarketSwapHistoricalFundingRate>(
-                uri: _baseClient.GetUrl(GetLinearSwapHistoricalFundingRateEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedMarketSwapHistoricalFundingRate>(
+                uri: _baseClient.GetUrl(GetLinearSwapHistoricalFundingRateEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -145,7 +145,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapLiquidationOrders>>> GetLinearSwapLiquidationOrdersAsync(int tradeType, string contractCode, string? pair = null, long? startTime = null, long? endTime = null, string? direct = null, long? fromId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapLiquidationOrders>>> GetLinearSwapLiquidationOrdersAsync(int tradeType, string contractCode, string? pair = null, long? startTime = null, long? endTime = null, string? direct = null, long? fromId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
@@ -158,8 +158,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("direct", direct);
             parameters.AddOptionalParameter("from_id", fromId);
 
-            var result = await _baseClient.SendHuobiV3Request<IEnumerable<HuobiUsdtMarginedMarketSwapLiquidationOrders>>(
-                uri: _baseClient.GetUrl(GetLinearSwapLiquidationOrdersEndpoint, ApiPath.LinearSwapApi, "3"),
+            var result = await _baseClient.SendHuobiV3Request<IEnumerable<WWTHuobiUsdtMarginedMarketSwapLiquidationOrders>>(
+                uri: _baseClient.GetUrl(GetLinearSwapLiquidationOrdersEndpoint, WWTApiPath.LinearSwapApi, "3"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -169,7 +169,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedSettlementRecords>> GetLinearSwapSettlementRecordsAsync(string contractCode, long? startTime = null, long? endTime = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedSettlementRecords>> GetLinearSwapSettlementRecordsAsync(string contractCode, long? startTime = null, long? endTime = null, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
@@ -180,8 +180,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("page_index", pageIndex);
             parameters.AddOptionalParameter("page_size", pageSize);
 
-            var result = await _baseClient.SendHuobiRequest<HuobiUsdtMarginedSettlementRecords>(
-                uri: _baseClient.GetUrl(GetLinearSwapSettlementRecordsEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedSettlementRecords>(
+                uri: _baseClient.GetUrl(GetLinearSwapSettlementRecordsEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -191,7 +191,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedEliteAccountRatio>> GetLinearSwapEliteAccountRatioAsync(string contractCode, string period, CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedEliteAccountRatio>> GetLinearSwapEliteAccountRatioAsync(string contractCode, string period, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
@@ -199,8 +199,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 { "period", period }
             };
 
-            var result = await _baseClient.SendHuobiRequest<HuobiUsdtMarginedEliteAccountRatio>(
-                uri: _baseClient.GetUrl(GetLinearSwapEliteAccountRatioEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedEliteAccountRatio>(
+                uri: _baseClient.GetUrl(GetLinearSwapEliteAccountRatioEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -210,7 +210,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedElitePositionRatio>> GetLinearSwapElitePositionRatioAsync(string contractCode, string period, CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedElitePositionRatio>> GetLinearSwapElitePositionRatioAsync(string contractCode, string period, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
@@ -218,8 +218,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
                 { "period", period }
             };
 
-            var result = await _baseClient.SendHuobiRequest<HuobiUsdtMarginedElitePositionRatio>(
-                uri: _baseClient.GetUrl(GetLinearSwapElitePositionRatioEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedElitePositionRatio>(
+                uri: _baseClient.GetUrl(GetLinearSwapElitePositionRatioEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -229,13 +229,13 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedApiState>>> GetLinearSwapApiStateAsync(string? contractCode = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedApiState>>> GetLinearSwapApiStateAsync(string? contractCode = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedApiState>>(
-                uri: _baseClient.GetUrl(GetLinearSwapApiStateEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedApiState>>(
+                uri: _baseClient.GetUrl(GetLinearSwapApiStateEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -245,7 +245,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketCrossLadderMargin>>> GetLinearSwapCrossLadderMarginAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketCrossLadderMargin>>> GetLinearSwapCrossLadderMarginAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode);
@@ -253,8 +253,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("contract_type", contractType);
             parameters.AddOptionalParameter("business_type", businessType);
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketCrossLadderMargin>>(
-                uri: _baseClient.GetUrl(GetLinearSwapCrossLadderMarginEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketCrossLadderMargin>>(
+                uri: _baseClient.GetUrl(GetLinearSwapCrossLadderMarginEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -264,13 +264,13 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketIsolatedLadderMargin>>> GetLinearSwapLadderMarginAsync(string? contractCode = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketIsolatedLadderMargin>>> GetLinearSwapLadderMarginAsync(string? contractCode = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode);
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketIsolatedLadderMargin>>(
-                uri: _baseClient.GetUrl(GetLinearSwapLadderMarginEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketIsolatedLadderMargin>>(
+                uri: _baseClient.GetUrl(GetLinearSwapLadderMarginEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -280,42 +280,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedEliteSettlementPrice>>> GetLinearSwapEstimatedSettlementPriceAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object> { };
-            parameters.AddOptionalParameter("contract_code", contractCode);
-            parameters.AddOptionalParameter("pair", pair);
-            parameters.AddOptionalParameter("contract_type", contractType);
-            parameters.AddOptionalParameter("business_type", businessType);
-
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedEliteSettlementPrice>>(
-                uri: _baseClient.GetUrl(GetLinearSwapEstimatedSettlementPriceEndpoint, ApiPath.LinearSwapApi, "1"),
-                method: HttpMethod.Get,
-                cancellationToken: ct,
-                parameters: parameters,
-                signed: false
-                ).ConfigureAwait(false);
-            return result;
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedAdjustfactor>>> GetLinearSwapAdjustfactorAsync(string? contractCode = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object> { };
-            parameters.AddOptionalParameter("contract_code", contractCode);
-
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapIsolatedAdjustfactor>>(
-                uri: _baseClient.GetUrl(GetLinearSwapAdjustfactorEndpoint, ApiPath.LinearSwapApi, "1"),
-                method: HttpMethod.Get,
-                cancellationToken: ct,
-                parameters: parameters,
-                signed: false
-                ).ConfigureAwait(false);
-            return result;
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapCrossAdjustfactor>>> GetLinearSwapCrossAdjustfactorAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedEliteSettlementPrice>>> GetLinearSwapEstimatedSettlementPriceAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode);
@@ -323,8 +288,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("contract_type", contractType);
             parameters.AddOptionalParameter("business_type", businessType);
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapCrossAdjustfactor>>(
-                uri: _baseClient.GetUrl(GetLinearSwapCrossAdjustfactorEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedEliteSettlementPrice>>(
+                uri: _baseClient.GetUrl(GetLinearSwapEstimatedSettlementPriceEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -334,7 +299,42 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedInsuranceFund>> GetLinearSwapInsuranceFundAsync(string contractCode, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedAdjustfactor>>> GetLinearSwapAdjustfactorAsync(string? contractCode = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object> { };
+            parameters.AddOptionalParameter("contract_code", contractCode);
+
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIsolatedAdjustfactor>>(
+                uri: _baseClient.GetUrl(GetLinearSwapAdjustfactorEndpoint, WWTApiPath.LinearSwapApi, "1"),
+                method: HttpMethod.Get,
+                cancellationToken: ct,
+                parameters: parameters,
+                signed: false
+                ).ConfigureAwait(false);
+            return result;
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossAdjustfactor>>> GetLinearSwapCrossAdjustfactorAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object> { };
+            parameters.AddOptionalParameter("contract_code", contractCode);
+            parameters.AddOptionalParameter("pair", pair);
+            parameters.AddOptionalParameter("contract_type", contractType);
+            parameters.AddOptionalParameter("business_type", businessType);
+
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapCrossAdjustfactor>>(
+                uri: _baseClient.GetUrl(GetLinearSwapCrossAdjustfactorEndpoint, WWTApiPath.LinearSwapApi, "1"),
+                method: HttpMethod.Get,
+                cancellationToken: ct,
+                parameters: parameters,
+                signed: false
+                ).ConfigureAwait(false);
+            return result;
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedInsuranceFund>> GetLinearSwapInsuranceFundAsync(string contractCode, int? pageIndex = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
@@ -343,8 +343,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("page_index", pageIndex);
             parameters.AddOptionalParameter("page_size", pageSize);
 
-            var result = await _baseClient.SendHuobiRequest<HuobiUsdtMarginedInsuranceFund>(
-                uri: _baseClient.GetUrl(GetLinearSwapInsuranceFundEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedInsuranceFund>(
+                uri: _baseClient.GetUrl(GetLinearSwapInsuranceFundEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -354,14 +354,14 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedRiskInfo>>> GetLinearSwapRiskInfoAsync(string? contractCode = null, string? businessType = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedRiskInfo>>> GetLinearSwapRiskInfoAsync(string? contractCode = null, string? businessType = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode);
             parameters.AddOptionalParameter("business_type", businessType);
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedRiskInfo>>(
-                uri: _baseClient.GetUrl(GetLinearSwapRiskInfoEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedRiskInfo>>(
+                uri: _baseClient.GetUrl(GetLinearSwapRiskInfoEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -371,7 +371,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapPriceLimit>>> GetLinearSwapPriceLimitAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapPriceLimit>>> GetLinearSwapPriceLimitAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode?.ToString(CultureInfo.InvariantCulture));
@@ -379,8 +379,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("contract_type", contractType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("business_type", businessType?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapPriceLimit>>(
-                uri: _baseClient.GetUrl(GetLinearSwapPriceLimitEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapPriceLimit>>(
+                uri: _baseClient.GetUrl(GetLinearSwapPriceLimitEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -390,7 +390,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapOpenInterest>>> GetLinearSwapOpenInterestAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapOpenInterest>>> GetLinearSwapOpenInterestAsync(string? contractCode = null, string? pair = null, string? contractType = null, string? businessType = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode?.ToString(CultureInfo.InvariantCulture));
@@ -398,8 +398,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("contract_type", contractType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("business_type", businessType?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapOpenInterest>>(
-                uri: _baseClient.GetUrl(GetLinearSwapOpenInterestEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapOpenInterest>>(
+                uri: _baseClient.GetUrl(GetLinearSwapOpenInterestEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -409,7 +409,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapContractInfo>>> GetLinearSwapContractInfoAsync(string? contractCode = null, string? supportMarginMode = null, string? pari = null, string? contractType = null, string? businessType = "all", CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapContractInfo>>> GetLinearSwapContractInfoAsync(string? contractCode = null, string? supportMarginMode = null, string? pari = null, string? contractType = null, string? businessType = "all", CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode?.ToString(CultureInfo.InvariantCulture));
@@ -418,8 +418,8 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             parameters.AddOptionalParameter("contract_type", contractType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("business_type", businessType?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapContractInfo>>(
-                uri: _baseClient.GetUrl(GetLinearSwapContractInfoEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapContractInfo>>(
+                uri: _baseClient.GetUrl(GetLinearSwapContractInfoEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -429,13 +429,13 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<HuobiUsdtMarginedMarketSwapIndex>>> GetLinearSwapIndexAsync(string? contractCode = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIndex>>> GetLinearSwapIndexAsync(string? contractCode = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { };
             parameters.AddOptionalParameter("contract_code", contractCode?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendHuobiRequest<IEnumerable<HuobiUsdtMarginedMarketSwapIndex>>(
-                uri: _baseClient.GetUrl(GetLinearSwapContractInfoEndpoint, ApiPath.LinearSwapApi, "1"),
+            var result = await _baseClient.SendHuobiRequest<IEnumerable<WWTHuobiUsdtMarginedMarketSwapIndex>>(
+                uri: _baseClient.GetUrl(GetLinearSwapContractInfoEndpoint, WWTApiPath.LinearSwapApi, "1"),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
                 parameters: parameters,
@@ -471,9 +471,9 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedMarketHeartbeat>> GetLinearSwapHeartbeatAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedMarketHeartbeat>> GetLinearSwapHeartbeatAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendHuobiRequest<HuobiUsdtMarginedMarketHeartbeat>(
+            return await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedMarketHeartbeat>(
                 uri: new Uri(GetLinearSwapHeartbeatEndpoint),
                 method: HttpMethod.Get,
                 cancellationToken: ct,
@@ -485,9 +485,9 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<HuobiUsdtMarginedMarketStatus>> GetLinearSwapSummaryAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<WWTHuobiUsdtMarginedMarketStatus>> GetLinearSwapSummaryAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendHuobiRequest<HuobiUsdtMarginedMarketStatus>(
+            return await _baseClient.SendHuobiRequest<WWTHuobiUsdtMarginedMarketStatus>(
                 uri: new Uri(GetLinearSwapSummaryEndpoint),
                 method: HttpMethod.Get,
                 cancellationToken: ct,

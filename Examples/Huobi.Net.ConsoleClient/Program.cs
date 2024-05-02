@@ -43,7 +43,7 @@ namespace Huobi.Net.ConsoleClient
                 Console.WriteLine($"PrivateKey:{(object.Equals(apiCredentials.PrivateKey, null) ? "null" : apiCredentials.PrivateKey.ToString().Trim())}");
                 Console.WriteLine($"Secret:{(object.Equals(apiCredentials.Secret, null) ? "null" : apiCredentials.Secret.ToString().Trim())}");
             }
-            await socketClient.SpotStreams.SubscribeToKlineUpdatesAsync("ethusdt", Enums.KlineInterval.FiveMinutes, data =>
+            await socketClient.SpotApi.SubscribeToKlineUpdatesAsync("ethusdt", Enums.KlineInterval.FiveMinutes, data =>
             {
                 Console.WriteLine("Received kline update. Last price: " + data.Data.ClosePrice);
             });

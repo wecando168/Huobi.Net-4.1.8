@@ -30,7 +30,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <param name="marginAccount">保证金账户，不填则返回所有全仓数据	"USDT"，目前只有一个全仓账户（USDT）</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<HuobiUsdtMarginedSwapCrossTransferState>>> GetLinearSwapCrossTransferStateAsync(string marginAccount, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<WWTHuobiUsdtMarginedSwapCrossTransferState>>> GetLinearSwapCrossTransferStateAsync(string marginAccount, CancellationToken ct = default);
 
         /// <summary>
         /// 
