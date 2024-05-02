@@ -50,7 +50,7 @@ namespace Huobi.Net.Interfaces.Clients.UsdtMarginSwapApi
         /// <summary>
         /// Trade
         /// </summary>
-        IHuobiClientUsdtMarginSwapTrade Trade { get; }
+        IHuobiClientUsdtMarginSwapApiTrading Trading { get; }
 
 
         /// <summary>

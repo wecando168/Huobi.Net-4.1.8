@@ -53,7 +53,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
         public IHuobiClientUsdtMarginSwapAccount Account { get; }
 
         /// <inheritdoc />
-        public IHuobiClientUsdtMarginSwapTrade Trade { get; }
+        public IHuobiClientUsdtMarginSwapApiTrading Trading { get; }
 
         /// <inheritdoc />
         public IHuobiClientUsdtMarginSwapStrategyOrder Strategy { get; }
@@ -74,7 +74,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             ReferenceData = new HuobiClientUsdtMarginSwapApiReferenceData(this);
             MarketData = new HuobiClientUsdtMarginSwapApiMarketData(this);
             Account = new HuobiClientUsdtMarginSwapApiAccount(this);
-            Trade = new HuobiClientUsdtMarginSwapApiTrade(this);
+            Trading = new HuobiClientUsdtMarginSwapApiTrading(this);
             Strategy = new HuobiClientUsdtMarginSwapApiStrategyOrder(this);
             Transferring = new HuobiClientUsdtMarginSwapApiTransferring(this);
 

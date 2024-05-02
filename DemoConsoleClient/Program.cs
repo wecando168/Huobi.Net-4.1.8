@@ -4191,7 +4191,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】查询系统交易权限");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossTradeStateAsync();
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossTradeStateAsync();
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4215,7 +4215,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】切换持仓模式");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapSwitchPositionModeAsync(marginAccount, positionMode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapSwitchPositionModeAsync(marginAccount, positionMode);
             if (result.Success)
             {
                 Console.WriteLine($"保证金账户：{result.Data.MarginAccount} 持仓模式：{result.Data.PositionMode}");
@@ -4235,7 +4235,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】切换持仓模式");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossSwitchPositionModeAsync(marginAccount, positionMode);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCrossSwitchPositionModeAsync(marginAccount, positionMode);
             if (result.Success)
             {
                 Console.WriteLine($"保证金账户：{result.Data.MarginAccount} 持仓模式：{result.Data.PositionMode}");
@@ -4273,7 +4273,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【逐仓】合约下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapOrderAsync(
                     contractCode: contractCode,
                     direction: direction,
                     offset: offset,
@@ -4329,7 +4329,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【全仓】合约下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossOrderAsync(
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCrossOrderAsync(
                     contractCode: contractCode,
                     direction: direction,
                     offset: offset,
@@ -4393,7 +4393,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【逐仓】合约批量下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapBatchorderAsync(isolatedOrders);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapBatchorderAsync(isolatedOrders);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -4451,7 +4451,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【全仓】合约批量下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossBatchorderAsync(crossOrders);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCrossBatchorderAsync(crossOrders);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -4493,7 +4493,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCancelAsync(contractCode, cancelIsolatedOrderIds, cancelIsolatedClientOrderIds);
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCancelAsync(contractCode, cancelIsolatedOrderIds, cancelIsolatedClientOrderIds);
                     if (result.Success)
                     {
                         foreach (var item in result.Data.ErrorsList)
@@ -4538,7 +4538,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 }
                 else
                 {
-                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossCancelAsync(contractCode, cancelCrossOrderIds, cancelCrossClientOrderIds, pair, contractType);
+                    var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCrossCancelAsync(contractCode, cancelCrossOrderIds, cancelCrossClientOrderIds, pair, contractType);
                     if (result.Success)
                     {
                         foreach (var item in result.Data.ErrorsList)
@@ -4575,7 +4575,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【逐仓】撤销全部合约单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCancelAllAsync(contractCode, direction, offset);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCancelAllAsync(contractCode, direction, offset);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -4613,7 +4613,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【全仓】撤销全部合约单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossCancelAllAsync(contractCode, pair, contractType, direction, offset);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCrossCancelAllAsync(contractCode, pair, contractType, direction, offset);
                 if (result.Success)
                 {
                     foreach (var item in result.Data.ErrorsList)
@@ -4649,7 +4649,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】切换杠杆");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapSwitchLeverRateAsync(contractCode, leverRate);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapSwitchLeverRateAsync(contractCode, leverRate);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
@@ -4671,7 +4671,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】切换杠杆");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossSwitchLeverRateAsync(contractCode, leverRate, pair, contractType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCrossSwitchLeverRateAsync(contractCode, leverRate, pair, contractType);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}\r\n" +
@@ -4693,7 +4693,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】获取用户的合约订单信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4720,7 +4720,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】获取用户的合约订单信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds, pair);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossOrderInfoAsync(contractCode, isolatedOrderIds, isolatedClientOrderIds, pair);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4750,7 +4750,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】获取用户的合约订单明细信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapOrderDetailAsync(orderId, contractCode, createdTimestamp, orderType, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapOrderDetailAsync(orderId, contractCode, createdTimestamp, orderType, pageIndex, pageSize);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
@@ -4781,7 +4781,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】获取用户的合约订单明细信息");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossOrderDetailAsync(orderId, contractCode, pair, createdTimestamp, orderType, pageIndex, pageSize);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossOrderDetailAsync(orderId, contractCode, pair, createdTimestamp, orderType, pageIndex, pageSize);
             if (result.Success)
             {
                 Console.WriteLine($"合约代码：{result.Data.ContractCode}  保证金模式：{result.Data.MarginMode} 当前杠杆倍数：{result.Data.LeverRate}");
@@ -4810,7 +4810,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】获取用户的合约当前未成交委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapOpenordersAsync(contractCode, pageIndex, pageSize, sortBy, tradeType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapOpenordersAsync(contractCode, pageIndex, pageSize, sortBy, tradeType);
             if (result.Success)
             {
                 Console.WriteLine($"总页数：{result.Data.TotalPage}  当前页：{result.Data.CurrentPage} 总条数：{result.Data.TotalSize}");
@@ -4841,7 +4841,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】获取用户的合约当前未成交委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossOpenordersAsync(contractCode, pair, pageIndex, pageSize, sortBy, tradeType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossOpenordersAsync(contractCode, pair, pageIndex, pageSize, sortBy, tradeType);
             if (result.Success)
             {
                 Console.WriteLine($"总页数：{result.Data.TotalPage}  当前页：{result.Data.CurrentPage} 总条数：{result.Data.TotalSize}");
@@ -4874,7 +4874,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】获取用户的合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapHisordersAsync(tradeType, type, status, contractCode, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapHisordersAsync(tradeType, type, status, contractCode, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4907,7 +4907,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】获取用户的合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossHisordersAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossHisordersAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4941,7 +4941,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】组合查询合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -4975,7 +4975,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】组合查询合约历史委托");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossHisordersExactAsync(tradeType, type, status, contractCode, pair, startTime, endTime, direct, fromId, priceType);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5006,7 +5006,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】获取用户的合约历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5037,7 +5037,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】获取用户的合约历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossMatchresultsAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5067,7 +5067,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【逐仓】组合查询用户历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapMatchresultsExactAsync(contractCode, tradeType, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapMatchresultsExactAsync(contractCode, tradeType, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5098,7 +5098,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
             huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
             #endregion
             Console.WriteLine("【全仓】组合查询用户历史成交记录");
-            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.GetLinearSwapCrossMatchresultsExactAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
+            var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.GetLinearSwapCrossMatchresultsExactAsync(tradeType, contractCode, pair, startTime, endTime, direct, fromId);
             if (result.Success)
             {
                 foreach (var item in result.Data)
@@ -5131,7 +5131,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【逐仓】合约闪电平仓下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapLightningClosePositionAsync(contractCode, volume, direction, clientOrderId, OrderPriceType);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapLightningClosePositionAsync(contractCode, volume, direction, clientOrderId, OrderPriceType);
                 if (result.Success)
                 {
                     if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
@@ -5161,7 +5161,7 @@ static async Task TestUsdtMarginSwapApiTradeEndpoints()
                 huobiUsdtMarginedClient.SetApiCredentials(apiCredentials);
                 #endregion
                 Console.WriteLine("【全仓】合约闪电平仓下单");
-                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trade.LinearSwapCrossLightningClosePositionAsync(volume, direction, contractCode, pair, contract_type, clientOrderId, OrderPriceType);
+                var result = await huobiUsdtMarginedClient.UsdtMarginSwapApi.Trading.LinearSwapCrossLightningClosePositionAsync(volume, direction, contractCode, pair, contract_type, clientOrderId, OrderPriceType);
                 if (result.Success)
                 {
                     if (result.Data != null && result.Data.OrderId != null && result.Data.ClientOrderId != null)
