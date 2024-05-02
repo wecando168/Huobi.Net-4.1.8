@@ -712,183 +712,6 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiExchangeData.GetLinearSwapPremiumIndexKlineAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapUnifiedAccountTypeAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.LinearSwapSwitchAccountTypeAsync(System.Int32,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapFundingRateAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapBatchFundingRateAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapHistoricalFundingRateAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapLiquidationOrdersAsync(System.Int32,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapSettlementRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapEliteAccountRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapElitePositionRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapApiStateAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapCrossLadderMarginAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapLadderMarginAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapEstimatedSettlementPriceAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapAdjustfactorAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapCrossAdjustfactorAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapInsuranceFundAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapRiskInfoAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapPriceLimitAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapOpenInterestAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapContractInfoAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapIndexAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapServerTimestampAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapServerDateTimeAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapHeartbeatAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapSummaryAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerOrderAsync(System.String,System.String,System.Decimal,System.Int64,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmTriggerType},System.Decimal,System.Int64,System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTriggerOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTriggerOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTriggerHisordersAsync(System.String,System.Int32,System.String,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTriggerHisordersAsync(System.Int32,System.String,System.Int32,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Decimal,System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslCancelAllAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslCancelAllAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTpslOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTpslOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTpslHisordersAsync(System.String,System.String,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTpslHisordersAsync(System.String,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapRelationTpslOrderAsync(System.String,System.Int64,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossRelationTpslOrderAsync(System.Int64,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackOrderAsync(System.String,System.String,System.Int32,System.Decimal,System.Decimal,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Int64,System.Decimal,System.Decimal,System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTrackOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTrackOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTrackHisordersAsync(System.String,System.String,System.Int32,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTrackHisordersAsync(System.String,System.Int32,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading">
             <inheritdoc />
         </member>
@@ -1045,15 +868,6 @@
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTrading.LinearSwapCrossLightningClosePositionAsync(System.Int64,System.String,System.String,System.String,System.String,System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTransferring">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTransferring.GetLinearSwapCrossTransferStateAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiClientUsdtMarginSwapApiTransferring.LinearSwapAccountTransferAsync(System.String,System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiSocketClientUsdtMarginSwapApi">
             <inheritdoc />
         </member>
@@ -1208,6 +1022,192 @@
             <inheritdoc />
         </member>
         <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.HuobiSocketClientUsdtMarginSwapApi.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
+            <inheritdoc />
+        </member>
+        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapUnifiedAccountTypeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.LinearSwapSwitchAccountTypeAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapFundingRateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapBatchFundingRateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapHistoricalFundingRateAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapLiquidationOrdersAsync(System.Int32,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapSettlementRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapEliteAccountRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapElitePositionRatioAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapApiStateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapCrossLadderMarginAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapLadderMarginAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapEstimatedSettlementPriceAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapAdjustfactorAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapCrossAdjustfactorAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapInsuranceFundAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapRiskInfoAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapPriceLimitAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapOpenInterestAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapContractInfoAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapServerTimestampAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapServerDateTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapHeartbeatAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiReferenceData.GetLinearSwapSummaryAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerOrderAsync(System.String,System.String,System.Decimal,System.Int64,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmTriggerType},System.Decimal,System.Int64,System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTriggerCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTriggerCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTriggerOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTriggerOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTriggerHisordersAsync(System.String,System.Int32,System.String,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTriggerHisordersAsync(System.Int32,System.String,System.Int32,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslOrderAsync(System.String,CryptoExchange.Net.CommonObjects.UmDirection,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},CryptoExchange.Net.CommonObjects.UmOrderPriceType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Decimal,System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTpslCancelAllAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTpslCancelAllAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTpslOpenordersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTpslOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTpslHisordersAsync(System.String,System.String,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTpslHisordersAsync(System.String,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapRelationTpslOrderAsync(System.String,System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossRelationTpslOrderAsync(System.Int64,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackOrderAsync(System.String,System.String,System.Int32,System.Decimal,System.Decimal,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackOrderAsync(System.Nullable{CryptoExchange.Net.CommonObjects.UmDirection},System.Int64,System.Decimal,System.Decimal,System.Nullable{CryptoExchange.Net.CommonObjects.UmOrderPriceType},System.String,System.String,System.Nullable{CryptoExchange.Net.CommonObjects.UmContractType},System.Nullable{CryptoExchange.Net.CommonObjects.UmReduceOnly},System.Nullable{CryptoExchange.Net.CommonObjects.UmOffset},System.Nullable{CryptoExchange.Net.CommonObjects.UmLeverRate},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackCancelAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackCancelAsync(System.Collections.Generic.IEnumerable{System.Int64},System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapTrackCancelAllAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.LinearSwapCrossTrackCancelAllAsync(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTrackOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTrackOpenordersAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapTrackHisordersAsync(System.String,System.String,System.Int32,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiStrategyOrder.GetLinearSwapCrossTrackHisordersAsync(System.String,System.Int32,System.Int64,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiTransferring">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiTransferring.GetLinearSwapCrossTransferStateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Huobi.Net.Clients.UsdtMarginSwapApi.WWTHuobiClientUsdtMarginSwapApiTransferring.LinearSwapAccountTransferAsync(System.String,System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Huobi.Net.Enums.AccountActivation">

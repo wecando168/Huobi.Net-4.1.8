@@ -19,7 +19,7 @@ using Huobi.Net.Objects.Models.Rest.Futures.UsdtMarginSwap.LinearSwapTrade.Reque
 namespace Huobi.Net.Clients.UsdtMarginSwapApi
 {
     /// <inheritdoc />
-    public class HuobiClientUsdtMarginSwapApiReferenceData : IWWTHuobiClientUsdtMarginSwapReferenceData
+    public class WWTHuobiClientUsdtMarginSwapApiReferenceData : IWWTHuobiClientUsdtMarginSwapReferenceData
     {
         //基础信息接口
         private const string GetLinearSwapUnifiedAccountTypeEndpoint = "/swap_unified_account_type";                            // 【通用】账户类型查询(PublicData)
@@ -49,7 +49,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
 
         private readonly HuobiClientUsdtMarginSwapApi _baseClient;
 
-        internal HuobiClientUsdtMarginSwapApiReferenceData(HuobiClientUsdtMarginSwapApi baseClient)
+        internal WWTHuobiClientUsdtMarginSwapApiReferenceData(HuobiClientUsdtMarginSwapApi baseClient)
         {
             _baseClient = baseClient;
         }

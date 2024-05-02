@@ -71,12 +71,12 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
             _options = options;
             _log = log;
 
-            ReferenceData = new HuobiClientUsdtMarginSwapApiReferenceData(this);
+            ReferenceData = new WWTHuobiClientUsdtMarginSwapApiReferenceData(this);
             ExchangeData = new HuobiClientUsdtMarginSwapApiExchangeData(this);
             Account = new HuobiClientUsdtMarginSwapApiAccount(this);
             Trading = new HuobiClientUsdtMarginSwapApiTrading(this);
-            Strategy = new HuobiClientUsdtMarginSwapApiStrategyOrder(this);
-            Transferring = new HuobiClientUsdtMarginSwapApiTransferring(this);
+            Strategy = new WWTHuobiClientUsdtMarginSwapApiStrategyOrder(this);
+            Transferring = new WWTHuobiClientUsdtMarginSwapApiTransferring(this);
 
         manualParseError = true;
         }

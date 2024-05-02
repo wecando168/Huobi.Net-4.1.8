@@ -19,7 +19,7 @@ using CryptoExchange.Net.CommonObjects;
 namespace Huobi.Net.Clients.UsdtMarginSwapApi
 {
     /// <inheritdoc />
-    public class HuobiClientUsdtMarginSwapApiStrategyOrder : IWWTHuobiClientUsdtMarginSwapStrategyOrder
+    public class WWTHuobiClientUsdtMarginSwapApiStrategyOrder : IWWTHuobiClientUsdtMarginSwapStrategyOrder
     {        
         //策略接口
         private const string LinearSwapTriggerOrderEndpoint = "/swap_trigger_order";                                     // 【逐仓】合约计划委托下单(PrivateData)
@@ -57,7 +57,7 @@ namespace Huobi.Net.Clients.UsdtMarginSwapApi
 
         private readonly HuobiClientUsdtMarginSwapApi _baseClient;
 
-        internal HuobiClientUsdtMarginSwapApiStrategyOrder(HuobiClientUsdtMarginSwapApi baseClient)
+        internal WWTHuobiClientUsdtMarginSwapApiStrategyOrder(HuobiClientUsdtMarginSwapApi baseClient)
         {
             _baseClient = baseClient;
         }
